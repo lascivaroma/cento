@@ -58,11 +58,13 @@
          </td>
          <td>
             <xsl:for-each select="tei:seg/@source">
+             ⊝ 
              <xsl:call-template name="string-replace-all">
                  <xsl:with-param name="text" select="." />
                  <xsl:with-param name="replace" select="'urn:cts:latinLit:phi0690.'" />
                  <xsl:with-param name="by" select="''" />
              </xsl:call-template>
+             <xsl:text> </xsl:text>
             </xsl:for-each>
          </td>
       </tr>
