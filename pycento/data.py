@@ -28,7 +28,10 @@ class Segment:
 	def normalized_source(self):
 		*_, work, psg = self.source.split(":")
 		work = {
-			"phi0690.phi003": "Ae."
+			"phi0690.phi003": "Ae.",
+			"phi0690.phi001": "B.",
+			"phi0690.phi002": "G."
+
 		}[work]
 		return f"{work}, {psg}" 
 
