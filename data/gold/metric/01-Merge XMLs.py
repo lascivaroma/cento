@@ -17,7 +17,7 @@ def normalize(context, a):
 
 
 title = re.compile(r"([a-z]+)(\d+)\.html")
-xsl = et.XSLT(et.parse("convert.xsl"))
+xsl = et.XSLT(et.parse("01-XSLT.xsl"))
 
 files = {
 	"aen": "urn:cts:latinLit:phi0690.phi003",
