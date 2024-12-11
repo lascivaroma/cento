@@ -9,6 +9,12 @@ _ns = {"t": "http://www.tei-c.org/ns/1.0"}
 
 
 @dataclass
+class Syllable:
+	text: str
+	length: int
+
+
+@dataclass
 class Word:
 	text: str
 	lemma: str
