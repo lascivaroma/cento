@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0">
     <teiHeader n="urn:cts:latinLit:stoa0045.stoa003.perseus-lat2">
     
@@ -358,7 +359,7 @@
                 <seg source="urn:cts:latinLit:phi0690.phi003:6.645" type="sq">
                     <w pos="CONcoo" msd="MORPH=empty" lemma="nec2" form="nec"><s met="long">nec</s></w>
                     <w pos="ADVneg" msd="MORPH=empty" lemma="non" form="non"><s met="long">non</s></w>
-                    <w pos="ADJqua" msd="Case=Nom|Numb=Sing|Gend=Masc|Deg=Pos" lemma="Thraeicius" forn="Thraeicius"><s met="long">Thrae</s><s met="short">i</s><s met="short">ci</s><s met="long">us</s></w>
+                    <w pos="ADJqua" msd="Case=Nom|Numb=Sing|Gend=Masc|Deg=Pos" lemma="Thraeicius" form="Thraeicius"><s met="long">Thrae</s><s met="short">i</s><s met="short">ci</s><s met="long">us</s></w>
                     <w pos="ADJqua" msd="Case=Abl|Numb=Sing|Gend=Fem|Deg=Pos" lemma="longus" form="longa"><s met="long">lon</s><s met="long">ga</s></w>
                     <w pos="PRE" msd="MORPH=empty" lemma="cum2" form="cum"><s met="long">cum</s></w>
                     <w pos="NOMcom" msd="Case=Abl|Numb=Sing" lemma="uestis" form="veste"><s met="long">ves</s><s met="short">te</s></w>
@@ -517,10 +518,20 @@
                     <w pos="NOMcom" msd="Case=Acc|Numb=Plur" lemma="oculus" form="oculos"><s met="short">o</s><s met="short">cu</s><s met="long">los.</s></w>
                     <pc>,</pc>
                 </seg>
-                    <w pos="VER" msd="Numb=Sing|Mood=Ind|Tense=Pres|Voice=Act|Person=3" lemma="uro">uritque</w>
-                    <w pos="CON" msd="MORPH=empty" lemma="que">{uritque}</w>
-                    <w pos="VER" msd="Case=Abl|Numb=Sing|Mood=Ger|Voice=Act" lemma="uideo">videndo</w>
-                    <w pos="PUNC" msd="MORPH=empty" lemma=".">.</w>
+                <seg source="urn:cts:latinLit:phi0690.phi003:3.215">
+                    <w pos="VER" msd="Numb=Sing|Mood=Ind|Tense=Pres|Voice=Act|Person=3" lemma="uro" form="uritque">
+                        <s met="long">u</s>
+                        <s met="long">rit</s>
+                        <s met="short">que</s>
+                    </w>
+                    <w pos="CON" msd="MORPH=empty" lemma="que" form="{uritque}"/>
+                    <w pos="VER" msd="Case=Abl|Numb=Sing|Mood=Ger|Voice=Act" lemma="uideo" form="videndo">
+                        <s met="short">vi</s>
+                        <s met="long">den</s>
+                        <s met="end">do</s>
+                    </w>
+                    <pc>.</pc>
+                </seg>
             </l>
             <l n="38">
                 <seg source="urn:cts:latinLit:phi0690.phi003:7.812">
@@ -538,7 +549,7 @@
                     <w pos="NOMcom" msd="Case=Nom|Numb=Sing" lemma="turba" form="turbaque"><s met="long">tur</s><s met="short">ba</s><s met="short">que</s></w>
                     <w pos="CON" msd="MORPH=empty" lemma="que">{turbaque}</w>
                     <w pos="VER" msd="Numb=Sing|Mood=Ind|Tense=Pres|Voice=Dep|Person=3" lemma="miror" form="miratur"><s met="long">mi</s><s met="long">ra</s><s met="long">tur</s></w>
-                    <w pos="NOMcom" msd="Case=Gen|Numb=Plur" lemma="mater" form="matrum"><s met="long">ma</s><s met="elided">trum</s></w>
+                    <w pos="NOMcom" msd="Case=Gen|Numb=Plur" lemma="mater" form="matrum"><s met="long">ma</s><s met="long">trum</s></w>
                     <pc>.</pc>
                 </seg>
                 <seg source="urn:cts:latinLit:phi0690.phi003:5.566">
@@ -810,9 +821,9 @@
             <l n="60">
                 <seg source="urn:cts:latinLit:phi0690.phi003:11.534" type="sq">
                     <w pos="CONcoo" msd="MORPH=empty" lemma="et2" form="et"><s met="long">et</s></w>
-                    <w pos="NOMcom" msd="Case=Acc|Numb=Sing" lemma="sella"><s met="long">sel</s><s met="long">lam</s></w>
+                    <w pos="NOMcom" msd="Case=Acc|Numb=Sing" lemma="sella" form="sellam"><s met="long">sel</s><s met="elided">lam</s></w>
                 </seg>
-                <seg source="urn:cts:latinLit:phi0690.phi003:1.649">
+                <seg source="urn:cts:latinLit:phi0690.phi003:1.648">
                     <note>Error on the edition</note>
                     <w pos="CONcoo" msd="MORPH=empty" lemma="et2" form="et"><s met="long">et</s></w>
                     <w pos="VER" msd="Case=Acc|Numb=Sing|Gend=MascNeut|Mood=Par|Tense=Perf|Voice=Pass" lemma="pingo" form="pictum"><s met="long">pic</s><s met="long">tum</s></w>
@@ -866,7 +877,7 @@
                     <w pos="ADJcar" msd="Case=Ind" lemma="quatuor" form="quattuor"><s met="long">quat</s><s met="short">tu</s><s met="short">or</s></w>
                     <w pos="PROdem" msd="Case=Dat|Numb=Sing|Gend=Com" lemma="hic1" form="hic"><s met="long">hic</s></w>
                     <w pos="NOMcom" msd="Case=Nom|Numb=Plur" lemma="iuuenis1" form="iuvenes"><s met="short">ju</s><s met="short">ve</s><s met="long"><caesura/>nes,</s></w>
-                    <w pos="PROdem" msd="Case=Ind" lemma="totidem1" form="totidem"><s met="short">to</s><s met="short">ti</s><s met="long">dem</s></w>
+                    <w pos="PROdem" msd="Case=Ind" lemma="totidem1" form="totidem"><s met="short">to</s><s met="short">ti</s><s met="elided">dem</s></w>
                 </seg>
                 <seg source="urn:cts:latinLit:phi0690.phi003:2.238">
                     <w pos="ADJqua" msd="Case=Nom|Numb=Plur|Gend=Fem|Deg=Pos" lemma="innuptus" form="innuptaeque"><s met="long">in</s><s met="long">nup</s><s met="long">tae</s><s met="short">que</s></w>
@@ -1092,7 +1103,7 @@
             </l>
             <l n="81">
                 <seg source="urn:cts:latinLit:phi0690.phi002:4.375" type="sq">
-                    <w pos="VER" msd="Numb=Sing|Gend=Neut|Mood=Par|Tense=Perf|Voice=Pass" lemma="peruenio" form="perventum"><s met="long">per</s><s met="long">ven</s><s met="elided">tum</s></w>
+                    <w pos="VER" msd="Numb=Sing|Gend=Neut|Mood=Par|Tense=Perf|Voice=Pass" lemma="peruenio" form="perventum"><s met="long">per</s><s met="long">ven</s><s met="long">tum</s></w>
                     <pc>,</pc>
                 </seg>
                 <seg source="urn:cts:latinLit:phi0690.phi003:8.468">
@@ -1121,7 +1132,7 @@
                     <w pos="CONcoo" msd="MORPH=empty" lemma="at2" form="at"><s met="long">At</s></w>
                     <w pos="NOMpro" msd="Case=Nom|Numb=Sing" lemma="Cytherea" form="Cytherea"><s met="short">Cy</s><s met="short">the</s><s met="long">re</s><s met="short">a</s></w>
                     <w pos="ADJqua" msd="Case=Acc|Numb=Plur|Gend=Fem|Deg=Pos" lemma="nouus" form="novas"><s met="short">no</s><s met="long">vas</s></w>
-                    <w pos="NOMcom" msd="Case=Acc|Numb=Plur" lemma="ars" form="artes"><s met="long">long</s><s met="long">ar</s><s met="short">tes</s></w>
+                    <w pos="NOMcom" msd="Case=Acc|Numb=Plur" lemma="ars" form="artes"><s met="long">ar</s><s met="long">tes</s></w>
                 </seg>
                 <seg source="urn:cts:latinLit:phi0690.phi003:4.166">
                     <w pos="CONcoo" msd="MORPH=empty" lemma="et2" form="et"><s met="long">et</s></w>
@@ -1144,7 +1155,7 @@
                 <seg source="urn:cts:latinLit:phi0690.phi003:1.715">
                     <w pos="PROdem" msd="Case=Nom|Numb=Sing|Gend=Masc" lemma="ille" form="ille"><s met="long">Il</s><s met="elided">le</s></w>
                     <w pos="CONsub" msd="MORPH=empty" lemma="ubi3" form="ubi"><s met="short">u</s><s met="short">bi</s></w>
-                    <w pos="NOMcom" msd="Case=Abl|Numb=Sing" lemma="complexus" form="complexu"><s met="long">com</s><s met="long">ple</s><s met="elided">xu</s></w>
+                    <w pos="NOMcom" msd="Case=Abl|Numb=Sing" lemma="complexus" form="complexu"><s met="long">com</s><s met="long">ple</s><s met="long">xu</s></w>
                 </seg>
                 <seg source="urn:cts:latinLit:phi0690.phi003:8.388">
                     <w pos="ADJqua" msd="Case=Abl|Numb=Sing|Gend=Com|Deg=Pos" lemma="mollis" form="molli"><s met="long">mol</s><s met="long">li</s></w>
@@ -1370,7 +1381,7 @@
             <l n="101">
                 <seg source="urn:cts:latinLit:phi0690.phi003:11.631">
                     <w pos="VER" msd="MORPH=empty" lemma="Postubua" form="Postquam"><s met="long">post</s><s met="long">quam</s></w>
-                    <w pos="VER" msd="Numb=Plur|Gend=Masc|Mood=Par|Tense=Perf|Voice=Dep" lemma="congredior" form="congressi"><s met="long">con</s><s met="long">gres</s><s met="elided">si</s></w>
+                    <w pos="VER" msd="Numb=Plur|Gend=Masc|Mood=Par|Tense=Perf|Voice=Dep" lemma="congredior" form="congressi"><s met="long">con</s><s met="long">gres</s><s met="long">si</s></w>
                 </seg>
                 <seg source="urn:cts:latinLit:phi0690.phi003:6.268">
                     <w pos="PROind" msd="Case=Abl|Numb=Sing|Gend=Fem" lemma="solus" form="sola"><s met="long">so</s><s met="long">la</s></w>
@@ -1413,7 +1424,7 @@
                 <seg source="urn:cts:latinLit:phi0690.phi003:10.699">
                     <w pos="VER" msd="Numb=Sing|Mood=Ind|Tense=Pres|Voice=Act|Person=3" lemma="occupo2" form="occupat"><s met="long">oc</s><s met="short">cu</s><s met="short">pat</s></w>
                     <w pos="NOMcom" msd="Case=Acc|Numb=Sing" lemma="os1" form="os"><s met="long">os</s></w>
-                    <w pos="NOMcom" msd="Case=Acc|Numb=Sing" lemma="facies" form="faciemque"><s met="short">fa</s><s met="short">ci</s><s met="long">em</s><s met="elided">que</s></w>
+                    <w pos="NOMcom" msd="Case=Acc|Numb=Sing" lemma="facies" form="faciemque"><s met="short">fa</s><s met="short">ci</s><s met="long">em</s><s met="short">que</s></w>
                     <w pos="CON" msd="MORPH=empty" lemma="que">{faciemque}</w>
                     <pc>,</pc>
                 </seg>
@@ -1433,7 +1444,7 @@
                     <pc>:</pc>
                 </seg>
                 <seg source="urn:cts:latinLit:phi0690.phi003:6.406">
-                    <w pos="NOMcom" msd="Case=Acc|Numb=Sing" lemma="ramus" form="ramum"><s met="long">ra</s><s met="elided">mum</s></w>
+                    <w pos="NOMcom" msd="Case=Acc|Numb=Sing" lemma="ramus" form="ramum"><s met="long">ra</s><s met="long">mum</s></w>
                     <pc>,</pc>
                     <w pos="PROrel" msd="Case=Nom|Numb=Sing|Gend=Masc" lemma="qui1" form="qui"><s met="long">qui</s></w>
                     <w pos="NOMcom" msd="Case=Abl|Numb=Sing" lemma="uestis" form="veste"><s met="long">ves</s><s met="short">te</s></w>
@@ -1538,7 +1549,7 @@
                 <seg source="urn:cts:latinLit:phi0690.phi003:7.568">
                     <w pos="PROdem" msd="Deg=Pos" lemma="hic1" form="hic"><s met="long">hic</s></w>
                     <w pos="NOMcom" msd="Case=Nom|Numb=Sing" lemma="specus" form="specus"><s met="short">spe</s><s met="short">cus</s></w>
-                    <w pos="ADJqua" msd="Numb=Sing|Gend=Neut|Deg=Pos" lemma="horrendus" form="horrendum"><s met="long">hor</s><s met="long">ren</s><s met="elided">dum</s></w>
+                    <w pos="ADJqua" msd="Numb=Sing|Gend=Neut|Deg=Pos" lemma="horrendus" form="horrendum"><s met="long">hor</s><s met="long">ren</s><s met="long">dum</s></w>
                     <pc>:</pc>
                 </seg>
                 <seg source="urn:cts:latinLit:phi0690.phi003:6.240">
@@ -1634,7 +1645,7 @@
                     <w pos="ADV" msd="Case=Acc|Numb=Sing|Gend=Neut|Deg=Comp" lemma="alte" form="altius"><s met="long">al</s><s met="short">ti</s><s met="short">us</s></w>
                     <w pos="PRE" msd="MORPH=empty" lemma="ad2" form="ad"><s met="long">ad</s></w>
                     <w pos="ADJqua" msd="Case=Acc|Numb=Sing|Deg=Pos" lemma="uiuus2" form="vivum"><s met="long">vi</s><s met="long">vum</s></w>
-                    <w pos="VER" msd="Numb=Sing|Mood=Ind|Tense=Perf|Voice=Act|Person=3" lemma="persido" form="persedit"><s met="long">per</s><s met="long">se</s><s met="short">dit</s></w>
+                    <w pos="VER" msd="Numb=Sing|Mood=Ind|Tense=Perf|Voice=Act|Person=3" lemma="persido" form="persedit"><s met="long">per</s><s met="long">se</s><s met="long">dit</s></w>
                 </seg>
                 <seg source="urn:cts:latinLit:phi0690.phi003:11.817">
                     <w pos="NOMcom" msd="Case=Abl|Numb=Sing" lemma="uulnus" form="vulnere"><s met="long">vul</s><s met="short">ne</s><s met="short">re</s></w>
