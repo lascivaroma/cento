@@ -83,8 +83,6 @@ for l in cento.xpath("//t:l", **ns):
                 w.attrib["notfound"] = 'true'
                 errors[source] += 1
 
-        break
-
 print(found/total)
 
 with open("cento-aligned.xml", "w") as f:
@@ -93,3 +91,5 @@ with open("cento-aligned.xml", "w") as f:
 for i, v in errors.most_common(50):
     if v > 1:
         print(i, v)
+
+print(sum(errors.values()))

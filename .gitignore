@@ -1,1 +1,11 @@
 .data/gold/metric
+*.bak
+.idea/
+data/generated/
+data/ausonius-hexameter*.xml
+data/segment_table.json
+data/gold/metric/*.html
+segment_stats.csv
+segment_visualization.png
+__pycache__/
+pycento/__pycache__/
