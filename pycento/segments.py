@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
     print()
     print("=== Ausonius Epigrams (inferred caesura) ===")
-    epig = parse(op.join(_root, "ausonius-gold", "AVSON-epig.xml"))
+    epig = parse(op.join(_root, "ausonius", "AVSON-epig.xml"))
     segs2 = build_segments(epig)
     print(Counter(s.kind for s in segs2))
     for s in segs2[:6]:

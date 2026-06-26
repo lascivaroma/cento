@@ -105,14 +105,18 @@ def parse_cento(file, punc=False) -> List[Line]:
 					Syllable(text=syll.text, length=syll.attrib.get("met"))
 					for syll in word.xpath("./t:s", namespaces=_ns)
 				]
-				ws.append(
-					Word(
-						text if not text.startswith("{") else "",
-						word.attrib["lemma"], word.attrib["pos"], word.attrib["msd"],
-						syllables=syllables
-					)
+				try:
 
-				)
+					ws.append(
+						Word(
+							text if not text.startswith("{") else "",
+							word.attrib["lemma"], word.attrib["pos"], word.attrib["msd"],
+							syllables=syllables
+						)
+
+					)
+				except Exception as E:
+					print(et.tostring(word, encoding=str))
 			segs.append(
 				Segment(
 					source=seg.attrib["source"],

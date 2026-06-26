@@ -128,17 +128,6 @@ def _add_to_table(table: dict, author: str, segs: list[CandidateSegment], source
 
 def build_table() -> dict:
     table: dict = {}
-
-    # --- Ausonius from annotated XML (has lemma/pos/msd, cento excluded) ---
-    annotated_path = op.join(_ROOT, "data", "ausonius-hexameter-annotated.xml")
-    print(f"Ausonius: {annotated_path}")
-    aus_lines_total = 0
-    for source_filename, lines in iter_annotated_poems(annotated_path):
-        segs = build_segments(lines)  # lines are already hexameters
-        _add_to_table(table, "Ausonius", segs, f"data/ausonius-hexameter-annotated.xml#{source_filename}")
-        aus_lines_total += len(lines)
-    print(f"  {aus_lines_total} hexameter lines processed")
-
     # --- Virgil from source XMLs (no lemma/pos) ---
     virgil_map = {
         "phi0690.phi003": "Virgil (Aeneid)",

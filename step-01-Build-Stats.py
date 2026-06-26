@@ -12,7 +12,7 @@ import matplotlib.patches as mpatches
 from pycento.data import parse_cento, Segment
 
 _ROOT = op.dirname(op.abspath(__file__))
-_ALIGNED = op.join(_ROOT, "data", "gold", "metric", "cento-aligned.xml")
+_ALIGNED = op.join(_ROOT, "data", "gold", "cento.xml")
 
 _MORA = {"long": 2, "short": 1, "anceps": 2, "elided": 0, "end": 2}
 _COLORS = ["#4C72B0", "#DD8452", "#55A868"]
@@ -38,12 +38,22 @@ def main():
     print(f"Parsed {len(lines)} lines")
 
     rows = []
-    # Track color carry-over for continued segments: line_idx -> color_index of last segment
-    prev_color_idx: dict[int, int] = {}
+    # last segment morae per line index, for continued-span length computation
+    last_seg_morae_by_line: dict[int, int] = {}
 
     for line in lines:
-        seg_data = [(segment_morae(s), s.continued) for s in line.segments]
-        total = sum(m for m, _ in seg_data)
+        raw_seg_data = [(segment_morae(s), s.continued) for s in line.segments]
+        total = sum(m for m, _ in raw_seg_data)
+
+        # For continued segments, report combined length (prev last + own morae)
+        seg_data = []
+        for morae, continued in raw_seg_data:
+            if continued:
+                prev = last_seg_morae_by_line.get(line.idx - 1, 0)
+                seg_data.append((prev + morae, True))
+            else:
+                seg_data.append((morae, False))
+
         schema = line_schema(seg_data)
         if total != 24:
             print(f"  WARNING line {line.idx}: total morae = {total} (schema: {schema})", file=sys.stderr)
@@ -53,6 +63,9 @@ def main():
             row[f"seg{i+1}_morae"] = morae
             row[f"seg{i+1}_continued"] = cont
         rows.append(row)
+
+        if raw_seg_data:
+            last_seg_morae_by_line[line.idx] = raw_seg_data[-1][0]
 
     # --- CSV output ---
     csv_path = op.join(_ROOT, "segment_stats.csv")
@@ -70,9 +83,17 @@ def main():
     # --- Print summary table ---
     from collections import Counter
     schema_counts = Counter(r["schema"] for r in rows)
+    # Build line index for lookup
+    line_by_idx = {line.idx: line for line in lines}
     print("\nSchema distribution:")
     for schema, count in sorted(schema_counts.items(), key=lambda x: -x[1]):
-        print(f"  {schema:30s}  {count}")
+        if count == 1:
+            row = next(r for r in rows if r["schema"] == schema)
+            line = line_by_idx[row["line"]]
+            text = " ".join(w.text for w in line.words if w.text and w.text.strip())
+            print(f"  {schema:30s}  {count}  (l.{row['line']}: {text})")
+        else:
+            print(f"  {schema:30s}  {count}")
 
     # --- Visualization ---
     fig_height = max(4, len(lines) * 0.18)

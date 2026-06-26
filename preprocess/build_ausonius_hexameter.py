@@ -130,7 +130,7 @@ if __name__ == "__main__":
     et.indent(tei, space="    ")
     tree = et.ElementTree(tei)
 
-    out_path = op.join(_ROOT, "data", "ausonius-hexameter.xml")
+    out_path = op.join(_ROOT, "..", "data", "ausonius-hexameter.xml")
     tree.write(out_path, encoding="utf-8", xml_declaration=True, pretty_print=True)
     print(f"Wrote {out_path}")
 

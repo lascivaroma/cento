@@ -88,8 +88,8 @@ def annotate_line(l_elem, tagger, iterator, processor):
 # ---------------------------------------------------------------------------
 
 def main():
-    in_path = op.join(_ROOT, "data", "ausonius-hexameter.xml")
-    out_path = op.join(_ROOT, "data", "ausonius-hexameter-annotated.xml")
+    in_path = op.join(_ROOT, "..", "data", "ausonius-hexameter.xml")
+    out_path = op.join(_ROOT, "..", "data", "ausonius-hexameter-annotated.xml")
 
     print("Loading LASLA model...")
     tagger, iterator, processor = load_tagger()
