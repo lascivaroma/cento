@@ -1,6 +1,7 @@
 """Compute segment mora-lengths and schema for each Cento line, then visualize."""
 
 import csv
+import json
 import os.path as op
 import sys
 
@@ -10,6 +11,8 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
 from pycento.data import parse_cento, Segment
+from typing import Tuple, List
+from collections import Counter
 
 _ROOT = op.dirname(op.abspath(__file__))
 _ALIGNED = op.join(_ROOT, "data", "gold", "cento.xml")
@@ -18,12 +21,20 @@ _MORA = {"long": 2, "short": 1, "anceps": 2, "elided": 0, "end": 2}
 _COLORS = ["#4C72B0", "#DD8452", "#55A868"]
 
 
-def segment_morae(seg: Segment) -> int:
+def segment_morae(seg: Segment) -> Tuple[int, List[Tuple[int, ...]]]:
     total = 0
+    segs = [[]]
     for word in seg.words:
         for syll in word.syllables:
             total += _MORA.get(syll.length, 0)
-    return total
+            if syll.length == "elided":
+                # segs[-1].append(0)
+                continue
+            elif length := _MORA.get(syll.length, 0):
+                segs[-1].append(length)
+            else:
+                continue
+    return total, [tuple(seg) for seg in segs if seg]
 
 
 def line_schema(seg_data: list[tuple[int, bool]]) -> str:
@@ -36,23 +47,31 @@ def line_schema(seg_data: list[tuple[int, bool]]) -> str:
 def main():
     lines = parse_cento(_ALIGNED)
     print(f"Parsed {len(lines)} lines")
+    print(lines)
+
+    table = []
 
     rows = []
     # last segment morae per line index, for continued-span length computation
     last_seg_morae_by_line: dict[int, int] = {}
 
     for line in lines:
-        raw_seg_data = [(segment_morae(s), s.continued) for s in line.segments]
-        total = sum(m for m, _ in raw_seg_data)
+        raw_seg_data = [(*segment_morae(s), s.continued) for s in line.segments]
+        total = sum(m for m, *_ in raw_seg_data)
 
         # For continued segments, report combined length (prev last + own morae)
         seg_data = []
-        for morae, continued in raw_seg_data:
+        for idx, (morae, scheme, continued) in enumerate(raw_seg_data):
             if continued:
                 prev = last_seg_morae_by_line.get(line.idx - 1, 0)
                 seg_data.append((prev + morae, True))
+                table[-1].extend([0, *scheme])
             else:
                 seg_data.append((morae, False))
+                if idx == 0:
+                    table.append([0, *scheme])
+                else:
+                    table.append(scheme)
 
         schema = line_schema(seg_data)
         if total != 24:
@@ -67,6 +86,19 @@ def main():
         if raw_seg_data:
             last_seg_morae_by_line[line.idx] = raw_seg_data[-1][0]
 
+    json_path = op.join(_ROOT, "scheme.json")
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump({
+            "table": table,
+            "counter": Counter(map(str, table)),
+        }, f, ensure_ascii=False, indent=4)
+
+    total = 0
+    for element in table:
+        total += sum([x for l in element if isinstance(l, tuple) for x in l])
+        print(f"{element}".replace("), 0", "), -|\n"))
+        if total % 24 == 0:
+            print()
     # --- CSV output ---
     csv_path = op.join(_ROOT, "segment_stats.csv")
     fieldnames = ["line", "n_segments",
@@ -81,7 +113,6 @@ def main():
     print(f"Wrote {csv_path}")
 
     # --- Print summary table ---
-    from collections import Counter
     schema_counts = Counter(r["schema"] for r in rows)
     # Build line index for lookup
     line_by_idx = {line.idx: line for line in lines}
@@ -116,7 +147,7 @@ def main():
             color_cursor = prev_last  # will be overridden by the continued branch below
 
         for seg in line.segments:
-            morae = segment_morae(seg)
+            morae, _ = segment_morae(seg)
 
             if seg.continued:
                 # Inherit color from the last segment of the previous line
