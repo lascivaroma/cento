@@ -33,10 +33,8 @@ def convert(xml_string):
             if word.attrib.get("sy"):
                 for q in parse_sy(word.attrib["sy"]):
                     ET.SubElement(w, "s", met=MET_MAP[q])
-            elif str(word.attrib.get("mf")) in {"SY", "PE"}:
+            if str(word.attrib.get("mf")) in {"SY", "PE"}:
                 ET.SubElement(w, "s", met=MET_MAP['e'])
-
-
 
             if punct:
                 pc = ET.SubElement(l, "pc")
