@@ -133,6 +133,50 @@ def parse_cento(file, punc=False) -> List[Line]:
 	return lines
 
 
+def parse_line_element(line, idx) -> Line:
+	""" Parses a single <l> element (namespaced or plain) into a Line.
+
+	Shared by parse() (whole-file) and any caller that already has an <l>
+	element in hand, e.g. one pulled from inside a <poem> subtree.
+	"""
+	# Namespace matching is by URI, not by the document's chosen prefix (some
+	# files bind the TEI namespace to a prefix like ns0: instead of making it
+	# the default), so probe with the namespaced query first and only fall
+	# back to a plain, unprefixed query if that finds nothing.
+	words = line.xpath("./t:w", namespaces=_ns)
+	if words:
+		ns, _s, _caesura = _ns, "t:s", "t:caesura"
+	else:
+		ns, _s, _caesura = {}, "s", "caesura"
+		words = line.xpath("./w")
+	ws = []
+	for word in words:
+		text = word.attrib.get("form", word.text)
+		sylls = word.xpath(f"./{_s}", namespaces=ns)
+		syllables = [
+			Syllable(text=syll.text, length=syll.attrib.get("met"))
+			for syll in sylls
+		]
+		has_caesura = any(
+			len(syll.xpath(f"./{_caesura}", namespaces=ns)) > 0
+			for syll in sylls
+		)
+		ws.append(
+			Word(
+				text if not text or not text.startswith("{") else "",
+				word.attrib.get("lemma"), word.attrib.get("pos"), word.attrib.get("msd"),
+				syllables=syllables,
+				caesura_after=has_caesura,
+			)
+		)
+	return Line(
+		idx+1,
+		segments=[],
+		ws=ws,
+		ref=line.attrib.get("n", str(idx+1)),
+	)
+
+
 def parse(file, punc=False) -> List[Line]:
 	""" Parses the Cento and returns a list of Lines
 
@@ -141,41 +185,7 @@ def parse(file, punc=False) -> List[Line]:
 	data = et.parse(file)
 	# Support both TEI-namespaced and plain XML (some Ausonius files lack namespace)
 	_line_nodes = data.xpath("//t:l", namespaces=_ns) or data.xpath("//l")
-	lines = []
-	for idx, line in enumerate(_line_nodes):
-		ns = _ns if line.nsmap.get(None) == _ns["t"] else {}
-		_w = f"t:w" if ns else "w"
-		_s = f"t:s" if ns else "s"
-		_caesura = f"t:caesura" if ns else "caesura"
-		ws = []
-		for word in line.xpath(f"./{_w}", namespaces=ns):
-			text = word.attrib.get("form", word.text)
-			sylls = word.xpath(f"./{_s}", namespaces=ns)
-			syllables = [
-				Syllable(text=syll.text, length=syll.attrib.get("met"))
-				for syll in sylls
-			]
-			has_caesura = any(
-				len(syll.xpath(f"./{_caesura}", namespaces=ns)) > 0
-				for syll in sylls
-			)
-			ws.append(
-				Word(
-					text if not text or not text.startswith("{") else "",
-					word.attrib.get("lemma"), word.attrib.get("pos"), word.attrib.get("msd"),
-					syllables=syllables,
-					caesura_after=has_caesura,
-				)
-			)
-		lines.append(
-			Line(
-				idx+1,
-				segments=[],
-				ws=ws,
-				ref=line.attrib.get("n", str(idx+1)),
-			)
-		)
-	return lines
+	return [parse_line_element(line, idx) for idx, line in enumerate(_line_nodes)]
 
 
 if __name__ == "__main__":

@@ -55,7 +55,7 @@ _SPLITS: List[Tuple[int, int]] = [
 
 def build_table() -> Dict[str, dict]:
     print("Indexing Virgil corpus...")
-    index = load_virgil_index()
+    index = load_virgil_index(annotated=True)
     print(f"  {len(index)} well-formed hexameters")
 
     # Each distinct total is matched once and shared across every split that

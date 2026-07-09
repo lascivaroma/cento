@@ -1,11 +1,102 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Optional, Tuple
 
-from pycento.data import Line, Word
+from pycento.data import Line, Word, Syllable
 
 _MORA = {"long": 2, "short": 1, "anceps": 2, "elided": 0, "end": 2}
+_LONG = {"long", "anceps", "end"}
 _HEXAMETER_MORAE = 24
 _CAESURA_MORAE = 10  # penthemimeral: feet 1-2 (8 morae) + arsis of foot 3 (2 morae)
+_FOOT_MORAE = 4
+_N_FEET = 6
+_FOOT_PATTERNS = {(2, 1, 1): "D", (2, 2): "S"}
+
+
+@dataclass
+class Foot:
+    number: int                # 1-based (1..6 for a hexameter)
+    syllables: List[Syllable]  # non-elided syllables assigned to this foot
+    pattern: str                # "D", "S", or "?" if it matches neither
+
+
+def group_feet(syllables: List[Syllable], foot_morae: int = _FOOT_MORAE, n_feet: int = _N_FEET) -> List[Foot]:
+    """Walk syllables into feet of `foot_morae` morae each, skipping elided
+    syllables (mora 0) exactly like check_metrics.check_line() does, including
+    forcing the last non-elided syllable to 'end' (anceps). Operates on a
+    local copy — never mutates the caller's Syllable objects. Returns only
+    fully-completed feet (an incomplete trailing foot, e.g. a malformed line,
+    is dropped rather than partially reported)."""
+    syll_queue = list(syllables)
+
+    last_idx = next(
+        (i for i in range(len(syll_queue) - 1, -1, -1)
+         if _MORA.get(syll_queue[i].length, 0) > 0),
+        None
+    )
+    if last_idx is not None:
+        syll_queue[last_idx] = Syllable(text=syll_queue[last_idx].text, length="end")
+
+    feet: List[Foot] = []
+    pos = 0
+    for foot_number in range(1, n_feet + 1):
+        foot_morae_count = 0
+        foot_syllables: List[Syllable] = []
+        incomplete = False
+
+        while foot_morae_count < foot_morae:
+            if pos >= len(syll_queue):
+                incomplete = True
+                break
+            syll = syll_queue[pos]
+            pos += 1
+            m = _MORA.get(syll.length, 0)
+            if m == 0:
+                continue
+            foot_syllables.append(syll)
+            foot_morae_count += m
+
+        if incomplete or not foot_syllables:
+            break
+
+        pattern = _FOOT_PATTERNS.get(tuple(_MORA.get(s.length, 0) for s in foot_syllables), "?")
+        feet.append(Foot(number=foot_number, syllables=foot_syllables, pattern=pattern))
+
+    return feet
+
+
+def assign_feet(syllables: List[Syllable], foot_morae: int = _FOOT_MORAE, n_feet: int = _N_FEET) -> List[Optional[int]]:
+    """Return the foot number (1-based) each syllable belongs to, in the same
+    order/length as `syllables`. Elided syllables, and any syllables past the
+    last complete foot, get None. Unlike group_feet(), this does not force the
+    last syllable to 'end' — mora accounting for foot boundaries is identical
+    whether a 2-mora syllable is typed long/anceps/end, so raw lengths are
+    used directly. This is the basis for reconstructing per-syllable foot
+    numbers for the compact sy= export format (see pycento/serialize.py)."""
+    assignments: List[Optional[int]] = [None] * len(syllables)
+    pos = 0
+    for foot_number in range(1, n_feet + 1):
+        foot_morae_count = 0
+        foot_positions: List[int] = []
+        while foot_morae_count < foot_morae:
+            if pos >= len(syllables):
+                return assignments
+            m = _MORA.get(syllables[pos].length, 0)
+            if m > 0:
+                foot_positions.append(pos)
+                foot_morae_count += m
+            pos += 1
+        for p in foot_positions:
+            assignments[p] = foot_number
+    return assignments
+
+
+def scan_pattern(line: Line) -> str:
+    """Return e.g. 'DDSDDS' — one 'D' (dactyl) or 'S' (spondee) per foot, in
+    order; '?' for a foot whose mora pattern is neither. Safe to call on
+    not-yet-validated lines (never raises)."""
+    syllables = [s for w in line.words for s in w.syllables]
+    feet = group_feet(syllables)
+    return "".join(f.pattern for f in feet)
 
 
 @dataclass

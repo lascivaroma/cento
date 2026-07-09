@@ -80,9 +80,19 @@ def to_found_object(vl: IndexedLine, words: List[Word], is_start: bool) -> dict:
         "filepath": vl.filepath,
         "kind": kind,
         "text": " ".join(w.text for w in words if w.text),
+        # Space-joined, one token per word (not filtered like "text" above),
+        # so step-04/step-05 can positionally .split() these against
+        # "text".split() -- filtering here would shift a dropped word's
+        # lemma/pos onto the wrong following word.
+        "lemma": " ".join(w.lemma or "" for w in words),
+        "pos": " ".join(w.pos or "" for w in words),
+        "msd": " ".join(w.morph or "" for w in words),
         "words": [
             {
                 "text": w.text,
+                "lemma": w.lemma,
+                "pos": w.pos,
+                "msd": w.morph,
                 "syllables": [{"text": s.text, "length": s.length} for s in w.syllables],
             }
             for w in words
@@ -115,7 +125,7 @@ def match_by_total(total: int, is_start: bool, index: List[IndexedLine]) -> List
     return found
 
 
-def load_virgil_index() -> List[IndexedLine]:
+def load_virgil_index(annotated: bool = False) -> List[IndexedLine]:
     """Parse every Virgil work and index the well-formed hexameters.
 
     Lines with incomplete/missing syllable data (is_hexameter() false, i.e.
@@ -126,10 +136,17 @@ def load_virgil_index() -> List[IndexedLine]:
     verse in Virgil's own text", not just "the next verse that happened to
     survive filtering" -- needed for detecting genuinely consecutive verses
     (see step-02's find_consecutive_pairs()).
+
+    :param annotated: read the LASLA-tagged `-annotated.xml` siblings
+        (produced by preprocess/annotate_virgil.py) instead of the bare
+        syllable-only files, so Word.lemma/pos/morph are populated. Defaults
+        to False so existing callers (e.g. this module's own __main__ demo)
+        are unaffected until they opt in.
     """
     index: List[IndexedLine] = []
     for filename in sorted(_VIRGIL_FILES):
-        path = op.join(_ROOT, "data", "gold", "metric", f"urn:cts:latinLit:{filename}.xml")
+        suffix = "-annotated" if annotated else ""
+        path = op.join(_ROOT, "data", "gold", "metric", f"urn:cts:latinLit:{filename}{suffix}.xml")
         rel_path = op.relpath(path, _ROOT)
         for raw_index, line in enumerate(parse(path)):
             if not is_hexameter(line):

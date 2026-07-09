@@ -18,6 +18,19 @@ _TEI = "http://www.tei-c.org/ns/1.0"
 _NS = {"t": _TEI}
 _ROOT = op.dirname(op.abspath(__file__))
 
+# Word forms can carry punctuation glued to either edge (trailing ",./;:" as
+# in Virgil's source, but also leading marks like "(", "[", opening curly
+# quotes, or a corruption dagger "†" as seen in some Ausonius lines, e.g.
+# "(grates"). Left in place, the tagger's tokenizer splits those off into an
+# extra token, shifting the positional alignment between tagger results and
+# <w> elements for the rest of the line. Stripped for tagging purposes only —
+# the original form= attribute is left untouched.
+_EDGE_PUNCT = re.compile(r"^\W+|\W+$")
+
+
+def clean_form(form: str) -> str:
+    return _EDGE_PUNCT.sub("", form)
+
 
 # ---------------------------------------------------------------------------
 # Load the LASLA model (done once)
@@ -48,8 +61,15 @@ def words_of_line(l_elem) -> list:
 
 
 def verse_text(w_elems) -> str:
-    """Build a space-joined string of word forms for the tagger."""
-    return " ".join(w.get("form", "") for w in w_elems if w.get("form"))
+    """Build a space-joined string of word forms for the tagger.
+
+    A <w> whose form is PUNCTUATION-ONLY (e.g. a standalone "-" or "|"
+    placeholder) cleans down to an empty string and is dropped entirely —
+    it must be dropped the same way in annotate_line()'s word loop below, or
+    the two would disagree on how many "real" tokens the line has and drift
+    out of alignment.
+    """
+    return " ".join(cleaned for w in w_elems if (cleaned := clean_form(w.get("form", ""))))
 
 
 def annotate_line(l_elem, tagger, iterator, processor):
@@ -69,11 +89,18 @@ def annotate_line(l_elem, tagger, iterator, processor):
 
     # Match results back to <w> elements by form (the tokenizer may skip
     # punctuation tokens; we iterate both lists together, ignoring None gaps).
-    result_iter = iter(r for r in results if r is not None)
+    # Enclitics (-que/-ne/-ve/...) also make the tagger emit an EXTRA result
+    # entry per word (e.g. "virumque" -> one entry for the stem with
+    # form='virumque', plus a second entry with form='{virumque}' for the
+    # '-que' itself) -- skip those brace-wrapped entries, or every word after
+    # the first enclitic in a line silently gets the wrong tag.
+    result_iter = (
+        r for r in results
+        if r is not None and not (r.get("form", "").startswith("{") and r.get("form", "").endswith("}"))
+    )
     for w in w_elems:
-        form = w.get("form", "")
-        if not form:
-            continue
+        if not clean_form(w.get("form", "")):
+            continue  # punctuation-only form, dropped from verse_text() too
         try:
             token = next(result_iter)
         except StopIteration:

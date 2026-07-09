@@ -26,16 +26,12 @@ from typing import List, Tuple
 import lxml.etree as et
 
 from pycento.data import parse_cento, Syllable
+from pycento.segments import group_feet, _MORA, _LONG
 
 _ROOT = op.dirname(op.abspath(__file__))
 _GOLD = op.join(_ROOT, "..", "data", "gold", "cento.xml")
 _NS = "http://www.tei-c.org/ns/1.0"
 _NSM = {"t": _NS}
-
-_MORA = {"long": 2, "short": 1, "anceps": 2, "elided": 0, "end": 2}
-_LONG = {"long", "anceps", "end"}
-_FOOT_MORAE = 4
-_N_FEET = 6
 
 
 @dataclass
@@ -49,79 +45,58 @@ class Violation:
 
 def check_line(line_idx: int, syllables: List[Syllable]) -> List[Violation]:
     violations: List[Violation] = []
-    syll_queue = list(syllables)
 
-    # Find index of last non-elided syllable
+    # Find index of last non-elided syllable (same rule group_feet() uses
+    # internally to force it to "end"/anceps on its own local copy).
     last_idx = next(
-        (i for i in range(len(syll_queue) - 1, -1, -1)
-         if _MORA.get(syll_queue[i].length, 0) > 0),
+        (i for i in range(len(syllables) - 1, -1, -1)
+         if _MORA.get(syllables[i].length, 0) > 0),
         None
     )
 
-    # Force last non-elided syllable to "end" (anceps)
-    if last_idx is not None:
-        syll_queue[last_idx] = Syllable(text=syll_queue[last_idx].text, length="end")
-
-    # Flag any "end" syllable that is not the last non-elided syllable
+    # Rule: flag any "end"-typed syllable (in the original data) that isn't
+    # the one group_feet() would treat as the line's final anceps.
     mora_pos = 0
-    for i, syll in enumerate(syll_queue):
-        m = _MORA.get(syll.length, 0)
+    for i, syll in enumerate(syllables):
         if syll.length == "end" and i != last_idx:
             violations.append(Violation(
                 line_idx, 0, mora_pos, syll,
                 f"mid-line 'end' syllable '{syll.text}' at mora {mora_pos}"
             ))
-        mora_pos += m
+        mora_pos += _MORA.get(syll.length, 0)
+
+    # Rule: elision at the absolute start of the line is always a problem.
+    for syll in syllables:
+        if _MORA.get(syll.length, 0) > 0:
+            break
+        violations.append(Violation(
+            line_idx, 1, 0, syll,
+            f"foot 1: elided syllable '{syll.text}' at line start"
+        ))
+
+    # Foot-level rules, derived from the shared group_feet() walk.
+    feet = group_feet(syllables)
     mora_pos = 0
-    line_started = False  # True once we've seen the first non-elided syllable
+    for foot in feet:
+        first_syll = foot.syllables[0]
 
-    pos = 0  # index into syll_queue
-
-    for foot in range(1, _N_FEET + 1):
-        foot_morae = 0
-        foot_syllables: List[Tuple[int, Syllable]] = []
-
-        while foot_morae < _FOOT_MORAE:
-            if pos >= len(syll_queue):
-                return violations  # incomplete line, mora check handles this
-
-            syll = syll_queue[pos]
-            pos += 1
-            m = _MORA.get(syll.length, 0)
-
-            if m == 0:  # elided — always skip metrically
-                if not line_started:
-                    # Elided at absolute line start — always a problem
-                    violations.append(Violation(
-                        line_idx, foot, mora_pos, syll,
-                        f"foot {foot}: elided syllable '{syll.text}' at line start"
-                    ))
-                continue
-
-            line_started = True
-            foot_syllables.append((mora_pos, syll))
-            foot_morae += m
-            mora_pos += m
-
-        if not foot_syllables:
-            continue
-
-        # Rule 1: foot-initial syllable must be long
-        first_pos, first_syll = foot_syllables[0]
+        # Rule: foot-initial syllable must be long
         if first_syll.length not in _LONG:
             violations.append(Violation(
-                line_idx, foot, first_pos, first_syll,
-                f"foot {foot}: starts with short '{first_syll.text}' at mora {first_pos}"
+                line_idx, foot.number, mora_pos, first_syll,
+                f"foot {foot.number}: starts with short '{first_syll.text}' at mora {mora_pos}"
             ))
 
-        # Rule 2: foot pattern must be dactyl (2+1+1) or spondee (2+2)
-        pattern = tuple(_MORA.get(s.length, 0) for _, s in foot_syllables)
-        if pattern not in ((2, 1, 1), (2, 2)):
+        # Rule: foot pattern must be dactyl (2+1+1) or spondee (2+2)
+        if foot.pattern == "?":
+            pattern = tuple(_MORA.get(s.length, 0) for s in foot.syllables)
             violations.append(Violation(
-                line_idx, foot, first_pos, first_syll,
-                f"foot {foot}: unexpected pattern {pattern} "
-                f"({[s.length for _, s in foot_syllables]})"
+                line_idx, foot.number, mora_pos, first_syll,
+                f"foot {foot.number}: unexpected pattern {pattern} "
+                f"({[s.length for s in foot.syllables]})"
             ))
+
+        mora_pos += sum(_MORA.get(s.length, 0) for s in foot.syllables)
 
     return violations
 

@@ -288,7 +288,7 @@ def build_table() -> Tuple[Dict[str, List[dict]], Counter, Counter]:
         scheme_table = json.load(fh)["table"]
 
     print("Indexing Virgil corpus...")
-    index = load_virgil_index()
+    index = load_virgil_index(annotated=True)
     print(f"  {len(index)} well-formed hexameters")
 
     # How many times each (pattern, is_start) actually occurs in the real
