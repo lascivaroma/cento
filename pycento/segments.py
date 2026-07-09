@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List, Optional, Tuple
 
-from pycento.data import Line, Word, Syllable
+from pycento.data import Line, Segment, Word, Syllable
 
 _MORA = {"long": 2, "short": 1, "anceps": 2, "elided": 0, "end": 2}
 _LONG = {"long", "anceps", "end"}
@@ -120,6 +120,52 @@ def line_morae(line: Line) -> int:
 
 def is_hexameter(line: Line) -> bool:
     return line_morae(line) == _HEXAMETER_MORAE
+
+
+def segment_morae(seg: Segment) -> Tuple[int, List[Tuple[int, ...]]]:
+    """Total morae for a segment, plus its non-elided syllable-mora sequence
+    (elisions dropped) as a single-element list wrapping one flat tuple --
+    e.g. (24, [(2, 1, 1, 2, ...)]). Used by step-01-Build-Stats.py to build
+    scheme.json's per-line "table" rows, and by line_structure()/
+    cento_structure() below to compare a generated cento's shape against the
+    source."""
+    total = 0
+    segs = [[]]
+    for word in seg.words:
+        for syll in word.syllables:
+            total += _MORA.get(syll.length, 0)
+            if syll.length == "elided":
+                continue
+            elif length := _MORA.get(syll.length, 0):
+                segs[-1].append(length)
+            else:
+                continue
+    return total, [tuple(seg) for seg in segs if seg]
+
+
+def line_schema(seg_data: List[Tuple[int, bool]]) -> str:
+    """e.g. [(14, False), (10, True)] -> '14+~10' (a '~' prefix marks a
+    continued segment) -- the same schema string step-01 writes into
+    segment_stats.csv's "schema" column."""
+    parts = []
+    for morae, continued in seg_data:
+        parts.append(f"~{morae}" if continued else str(morae))
+    return "+".join(parts)
+
+
+def line_structure(line: Line) -> List[Tuple[int, bool]]:
+    """Per-segment (total_morae, continued) for one line -- the structural
+    signature used to compare a generated cento's shape against the source
+    (same line count, same segment count per line, same morae target per
+    segment, same continuation flags)."""
+    return [(segment_morae(seg)[0], seg.continued) for seg in line.segments]
+
+
+def cento_structure(lines: List[Line]) -> List[List[Tuple[int, bool]]]:
+    """The full structural signature of a cento (gold or generated): one
+    line_structure() per line. Two centos have "the same structure" iff
+    cento_structure(lines_a) == cento_structure(lines_b)."""
+    return [line_structure(line) for line in lines]
 
 
 def split_at_caesura(line: Line) -> Optional[Tuple[List[Word], List[Word]]]:

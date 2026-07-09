@@ -8,6 +8,21 @@ _gold = op.join(op.abspath(op.dirname(__file__)), "..", "data", "gold")
 _ns = {"t": "http://www.tei-c.org/ns/1.0"}
 
 
+def _syllable_text(syll) -> str:
+	""" Full text of a <s> element, including text that falls AFTER an
+	inline <caesura/> marker.
+
+	lxml's `.text` only captures text before the first child element, so for
+	`<s met="long"><caesura/>tis</s>` (caesura falling mid-syllable -- ten
+	occurrences in data/gold/cento.xml), `.text` alone is empty/None and the
+	real content ("tis") is the caesura element's `.tail` instead.
+	"""
+	parts = [syll.text or ""]
+	for child in syll:
+		parts.append(child.tail or "")
+	return "".join(parts)
+
+
 @dataclass
 class Syllable:
 	text: str
@@ -102,7 +117,7 @@ def parse_cento(file, punc=False) -> List[Line]:
 					continue
 				text = word.attrib.get("form", word.text)
 				syllables = [
-					Syllable(text=syll.text, length=syll.attrib.get("met"))
+					Syllable(text=_syllable_text(syll), length=syll.attrib.get("met"))
 					for syll in word.xpath("./t:s", namespaces=_ns)
 				]
 				try:
@@ -154,7 +169,7 @@ def parse_line_element(line, idx) -> Line:
 		text = word.attrib.get("form", word.text)
 		sylls = word.xpath(f"./{_s}", namespaces=ns)
 		syllables = [
-			Syllable(text=syll.text, length=syll.attrib.get("met"))
+			Syllable(text=_syllable_text(syll), length=syll.attrib.get("met"))
 			for syll in sylls
 		]
 		has_caesura = any(

@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
 from pycento.data import parse_cento, Segment
+from pycento.segments import segment_morae, line_schema
 from typing import Tuple, List
 from collections import Counter
 
@@ -19,29 +20,6 @@ _ALIGNED = op.join(_ROOT, "data", "gold", "cento.xml")
 
 _MORA = {"long": 2, "short": 1, "anceps": 2, "elided": 0, "end": 2}
 _COLORS = ["#4C72B0", "#DD8452", "#55A868"]
-
-
-def segment_morae(seg: Segment) -> Tuple[int, List[Tuple[int, ...]]]:
-    total = 0
-    segs = [[]]
-    for word in seg.words:
-        for syll in word.syllables:
-            total += _MORA.get(syll.length, 0)
-            if syll.length == "elided":
-                # segs[-1].append(0)
-                continue
-            elif length := _MORA.get(syll.length, 0):
-                segs[-1].append(length)
-            else:
-                continue
-    return total, [tuple(seg) for seg in segs if seg]
-
-
-def line_schema(seg_data: list[tuple[int, bool]]) -> str:
-    parts = []
-    for morae, continued in seg_data:
-        parts.append(f"~{morae}" if continued else str(morae))
-    return "+".join(parts)
 
 
 def main():
