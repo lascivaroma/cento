@@ -1,0 +1,8 @@
+mosella.xml
+cupido_cruciatus.xml
+ordo_urbium_nobilium.xml
+griphus_ternarii_numeri.xml
+protrepticus_ad_nepotem.xml
+precationes_variae.xml
+genethliacos.xml
+cento_nuptialis.xml
