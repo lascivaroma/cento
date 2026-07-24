@@ -132,6 +132,7 @@ See **PIPELINE.md** for full replicable instructions.
 - [x] Cleanup: delete stale files, remove non-hexameter raw XMLs
 - [x] Write `extract_text.py` and `generate_metrical.py`
 - [x] Write `PIPELINE.md` runbook
-- [ ] Run latin-masking on all corpora → `lexical_model/`
-- [ ] Generate metrical output → `metrical_model/`
+- [x] Run latin-masking on all corpora → `lexical_model/`
+- [x] Generate metrical output → `metrical_model/`
+- [ ] Fix metrical/lexical token alignment (316 lines differ due to latin-masking word splits like `anne` → `an ne`)
 - [ ] Build LamdaG model and evaluate
