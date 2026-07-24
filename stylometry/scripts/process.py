@@ -128,12 +128,11 @@ def parse_args() -> argparse.Namespace:
         default="./output",
         help="Output directory for latin_masking (default ./output)",
     )
+    default_cache = str(Path(__file__).resolve().parent.parent / "processed" / "udpipe_cache")
     p.add_argument(
         "--cache-dir",
-        default=None,
-        help="Directory for cached UDPipe responses. Defaults to "
-             "output_dir/udpipe_cache; pass the bundled udpipe_cache/ to "
-             "reuse existing responses and avoid network fetches.",
+        default=default_cache,
+        help="Directory for cached UDPipe responses (default: processed/udpipe_cache).",
     )
     p.add_argument(
         "--keep-adverbs",

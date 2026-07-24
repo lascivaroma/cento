@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.pyc
+
+# UDPipe cache
+processed/udpipe_cache/
+
+# Hypotactic source symlinks (big author-level files, not tracked)
+raw/hypotactic_source/

@@ -32,7 +32,7 @@ from sentence_mapping import (  # noqa: E402
 
 def load_cento_lines():
     """Load all hexameter lines from cento_nuptialis.xml."""
-    return load_hex_lines(Path(__file__).parent.parent / "raw" / "ausonius" / "cento_nuptialis.xml")
+    return load_hex_lines(Path(__file__).parent.parent / "raw" / "question" / "cento_nuptialis.xml")
 
 
 def line_numbers(line_tag) -> list[tuple[str, object]]:

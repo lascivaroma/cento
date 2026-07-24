@@ -50,6 +50,10 @@ def extract_poem(ctx: dict, lines: list[dict], out_dir: Path) -> Path:
     book = ctx.get("book", "")
     book_name = _safe_name(str(book)) if book else ""
 
+    # Strip work name prefix from book to avoid doubling (e.g. "aeneid_aeneid_1" → "aeneid_1")
+    if book_name.startswith(work + "_"):
+        book_name = book_name[len(work) + 1:]
+
     if book_name:
         name = f"{author}_{work}_{book_name}"
     else:

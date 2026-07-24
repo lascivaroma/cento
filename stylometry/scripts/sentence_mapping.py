@@ -16,7 +16,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 from metrical_numbering import _norm, process_line
-from filter_hexameter import clean_xml
+from xml_utils import clean_xml
 
 
 def read_sentences(sentences_path: Path) -> list[str]:
