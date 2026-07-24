@@ -135,7 +135,7 @@ def process_line(line_tag: Tag) -> list[dict[str, object]]:
     """Process a single <line> element and return word data.
 
     Only processes words that have actual scansion (non-empty sy attribute).
-    Words that are prodelided (mf="PE", sy="") are shown with number=None.
+    Lost words (PE targets, elided single-syllable) get number=0.
 
     Rules:
       - PE takes priority: if next word has mf="PE", this word gets PE.
@@ -144,13 +144,14 @@ def process_line(line_tag: Tag) -> list[dict[str, object]]:
       - Elision: mf="SY" on a multi-syllable word → append E.
       - Elided single-syllable word (mf="SY", no scansion) → number 0,
         push E to next word.
+      - PE target (mf="PE", no scansion) → number 0.
 
     Args:
         line_tag: A BeautifulSoup <line> tag element.
 
     Returns:
         List of dicts with keys: text, sy_raw, syllables, added,
-        final_syllables, number (int or None for lost words).
+        final_syllables, number (int).
     """
     words = line_tag.find_all("word")
     results = []
@@ -171,7 +172,7 @@ def process_line(line_tag: Tag) -> list[dict[str, object]]:
         next_text = word_text(next_word) if next_word is not None else ""
         next_mf = str(next_word.get("mf", "") or "") if next_word is not None else ""
 
-        # PE target — lost word, number None
+        # PE target — lost word, number 0 (same as push_e)
         if mf == "PE":
             results.append({
                 "text": text,
@@ -179,7 +180,7 @@ def process_line(line_tag: Tag) -> list[dict[str, object]]:
                 "syllables": [],
                 "added": ["lost"],
                 "final_syllables": [],
-                "number": None,
+                "number": 0,
             })
             continue
 

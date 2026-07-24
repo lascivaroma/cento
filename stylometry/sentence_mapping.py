@@ -80,11 +80,7 @@ def build_xml_index(xml_lines: list) -> tuple[list[str], list[int]]:
     for line_tag in xml_lines:
         for w in process_line(line_tag):
             texts.append(_norm(str(w["text"])))
-            num = w["number"]
-            if isinstance(num, int):
-                numbers.append(num)
-            else:
-                numbers.append(0)
+            numbers.append(int(w["number"]))
     return texts, numbers
 
 
@@ -266,8 +262,7 @@ def corpus_to_string(
     for line_tag in xml_lines:
         words = process_line(line_tag)
         for w in words:
-            if w["number"] is not None:
-                parts.append(str(w["number"]))
+            parts.append(str(w["number"]))
             if xml_pos in eos_xml_positions:
                 parts.append("<EOS>")
             xml_pos += 1

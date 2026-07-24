@@ -229,11 +229,11 @@ class TestLineToNumbers:
         nums = [w["number"] for w in process_line(self.lines[2])]
         assert nums == [4, 8, 9, 324, 4]
 
-    def test_returns_list_of_ints_and_nones(self):
-        """All values should be int or None (lost PE words)."""
+    def test_returns_list_of_ints(self):
+        """All values should be int (including 0 for lost words)."""
         for line in self.lines[:20]:
             for w in process_line(line):
-                assert w["number"] is None or isinstance(w["number"], int)
+                assert isinstance(w["number"], int)
 
 
 # ---------------------------------------------------------------------------
