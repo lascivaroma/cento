@@ -196,22 +196,26 @@ def _build_output_from_masked(
 ) -> list[str]:
     """Build numbered sentences matching the masked file's structure exactly.
 
-    The masked file may have word splits (mecum → me cum). We walk through
-    the masked file and the quesplit sentences simultaneously. When a masked
-    token matches the quesplit token, we consume the next flat_part. When
-    they don't match (it's a split continuation), we emit 0.
+    The masked file has POS tags for content words and lowercase function
+    words.  Word splits (mecum → me cum) cause the masked file to have more
+    tokens than the quesplit flat_parts.
+
+    Strategy: walk through both files simultaneously.
+    - If the masked token matches the quesplit word → consume flat_part, advance both
+    - If the masked token is a POS tag (doesn't match) → consume flat_part, advance both
+    - If the masked token is a split continuation (prefix of quesplit word) → emit 0, advance masked only
     """
     result: list[str] = []
     flat_idx = 0
 
-    # Flatten quesplit words (excluding <EOL>) for comparison
+    # Flatten quesplit words (excluding <EOL>)
     quesplit_words: list[str] = []
     for sent in sentences_raw:
         for tok in sent.split():
             if tok != "<EOL>":
                 quesplit_words.append(tok)
 
-    quesplit_idx = 0
+    q_idx = 0
 
     for masked in masked_lines:
         current: list[str] = []
@@ -219,26 +223,33 @@ def _build_output_from_masked(
             if tok in ("<EOL>", "<EOS>"):
                 current.append(tok)
             else:
+                tok_norm = _norm(_clean_token(tok))
+
+                if flat_idx >= len(flat_parts):
+                    current.append("0")
+                    continue
+
                 # Check if this masked token matches the current quesplit word
-                if quesplit_idx < len(quesplit_words):
-                    q_word = quesplit_words[quesplit_idx]
-                    # Normalize both for comparison
-                    q_norm = _norm(_clean_token(q_word))
-                    tok_norm = _norm(_clean_token(tok))
+                if q_idx < len(quesplit_words):
+                    q_norm = _norm(_clean_token(quesplit_words[q_idx]))
 
                     if tok_norm == q_norm:
-                        # Match: consume the next flat_part
-                        if flat_idx < len(flat_parts):
-                            current.append(flat_parts[flat_idx])
-                            flat_idx += 1
-                        else:
-                            current.append("0")
-                        quesplit_idx += 1
-                    else:
-                        # Split continuation: emit 0, don't advance quesplit
+                        # Exact match (function word) — consume flat_part
+                        current.append(flat_parts[flat_idx])
+                        flat_idx += 1
+                        q_idx += 1
+                    elif q_norm.startswith(tok_norm) and tok_norm:
+                        # Split continuation (e.g., masked='me', quesplit='mecum')
+                        # Don't consume a flat_part, advance masked only
                         current.append("0")
+                    else:
+                        # POS tag or different word — consume flat_part
+                        current.append(flat_parts[flat_idx])
+                        flat_idx += 1
+                        q_idx += 1
                 else:
-                    current.append("0")
+                    current.append(flat_parts[flat_idx])
+                    flat_idx += 1
         result.append(" ".join(current))
 
     return result
