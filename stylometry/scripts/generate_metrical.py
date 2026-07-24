@@ -24,6 +24,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+import unicodedata
 from collections import defaultdict
 from pathlib import Path
 
@@ -57,6 +58,13 @@ AENEID_SENT = BASE_DIR / "processed" / "aeneid"
 BACKGROUND_SENT = BASE_DIR / "processed" / "background"
 QUESTION_SENT = BASE_DIR / "processed" / "question"
 
+# Masked file directories (lexical model)
+AUSONIUS_MASKED = BASE_DIR / "lexical_model" / "ausonius"
+VERGIL_MASKED = BASE_DIR / "lexical_model" / "vergil"
+AENEID_MASKED = BASE_DIR / "lexical_model" / "aeneid"
+BACKGROUND_MASKED = BASE_DIR / "lexical_model" / "background"
+QUESTION_MASKED = BASE_DIR / "lexical_model" / "question"
+
 # Output directories
 OUT_AUSONIUS = BASE_DIR / "metrical_model" / "ausonius"
 OUT_VERGIL = BASE_DIR / "metrical_model" / "vergil"
@@ -68,6 +76,13 @@ OUT_QUESTION = BASE_DIR / "metrical_model" / "question"
 # ---------------------------------------------------------------------------
 # Shared alignment logic
 # ---------------------------------------------------------------------------
+
+def _clean_token(tok: str) -> str:
+    """Strip diacritics/macrons and non-alpha characters from a token."""
+    nfd = unicodedata.normalize("NFD", tok)
+    stripped = "".join(c for c in nfd if unicodedata.category(c) != "Mn")
+    return re.sub(r"[^a-zA-Z]", "", stripped)
+
 
 def build_word_index(
     texts: list[str], numbers: list[int]
@@ -104,89 +119,156 @@ def numbered_sentences_from_flat(
     source_texts: list[str],
     source_numbers: list[int],
     sentences_raw: list[str],
-) -> list[str]:
+    masked_lines: list[str] | None = None,
+) -> tuple[list[str], int]:
     """Build numbered sentences from flat source data and sentence strings.
 
-    Returns one string per sentence with <EOL> and <EOS> tokens preserved.
-    """
-    # Flatten sentence words, tracking <EOL>/<EOS> positions
-    flat_words: list[str] = []
-    eol_after: set[int] = set()
+    Args:
+        masked_lines: If provided, use as the output template. Each POS tag
+            or function word in the masked file gets the next metrical number.
+            Word splits (mecum → me cum) are handled by assigning the number
+            to the first token and 0 to subsequent split tokens.
 
+    Returns:
+        Tuple of (numbered sentences, mismatch count).
+    """
+    # Flatten sentence words for alignment
+    flat_words: list[str] = []
     for sent in sentences_raw:
         for tok in sent.split():
             if tok == "<EOL>":
-                if flat_words:
-                    eol_after.add(len(flat_words) - 1)
-            else:
-                w = _norm(re.sub(r"[^a-zA-Z]", "", tok))
-                if w:
-                    flat_words.append(w)
+                continue
+            w = _norm(_clean_token(tok))
+            if w:
+                flat_words.append(w)
+
+    # Build a lookup: for each source position, the normalised text.
+    # Also pre-split -que words so 'ulmisque' maps to both 'ulmisque' and 'ulmis'.
+    src_lookup: dict[str, list[int]] = defaultdict(list)
+    for idx, w in enumerate(source_texts):
+        src_lookup[w].append(idx)
+        if w.endswith("que") and len(w) > 3:
+            base = w[:-3]
+            src_lookup[base].append(idx)
+    for k in src_lookup:
+        src_lookup[k].reverse()
 
     # Build permutation
-    permutation = build_permutation(source_texts, source_numbers, flat_words)
+    permutation: list[int] = []
+    for sw in flat_words:
+        if sw == "que":
+            permutation.append(-1)
+        elif src_lookup.get(sw):
+            permutation.append(src_lookup[sw].pop())
+        else:
+            permutation.append(-1)
 
-    # Report mismatches
-    mismatches = sum(1 for p in permutation if p < 0)
-    if mismatches:
-        print(f"    WARNING: {mismatches}/{len(permutation)} words unmatched")
+    # Count mismatches (excluding -que tokens)
+    mismatch_count = sum(
+        1 for p, w in zip(permutation, flat_words) if p < 0 and w != "que"
+    )
+    if mismatch_count:
+        print(f"    WARNING: {mismatch_count}/{len(permutation)} words unmatched")
 
-    # Build flat output
+    # Build flat output (word numbers only)
     flat_parts: list[str] = []
-    for i, src_pos in enumerate(permutation):
-        if src_pos >= 0:
-            flat_parts.append(str(source_numbers[src_pos]))
+    for pos, w in zip(permutation, flat_words):
+        if w == "que":
+            flat_parts.append("0")
+        elif pos >= 0:
+            flat_parts.append(str(source_numbers[pos]))
         else:
             flat_parts.append("0")
-        if i in eol_after:
-            flat_parts.append("<EOL>")
 
-    # Split into per-sentence strings at sentence boundaries.
-    # Sentence boundaries are where the original sentence ended — we detect
-    # them by replaying the sentence tokens and counting consumed words.
+    # Split into per-sentence strings using masked file as template
+    if masked_lines:
+        result = _build_output_from_masked(flat_parts, masked_lines, sentences_raw)
+    else:
+        result = _build_output_from_sentences(flat_parts, sentences_raw)
+
+    return result, mismatch_count
+
+
+def _build_output_from_masked(
+    flat_parts: list[str],
+    masked_lines: list[str],
+    sentences_raw: list[str],
+) -> list[str]:
+    """Build numbered sentences matching the masked file's structure exactly.
+
+    The masked file may have word splits (mecum → me cum). We walk through
+    the masked file and the quesplit sentences simultaneously. When a masked
+    token matches the quesplit token, we consume the next flat_part. When
+    they don't match (it's a split continuation), we emit 0.
+    """
+    result: list[str] = []
+    flat_idx = 0
+
+    # Flatten quesplit words (excluding <EOL>) for comparison
+    quesplit_words: list[str] = []
+    for sent in sentences_raw:
+        for tok in sent.split():
+            if tok != "<EOL>":
+                quesplit_words.append(tok)
+
+    quesplit_idx = 0
+
+    for masked in masked_lines:
+        current: list[str] = []
+        for tok in masked.split():
+            if tok in ("<EOL>", "<EOS>"):
+                current.append(tok)
+            else:
+                # Check if this masked token matches the current quesplit word
+                if quesplit_idx < len(quesplit_words):
+                    q_word = quesplit_words[quesplit_idx]
+                    # Normalize both for comparison
+                    q_norm = _norm(_clean_token(q_word))
+                    tok_norm = _norm(_clean_token(tok))
+
+                    if tok_norm == q_norm:
+                        # Match: consume the next flat_part
+                        if flat_idx < len(flat_parts):
+                            current.append(flat_parts[flat_idx])
+                            flat_idx += 1
+                        else:
+                            current.append("0")
+                        quesplit_idx += 1
+                    else:
+                        # Split continuation: emit 0, don't advance quesplit
+                        current.append("0")
+                else:
+                    current.append("0")
+        result.append(" ".join(current))
+
+    return result
+
+
+def _build_output_from_sentences(
+    flat_parts: list[str],
+    sentences_raw: list[str],
+) -> list[str]:
+    """Build numbered sentences from quesplit sentence structure."""
     result: list[str] = []
     current: list[str] = []
-    word_idx = 0
+    flat_idx = 0
     for sent in sentences_raw:
         for tok in sent.split():
             if tok == "<EOL>":
-                if current:
-                    current.append("<EOL>")
-            else:
-                w = _norm(re.sub(r"[^a-zA-Z]", "", tok))
-                if w:
-                    if word_idx < len(flat_parts):
-                        # Find this word's number in flat_parts
-                        # We need to walk through flat_parts matching word_idx
-                        pass
-                    word_idx += 1
-        # Mark sentence end
-        if current:
-            current.append("<EOS>")
-            result.append(" ".join(current))
-            current = []
-
-    # Simpler approach: rebuild from flat_parts using word count per sentence
-    result = []
-    current = []
-    flat_idx = 0
-    for sent in sentences_raw:
-        word_count = sum(1 for tok in sent.split() if tok != "<EOL>" and _norm(re.sub(r"[^a-zA-Z]", "", tok)))
-        for _ in range(word_count):
-            if flat_idx < len(flat_parts):
-                current.append(flat_parts[flat_idx])
-                flat_idx += 1
-        # Add <EOL> tokens that appeared in this sentence
-        for tok in sent.split():
-            if tok == "<EOL>" and current:
                 current.append("<EOL>")
+            else:
+                w = _norm(_clean_token(tok))
+                if w:
+                    if flat_idx < len(flat_parts):
+                        current.append(flat_parts[flat_idx])
+                        flat_idx += 1
+                else:
+                    current.append("0")
         current.append("<EOS>")
         result.append(" ".join(current))
         current = []
-
     if current:
         result.append(" ".join(current))
-
     return result
 
 
@@ -247,11 +329,16 @@ def process_corpus(
     source_flattener,
     sentence_dir: Path,
     sentence_suffix: str,
+    masked_dir: Path,
+    masked_suffix: str,
     output_dir: Path,
     label: str,
     skip: set[str] | None = None,
 ) -> None:
     """Process one corpus: align source data with sentences, write metrical output.
+
+    Reads sentence structure from the masked file (to match lexical model exactly)
+    and word alignment from the quesplit sentence file.
 
     Args:
         skip: Optional set of file stems to exclude.
@@ -273,8 +360,9 @@ def process_corpus(
 
     for src_path in source_files:
         stem = src_path.stem
-        # Find matching sentence file
+        # Find matching sentence file and masked file
         sent_path = sentence_dir / f"{stem}{sentence_suffix}"
+        masked_path = masked_dir / f"{stem}{masked_suffix}"
         if not sent_path.exists():
             print(f"    SKIP {stem}: no sentence file at {sent_path}")
             continue
@@ -287,14 +375,15 @@ def process_corpus(
         with open(sent_path, "r", encoding="utf-8") as f:
             sentences = [line.strip() for line in f if line.strip()]
 
-        # Generate numbered sentences
-        numbered = numbered_sentences_from_flat(src_texts, src_numbers, sentences)
+        # Load masked file (template for output structure)
+        masked_lines = None
+        if masked_path.exists():
+            with open(masked_path, "r", encoding="utf-8") as f:
+                masked_lines = [line.strip() for line in f if line.strip()]
 
-        # Count mismatches
-        mismatches = sum(
-            1 for s in numbered
-            for tok in s.split()
-            if tok not in ("<EOL>", "<EOS>") and tok == "0"
+        # Generate numbered sentences
+        numbered, mismatches = numbered_sentences_from_flat(
+            src_texts, src_numbers, sentences, masked_lines
         )
         total_mismatches += mismatches
 
@@ -328,7 +417,9 @@ def main() -> int:
         source_loader=load_xml_lines,
         source_flattener=xml_to_flat,
         sentence_dir=AUSONIUS_SENT,
-        sentence_suffix="_sentences.txt",
+        sentence_suffix="_sentences.quesplit.txt",
+        masked_dir=AUSONIUS_MASKED,
+        masked_suffix="_sentences.quesplit.masked.txt",
         output_dir=OUT_AUSONIUS,
         label="Ausonius",
         skip={"cento_nuptialis"},
@@ -345,7 +436,9 @@ def main() -> int:
         source_loader=load_json_lines,
         source_flattener=json_to_flat,
         sentence_dir=VERGIL_SENT,
-        sentence_suffix="_sentences.txt",
+        sentence_suffix="_sentences.quesplit.txt",
+        masked_dir=VERGIL_MASKED,
+        masked_suffix="_sentences.quesplit.masked.txt",
         output_dir=OUT_VERGIL,
         label="Vergil",
     )
@@ -361,7 +454,9 @@ def main() -> int:
         source_loader=load_json_lines,
         source_flattener=json_to_flat,
         sentence_dir=AENEID_SENT,
-        sentence_suffix="_sentences.txt",
+        sentence_suffix="_sentences.quesplit.txt",
+        masked_dir=AENEID_MASKED,
+        masked_suffix="_sentences.quesplit.masked.txt",
         output_dir=OUT_AENEID,
         label="Aeneid",
     )
@@ -377,7 +472,9 @@ def main() -> int:
         source_loader=load_json_lines,
         source_flattener=json_to_flat,
         sentence_dir=BACKGROUND_SENT,
-        sentence_suffix="_sentences.txt",
+        sentence_suffix="_sentences.quesplit.txt",
+        masked_dir=BACKGROUND_MASKED,
+        masked_suffix="_sentences.quesplit.masked.txt",
         output_dir=OUT_BACKGROUND,
         label="Background",
     )
@@ -388,18 +485,20 @@ def main() -> int:
     print(f"Sentences:     {QUESTION_SENT}")
     print(f"Output:        {OUT_QUESTION}")
     cento_xml = QUESTION_XML / "cento_nuptialis.xml"
-    cento_sent = QUESTION_SENT / "cento_nuptialis_sentences.txt"
+    cento_sent = QUESTION_SENT / "cento_nuptialis_sentences.quesplit.txt"
+    cento_masked = QUESTION_MASKED / "cento_nuptialis_sentences.quesplit.masked.txt"
     if cento_xml.exists() and cento_sent.exists():
         OUT_QUESTION.mkdir(parents=True, exist_ok=True)
         raw_lines = load_xml_lines(cento_xml)
         src_texts, src_numbers = xml_to_flat(raw_lines)
         with open(cento_sent, "r", encoding="utf-8") as f:
             sentences = [line.strip() for line in f if line.strip()]
-        numbered = numbered_sentences_from_flat(src_texts, src_numbers, sentences)
-        mismatches = sum(
-            1 for s in numbered
-            for tok in s.split()
-            if tok not in ("<EOL>", "<EOS>") and tok == "0"
+        masked_lines = None
+        if cento_masked.exists():
+            with open(cento_masked, "r", encoding="utf-8") as f:
+                masked_lines = [line.strip() for line in f if line.strip()]
+        numbered, mismatches = numbered_sentences_from_flat(
+            src_texts, src_numbers, sentences, masked_lines
         )
         out_path = OUT_QUESTION / "cento_nuptialis_sentences.metrical.txt"
         with open(out_path, "w", encoding="utf-8") as f:
