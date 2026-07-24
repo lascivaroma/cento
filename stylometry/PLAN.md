@@ -14,12 +14,40 @@ The method follows the pipeline used in the **Liber-Regum** project
 
 ```
 cento/stylometry/
-├── ausonius_raw/              # Raw XML downloads from Pedecerto
-├── download_ausonius.py       # Script to download Ausonius hexameter XML
-├── preprocess.py              # Convert XML → sentences → masked (TBD)
-├── build_model.py             # Build LamdaG model from Ausonius works (TBD)
-├── evaluate.py                # Evaluate cento against model and Vergil (TBD)
-└── PLAN.md                    # This file
+├── raw/                         # Source files (one-time data)
+│   ├── ausonius/                # Pedecerto XML (one file per work)
+│   ├── vergil/                  # Hypotactic JSON (one file per book)
+│   └── background/              # Ovid, Lucan, Silius, Valerius Flaccus
+├── processed/                   # Intermediate files (reproducible)
+│   ├── ausonius/                # Filtered XML, text, sentences
+│   ├── vergil/
+│   ├── background/
+│   └── question/                # cento_nuptialis
+├── model/                       # Lexical analysis corpora
+│   ├── ausonius/                # *_sentences.quesplit.masked.txt
+│   ├── vergil/
+│   ├── background/
+│   └── question/
+├── metrical/                    # Metrical numbered output
+│   ├── ausonius/                # *_sentences.metrical.txt
+│   ├── vergil/
+│   ├── background/
+│   └── question/
+├── scripts/                     # Pipeline scripts
+│   ├── metrical_numbering.py    # Pedecerto XML → numbers
+│   ├── hypotactic_numbering.py  # Hypotactic JSON → numbers
+│   ├── sentence_mapping.py      # Permutation mapping
+│   ├── filter_hexameter.py      # XML hexameter filtering
+│   ├── extract_sentences.py     # XML → text extraction
+│   ├── extract_hypotactic.py    # Author JSON → individual poems
+│   ├── download_ausonius.py     # Pedecerto download
+│   ├── process.py               # Latin-masking pipeline wrapper
+│   ├── corpus_utils.py          # Hypotactic data utilities
+│   └── naming.py                # Naming conventions
+├── tests/                       # Test files
+│   └── test_metrical_numbering.py
+├── common_adverbs.txt           # Latin-masking adverb list
+└── PLAN.md                      # This file
 ```
 
 ## Data Sources
@@ -28,142 +56,63 @@ cento/stylometry/
 
 Source: https://www.pedecerto.eu/pagine/autori/idautori/183
 
-All 31 works by Ausonius have been downloaded as XML files into `ausonius_raw/`.
-Some works contain a mix of meters; the `meter` attribute on each `<line>` element
-indicates the meter type, where `H` = hexameter.
+All 31 works by Ausonius have been downloaded as XML files into `raw/ausonius/`.
+Selected hexameter works are listed in `to_process.md` (to be replaced by
+automated extraction). Filtered XML goes to `processed/ausonius/`, text files
+to `processed/ausonius/`, and masked files to `model/ausonius/`.
 
-Meter distribution across downloaded files:
+### Hypotactic Authors
 
-| File | H (hex) | Other meters | Notes |
-|------|---------|-------------|-------|
-| `mosella.xml` | 484 | 1 (X) | Almost pure hexameter |
-| `uersus_paschales.xml` | 31 | 1 (X) | Almost pure hexameter |
-| `cupido_cruciatus.xml` | 103 | 5 (", X) | Predominantly hexameter |
-| `epitaphia_heroum.xml` | 66 | 80 (", P, X) | Mixed |
-| `epigrammata.xml` | 294 | 178 (", G, G1, P, T, V, X) | Mixed |
-| `epistulae.xml` | 521 | 755 (", D, F, G, G1, P, V, X) | Mixed |
-| `technopaegnion.xml` | 163 | 34 (", X) | Predominantly hexameter |
-| `parentalia.xml` | 191 | 278 (G, G1, P, V, X, Y) | Mixed |
-| `praefationes.xml` | 41 | 49 (", F, P, X) | Mixed |
-| `caesares.xml` | 91 | 148 (", P, X) | Mixed |
-| `cento_nuptialis.xml` | 132 | 48 (", G, X) | **Target text** |
-| `ephemeris.xml` | 133 | 110 (A, G, P, S1, X) | Mixed |
-| `eclogae.xml` | 350 | 79 (", P, T, X) | Predominantly hexameter |
-| `commemoratio_professorum_burdigalensium.xml` | 131 | 473 (", A, G, G1, P, S1, T, V, X, Y) | Mixed |
-| `ordo_urbium_nobilium.xml` | 168 | 30 (", X) | Predominantly hexameter |
-| `griphus_ternarii_numeri.xml` | 90 | 6 (", X) | Predominantly hexameter |
-| `protrepticus_ad_nepotem.xml` | 100 | 7 (", X) | Predominantly hexameter |
-| `epicedion_in_patrem.xml` | 32 | 37 (", P, X) | Mixed |
-| `pater_ad_filium.xml` | 22 | 3 (", X) | Predominantly hexameter |
-| `bissula.xml` | 18 | 31 (O, P, T, V, X) | Mixed |
-| `periochae_iliados.xml` | 43 | 76 (", X) | Mixed |
-| `periochae_odyssiae.xml` | 25 | 73 (", X) | Mixed |
-| `fasti.xml` | 13 | 29 (", P, X) | Mixed |
-| `genethliacos.xml` | 29 | 2 (", X) | Predominantly hexameter |
-| `ad_patrem_de_suscepto_filio.xml` | 20 | 20 (P) | Mixed |
-| `de_herediolo.xml` | 15 | 20 (", P, X) | Mixed |
-| `ludus_septem_sapientium.xml` | 9 | 210 (", G, P, X) | Not hexameter |
-| `precationes_variae.xml` | 85 | 4 (", X) | Predominantly hexameter |
-| `oratio_consulis_ausonii_versibus_rhopalicis.xml` | 42 | 1 (X) | Almost pure hexameter |
-| `appendix_ausoniana.xml` | 1 | 2 (V) | Not hexameter |
-| `appendix_ausoniana_2.xml` | 34 | 122 (", D, F, G, G1, P, T, V, X, Y) | Mixed |
+Individual poem JSONs extracted from the hypotactic corpus into `raw/vergil/`
+and `raw/background/` using `scripts/extract_hypotactic.py`. Each file
+contains hexameter lines only.
+
+- **Vergil**: Aeneid (12 books), Georgics (4 books)
+- **Background**: Ovid Metamorphoses (15 books), Lucan Bellum Civile (10 books),
+  Silius Italicus Punica (17 books), Valerius Flaccus Argonautica (8 books)
 
 ### Download Instructions
 
 ```bash
 cd cento/stylometry
-python download_ausonius.py
+~/venv/py314/bin/python scripts/download_ausonius.py
 ```
 
-This downloads all 31 works by Ausonius as XML files into `ausonius_raw/`.
+This downloads all 31 works by Ausonius as XML files into `raw/ausonius/`.
 
 ### Meter Filtering
 
-A script (`filter_hexameter.py`) extracts only hexameter lines (`meter="H"`)
-from files that contain a mix of meters. Files with no hexameter lines at all
-are skipped.
+`scripts/filter_hexameter.py` reads `to_process.md` for the list of files to
+process, extracts only hexameter lines, and skips lines with:
+- Empty or "X" meter (unscanned)
+- `pattern="not scanned"` attribute
+- Asterisks in word text
 
-Results: 29 files kept, 2 files skipped (`appendix_ausoniana.xml` and
-`periochae_iliados.xml` have no hexameter lines).
+Filtered XML goes to `processed/ausonius/`, text to `processed/ausonius/`.
 
 ### Hexameter Works for LamdaG Model
 
-The following works have hexameter lines and are suitable for building the
-Ausonius LamdaG model (excluding `cento_nuptialis` which is the target text):
+7 works selected in `to_process.md` (excluding cento_nuptialis):
+mosella, cupido_cruciatus, ordo_urbium_nobilium, griphus_ternarii_numeri,
+protrepticus_ad_nepotem, precationes_variae, genethliacos.
 
-| File | H lines | Total lines |
-|------|---------|-------------|
-| `epistulae.xml` | 245 | 672 |
-| `epigrammata.xml` | 4 | 9 |
-| `mosella.xml` | 484 | 485 |
-| `parentalia.xml` | 191 | 469 |
-| `praefationes.xml` | 33 | 89 |
-| `ephemeris.xml` | 85 | 132 |
-| `eclogae.xml` | 12 | 13 |
-| `caesares.xml` | 91 | 197 |
-| `technopaegnion.xml` | 163 | 195 |
-| `ordo_urbium_nobilium.xml` | 168 | 196 |
-| `commemoratio_professorum_burdigalensium.xml` | 131 | 610 |
-| `griphus_ternarii_numeri.xml` | 90 | 96 |
-| `protrepticus_ad_nepotem.xml` | 100 | 107 |
-| `epitaphia_heroum.xml` | 66 | 173 |
-| `precationes_variae.xml` | 17 | 17 |
-| `oratio_consulis_ausonii_versibus_rhopalicis.xml` | 42 | 43 |
-| `pater_ad_filium.xml` | 22 | 24 |
-| `epicedion_in_patrem.xml` | 32 | 70 |
-| `cupido_cruciatus.xml` | 103 | 109 |
-| `genethliacos.xml` | 29 | 31 |
-| `bissula.xml` | 18 | 48 |
-| `periochae_odyssiae.xml` | 2 | 5 |
-| `ad_patrem_de_suscepto_filio.xml` | 20 | 40 |
-| `de_herediolo.xml` | 15 | 35 |
-| `ludus_septem_sapientium.xml` | 9 | 251 |
-| `fasti.xml` | 13 | 33 |
-| `appendix_ausoniana_2.xml` | 1 | 13 |
+## Pipeline
 
-**Total hexameter lines (excluding cento_nuptialis): ~1,980**
-
-### File Classification (from `analyze_hexameter.py`)
-
-The analysis script categorizes files based on hexameter content and continuous stretches:
-
-| Category | Count | Files |
-|----------|-------|-------|
-| **pure_hexameter** | 1 | `precationes_variae.xml` (17/17 H) |
-| **predominant_hexameter** | 13 | `mosella`, `uersus_paschales`, `technopaegnion`, `ordo_urbium_nobilium`, `oratio_consulis_ausonii_versibus_rhopalicis`, `protrepticus_ad_nepotem`, `genethliacos`, `griphus_ternarii_numeri`, `ephemeris`, `eclogae`, `pater_ad_filium`, `cupido_cruciatus`, `cento_nuptialis` |
-| **mixed_hexameter** | 12 | `epistulae`, `parentalia`, `praefationes`, `epitaphia_heroum`, `commemoratio_professorum_burdigalensium`, `caesares`, `epicedion_in_patrem`, `de_herediolo`, `bissula`, `epigrammata`, `fasti`, `periochae_odyssiae` |
-| **elegiac_couplets** | 1 | `ad_patrem_de_suscepto_filio.xml` (alternating H/P) |
-| **minimal_hexameter** | 2 | `appendix_ausoniana_2.xml`, `ludus_septem_sapientium.xml` |
-| **no_hexameter** | 2 | `appendix_ausoniana.xml`, `periochae_iliados.xml` |
-
-**Recommendation**: Files in `pure_hexameter` and `predominant_hexameter` categories
-are the best candidates for the Ausonius hexameter corpus. Files in `mixed_hexameter`
-and `elegiac_couplets` need manual review — their hexameter lines may be interspersed
-with non-hexameter content that could introduce noise.
-
-## Pipeline (following Liber-Regum)
-
-The analysis pipeline mirrors `Liber-Regum/Lexical analysis/latin_masking_pipeline.ipynb`:
-
-1. **XML → Sentences**: Extract sentences from Pedecerto XML (preserving punctuation)
-2. **-que Splitting**: Split -que enclitics using `latin_masking split-que`
-3. **Masking**: Two-pass POS + adverb masking using UDPipe (`latin-evalatin24-240520`)
-4. **Feature Extraction**: Build n-gram frequency vectors (LamdaG model)
-5. **Classification**: Compare cento against Ausonius model and Vergil
+1. **Extract raw**: Download Ausonius XML + extract hypotactic JSONs → `raw/`
+2. **Filter hexameter**: XML → hexameter-only XML → `processed/ausonius/`
+3. **Extract text**: XML → plain text files → `processed/`
+4. **Sentence split + mask**: latin-masking pipeline → `model/`
+5. **Metrical numbering**: XML/JSON + sentences → numbered output → `metrical/`
+6. **Analysis**: LamdaG authorship verification
 
 ## Next Steps
 
-- [x] Create download script for Ausonius works
-- [x] Run download script to populate `ausonius_raw/` (all 31 works)
-- [x] Analyze meter distribution in downloaded files
-- [x] Create `analyze_hexameter.py` to report on hexameter content per file
-- [x] Create `filter_hexameter.py` to extract hexameter lines (skip unscanned/asterisk/not-scanned pattern)
-- [x] Fix XML cleaning — line-by-line division stripping
-- [x] Create `to_process.md` with selected files for corpus
-- [x] Run filter on 7 selected files → 1,054 hexameter lines
-- [x] Create `extract_sentences.py` to convert XML → text (preserving punctuation)
-- [x] Run extract → 7 text files, 1,054 lines, 6,527 words
-- [x] Run latin-masking pipeline (Stage 1 + Stage 2)
-- [x] Build LamdaG model from Ausonius hexameter works
-- [x] Obtain Vergil hexameter texts (Aeneid, Georgics, Eclogues)
-- [x] Evaluate cento against both models
+- [x] Download Ausonius XML from Pedecerto → `raw/ausonius/`
+- [x] Extract hypotactic poems → `raw/vergil/`, `raw/background/`
+- [x] Create metrical numbering modules (`metrical_numbering.py`, `hypotactic_numbering.py`)
+- [x] Create sentence mapping module (`sentence_mapping.py`)
+- [x] Restructure directories
+- [ ] Replace `to_process.md` with principled hexameter extraction
+- [ ] Run latin-masking on Ausonius question text
+- [ ] Generate metrical output for all corpora
+- [ ] Build LamdaG model and evaluate
