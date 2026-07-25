@@ -119,8 +119,12 @@ def process_directory(
     extractor,
     glob_pattern: str,
     label: str,
+    prefix: str = "",
 ) -> tuple[int, int]:
     """Process all files in a directory.
+
+    Args:
+        prefix: Optional prefix to add to output filenames (e.g. 'ausonius_').
 
     Returns (files_written, total_lines).
     """
@@ -135,7 +139,7 @@ def process_directory(
     total_words = 0
     for input_path in input_files:
         stem = input_path.stem
-        output_name = stem + ".txt"
+        output_name = prefix + stem + ".txt"
         output_path = output_dir / output_name
 
         text_lines = extractor(input_path)
@@ -166,7 +170,8 @@ def main() -> int:
     print(f"XML source:  {AUSONIUS_XML}")
     print(f"XML output:  {AUSONIUS_OUT}")
     n_files, n_lines = process_directory(
-        AUSONIUS_XML, AUSONIUS_OUT, extract_text_from_xml, "*.xml", "Ausonius XML"
+        AUSONIUS_XML, AUSONIUS_OUT, extract_text_from_xml, "*.xml", "Ausonius XML",
+        prefix="ausonius_",
     )
     total_files += n_files
     total_lines += n_lines

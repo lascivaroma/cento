@@ -124,7 +124,7 @@ See **PIPELINE.md** for full replicable instructions.
 ## Next Steps
 
 - [x] Download Ausonius XML from Pedecerto → `raw/ausonius/`
-- [x] Extract hypotactic poems → `raw/vergil/`, `raw/background/`
+- [x] Extract hypotactic poems → `raw/vergil/`, `raw/background/`, `raw/aeneid/`
 - [x] Create metrical numbering modules (`metrical_numbering.py`, `hypotactic_numbering.py`)
 - [x] Create sentence mapping module (`sentence_mapping.py`)
 - [x] Restructure directories
@@ -134,5 +134,4 @@ See **PIPELINE.md** for full replicable instructions.
 - [x] Write `PIPELINE.md` runbook
 - [x] Run latin-masking on all corpora → `lexical_model/`
 - [x] Generate metrical output → `metrical_model/`
-- [ ] Fix metrical/lexical token alignment (316 lines differ due to latin-masking word splits like `anne` → `an ne`)
 - [ ] Build LamdaG model and evaluate

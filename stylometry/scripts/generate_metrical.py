@@ -204,8 +204,15 @@ def process_corpus(
     output_dir: Path,
     label: str,
     skip: set[str] | None = None,
+    sent_prefix: str = "",
+    out_prefix: str = "",
 ) -> None:
-    """Process one corpus."""
+    """Process one corpus.
+
+    Args:
+        sent_prefix: Prefix for finding sentence files (e.g. 'ausonius_').
+        out_prefix: Prefix for output filenames (e.g. 'ausonius_').
+    """
     if skip is None:
         skip = set()
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -223,7 +230,7 @@ def process_corpus(
 
     for src_path in source_files:
         stem = src_path.stem
-        sent_path = sentence_dir / f"{stem}{sentence_suffix}"
+        sent_path = sentence_dir / f"{sent_prefix}{stem}{sentence_suffix}"
         if not sent_path.exists():
             print(f"    SKIP {stem}: no sentence file at {sent_path}")
             continue
@@ -239,7 +246,7 @@ def process_corpus(
         )
         total_mismatches += mismatches
 
-        out_path = output_dir / f"{stem}_sentences.metrical.txt"
+        out_path = output_dir / f"{out_prefix}{stem}_sentences.metrical.txt"
         with open(out_path, "w", encoding="utf-8") as f:
             for line in numbered:
                 f.write(line + "\n")
@@ -265,6 +272,7 @@ def main() -> int:
         sentence_dir=AUSONIUS_SENT, sentence_suffix="_sentences.txt",
         output_dir=OUT_AUSONIUS, label="Ausonius",
         skip={"cento_nuptialis"},
+        sent_prefix="ausonius_", out_prefix="ausonius_",
     )
 
     # Vergil Georgics
