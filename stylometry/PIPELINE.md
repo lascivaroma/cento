@@ -122,13 +122,31 @@ PYTHONPATH=scripts python scripts/generate_metrical.py
 
 ---
 
-## Step 6 — Analysis (TODO)
+## Step 6 — Line-based metrical numbering
 
-Build LamdaG models and evaluate the cento.
+Generate one sentence per hexameter line, with each word replaced by its
+prime-encoded metrical position number.  Unlike Step 5, no sentence splitting
+is used — each hexameter line is its own sentence.  Every sentence ends with
+`<EOL>`.
 
 ```bash
-# TODO: LamdaG commands
+PYTHONPATH=scripts python scripts/generate_metrical_lines.py
 ```
+
+- **Input**: Source XML/JSON files (same as Step 5)
+- **Output**: `metrical_model_lines/{ausonius,vergil,aeneid,background,question}/*.mapped_lines.txt`
+
+---
+
+## Step 7 — Analysis
+
+LambdaG models are built and evaluated in the Jupyter notebooks:
+
+- `cento_stylometry.ipynb` — lexical (POS-masked) analysis
+- `cento_metrical_stylometry.ipynb` — sentence-based metrical analysis
+- `cento_metrical_lines_stylometry.ipynb` — line-based metrical analysis (N=1,2,4)
+- `cento_syntactic_stylometry.ipynb` — syntactic analysis
+- `cento_sentence_similarity.ipynb` — per-sentence similarity visualization
 
 ---
 
