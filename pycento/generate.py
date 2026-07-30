@@ -86,7 +86,9 @@ def rescan_joint(words_a: List[Word], words_b: List[Word]) -> RescanResult:
     return RescanResult(False, f"failed to scan as a valid hexameter: {text!r}")
 
 
-def _pick(candidates: List[dict], used_refs: set) -> dict:
+def pick_candidate(candidates: List[dict], used_refs: set) -> dict:
+    """Pick a random candidate, preferring ones not already used elsewhere
+    in the poem (falls back to the full pool if every candidate is used)."""
     pool = [e for e in candidates if e["id"] not in used_refs] or candidates
     return random.choice(pool)
 
@@ -165,8 +167,8 @@ def resolve_merge_slot(
         return None
 
     for _ in range(max_attempts):
-        entry_a = _pick(a_candidates, used_refs)
-        entry_b = _pick(b_candidates, used_refs)
+        entry_a = pick_candidate(a_candidates, used_refs)
+        entry_b = pick_candidate(b_candidates, used_refs)
         words_a, words_b = entry_to_words(entry_a), entry_to_words(entry_b)
         if allow_unchecked:
             if stats is not None:
@@ -179,6 +181,54 @@ def resolve_merge_slot(
             if stats is not None:
                 stats.independent_resolved += 1
             return words_a, words_b, [entry_a["id"], entry_b["id"]]
+        if stats is not None:
+            stats.rescan_rejected += 1
+    if stats is not None:
+        stats.slots_given_up += 1
+    return None
+
+
+def resolve_pinned_slot(
+    pinned_words: List[Word],
+    pinned_is_start: bool,
+    free_candidates: List[dict],
+    used_refs: set,
+    allow_unchecked: bool,
+    max_attempts: int = 8,
+    stats: Optional[MergeStats] = None,
+) -> Optional[Tuple[List[Word], str]]:
+    """Resolve the one FREE side of a two-segment slot whose other side is
+    already fixed -- e.g. a cross-line continuation boundary, where the
+    pinned side was drawn from a pre-validated adjacent-Virgil-verse pair
+    and must not be redrawn, but the line it belongs to may still need an
+    ordinary (independently drawn) second segment to complete its own
+    hexameter.
+
+    Draws a candidate for the free side and re-scans the joint against the
+    pinned words (unless `allow_unchecked`), retrying up to `max_attempts`
+    times. Returns (free_words, free_id), or None if no candidates exist or
+    every attempt fails re-scan.
+    """
+    if not free_candidates:
+        if stats is not None:
+            stats.slots_given_up += 1
+        return None
+
+    for _ in range(max_attempts):
+        entry_free = pick_candidate(free_candidates, used_refs)
+        words_free = entry_to_words(entry_free)
+        words_a, words_b = (pinned_words, words_free) if pinned_is_start else (words_free, pinned_words)
+        if allow_unchecked:
+            if stats is not None:
+                stats.independent_resolved += 1
+            return words_free, entry_free["id"]
+        result = rescan_joint(words_a, words_b)
+        if stats is not None:
+            stats.rescan_attempts += 1
+        if result.valid:
+            if stats is not None:
+                stats.independent_resolved += 1
+            return words_free, entry_free["id"]
         if stats is not None:
             stats.rescan_rejected += 1
     if stats is not None:

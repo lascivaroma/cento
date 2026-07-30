@@ -8,6 +8,7 @@ a Virgil verse.
 """
 
 import json
+from dataclasses import dataclass
 from typing import Iterator, List, Tuple
 
 
@@ -72,6 +73,93 @@ def iter_scheme_rows(table: List[list]) -> Iterator[RowShape]:
                 segs.append((tuple(item), prev == 0))
             prev = item
         yield tuple(segs)
+
+
+def line_segment_totals(line_segs: RowShape) -> Tuple[int, ...]:
+    """The morae total of each segment in one accumulated output line
+    (as built by walking iter_scheme_rows()'s is_start-driven line
+    accumulation -- see step-04/step-05/step-03).
+
+    Only the line's actual FINAL segment (always the last one in
+    `line_segs`, whether or not it is itself an `is_start` segment) ends the
+    whole hexameter, so only its last mora gets the anceps-normalization
+    (forced to 2 regardless of its stored length -- the "line-final anceps
+    convention", see pycento/serialize.py's `X` coding). Every other
+    segment's last syllable is a genuine mid-verse syllable and must use its
+    real stored value -- normalizing it too silently corrupts the total
+    (e.g. a real (16, 8) split reads back as a nonexistent (17, 8) if the
+    start segment's last mora, actually short, gets force-bumped to 2).
+    """
+    totals = []
+    last = len(line_segs) - 1
+    for i, (pattern, _is_start) in enumerate(line_segs):
+        if not pattern:
+            totals.append(0)
+        elif i == last:
+            totals.append(sum(pattern[:-1]) + 2)
+        else:
+            totals.append(sum(pattern))
+    return tuple(totals)
+
+
+@dataclass(frozen=True)
+class LineSpec:
+    """One real cento line, reconstructed from scheme.json's rows -- the
+    same is_start-driven accumulation iter_scheme_rows' shapes already
+    imply, but flattened across row boundaries into actual per-line units
+    (see build_line_specs)."""
+    segs: RowShape
+    continues_previous: bool
+
+
+def build_line_specs(rows: Iterator[RowShape]) -> List[LineSpec]:
+    """Partition scheme.json's rows into real cento lines, marking each line
+    whose first segment is a genuine `type="sq"` continuation of the
+    immediately preceding line's LAST segment (`continues_previous=True`).
+
+    A continuation is bundled into a single 2-segment ROW (see
+    iter_scheme_rows) in exactly two shapes, and both reduce to the same
+    rule -- the row's second element always starts a new line that
+    continues whatever the row's first element just closed:
+      - [tupA, 0, tupB]    : tupA (is_start=False) closes whatever line was
+                              already open (from an earlier row); tupB
+                              (is_start=True) opens the continuing line.
+      - [0, tupA, 0, tupB] : tupA (is_start=True) first closes out and
+                              replaces whatever was open with its own
+                              (non-continuing) single-segment line; tupB
+                              then opens a new line continuing THAT one.
+
+    Verified directly against data/gold/cento.xml's own `continued` flags
+    (via pycento.data.parse_cento): matches all 131 lines and all 26
+    continuations exactly.
+    """
+    specs: List[LineSpec] = []
+    current: List[Tuple[Tuple[int, ...], bool]] = []
+    continues_previous = False
+
+    def flush():
+        nonlocal current, continues_previous
+        if current:
+            specs.append(LineSpec(segs=tuple(current), continues_previous=continues_previous))
+        current = []
+        continues_previous = False
+
+    for row_segs in rows:
+        if len(row_segs) == 2:
+            (pattern_a, is_start_a), (pattern_b, is_start_b) = row_segs
+            if is_start_a and current:
+                flush()
+            current.append((pattern_a, is_start_a))
+            flush()
+            continues_previous = True
+            current.append((pattern_b, is_start_b))
+        else:
+            for pattern, is_start in row_segs:
+                if is_start and current:
+                    flush()
+                current.append((pattern, is_start))
+    flush()
+    return specs
 
 
 def render_row(segs: RowShape) -> str:

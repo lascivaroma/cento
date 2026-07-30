@@ -11,7 +11,7 @@ syllable sequence (step-02) or just a target morae total (step-02bis).
 
 import os.path as op
 from dataclasses import dataclass
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 from pycento.data import Line, Word, parse
 from pycento.segments import is_hexameter
@@ -123,6 +123,45 @@ def match_by_total(total: int, is_start: bool, index: List[IndexedLine]) -> List
         words = vl.words[:word_count] if is_start else vl.words[word_count:]
         found.append(to_found_object(vl, words, is_start))
     return found
+
+
+def match_consecutive_pairs_by_total(
+    a_total: int, b_total: int, index: List[IndexedLine],
+) -> List[Tuple[dict, dict]]:
+    """Loose (total-morae) analogue of step-02's find_consecutive_pairs: every
+    pair of Virgil verses that are genuinely ADJACENT (same file, raw_index
+    differs by exactly 1) where a word-boundary-respecting PREFIX of the
+    first verse sums to a_total and a word-boundary-respecting SUFFIX of the
+    second sums to b_total -- regardless of the specific long/short
+    arrangement within either budget.
+
+    For scheme.json's `type="sq"` continuation slots (the tail of one cento
+    line glued to the continued head of the next): even under loose,
+    total-morae-only matching, these two segments must still come from two
+    sequential Virgil verses, not just any two verses whose totals happen to
+    fit -- that's the whole point of `type="sq"` in the gold cento.
+    """
+    by_position: Dict[Tuple[str, int], IndexedLine] = {
+        (vl.filepath, vl.raw_index): vl for vl in index
+    }
+    pairs: List[Tuple[dict, dict]] = []
+    for vl_a in index:
+        word_count_a = vl_a.boundary_word_count_by_total.get(a_total)
+        if word_count_a is None:
+            continue
+        vl_b = by_position.get((vl_a.filepath, vl_a.raw_index + 1))
+        if vl_b is None:
+            continue
+        word_count_b = vl_b.boundary_word_count_by_total.get(24 - b_total)
+        if word_count_b is None:
+            continue
+        words_a = vl_a.words[:word_count_a]
+        words_b = vl_b.words[word_count_b:]
+        pairs.append((
+            to_found_object(vl_a, words_a, True),
+            to_found_object(vl_b, words_b, False),
+        ))
+    return pairs
 
 
 def load_virgil_index(annotated: bool = False) -> List[IndexedLine]:
