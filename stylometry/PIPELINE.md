@@ -150,6 +150,34 @@ LambdaG models are built and evaluated in the Jupyter notebooks:
 
 ---
 
+## Step 8 — Generated cento conversion
+
+Convert automatically generated centos from `data/generated-compact/exact/` to
+all stylometry formats.  Uses `la_senter` for sentence splitting and
+`latin_masking.clitics` for que-splitting (no UDPipe).  POS masking uses
+Pedecerto POS tags with a manually editable mapping file.
+
+```bash
+# Process a single cento for testing
+PYTHONPATH=scripts python scripts/generate_generated_exact.py --limit 1
+
+# Process all 1000 centos
+PYTHONPATH=scripts python scripts/generate_generated_exact.py
+```
+
+- **Input**: `../data/generated-compact/exact/cento_*.xml`
+- **Mapping**: `pos_mapping.tsv` (Pedecerto POS → UD POS, editable)
+- **Output**:
+  - `processed/generated_exact/*.txt` — plain text with pipe markers
+  - `processed/generated_exact/*_sentences.txt` — sentence-split
+  - `processed/generated_exact/*_sentences.quesplit.txt` — que-split
+  - `processed/generated_exact/*_sentences.quesplit.masked.txt` — POS-masked
+  - `lexical_model/generated_exact/*_sentences.quesplit.masked.txt` — copy
+  - `metrical_model/generated_exact/*_sentences.metrical.txt` — sentence-based metrical
+  - `metrical_model_lines/generated_exact/*.mapped_lines.txt` — line-based metrical
+
+---
+
 ## Reproducing from scratch
 
 ```bash

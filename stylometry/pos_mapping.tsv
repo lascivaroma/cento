@@ -1,0 +1,35 @@
+# Pedecerto POS → UDPipe UD POS mapping for generated centos
+# Used by scripts/generate_generated_exact.py
+#
+# pedecerto_pos: POS tag from the generated XML
+# ud_pos:        UDPipe Universal Dependencies POS tag to emit
+# mask:          y = replace word with ud_pos tag; n = keep lowercased word
+#
+# Edit this file to refine mappings. Tab-separated.
+pedecerto_pos	ud_pos	mask
+NOMcom	NOUN	y
+NOMpro	PROPN	y
+VER	VERB	y
+ADJqua	ADJ	y
+ADJord	ADJ	y
+ADJcar	NUM	y
+ADJmul	ADJ	y
+ADJdis	ADJ	y
+ADJadv.ord	ADJ	y
+PROpos	PRON	n
+PROpos.ref	PRON	n
+PROrel	PRON	n
+PROint	PRON	n
+PROdem	PRON	n
+PROind	PRON	n
+PROper	PRON	n
+PROref	PRON	n
+CONcoo	CCONJ	n
+CONsub	SCONJ	n
+PRE	ADP	n
+ADV	ADV	y
+ADVneg	ADV	y
+ADVrel	ADV	n
+ADVint	ADV	n
+INJ	INTJ	n
+AUX	AUX	y
