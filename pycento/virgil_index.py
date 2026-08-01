@@ -130,36 +130,53 @@ def match_consecutive_pairs_by_total(
 ) -> List[Tuple[dict, dict]]:
     """Loose (total-morae) analogue of step-02's find_consecutive_pairs: every
     pair of Virgil verses that are genuinely ADJACENT (same file, raw_index
-    differs by exactly 1) where a word-boundary-respecting PREFIX of the
-    first verse sums to a_total and a word-boundary-respecting SUFFIX of the
-    second sums to b_total -- regardless of the specific long/short
-    arrangement within either budget.
+    differs by exactly 1) where a word-boundary-respecting SUFFIX (tail) of
+    the first verse sums to a_total and a word-boundary-respecting PREFIX
+    (head) of the second sums to b_total -- regardless of the specific
+    long/short arrangement within either budget.
 
     For scheme.json's `type="sq"` continuation slots (the tail of one cento
     line glued to the continued head of the next): even under loose,
     total-morae-only matching, these two segments must still come from two
     sequential Virgil verses, not just any two verses whose totals happen to
     fit -- that's the whole point of `type="sq"` in the gold cento.
+
+    a_total/b_total ARE tail/head, not head/tail (verified against
+    step-02's find_consecutive_pairs, the validated exact-mode equivalent:
+    for a genuine continuation row `[tupA, 0, tupB]`, tupA is
+    is_start=False -- the END/tail of whatever line it closes -- and tupB
+    is is_start=True -- the START/head of the line it opens). Taking a's
+    PREFIX and b's SUFFIX instead (the bug this replaced) only happened to
+    be harmless when a_total or b_total was the whole 24-morae verse
+    (prefix-of-24 and suffix-of-24 are the same words either way), which is
+    why it wasn't caught by the whole-verse case -- but for any genuine
+    partial split it hands step-05 a fragment whose internal foot-grid
+    assumes it starts a FRESH line at position 0, when it's actually being
+    spliced in mid-line after (or before) another segment. The result:
+    resolve_pinned_slot()/the "both pinned" branch in step-05 could never
+    find a free-side candidate that produced a clean (non-defective) foot
+    grouping against it -- not bad luck, a 0% success rate regardless of
+    how many candidates were tried, since it's a structural misalignment.
     """
     by_position: Dict[Tuple[str, int], IndexedLine] = {
         (vl.filepath, vl.raw_index): vl for vl in index
     }
     pairs: List[Tuple[dict, dict]] = []
     for vl_a in index:
-        word_count_a = vl_a.boundary_word_count_by_total.get(a_total)
+        word_count_a = vl_a.boundary_word_count_by_total.get(24 - a_total)
         if word_count_a is None:
             continue
         vl_b = by_position.get((vl_a.filepath, vl_a.raw_index + 1))
         if vl_b is None:
             continue
-        word_count_b = vl_b.boundary_word_count_by_total.get(24 - b_total)
+        word_count_b = vl_b.boundary_word_count_by_total.get(b_total)
         if word_count_b is None:
             continue
-        words_a = vl_a.words[:word_count_a]
-        words_b = vl_b.words[word_count_b:]
+        words_a = vl_a.words[word_count_a:]
+        words_b = vl_b.words[:word_count_b]
         pairs.append((
-            to_found_object(vl_a, words_a, True),
-            to_found_object(vl_b, words_b, False),
+            to_found_object(vl_a, words_a, False),
+            to_found_object(vl_b, words_b, True),
         ))
     return pairs
 

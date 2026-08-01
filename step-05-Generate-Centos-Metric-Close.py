@@ -45,6 +45,8 @@ from pycento.generate import (
     assemble_lines,
     elision_ok,
     entry_to_words,
+    first_defective_line,
+    is_clean_hexameter,
     pick_candidate,
     rescan_joint,
     resolve_merge_slot,
@@ -125,7 +127,28 @@ def resolve_line(
             if not whole_candidates:
                 raise LineSkipped("no whole-verse candidates available (segment_table_by_total.json "
                                    "has no 'whole' bucket -- regenerate it via step-03)")
-            entry = pick_candidate(whole_candidates, used_refs)
+            # A whole-verse entry is real, unmodified Virgil text -- no
+            # gluing, so it should always be intrinsically clean. Verify
+            # anyway rather than assume (a handful of retries in case a
+            # rare bad entry is drawn), since this is the only path that
+            # never goes through a joint check.
+            failed: set = set()
+            entry = None
+            for _ in range(30):
+                candidate = pick_candidate(whole_candidates, used_refs | failed)
+                if stats is not None:
+                    stats.clean_scan_checks += 1
+                if is_clean_hexameter(entry_to_words(candidate)):
+                    entry = candidate
+                    break
+                if stats is not None:
+                    stats.clean_scan_rejected += 1
+                failed.add(candidate["id"])
+            if entry is None:
+                if stats is not None:
+                    stats.slots_given_up += 1
+                raise LineSkipped("no whole-verse candidate scans as a clean hexameter "
+                                   "after 30 attempts")
             used_refs.add(entry["id"])
             slots[0] = (entry["id"], entry_to_words(entry), False)
         source, words, continued = slots[0]
@@ -160,6 +183,13 @@ def resolve_line(
             raise LineSkipped(f"pinned joint for split {key} would un-elide "
                                f"(final syllable of {id_a} is elided, but {id_b} "
                                f"doesn't start with a vowel)")
+        if stats is not None:
+            stats.clean_scan_checks += 1
+        if not is_clean_hexameter(words_a + words_b):
+            if stats is not None:
+                stats.clean_scan_rejected += 1
+                stats.slots_given_up += 1
+            raise LineSkipped(f"pinned joint for split {key} would write a defective foot")
         if not allow_unchecked:
             if stats is not None:
                 stats.rescan_attempts += 1
@@ -212,19 +242,31 @@ def resolve_line(
 
 
 def generate_poem(line_specs: List[LineSpec], by_total: dict, works, allow_unchecked: bool, stats: MergeStats):
+    """Resolve every one of the gold cento's 131 lines. Unlike the previous
+    behavior, a line that can't be resolved is NOT silently dropped -- it
+    fails the WHOLE poem (LineSkipped propagates to the caller), so every
+    poem this returns has exactly as many lines as line_specs, all of them
+    validated. The caller is expected to retry with a fresh poem attempt on
+    failure rather than accept a shorter poem."""
     used_refs: set = set()
     totals_per_line = [line_segment_totals(spec.segs) for spec in line_specs]
     resolved_slots = resolve_continuation_boundaries(line_specs, totals_per_line, by_total, works, used_refs)
 
-    all_lines: List[List[ResolvedSegment]] = []
-    skipped_lines = 0
-    for spec, totals, slots in zip(line_specs, totals_per_line, resolved_slots):
-        try:
-            all_lines.append(resolve_line(totals, slots, by_total, works, used_refs, allow_unchecked, stats))
-        except LineSkipped:
-            skipped_lines += 1
+    all_lines: List[List[ResolvedSegment]] = [
+        resolve_line(totals, slots, by_total, works, used_refs, allow_unchecked, stats)
+        for spec, totals, slots in zip(line_specs, totals_per_line, resolved_slots)
+    ]
 
-    return assemble_lines(all_lines), skipped_lines
+    lines = assemble_lines(all_lines)
+    defective = first_defective_line(lines)
+    if defective is not None:
+        # Final safety net: every joint (resolve_merge_slot/
+        # resolve_pinned_slot/the both-pinned branch/the whole-verse
+        # branch) already checks is_clean_hexameter() before accepting,
+        # so this should be unreachable in practice -- but verify rather
+        # than assume.
+        raise LineSkipped(f"line {defective.idx} has a defective/incomplete foot")
+    return lines
 
 
 def main():
@@ -236,6 +278,9 @@ def main():
                          help="Skip rescan_joint's full-hexameter re-validation of merged "
                               "joints (e.g. if the compiled scansion grammar isn't available). "
                               "The elision check always runs regardless.")
+    parser.add_argument("--max-attempts-multiplier", type=int, default=10,
+                         help="Give up after --count * this many total poem attempts, in "
+                              "case some split has a hard, unresolvable coverage gap.")
     args = parser.parse_args()
 
     if args.seed is not None:
@@ -255,31 +300,39 @@ def main():
 
     out_dir = op.join(_ROOT, "data", "generated-compact", "loose")
 
-    print(f"\nGenerating {args.count} poems -> {out_dir}/")
-    written, failed = 0, 0
-    total_line_skips = 0
+    max_total_attempts = args.count * args.max_attempts_multiplier
+    print(f"\nGenerating {args.count} complete ({len(line_specs)}/{len(line_specs)}-line), "
+          f"fully-scanned poems -> {out_dir}/ (up to {max_total_attempts} attempts)")
+    written, failed, attempt = 0, 0, 0
     stats = MergeStats()
-    for n in range(1, args.count + 1):
+    while written < args.count and attempt < max_total_attempts:
+        attempt += 1
         try:
-            lines, skipped_lines = generate_poem(line_specs, by_total, args.works, args.allow_unchecked_merges, stats)
+            lines = generate_poem(line_specs, by_total, args.works, args.allow_unchecked_merges, stats)
+        except LineSkipped as exc:
+            failed += 1
+            if failed % 500 == 0:
+                print(f"  ({failed} attempts failed so far, most recently: {exc})")
+            continue
         except ScansionUnavailable as exc:
             print(f"\nSome slots here need a re-scanned merge, but the scansion grammar "
                   f"isn't available: {exc}\nPass --allow-unchecked-merges to generate anyway.")
             raise SystemExit(1)
-        total_line_skips += skipped_lines
-        if not lines:
-            print(f"  [SKIP] poem {n}: no lines resolved")
-            failed += 1
-            continue
-        out_path = op.join(out_dir, f"cento_{n:04d}.xml")
-        write_poem(lines, out_path)
         written += 1
-        if n % 100 == 0:
-            print(f"  {n}/{args.count}")
+        out_path = op.join(out_dir, f"cento_{written:04d}.xml")
+        write_poem(lines, out_path)
+        if written % 100 == 0:
+            print(f"  {written}/{args.count} (after {attempt} attempts)")
 
-    print(f"Done. Generated {written}/{args.count} poems ({failed} skipped) in {out_dir}/")
-    print(f"  {total_line_skips} line(s) skipped across all generated poems "
-          f"(uncovered splits / unresolved candidates)")
+    if written < args.count:
+        print(f"\nGave up after {attempt} attempts: only {written}/{args.count} poems were "
+              f"both complete ({len(line_specs)}/{len(line_specs)} lines) and fully scanned "
+              f"(no defective feet). Some split in segment_table_by_total.json likely has no "
+              f"combination that satisfies elision + clean-scan + rescan -- more attempts "
+              f"won't help a hard coverage gap; re-run step-03 with more source data, or "
+              f"widen --works.")
+    print(f"Done. Generated {written}/{args.count} poems ({failed} failed attempts, "
+          f"{attempt} total attempts) in {out_dir}/")
     print("Merge-slot resolution:")
     print(stats.summary())
 

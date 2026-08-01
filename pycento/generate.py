@@ -9,12 +9,14 @@ poem out through pycento/serialize.py's compact-format writer.
 import os
 import os.path as op
 import random
+import re
 from dataclasses import dataclass
 from typing import List, Optional, Tuple
 
 import lxml.etree as et
 
 from pycento.data import Line, Segment, Syllable, Word
+from pycento.segments import scan_pattern
 from pycento.serialize import lines_to_compact_tree
 
 _WORK_NAMES = {
@@ -89,6 +91,32 @@ def elision_ok(words_a: List[Word], words_b: List[Word]) -> bool:
     return first_letter in _VOWELS
 
 
+_CLEAN_SCAN_RE = re.compile(r"^[DS]{6}$")
+
+
+def is_clean_hexameter(words: List[Word]) -> bool:
+    """True iff `words` (the full syllable sequence of one assembled cento
+    line) groups into exactly 6 complete dactyl/spondee feet with no
+    unresolved ('?') foot -- i.e. genuinely writable as a valid compact-
+    format `<line pattern="......">` by pycento/serialize.py.
+
+    This is NOT redundant with rescan_joint(): that asks the pynini engine
+    whether the glued TEXT scans as a valid hexameter, freshly determining
+    weight/elision right at the new seam. This instead re-checks that OUR
+    OWN stored per-syllable `length` annotations -- the ones that actually
+    get written out as sy= codes, unchanged by rescan_joint's engine-side
+    determination -- still group cleanly into 6 real feet. The two can
+    disagree: a joint the engine accepts as a valid hexameter (using
+    weights it worked out fresh) can still misalign against our old,
+    unmodified Syllable.length labels right at the seam, producing a
+    written line with a defective ('?') foot even though the underlying
+    text genuinely scans. Needs no compiled grammar, so (like elision_ok)
+    it should always run regardless of --allow-unchecked-merges.
+    """
+    line = Line(idx=0, segments=[], ws=list(words))
+    return bool(_CLEAN_SCAN_RE.match(scan_pattern(line)))
+
+
 @dataclass
 class RescanResult:
     valid: bool
@@ -143,6 +171,8 @@ class MergeStats:
     independent_resolved: int = 0
     elision_checks: int = 0
     elision_rejected: int = 0
+    clean_scan_checks: int = 0
+    clean_scan_rejected: int = 0
     rescan_attempts: int = 0
     rescan_rejected: int = 0
     slots_given_up: int = 0
@@ -158,6 +188,13 @@ class MergeStats:
                 f"{self.elision_rejected} rejected (elided final syllable would no longer "
                 f"elide against the glued-in next word) "
                 f"({100 * self.elision_rejected // self.elision_checks}% thrown out)"
+            )
+        if self.clean_scan_checks:
+            lines.append(
+                f"  {self.clean_scan_checks} clean-scan check(s): "
+                f"{self.clean_scan_rejected} rejected (would write a defective/incomplete "
+                f"foot) "
+                f"({100 * self.clean_scan_rejected // self.clean_scan_checks}% thrown out)"
             )
         if self.rescan_attempts:
             lines.append(
@@ -182,6 +219,7 @@ def resolve_merge_slot(
     allow_unchecked: bool,
     max_attempts: int = 30,
     stats: Optional[MergeStats] = None,
+    full_line: bool = True,
 ) -> Optional[Tuple[List[Word], List[Word], List[str]]]:
     """Resolve a two-segment slot (a cross-line continuation, or any other
     two-segment combination), returning (words_a, words_b, [id_a, id_b]).
@@ -199,6 +237,20 @@ def resolve_merge_slot(
        explore new combinations instead of risking a repeat draw of the
        same bad candidate.
 
+    `full_line`: whether `words_a + words_b`, concatenated, represents the
+    ENTIRE 24-morae cento line on its own (true for an ordinary same-line
+    split with no other segments involved -- step-05's common case) versus
+    just two unrelated fragments that each belong to a DIFFERENT, larger
+    cento line (a `type="sq"` continuation boundary, where A is typically
+    only PART of the line it closes and B only part of the line it opens --
+    step-04's continuation rows). Only when `full_line` is true is it
+    meaningful to run is_clean_hexameter() on the concatenation itself --
+    otherwise the combined morae total isn't even expected to be 24, and
+    the check would reject every candidate regardless of correctness.
+    elision_ok()/rescan_joint() stay unconditional either way: they only
+    reason about the local seam, which is meaningful regardless of whether
+    the two sides sum to a whole line.
+
     Returns None if there are no candidates at all, or every attempt fails
     re-scan -- the caller should skip the whole poem in that case. Pass
     `stats` (a shared MergeStats instance) to accumulate counts of how often
@@ -209,10 +261,26 @@ def resolve_merge_slot(
             pair for pair in pair_entries
             if pair[0]["id"] not in used_refs and pair[1]["id"] not in used_refs
         ] or pair_entries
-        entry_a, entry_b = random.choice(pool)
-        if stats is not None:
-            stats.pair_used += 1
-        return entry_to_words(entry_a), entry_to_words(entry_b), [entry_a["id"], entry_b["id"]]
+        if full_line:
+            # Real adjacent Virgil text, so this should always be clean --
+            # verify anyway (cheap, no grammar needed) rather than assume,
+            # trying a few other pairs from the pool before giving up.
+            for _ in range(min(max_attempts, len(pool))):
+                entry_a, entry_b = random.choice(pool)
+                words_a, words_b = entry_to_words(entry_a), entry_to_words(entry_b)
+                if stats is not None:
+                    stats.clean_scan_checks += 1
+                if is_clean_hexameter(words_a + words_b):
+                    if stats is not None:
+                        stats.pair_used += 1
+                    return words_a, words_b, [entry_a["id"], entry_b["id"]]
+                if stats is not None:
+                    stats.clean_scan_rejected += 1
+        else:
+            entry_a, entry_b = random.choice(pool)
+            if stats is not None:
+                stats.pair_used += 1
+            return entry_to_words(entry_a), entry_to_words(entry_b), [entry_a["id"], entry_b["id"]]
 
     if not a_candidates or not b_candidates:
         if stats is not None:
@@ -240,6 +308,14 @@ def resolve_merge_slot(
                 stats.elision_rejected += 1
             (failed_a if shrink_a else failed_b).add((entry_a if shrink_a else entry_b)["id"])
             continue
+        if full_line:
+            if stats is not None:
+                stats.clean_scan_checks += 1
+            if not is_clean_hexameter(words_a + words_b):
+                if stats is not None:
+                    stats.clean_scan_rejected += 1
+                (failed_a if shrink_a else failed_b).add((entry_a if shrink_a else entry_b)["id"])
+                continue
         if allow_unchecked:
             if stats is not None:
                 stats.independent_resolved += 1
@@ -275,12 +351,18 @@ def resolve_pinned_slot(
     ordinary (independently drawn) second segment to complete its own
     hexameter.
 
-    Draws a candidate for the free side and re-scans the joint against the
-    pinned words (unless `allow_unchecked`), retrying up to `max_attempts`
-    times. A candidate that fails elision or rescan is removed from the pool
-    for the remaining attempts (falling back to the full pool once every
-    candidate has been tried and failed). Returns (free_words, free_id), or
-    None if no candidates exist or every attempt fails re-scan.
+    Draws a candidate for the free side and validates the joint against the
+    pinned words -- elision, then is_clean_hexameter(), then rescan_joint()
+    (unless `allow_unchecked`) -- retrying up to `max_attempts` times. A
+    candidate that fails any check is removed from the pool for the
+    remaining attempts (falling back to the full pool once every candidate
+    has been tried and failed). Returns (free_words, free_id), or None if
+    no candidates exist or every attempt fails validation.
+
+    Always called where pinned_words + the free side's words genuinely sum
+    to one whole 24-morae cento line (step-05's only caller), so unlike
+    resolve_merge_slot() there's no `full_line` parameter -- the
+    is_clean_hexameter() check always applies.
     """
     if not free_candidates:
         if stats is not None:
@@ -297,6 +379,13 @@ def resolve_pinned_slot(
         if not elision_ok(words_a, words_b):
             if stats is not None:
                 stats.elision_rejected += 1
+            failed.add(entry_free["id"])
+            continue
+        if stats is not None:
+            stats.clean_scan_checks += 1
+        if not is_clean_hexameter(words_a + words_b):
+            if stats is not None:
+                stats.clean_scan_rejected += 1
             failed.add(entry_free["id"])
             continue
         if allow_unchecked:
@@ -337,6 +426,25 @@ def assemble_lines(resolved: List[List[ResolvedSegment]]) -> List[Line]:
         )
         for idx, segs in enumerate(resolved, start=1)
     ]
+
+
+def first_defective_line(lines: List[Line]) -> Optional[Line]:
+    """Return the first Line (in original order) whose assembled syllables
+    don't group into exactly 6 clean dactyl/spondee feet, or None if every
+    line is clean.
+
+    Final safety net, run once per whole poem after assembly: the per-draw
+    checks in resolve_merge_slot()/resolve_pinned_slot() already reject a
+    defective JOINT before it's ever accepted, but a single-segment line
+    (a whole, unmodified Virgil verse, or step-04's first-of-line draw when
+    it turns out to be the line's only segment) never goes through a joint
+    check at all, since there's no gluing involved -- this catches that
+    case too, uniformly, regardless of which code path produced the line.
+    """
+    for line in lines:
+        if not is_clean_hexameter(line.words):
+            return line
+    return None
 
 
 def write_poem(lines: List[Line], out_path: str) -> None:

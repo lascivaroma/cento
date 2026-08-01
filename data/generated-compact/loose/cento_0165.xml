@@ -1,1091 +1,1344 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <text>
-<line meter="H" n="1" pattern="DSSSDS">
-<milestone n="1" source="urn:cts:latinLit:phi0690.phi003:2.214" unit="segment">segment ID 1</milestone>
-<word lemma="corpus" pos="NOMcom" sy="1A1b1c">corpora</word>
-<word lemma="natus1" pos="NOMcom" sy="2A2T3A">natorum</word>
-<word lemma="serpens" pos="NOMcom" sy="3T4A">serpens</word>
-<word lemma="amplector" pos="VER" sy="4T5A5b">amplexus</word>
-<word lemma="uterque" pos="PROind" sy="5c6A6X">uterque</word>
-</line>
-<line meter="H" n="2" pattern="SSDSDS">
-<milestone n="2" source="urn:cts:latinLit:phi0690.phi003:12.829" unit="segment">segment ID 2</milestone>
-<word lemma="ille" pos="PROdem" sy="1A1T">olli</word>
-<word lemma="subrideo" pos="VER" sy="2A2T3A">subridens</word>
-<word lemma="homo" pos="NOMcom" sy="3b3c4A">hominum</word>
-<word lemma="res" pos="NOMcom" sy="4T5A5b">rerumque</word>
-<word lemma="repertor" pos="NOMcom" sy="5c6A6X">repertor:</word>
-</line>
-<line meter="H" n="3" pattern="SSSSDS">
-<milestone n="3" source="urn:cts:latinLit:phi0690.phi003:2.536" unit="segment">segment ID 3</milestone>
-<word lemma="deus" pos="NOMcom" sy="1A">di,</word>
-<word lemma="si2" pos="CONsub" sy="1T">si</word>
-<word lemma="quis2" pos="PROind" sy="2A">qua</word>
-<word lemma="sum1" mf="PE" pos="VER" sy="">est</word>
-<word lemma="caelum1" pos="NOMcom" sy="2T3A">caelo</word>
-<milestone n="4" source="urn:cts:latinLit:phi0690.phi001:8.98" unit="segment">segment ID 4</milestone>
-<word lemma="inferus" pos="ADJqua" sy="3T4A">imis</word>
-<word lemma="excio" pos="VER" sy="4T5A5b">excire</word>
-<word lemma="sepulcrum" pos="NOMcom" sy="5c6A6X">sepulcris,</word>
-</line>
-<line meter="H" n="4" pattern="SDSDDS">
-<milestone continued="true" n="5" source="urn:cts:latinLit:phi0690.phi003:4.567" unit="segment">segment ID 5</milestone>
-<word lemma="colluceo" pos="VER" sy="1A1T2A2b">conlucere</word>
-<word lemma="fax" pos="NOMcom" sy="2c3A">faces,</word>
-<word lemma="iam" pos="ADV" sy="3T">jam</word>
-<word lemma="ferueo" pos="VER" sy="4A4b4c">fervere</word>
-<word lemma="litus" pos="NOMcom" sy="5A5b5c">litora</word>
-<word lemma="flamma" pos="NOMcom" sy="6A6X">flammis,</word>
-</line>
-<line meter="H" n="5" pattern="DDDSDS">
-<milestone n="6" source="urn:cts:latinLit:phi0690.phi003:5.314" unit="segment">segment ID 6</milestone>
-<word lemma="tertius" pos="ADJord" sy="1A1b1c">tertius</word>
-<word lemma="Argolicus" mf="SY" pos="ADJqua" sy="2A2b2c">Argolica</word>
-<word lemma="hic1" pos="PROdem" sy="3A">hac</word>
-<milestone n="7" source="urn:cts:latinLit:phi0690.phi003:1.237" unit="segment">segment ID 7</milestone>
-<word lemma="genitor" pos="NOMcom" sy="3b3c4A">genitor,</word>
-<word lemma="sententia" pos="NOMcom" sy="4T5A5b5c">sententia</word>
-<word lemma="uerto" pos="VER" sy="6A6X">vertit?</word>
-</line>
-<line meter="H" n="6" pattern="SSDSDS">
-<milestone n="8" source="urn:cts:latinLit:phi0690.phi003:11.94" unit="segment">segment ID 8</milestone>
-<word lemma="postquam" mf="SY" pos="CONsub" sy="1A">postquam</word>
-<word lemma="omnis" pos="PROind" sy="1X2A">omnis</word>
-<word lemma="longe" pos="ADV" sy="2X3A">longe</word>
-<word lemma="comes" pos="NOMcom" sy="3b3c4A">comitum</word>
-<milestone n="9" source="urn:cts:latinLit:phi0690.phi003:3.276" unit="segment">segment ID 9</milestone>
-<word lemma="succedo1" pos="VER" sy="4T5A5b5c">succedimus</word>
-<word lemma="urbs" pos="NOMcom" sy="6A6X">urbi;</word>
-</line>
-<line meter="H" n="7" pattern="DDDSDS">
-<milestone n="10" source="urn:cts:latinLit:phi0690.phi002:3.16" unit="segment">segment ID 10</milestone>
-<word lemma="in" pos="PRE" sy="1A">in</word>
-<word lemma="medium" pos="NOMcom" sy="1b1c2A">medio</word>
-<word lemma="ego" pos="PROper" sy="2b2c">mihi</word>
-<word lemma="Caesar" pos="NOMpro" sy="3A3b">Caesar</word>
-<word lemma="sum1" pos="VER" sy="3c4A">erit</word>
-<word lemma="templum" pos="NOMcom" sy="4T5A5b">templumque</word>
-<word lemma="teneo" pos="VER" sy="5c6A6X">tenebit:</word>
-</line>
-<line meter="H" n="8" pattern="DDDDDS">
-<milestone n="11" source="urn:cts:latinLit:phi0690.phi003:12.249" unit="segment">segment ID 11</milestone>
-<word lemma="agmen" pos="NOMcom" sy="1A1b1c">agminis</word>
-<word lemma="aliger" pos="ADJqua" sy="2A2b2c3A">aligeri,</word>
-<word lemma="subito" pos="ADV" sy="3b3c4A">subito</word>
-<milestone n="12" source="urn:cts:latinLit:phi0690.phi003:8.515" unit="segment">segment ID 12</milestone>
-<word lemma="tolero" pos="VER" sy="4b4c5A5b">tolerare</word>
-<word lemma="magister" pos="NOMcom" sy="5c6A6X">magistro</word>
-</line>
-<line meter="H" n="9" pattern="SDDDDS">
-<milestone n="13" source="urn:cts:latinLit:phi0690.phi003:8.261" unit="segment">segment ID 13</milestone>
-<word lemma="elido" pos="VER" sy="1A1T2A">elisos</word>
-<word lemma="oculus" pos="NOMcom" sy="2b2c3A">oculos</word>
-<milestone n="14" source="urn:cts:latinLit:phi0690.phi003:12.908" unit="segment">segment ID 14</milestone>
-<word lemma="oculus" pos="NOMcom" sy="3b3c4A">oculos</word>
-<word lemma="ubi1" pos="ADVrel" sy="4b4c">ubi</word>
-<word lemma="languidus" pos="ADJqua" sy="5A5b5c">languida</word>
-<word lemma="premo" pos="VER" sy="6A6X">pressit</word>
-</line>
-<line meter="H" n="10" pattern="DDSDDS">
-<milestone n="15" source="urn:cts:latinLit:phi0690.phi003:6.341" unit="segment">segment ID 15</milestone>
-<word lemma="sic" pos="ADV" sy="1A">sic</word>
-<word lemma="prior" pos="ADJord" sy="1b1c">prior</word>
-<word lemma="alloquor" pos="VER" sy="2A2b2c3A">adloquitur:</word>
-<word lemma="quis1" pos="PROint" sy="3T">‘quis</word>
-<word lemma="tu" pos="PROper" sy="4A">te,</word>
-<word lemma="Palinurus" pos="NOMpro" sy="4b4c5A5b">Palinure,</word>
-<word lemma="deus" pos="NOMcom" sy="5c6A6X">deorum</word>
-</line>
-<line meter="H" n="11" pattern="SDSDDS">
-<milestone n="16" source="urn:cts:latinLit:phi0690.phi003:6.24" unit="segment">segment ID 16</milestone>
-<word lemma="hic1" pos="PROdem" sy="1A">hic</word>
-<word lemma="crudelis" pos="ADJqua" sy="1T2A2b">crudelis</word>
-<word lemma="amor" pos="NOMcom" sy="2c3A">amor</word>
-<milestone n="17" source="urn:cts:latinLit:phi0690.phi003:1.686" unit="segment">segment ID 17</milestone>
-<word lemma="mensa" pos="NOMcom" sy="3T4A">mensas</word>
-<word lemma="latex" pos="NOMcom" sy="4b4c5A5b">laticemque</word>
-<word lemma="Lyaeus" pos="NOMpro" sy="5c6A6X">Lyaeum,</word>
-</line>
-<line meter="H" n="12" pattern="SDSSDS">
-<milestone n="18" source="urn:cts:latinLit:phi0690.phi003:1.327" unit="segment">segment ID 18</milestone>
-<word lemma="o" pos="INJ" sy="1A">O</word>
-<word lemma="quam2" pos="ADVint" sy="1T">quam</word>
-<word lemma="tu" pos="PROper" sy="2A">te</word>
-<word lemma="memoro" pos="VER" sy="2b2c3A">memorem,</word>
-<word lemma="uirgo" pos="NOMcom" sy="3T4A">virgo?</word>
-<milestone n="19" source="urn:cts:latinLit:phi0690.phi003:4.483" unit="segment">segment ID 19</milestone>
-<word lemma="monstro" pos="VER" sy="4T5A5b">monstrata</word>
-<word lemma="sacerdos" pos="NOMcom" sy="5c6A6X">sacerdos,</word>
-</line>
-<line meter="H" n="13" pattern="DDDDDS">
-<milestone n="20" source="urn:cts:latinLit:phi0690.phi003:7.214" unit="segment">segment ID 20</milestone>
-<word lemma="ater" pos="ADJqua" sy="1A1b">atra</word>
-<word lemma="subigo" pos="VER" sy="1c2A2b">subegit</word>
-<word lemma="hiems" pos="NOMcom" sy="2c3A">hiems</word>
-<milestone n="21" source="urn:cts:latinLit:phi0690.phi002:1.388" unit="segment">segment ID 21</milestone>
-<word lemma="pluuia" pos="NOMcom" sy="3b3c4A">pluviam</word>
-<word lemma="uoco" pos="VER" sy="4b4c">vocat</word>
-<word lemma="improbus" pos="ADJqua" sy="5A5b5c">improba</word>
-<word lemma="uox" pos="NOMcom" sy="6A6X">voce</word>
-</line>
-<line meter="H" n="14" pattern="DSSSDS">
-<milestone n="22" source="urn:cts:latinLit:phi0690.phi003:10.152" unit="segment">segment ID 22</milestone>
-<word lemma="edoceo" pos="VER" sy="1A1b1c">edocet,</word>
-<word lemma="humanus" pos="ADJqua" sy="2A2T3A">humanis</word>
-<milestone n="23" source="urn:cts:latinLit:phi0690.phi003:9.2" unit="segment">segment ID 23</milestone>
-<word lemma="mitto" pos="VER" sy="3T4A">misit</word>
-<word lemma="Saturnius" pos="ADJqua" sy="4T5A5b5c">Saturnia</word>
-<word lemma="Iuno" pos="NOMpro" sy="6A6X">Juno</word>
-</line>
-<line meter="H" n="15" pattern="DSSSDS">
-<milestone n="24" source="urn:cts:latinLit:phi0690.phi003:8.344" unit="segment">segment ID 24</milestone>
-<word lemma="Parrhasius" pos="ADJqua" sy="1A1b1c2A">Parrhasio</word>
-<word lemma="dico2" pos="VER" sy="2T3A">dictum</word>
-<word lemma="Pan" pos="NOMpro" sy="3T4A">Panos</word>
-<word lemma="de" pos="PRE" sy="4T">de</word>
-<milestone n="25" source="urn:cts:latinLit:phi0690.phi003:3.642" unit="segment">segment ID 25</milestone>
-<word lemma="uber1" pos="NOMcom" sy="5A5b5c">ubera</word>
-<word lemma="presso" pos="VER" sy="6A6X">pressat,</word>
-</line>
-<line meter="H" n="16" pattern="DSSDDS">
-<milestone n="26" source="urn:cts:latinLit:phi0690.phi002:3.508" unit="segment">segment ID 26</milestone>
-<word lemma="sanguis" pos="NOMcom" sy="1A1b">sanguis,</word>
-<word lemma="et2" pos="CONcoo" sy="1c">et</word>
-<word lemma="obsideo" pos="VER" sy="2A2T3A">obsessas</word>
-<word lemma="faux" pos="NOMcom" sy="3T4A">fauces</word>
-<word lemma="premo" pos="VER" sy="4b4c">premit</word>
-<word lemma="asper" pos="ADJqua" sy="5A5b5c">aspera</word>
-<word lemma="lingua" pos="NOMcom" sy="6A6X">lingua.</word>
-</line>
-<line meter="H" n="17" pattern="DDSDDS">
-<milestone n="27" source="urn:cts:latinLit:phi0690.phi003:7.809" unit="segment">segment ID 27</milestone>
-<word lemma="gramen" pos="NOMcom" sy="1A1b1c">gramina</word>
-<word lemma="nec2" pos="CONcoo" sy="2A">nec</word>
-<word lemma="tener" pos="ADJqua" sy="2b2c3A">teneras</word>
-<word lemma="cursus" pos="NOMcom" sy="3T4A">cursu</word>
-<milestone n="28" source="urn:cts:latinLit:phi0690.phi003:8.556" unit="segment">segment ID 28</milestone>
-<word lemma="prope" pos="ADV" sy="4b4c5A5b">propiusque</word>
-<word lemma="periculum" pos="NOMcom" sy="5c6A6X">periclo</word>
-</line>
-<line meter="H" n="18" pattern="DSDSDS">
-<milestone continued="true" n="29" source="urn:cts:latinLit:phi0690.phi003:10.154" unit="segment">segment ID 29</milestone>
-<word lemma="iungo" pos="VER" sy="1A1b">jungit</word>
-<word lemma="ops" pos="NOMcom" sy="1c2A">opes</word>
-<word lemma="foedus" pos="NOMcom" sy="2T3A3b">foedusque</word>
-<word lemma="ferio" pos="VER" sy="3c4A">ferit;</word>
-<word lemma="tum" pos="ADV" sy="4T">tum</word>
-<word lemma="liber2" pos="ADJqua" sy="5A5b5c">libera</word>
-<word lemma="fatum" pos="NOMcom" sy="6A6X">fati</word>
-</line>
-<line meter="H" n="19" pattern="SSDSDS">
-<milestone n="30" source="urn:cts:latinLit:phi0690.phi002:3.532" unit="segment">segment ID 30</milestone>
-<word lemma="quaero" pos="VER" sy="1A1T2A">quaesitas</word>
-<word lemma="ad2" pos="PRE" sy="2T">ad</word>
-<word lemma="sacrum" pos="NOMcom" sy="3A3b">sacra</word>
-<word lemma="bos" pos="NOMcom" sy="3c4A">boves</word>
-<word lemma="Iuno" pos="NOMpro" sy="4T5A5b">Junonis</word>
-<word lemma="et2" pos="CONcoo" sy="5c">et</word>
-<word lemma="uro" pos="VER" sy="6A6X">uris</word>
-</line>
-<line meter="H" n="20" pattern="SSDDDS">
-<milestone n="31" source="urn:cts:latinLit:phi0690.phi003:1.64" unit="segment">segment ID 31</milestone>
-<word lemma="ad2" pos="PRE" sy="1A">Ad</word>
-<word lemma="qui1" pos="PROrel" sy="1T">quem</word>
-<word lemma="tum" pos="ADV" sy="2A">tum</word>
-<word lemma="Iuno" pos="NOMpro" sy="2T3A">Juno</word>
-<milestone n="32" source="urn:cts:latinLit:phi0690.phi002:1.325" unit="segment">segment ID 32</milestone>
-<word lemma="sero3" pos="VER" sy="3b3c">sata</word>
-<word lemma="laetus2" pos="ADJqua" sy="4A4b">laeta</word>
-<word lemma="bos" pos="NOMcom" sy="4c5A5b">boumque</word>
-<word lemma="labor1" pos="NOMcom" sy="5c6A6X">labores</word>
-</line>
-<line meter="H" n="21" pattern="DDDDDS">
-<milestone n="33" source="urn:cts:latinLit:phi0690.phi003:7.563" unit="segment">segment ID 33</milestone>
-<word lemma="sum1" pos="VER" sy="1A">est</word>
-<word lemma="locus" pos="NOMcom" sy="1b1c">locus</word>
-<word lemma="Italia" pos="NOMpro" sy="2A2b2c3A">Italiae</word>
-<word lemma="medius" pos="ADJqua" sy="3b3c4A">medio</word>
-<milestone n="34" source="urn:cts:latinLit:phi0690.phi003:8.88" unit="segment">segment ID 34</milestone>
-<word lemma="placidus" pos="ADJqua" sy="4b4c5A5b">placidaeque</word>
-<word lemma="palus2" pos="NOMcom" sy="5c6A6X">paludis</word>
-</line>
-<line meter="H" n="22" pattern="SDDSDS">
-<milestone continued="true" n="35" source="urn:cts:latinLit:phi0690.phi003:6.841" unit="segment">segment ID 35</milestone>
-<word lemma="quis1" pos="PROint" sy="1A">quis</word>
-<word lemma="tu" pos="PROper" sy="1T">te,</word>
-<word lemma="magnus" pos="ADJqua" sy="2A2b">magne</word>
-<word lemma="Cato" pos="NOMpro" sy="2c3A">Cato,</word>
-<word lemma="tacitus" mf="SY" pos="ADJqua" sy="3b3c">tacitum</word>
-<word lemma="aut" pos="CONcoo" sy="4A">aut</word>
-<word lemma="tu" pos="PROper" sy="4T">te,</word>
-<word lemma="Cossus" pos="NOMpro" sy="5A5b">Cosse,</word>
-<word lemma="relinquo" pos="VER" sy="5c6A6X">relinquat?</word>
-</line>
-<line meter="H" n="23" pattern="DSDDDS">
-<milestone n="36" source="urn:cts:latinLit:phi0690.phi003:11.438" unit="segment">segment ID 36</milestone>
-<word lemma="eo1" mf="SY" pos="VER" sy="1A">ibo</word>
-<word lemma="animus" pos="NOMcom" sy="1b1c2A">animis</word>
-<word lemma="contra1" pos="ADV" sy="2T3A">contra,</word>
-<milestone n="37" source="urn:cts:latinLit:phi0690.phi003:7.566" unit="segment">segment ID 37</milestone>
-<word lemma="nemus" pos="NOMcom" sy="3b3c4A">nemoris,</word>
-<word lemma="medius" pos="ADJqua" sy="4b4c5A5b">medioque</word>
-<word lemma="fragosus" pos="ADJqua" sy="5c6A6X">fragosus</word>
-</line>
-<line meter="H" n="24" pattern="DSDSDS">
-<milestone n="38" source="urn:cts:latinLit:phi0690.phi003:3.464" unit="segment">segment ID 38</milestone>
-<word lemma="donum" pos="NOMcom" sy="1A1b">dona</word>
-<word lemma="dehinc" pos="ADV" sy="1c2A">dehinc</word>
-<word lemma="aurum" pos="NOMcom" sy="2T3A">auro</word>
-<word lemma="grauis" mf="SY" pos="ADJqua" sy="3b3c">gravia</word>
-<word lemma="ac1" pos="CONcoo" sy="4A">ac</word>
-<word lemma="seco" pos="VER" sy="4T5A">secto</word>
-<word lemma="elephantus" pos="NOMcom" sy="5b5c6A6X">elephanto</word>
-</line>
-<line meter="H" n="25" pattern="SDDSDS">
-<milestone continued="true" n="39" source="urn:cts:latinLit:phi0690.phi002:3.134" unit="segment">segment ID 39</milestone>
-<word lemma="surgo" mf="SY" pos="VER" sy="1A1T">surgentem</word>
-<word lemma="ad2" pos="PRE" sy="2A">ad</word>
-<word lemma="Zephyrus" pos="NOMpro" sy="2b2c3A">Zephyrum</word>
-<word lemma="palea" pos="NOMcom" sy="3b3c4A">paleae</word>
-<word lemma="iacto" pos="VER" sy="4T5A5b">jactantur</word>
-<word lemma="inanis" pos="ADJqua" sy="5c6A6X">inanes.</word>
-</line>
-<line meter="H" n="26" pattern="DSDSDS">
-<milestone n="40" source="urn:cts:latinLit:phi0690.phi001:1.12" unit="segment">segment ID 40</milestone>
-<word lemma="usque" mf="SY" pos="ADV" sy="1A">usque</word>
-<word lemma="adeo2" pos="ADV" sy="1b1c2A">adeo</word>
-<word lemma="turbo2" pos="VER" sy="2T3A3b">turbatur</word>
-<word lemma="ager" pos="NOMcom" sy="3c4A">agris.</word>
-<milestone n="41" source="urn:cts:latinLit:phi0690.phi002:4.56" unit="segment">segment ID 41</milestone>
-<word lemma="hinc" pos="ADV" sy="4T">hinc</word>
-<word lemma="ars" pos="NOMcom" sy="5A5b">arte</word>
-<word lemma="recens1" pos="ADJqua" sy="5c6A6X">recentes</word>
-</line>
-<line meter="H" n="27" pattern="SDSSDS">
-<milestone n="42" source="urn:cts:latinLit:phi0690.phi003:1.146" unit="segment">segment ID 42</milestone>
-<word lemma="et2" pos="CONcoo" sy="1A">et</word>
-<word lemma="uastus" pos="ADJqua" sy="1T2A">vastas</word>
-<word lemma="aperio" pos="VER" sy="2b2c3A">aperit</word>
-<word lemma="Syrtis" pos="NOMpro" sy="3T4A">Syrtis,</word>
-<word lemma="et2" pos="CONcoo" sy="4T">et</word>
-<word lemma="tempero" pos="VER" sy="5A5b5c">temperat</word>
-<word lemma="aequor" pos="NOMcom" sy="6A6X">aequor,</word>
-</line>
-<line meter="H" n="28" pattern="DDSSDS">
-<milestone n="43" source="urn:cts:latinLit:phi0690.phi002:1.198" unit="segment">segment ID 43</milestone>
-<word lemma="degenero" pos="VER" sy="1A1b1c2A2b">degenerare</word>
-<word lemma="tamen" pos="ADV" sy="2c3A">tamen,</word>
-<word lemma="ni2" pos="CONsub" sy="3T">ni</word>
-<word lemma="uolo3" pos="VER" sy="4A">vis</word>
-<word lemma="humanus" pos="ADJqua" sy="4T5A5b">humana</word>
-<word lemma="quotannis" pos="ADV" sy="5c6A6X">quotannis</word>
-</line>
-<line meter="H" n="29" pattern="DSDS?S">
-<milestone n="44" source="urn:cts:latinLit:phi0690.phi001:7.38" unit="segment">segment ID 44</milestone>
-<word lemma="candidus" pos="ADJqua" sy="1A1b1c2A">candidior</word>
-<word lemma="cycnus" pos="NOMcom" sy="2T3A">cycnis,</word>
-<word lemma="hedera" pos="NOMcom" sy="3b3c4A">hedera</word>
-<milestone n="45" source="urn:cts:latinLit:phi0690.phi001:10.10" unit="segment">segment ID 45</milestone>
-<word lemma="Nais" pos="NOMpro" sy="4T5b5c">Naides,</word>
-<word lemma="indignus" pos="ADJqua" sy="5A6A6X">indigno</word>
-</line>
-<line meter="H" n="30" pattern="SSSDDS">
-<milestone n="46" source="urn:cts:latinLit:phi0690.phi002:4.510" unit="segment">segment ID 46</milestone>
-<word lemma="mulceo" pos="VER" sy="1A1T2A">mulcentem</word>
-<word lemma="tigris" pos="NOMcom" sy="2T3A">tigres</word>
-<milestone n="47" source="urn:cts:latinLit:phi0690.phi003:10.376" unit="segment">segment ID 47</milestone>
-<word lemma="nos" pos="PROper" sy="3X4A">nobis</word>
-<word lemma="anima" pos="NOMcom" sy="4b4c5A5b">animaeque</word>
-<word lemma="manus" pos="NOMcom" sy="5c6A6X">manusque.</word>
-</line>
-<line meter="H" n="31" pattern="SSSSDS">
-<milestone n="48" source="urn:cts:latinLit:phi0690.phi003:11.541" unit="segment">segment ID 48</milestone>
-<word lemma="infans1" pos="NOMcom" sy="1A1T2A">infantem</word>
-<milestone n="49" source="urn:cts:latinLit:phi0690.phi003:4.148" unit="segment">segment ID 49</milestone>
-<word lemma="crinis" pos="NOMcom" sy="2T3A">crinem</word>
-<word lemma="fingo" pos="VER" sy="3T4A">fingens</word>
-<word lemma="atque1" mf="SY" pos="CONcoo" sy="4T">atque</word>
-<word lemma="implico" pos="VER" sy="5A5b5c">implicat</word>
-<word lemma="aurum" pos="NOMcom" sy="6A6X">auro,</word>
-</line>
-<line meter="H" n="32" pattern="SDSDDS">
-<milestone n="50" source="urn:cts:latinLit:phi0690.phi003:5.135" unit="segment">segment ID 50</milestone>
-<word lemma="nudo" mf="SY" pos="VER" sy="1A1T2A">nudatosque</word>
-<word lemma="humerus" pos="NOMcom" sy="2b2c3A">umeros</word>
-<milestone n="51" source="urn:cts:latinLit:phi0690.phi001:6.71" unit="segment">segment ID 51</milestone>
-<word lemma="deduco" pos="VER" sy="3T4A4b4c">deducere</word>
-<word lemma="mons" pos="NOMcom" sy="5A5b5c">montibus</word>
-<word lemma="ornus" pos="NOMcom" sy="6A6X">ornos.</word>
-</line>
-<line meter="H" n="33" pattern="DSSSDS">
-<milestone n="52" source="urn:cts:latinLit:phi0690.phi003:12.498" unit="segment">segment ID 52</milestone>
-<word lemma="terribilis" pos="ADJqua" sy="1A1b1c2A">terribilis</word>
-<word lemma="saeuus" pos="ADJqua" sy="2T3A">saevam</word>
-<word lemma="nullus" pos="PROind" sy="3T4A">nullo</word>
-<word lemma="discrimen" pos="NOMcom" sy="4T5A5b5c">discrimine</word>
-<word lemma="caedes" pos="NOMcom" sy="6A6X">caedem</word>
-</line>
-<line meter="H" n="34" pattern="SDDDSS">
-<milestone n="53" source="urn:cts:latinLit:phi0690.phi003:1.100" unit="segment">segment ID 53</milestone>
-<word lemma="Sarpedon" pos="NOMpro" sy="1A1T2A">Sarpedon,</word>
-<word lemma="ubi3" pos="CONsub" sy="2b2c">ubi</word>
-<milestone n="54" source="urn:cts:latinLit:phi0690.phi003:3.45" unit="segment">segment ID 54</milestone>
-<word lemma="nam" pos="CONcoo" sy="3A">nam</word>
-<word lemma="Polydorus" pos="NOMpro" sy="3b3c4A4b">Polydorus</word>
-<word lemma="ego" mf="SY" pos="PROper" sy="4c">ego.</word>
-<word lemma="hic2" pos="ADV" sy="5A">hic</word>
-<word lemma="configo" pos="VER" sy="5X6A6X">confixum</word>
-</line>
-<line meter="H" n="35" pattern="SDDSDS">
-<milestone continued="true" n="55" source="urn:cts:latinLit:phi0690.phi003:3.46" unit="segment">segment ID 55</milestone>
-<word lemma="telum" pos="NOMcom" sy="1A1T2A">telorum</word>
-<word lemma="seges" pos="NOMcom" sy="2b2c">seges</word>
-<word lemma="et2" pos="CONcoo" sy="3A">et</word>
-<word lemma="iaculum" pos="NOMcom" sy="3b3c4A">jaculis</word>
-<word lemma="incresco" pos="VER" sy="4T5A5b">increvit</word>
-<word lemma="acutus" pos="ADJqua" sy="5c6A6X">acutis.'</word>
-</line>
-<line meter="H" n="36" pattern="DSDSDS">
-<milestone n="56" source="urn:cts:latinLit:phi0690.phi003:9.211" unit="segment">segment ID 56</milestone>
-<word lemma="si2" pos="CONsub" sy="1A">si</word>
-<word lemma="quis2" pos="PROind" sy="1b">quis</word>
-<word lemma="in" pos="PRE" sy="1c">in</word>
-<word lemma="aduersus1" pos="ADJqua" sy="2A2T3A">adversum</word>
-<word lemma="rapio" pos="VER" sy="3b3c4A">rapiat</word>
-<word lemma="casus" pos="NOMcom" sy="4T5A5b">casusve</word>
-<word lemma="deus" pos="NOMcom" sy="5c6A6X">deusve,</word>
-</line>
-<line meter="H" n="37" pattern="DSDSDS">
-<milestone n="57" source="urn:cts:latinLit:phi0690.phi003:6.302" unit="segment">segment ID 57</milestone>
-<word lemma="ipse" pos="PROdem" sy="1A1b">ipse</word>
-<word lemma="ratis" pos="NOMcom" sy="1c2A">ratem</word>
-<word lemma="contus" pos="NOMcom" sy="2T3A">conto</word>
-<word lemma="subigo" pos="VER" sy="3b3c4A">subigit</word>
-<milestone n="58" source="urn:cts:latinLit:phi0690.phi003:10.90" unit="segment">segment ID 58</milestone>
-<word lemma="consurgo" mf="SY" pos="VER" sy="4T5A5b">consurgere</word>
-<word lemma="in" pos="PRE" sy="5c">in</word>
-<word lemma="arma" pos="NOMcom" sy="6A6X">arma</word>
-</line>
-<line meter="H" n="38" pattern="DSDSDS">
-<milestone n="59" source="urn:cts:latinLit:phi0690.phi003:11.643" unit="segment">segment ID 59</milestone>
-<word lemma="caesaries" pos="NOMcom" sy="1A1b1c2A">caesaries</word>
-<word lemma="nudus" mf="SY" pos="ADJqua" sy="2T3A">nudique</word>
-<word lemma="humerus" pos="NOMcom" sy="3b3c4A">umeri</word>
-<word lemma="nec2" pos="CONcoo" sy="4T">nec</word>
-<word lemma="uulnus" pos="NOMcom" sy="5A5b5c">vulnera</word>
-<word lemma="terreo" pos="VER" sy="6A6X">terrent;</word>
-</line>
-<line meter="H" n="39" pattern="DDDSDS">
-<milestone n="60" source="urn:cts:latinLit:phi0690.phi003:9.123" unit="segment">segment ID 60</milestone>
-<word lemma="obstupesco" mf="SY" pos="VER" sy="1A1b1c2A">Obstipuere</word>
-<word lemma="animus" pos="NOMcom" sy="2b2c3A">animis</word>
-<word lemma="Rutuli" pos="NOMpro" sy="3b3c4A">Rutuli,</word>
-<milestone n="61" source="urn:cts:latinLit:phi0690.phi003:8.318" unit="segment">segment ID 61</milestone>
-<word lemma="uenatus" pos="NOMcom" sy="4T5A5b">venatus</word>
-<word lemma="alo" pos="VER" sy="5c6A6X">alebat.</word>
-</line>
-<line meter="H" n="40" pattern="SSDSDS">
-<milestone n="62" source="urn:cts:latinLit:phi0690.phi003:10.809" unit="segment">segment ID 62</milestone>
-<word lemma="Aeneas" pos="NOMpro" sy="1A1X2A">Aeneas</word>
-<milestone n="63" source="urn:cts:latinLit:phi0690.phi003:10.274" unit="segment">segment ID 63</milestone>
-<word lemma="morbus" pos="NOMcom" sy="2T3A3b">morbosque</word>
-<word lemma="fero" pos="VER" sy="3c4A">ferens</word>
-<word lemma="mortalis1" pos="NOMcom" sy="4T5A5b5c">mortalibus</word>
-<word lemma="aeger2" pos="ADJqua" sy="6A6X">aegris</word>
-</line>
-<line meter="H" n="41" pattern="DSDSDS">
-<milestone n="64" source="urn:cts:latinLit:phi0690.phi003:5.347" unit="segment">segment ID 64</milestone>
-<word lemma="ultimus" pos="ADJqua" sy="1A1b1c">ultima,</word>
-<word lemma="si2" pos="CONsub" sy="2A">si</word>
-<word lemma="primus" pos="ADJord" sy="2T3A">primi</word>
-<word lemma="Salius" pos="NOMpro" sy="3b3c4A">Salio</word>
-<word lemma="reddo" pos="VER" sy="4T5A5b">reddentur</word>
-<word lemma="honor" pos="NOMcom" sy="5c6A6X">honores.</word>
-</line>
-<line meter="H" n="42" pattern="SDSSDS">
-<milestone n="65" source="urn:cts:latinLit:phi0690.phi003:1.412" unit="segment">segment ID 65</milestone>
-<word lemma="et2" pos="CONcoo" sy="1A">et</word>
-<word lemma="multus" pos="ADJqua" sy="1T2A">multo</word>
-<word lemma="nebula" pos="NOMcom" sy="2b2c3A">nebulae</word>
-<milestone n="66" source="urn:cts:latinLit:phi0690.phi003:9.813" unit="segment">segment ID 66</milestone>
-<word lemma="nec2" pos="CONcoo" sy="3T">(nec</word>
-<word lemma="respiro" pos="VER" sy="4A4T5A5b">respirare</word>
-<word lemma="potestas" pos="NOMcom" sy="5c6A6X">potestas)</word>
-</line>
-<line meter="H" n="43" pattern="DDSSDS">
-<milestone n="67" source="urn:cts:latinLit:phi0690.phi003:11.460" unit="segment">segment ID 67</milestone>
-<word lemma="cogo" pos="VER" sy="1A1b1c">‘cogite</word>
-<word lemma="concilium" mf="SY" pos="NOMcom" sy="2A2b2c">concilium</word>
-<word lemma="et2" pos="CONcoo" sy="3A">et</word>
-<word lemma="pax" pos="NOMcom" sy="3T4A">pacem</word>
-<word lemma="laudo" pos="VER" sy="4T5A5b">laudate</word>
-<word lemma="sedeo" pos="VER" sy="5c6A6X">sedentes;</word>
-</line>
-<line meter="H" n="44" pattern="SDSSDS">
-<milestone n="68" source="urn:cts:latinLit:phi0690.phi003:2.673" unit="segment">segment ID 68</milestone>
-<word lemma="ecce" mf="SY" pos="INJ" sy="1A">ecce</word>
-<word lemma="autem" pos="CONcoo" sy="1T2A">autem</word>
-<milestone n="69" source="urn:cts:latinLit:phi0690.phi003:8.395" unit="segment">segment ID 69</milestone>
-<word lemma="peto" pos="VER" sy="2b2c">petis</word>
-<word lemma="ex" pos="PRE" sy="3A">ex</word>
-<word lemma="altum" pos="NOMcom" sy="3T4A">alto?</word>
-<word lemma="fiducia" pos="NOMcom" sy="4T5A5b5c">fiducia</word>
-<word lemma="cedo1" pos="VER" sy="6A6X">cessit</word>
-</line>
-<line meter="H" n="45" pattern="DSSSDS">
-<milestone n="70" source="urn:cts:latinLit:phi0690.phi003:2.211" unit="segment">segment ID 70</milestone>
-<word lemma="sibilus1" pos="NOMcom" sy="1A1b1c">sibila</word>
-<word lemma="lambo" pos="VER" sy="2A2T3A">lambebant</word>
-<word lemma="lingua" pos="NOMcom" sy="3T4A">linguis</word>
-<word lemma="uibrans" pos="VER" sy="4T5A5b5c">vibrantibus</word>
-<word lemma="os1" pos="NOMcom" sy="6A6X">ora.</word>
-</line>
-<line meter="H" n="46" pattern="SSDSDS">
-<milestone continued="true" n="71" source="urn:cts:latinLit:phi0690.phi003:2.212" unit="segment">segment ID 71</milestone>
-<word lemma="certus" pos="ADJqua" sy="1A1T">certo</word>
-<milestone n="72" source="urn:cts:latinLit:phi0690.phi003:4.529" unit="segment">segment ID 72</milestone>
-<word lemma="infelix" pos="ADJqua" sy="2A2T3A">infelix</word>
-<word lemma="animus" pos="NOMcom" sy="3b3c4A">animi</word>
-<word lemma="Phoenissus" pos="ADJqua" sy="4T5A5b">Phoenissa,</word>
-<word lemma="neque" mf="SY" pos="CONcoo" sy="5c">neque</word>
-<word lemma="umquam" pos="ADV" sy="6A6X">umquam</word>
-</line>
-<line meter="H" n="47" pattern="DSDS??">
-<milestone n="73" source="urn:cts:latinLit:phi0690.phi003:1.692" unit="segment">segment ID 73</milestone>
-<word lemma="irrigo" pos="VER" sy="1A1b1c">inrigat,</word>
-<word lemma="et2" pos="CONcoo" sy="2A">et</word>
-<word lemma="foueo" pos="NOMcom" sy="2T3A">fotum</word>
-<word lemma="gremium" pos="NOMcom" sy="3b3c4A">gremio</word>
-<milestone n="74" source="urn:cts:latinLit:phi0690.phi003:6.380" unit="segment">segment ID 74</milestone>
-<word lemma="et2" pos="CONcoo" sy="4T">et</word>
-<word lemma="statuo" pos="VER" sy="5b5c5A">statuent</word>
-<word lemma="tumulus" mf="SY" pos="NOMcom" sy="6b6c">tumulum</word>
-<word lemma="et2" pos="CONcoo" sy="6X">et</word>
-</line>
-<line meter="H" n="48" pattern="SDDSDS">
-<milestone continued="true" n="75" source="urn:cts:latinLit:phi0690.phi003:6.381" unit="segment">segment ID 75</milestone>
-<word lemma="aeternus" pos="ADJqua" sy="1A1T2A2b">aeternumque</word>
-<word lemma="locus" pos="NOMcom" sy="2c3A">locus</word>
-<word lemma="Palinurus" pos="NOMpro" sy="3b3c4A4T">Palinuri</word>
-<word lemma="nomen" pos="NOMcom" sy="5A5b">nomen</word>
-<word lemma="habeo" pos="VER" sy="5c6A6X">habebit.'</word>
-</line>
-<line meter="H" n="49" pattern="DSSSDS">
-<milestone n="76" source="urn:cts:latinLit:phi0690.phi003:4.618" unit="segment">segment ID 76</milestone>
-<word lemma="funus" pos="NOMcom" sy="1A1b1c">funera;</word>
-<word lemma="nec2" pos="CONcoo" sy="2A">nec,</word>
-<word lemma="cum3" pos="CONsub" sy="2T">cum</word>
-<word lemma="sui1" pos="PROref" sy="3A">se</word>
-<milestone n="77" source="urn:cts:latinLit:phi0690.phi003:11.335" unit="segment">segment ID 77</milestone>
-<word lemma="res" pos="NOMcom" sy="3T4A">rebus</word>
-<word lemma="succurro" pos="VER" sy="4T5A5b5c">succurrite</word>
-<word lemma="fessus" pos="ADJqua" sy="6A6X">fessis.'</word>
-</line>
-<line meter="H" n="50" pattern="SDSSDS">
-<milestone n="78" source="urn:cts:latinLit:phi0690.phi003:2.314" unit="segment">segment ID 78</milestone>
-<word lemma="arma" mf="SY" pos="NOMcom" sy="1A">arma</word>
-<word lemma="amens" pos="ADJqua" sy="1T2A">amens</word>
-<word lemma="capio2" pos="VER" sy="2b2c3A">capio;</word>
-<word lemma="nec2" pos="CONcoo" sy="3T">nec</word>
-<milestone n="79" source="urn:cts:latinLit:phi0690.phi003:10.111" unit="segment">segment ID 79</milestone>
-<word lemma="quisque2" mf="SY" pos="PROind" sy="4A">cuique</word>
-<word lemma="exorsa" pos="VER" sy="4T5A5b">exorsa</word>
-<word lemma="labor1" pos="NOMcom" sy="5c6A6X">laborem</word>
-</line>
-<line meter="H" n="51" pattern="SSDDDS">
-<milestone continued="true" n="80" source="urn:cts:latinLit:phi0690.phi002:2.77" unit="segment">segment ID 80</milestone>
-<word lemma="includo" pos="VER" sy="1A1T2A">includunt</word>
-<word lemma="udus" pos="ADJqua" sy="2T3A3b">udoque</word>
-<word lemma="doceo" pos="VER" sy="3c4A">docent</word>
-<word lemma="inolesco" pos="VER" sy="4b4c5A5b5c">inolescere</word>
-<word lemma="liber1" pos="NOMcom" sy="6A6X">libro.</word>
-</line>
-<line meter="H" n="52" pattern="DDSSDS">
-<milestone n="81" source="urn:cts:latinLit:phi0690.phi001:8.89" unit="segment">segment ID 81</milestone>
-<word lemma="talis" pos="PROdem" sy="1A1b">talis</word>
-<word lemma="amor" pos="NOMcom" sy="1c2A">amor</word>
-<word lemma="teneo" pos="VER" sy="2b2c3A">teneat,</word>
-<word lemma="nec2" pos="CONcoo" sy="3T">nec</word>
-<word lemma="sum1" pos="VER" sy="4A">sit</word>
-<milestone n="82" source="urn:cts:latinLit:phi0690.phi002:2.398" unit="segment">segment ID 82</milestone>
-<word lemma="namque" mf="SY" pos="CONcoo" sy="4T">namque</word>
-<word lemma="omnis" pos="PROind" sy="5A5b">omne</word>
-<word lemma="quotannis" pos="ADV" sy="5c6A6X">quotannis</word>
-</line>
-<line meter="H" n="53" pattern="SSDDDS">
-<milestone n="83" source="urn:cts:latinLit:phi0690.phi003:12.655" unit="segment">segment ID 83</milestone>
-<word lemma="deicio" mf="SY" pos="VER" sy="1A1T2A">dejecturum</word>
-<word lemma="arx" pos="NOMcom" sy="2T3A">arces</word>
-<milestone n="84" source="urn:cts:latinLit:phi0690.phi001:3.38" unit="segment">segment ID 84</milestone>
-<word lemma="facilis" pos="ADJqua" sy="3b3c4A">facili</word>
-<word lemma="superaddo" pos="VER" sy="4b4c5A5b5c">superaddita</word>
-<word lemma="uitis" pos="NOMcom" sy="6A6X">vitis</word>
-</line>
-<line meter="H" n="54" pattern="DSDDDS">
-<milestone n="85" source="urn:cts:latinLit:phi0690.phi002:4.127" unit="segment">segment ID 85</milestone>
-<word lemma="Corycius" pos="ADJqua" sy="1A1b1c2A">Corycium</word>
-<word lemma="uideo" pos="VER" sy="2T3A3b">vidisse</word>
-<word lemma="senex1" pos="NOMcom" sy="3c4A">senem,</word>
-<milestone n="86" source="urn:cts:latinLit:phi0690.phi003:3.511" unit="segment">segment ID 86</milestone>
-<word lemma="sopor" pos="NOMcom" sy="4b4c">sopor</word>
-<word lemma="irrigo" pos="VER" sy="5A5b5c">inrigat</word>
-<word lemma="artus1" pos="NOMcom" sy="6A6X">artus.</word>
-</line>
-<line meter="H" n="55" pattern="DDSDDS">
-<milestone n="87" source="urn:cts:latinLit:phi0690.phi003:1.416" unit="segment">segment ID 87</milestone>
-<word lemma="laetus2" pos="ADJqua" sy="1A1b">laeta</word>
-<word lemma="suus" pos="PROpos.ref" sy="1c2A">suas,</word>
-<word lemma="ubi2" pos="ADVint" sy="2b2c">ubi</word>
-<word lemma="templum" mf="SY" pos="NOMcom" sy="3A">templum</word>
-<word lemma="ille" pos="PROdem" sy="3T4A">illi,</word>
-<milestone n="88" source="urn:cts:latinLit:phi0690.phi003:3.436" unit="segment">segment ID 88</milestone>
-<word lemma="iterum" pos="ADV" sy="4b4c5A5b">iterumque</word>
-<word lemma="moneo" pos="VER" sy="5c6A6X">monebo,</word>
-</line>
-<line meter="H" n="56" pattern="DDSSDS">
-<milestone n="89" source="urn:cts:latinLit:phi0690.phi003:9.638" unit="segment">segment ID 89</milestone>
-<word lemma="aetherius" pos="ADJqua" sy="1A1b1c2A">Aetheria</word>
-<milestone n="90" source="urn:cts:latinLit:phi0690.phi003:6.85" unit="segment">segment ID 90</milestone>
-<word lemma="uenio" pos="VER" sy="2b2c3A">venient</word>
-<word lemma="mitto" mf="SY" pos="VER" sy="3T">(mitte</word>
-<word lemma="hic1" pos="PROdem" sy="4A">hanc</word>
-<word lemma="de" pos="PRE" sy="4T">de</word>
-<word lemma="pectus" pos="NOMcom" sy="5A5b5c">pectore</word>
-<word lemma="cura" pos="NOMcom" sy="6A6X">curam),</word>
-</line>
-<line meter="H" n="57" pattern="DSSSDS">
-<milestone n="91" source="urn:cts:latinLit:phi0690.phi002:1.222" unit="segment">segment ID 91</milestone>
-<word lemma="Gnosius" mf="SY" pos="ADJqua" sy="1A1b1c">Cnosiaque</word>
-<word lemma="ardens" pos="ADJqua" sy="2A2T3A">ardentis</word>
-<word lemma="decedo1" pos="VER" sy="3T4A4T">decedat</word>
-<word lemma="stella" pos="NOMcom" sy="5A5b">stella</word>
-<word lemma="corona" pos="NOMcom" sy="5c6A6X">Coronae,</word>
-</line>
-<line meter="H" n="58" pattern="DDDSDS">
-<milestone n="92" source="urn:cts:latinLit:phi0690.phi003:10.683" unit="segment">segment ID 92</milestone>
-<word lemma="fluctus" pos="NOMcom" sy="1A1b1c">fluctibus</word>
-<word lemma="an" pos="ADVint" sy="2A">an</word>
-<word lemma="iacio" pos="VER" sy="2b2c3A">jaciat</word>
-<milestone n="93" source="urn:cts:latinLit:phi0690.phi002:1.55" unit="segment">segment ID 93</milestone>
-<word lemma="alibi" mf="SY" pos="ADV" sy="3b3c">alibi</word>
-<word lemma="atque1" mf="SY" pos="CONcoo" sy="4A">atque</word>
-<word lemma="iniussus2" pos="ADJqua" sy="4T5A5b">injussa</word>
-<word lemma="uiresco" pos="VER" sy="5c6A6X">virescunt</word>
-</line>
-<line meter="H" n="59" pattern="SDSSDS">
-<milestone n="94" source="urn:cts:latinLit:phi0690.phi002:1.443" unit="segment">segment ID 94</milestone>
-<word lemma="suspectus2" pos="ADJqua" sy="1A1T2A">suspecti</word>
-<word lemma="tu" pos="PROper" sy="2b2c">tibi</word>
-<word lemma="sum1" pos="VER" sy="3A">sint</word>
-<word lemma="imber" pos="NOMcom" sy="3T4A">imbres:</word>
-<milestone n="95" source="urn:cts:latinLit:phi0690.phi003:5.710" unit="segment">segment ID 95</milestone>
-<word lemma="fortuna" pos="NOMcom" sy="4T5A5b">fortuna</word>
-<word lemma="fero" pos="VER" sy="5c6A6X">ferendo</word>
-<word lemma="sum1" mf="PE" pos="VER" sy="">est.</word>
-</line>
-<line meter="H" n="60" pattern="SSDSDS">
-<milestone n="96" source="urn:cts:latinLit:phi0690.phi003:12.469" unit="segment">segment ID 96</milestone>
-<word lemma="auriga" pos="NOMcom" sy="1A1T2A">aurigam</word>
-<word lemma="Turnus" pos="NOMpro" sy="2T3A">Turni</word>
-<word lemma="medius" mf="SY" pos="ADJqua" sy="3b3c">media</word>
-<word lemma="inter" pos="PRE" sy="4A4T">inter</word>
-<word lemma="lorum" pos="NOMcom" sy="5A5b">lora</word>
-<word lemma="Metiscus" pos="NOMpro" sy="5c6A6X">Metiscum</word>
-</line>
-<line meter="H" n="61" pattern="DSSSDS">
-<milestone continued="true" n="97" source="urn:cts:latinLit:phi0690.phi003:12.470" unit="segment">segment ID 97</milestone>
-<word lemma="excutio" pos="VER" sy="1A1b1c">excutit</word>
-<word lemma="et2" pos="CONcoo" sy="2A">et</word>
-<word lemma="longe" pos="ADV" sy="2T3A">longe</word>
-<word lemma="labor2" pos="VER" sy="3T4A">lapsum</word>
-<word lemma="temo" pos="NOMcom" sy="4T5A5b">temone</word>
-<word lemma="relinquo" pos="VER" sy="5c6A6X">reliquit;</word>
-</line>
-<line meter="H" n="62" pattern="DSSSDS">
-<milestone n="98" source="urn:cts:latinLit:phi0690.phi003:11.836" unit="segment">segment ID 98</milestone>
-<word lemma="at2" pos="CONcoo" sy="1A">At</word>
-<word lemma="Triuia" pos="NOMpro" sy="1b1c2A">Triviae</word>
-<word lemma="custos" pos="NOMcom" sy="2T3A">custos</word>
-<milestone n="99" source="urn:cts:latinLit:phi0690.phi003:4.83" unit="segment">segment ID 99</milestone>
-<word lemma="absum1" mf="SY" pos="VER" sy="3T4A">absentem</word>
-<word lemma="audio" pos="VER" sy="4T5A5b">auditque</word>
-<word lemma="uideo" pos="VER" sy="5c6A6X">videtque,</word>
-</line>
-<line meter="H" n="63" pattern="SSS??S">
-<milestone n="100" source="urn:cts:latinLit:phi0690.phi003:11.576" unit="segment">segment ID 100</milestone>
-<word lemma="pro1" pos="PRE" sy="1A">pro</word>
-<word lemma="crinalis" mf="SY" pos="ADJqua" sy="1T2A">crinali</word>
-<word lemma="aurum" pos="NOMcom" sy="2T3A">auro,</word>
-<milestone n="101" source="urn:cts:latinLit:phi0690.phi003:5.520" unit="segment">segment ID 101</milestone>
-<word lemma="qui1" pos="PROrel" sy="3T">qui</word>
-<word lemma="tamen" pos="ADV" sy="4b4c">tamen</word>
-<word lemma="aerius" pos="ADJqua" sy="4A5b5c5A">aerias</word>
-<word lemma="telum" pos="NOMcom" sy="6A6X">telum</word>
-</line>
-<line meter="H" n="64" pattern="SSDSDS">
-<milestone continued="true" n="102" source="urn:cts:latinLit:phi0690.phi003:5.521" unit="segment">segment ID 102</milestone>
-<word lemma="ostento" pos="VER" sy="1A1T2A">ostentans</word>
-<word lemma="ars" pos="NOMcom" sy="2T3A3b">artemque</word>
-<word lemma="pater" pos="NOMcom" sy="3c4A">pater</word>
-<word lemma="arcus" pos="NOMcom" sy="4T5A5b">arcumque</word>
-<word lemma="sono1" pos="VER" sy="5c6A6X">sonantem.</word>
-</line>
-<line meter="H" n="65" pattern="DDSSDS">
-<milestone n="103" source="urn:cts:latinLit:phi0690.phi003:5.413" unit="segment">segment ID 103</milestone>
-<word lemma="sanguis" pos="NOMcom" sy="1A1b1c">(sanguine</word>
-<word lemma="cerno" pos="VER" sy="2A2b">cernis</word>
-<word lemma="adhuc" pos="ADV" sy="2c3A">adhuc</word>
-<word lemma="spargo" mf="SY" pos="VER" sy="3T4A">sparsoque</word>
-<word lemma="inficio" pos="VER" sy="4T5A5b">infecta</word>
-<word lemma="cerebrum" pos="NOMcom" sy="5c6A6X">cerebro),</word>
-</line>
-<line meter="H" n="66" pattern="DDSSDS">
-<milestone n="104" source="urn:cts:latinLit:phi0690.phi002:2.320" unit="segment">segment ID 104</milestone>
-<word lemma="candidus" pos="ADJqua" sy="1A1b1c">candida</word>
-<word lemma="uenio" pos="VER" sy="2A2b">venit</word>
-<word lemma="auis" pos="NOMcom" sy="2c3A">avis</word>
-<word lemma="longus" pos="ADJqua" sy="3T4A">longis</word>
-<milestone n="105" source="urn:cts:latinLit:phi0690.phi002:4.42" unit="segment">segment ID 105</milestone>
-<word lemma="sum1" pos="VER" sy="4T">est</word>
-<word lemma="fama" pos="NOMcom" sy="5A5b">fama,</word>
-<word lemma="latebra" pos="NOMcom" sy="5c6A6X">latebris</word>
-</line>
-<line meter="H" n="67" pattern="DSSSDS">
-<milestone n="106" source="urn:cts:latinLit:phi0690.phi001:7.55" unit="segment">segment ID 106</milestone>
-<word lemma="omnis" pos="PROind" sy="1A1b1c">omnia</word>
-<word lemma="nunc" pos="ADV" sy="2A">nunc</word>
-<word lemma="rideo" pos="VER" sy="2T3A">rident:</word>
-<word lemma="at2" pos="CONcoo" sy="3T">at,</word>
-<word lemma="si2" pos="CONsub" sy="4A">si</word>
-<milestone n="107" source="urn:cts:latinLit:phi0690.phi003:2.345" unit="segment">segment ID 107</milestone>
-<word lemma="praeceptum" pos="NOMcom" sy="4T5A5b">praecepta</word>
-<word lemma="furo" pos="ADJqua" sy="5c6A6X">furentis</word>
-</line>
-<line meter="H" n="68" pattern="SDSSDS">
-<milestone n="108" source="urn:cts:latinLit:phi0690.phi002:1.470" unit="segment">segment ID 108</milestone>
-<word lemma="obscenus" pos="ADJqua" sy="1A1T2A2b">obscenaeque</word>
-<word lemma="canis" pos="NOMcom" sy="2c3A">canes</word>
-<word lemma="importunus" pos="ADJqua" sy="3T4A4T5A5b">importunaeque</word>
-<word lemma="uolucris" pos="NOMcom" sy="5c6A6X">volucres</word>
-</line>
-<line meter="H" n="69" pattern="SDSSDS">
-<milestone n="109" source="urn:cts:latinLit:phi0690.phi003:11.598" unit="segment">segment ID 109</milestone>
-<word lemma="Etruscus" pos="ADJqua" sy="1A1T2A2b">Etruscique</word>
-<word lemma="dux" pos="NOMcom" sy="2c3A">duces</word>
-<milestone n="110" source="urn:cts:latinLit:phi0690.phi003:2.630" unit="segment">segment ID 110</milestone>
-<word lemma="paulatim" mf="SY" pos="ADV" sy="3T4A">paulatim</word>
-<word lemma="euinco" pos="VER" sy="4T5A5b">evicta</word>
-<word lemma="superus" pos="ADJqua" sy="5c6A6X">supremum</word>
-</line>
-<line meter="H" n="70" pattern="DSDDDS">
-<milestone n="111" source="urn:cts:latinLit:phi0690.phi002:3.73" unit="segment">segment ID 111</milestone>
-<word lemma="tu" pos="PROper" sy="1A">tu</word>
-<word lemma="modo1" pos="ADV" sy="1b1c">modo,</word>
-<word lemma="qui1" pos="PROint" sy="2A">quos</word>
-<word lemma="in" pos="PRE" sy="2T">in</word>
-<word lemma="spes" pos="NOMcom" sy="3A">spem</word>
-<word lemma="statuo" pos="VER" sy="3b3c4A">statues</word>
-<milestone n="112" source="urn:cts:latinLit:phi0690.phi003:7.207" unit="segment">segment ID 112</milestone>
-<word lemma="penetro" pos="VER" sy="4b4c5A5b">penetrarit</word>
-<word lemma="ad2" pos="PRE" sy="5c">ad</word>
-<word lemma="urbs" pos="NOMcom" sy="6A6X">urbes</word>
-</line>
-<line meter="H" n="71" pattern="SSDSDS">
-<milestone n="113" source="urn:cts:latinLit:phi0690.phi003:2.721" unit="segment">segment ID 113</milestone>
-<word lemma="hic1" pos="PROdem" sy="1A">haec</word>
-<word lemma="for" pos="VER" sy="1T2A">fatus</word>
-<word lemma="latus2" pos="ADJqua" sy="2T3A">latos</word>
-<word lemma="humerus" pos="NOMcom" sy="3b3c4A">umeros</word>
-<milestone n="114" source="urn:cts:latinLit:phi0690.phi002:2.158" unit="segment">segment ID 114</milestone>
-<word lemma="qui" mf="SY" pos="PROrel" sy="4T">quodque</word>
-<word lemma="alluo" pos="VER" sy="5A5b5c">adluit</word>
-<word lemma="infra1" pos="ADV" sy="6A6X">infra?</word>
-</line>
-<line meter="H" n="72" pattern="SDSSDS">
-<milestone n="115" source="urn:cts:latinLit:phi0690.phi003:4.584" unit="segment">segment ID 115</milestone>
-<word lemma="et2" pos="CONcoo" sy="1A">Et</word>
-<word lemma="iam" pos="ADV" sy="1T">jam</word>
-<word lemma="primus" pos="ADJord" sy="2A2b">prima</word>
-<word lemma="nouus" pos="ADJqua" sy="2c3A">novo</word>
-<milestone n="116" source="urn:cts:latinLit:phi0690.phi003:11.798" unit="segment">segment ID 116</milestone>
-<word lemma="uox" pos="NOMcom" sy="3T4A">vocem</word>
-<word lemma="uerto" pos="VER" sy="4T5A5b">vertere</word>
-<word lemma="procella" pos="NOMcom" sy="5c6A6X">procellae.</word>
-</line>
-<line meter="H" n="73" pattern="DDDSDS">
-<milestone n="117" source="urn:cts:latinLit:phi0690.phi003:8.396" unit="segment">segment ID 117</milestone>
-<word lemma="quo3" pos="ADVint" sy="1A">quo</word>
-<word lemma="tu" pos="PROper" sy="1b1c">tibi,</word>
-<word lemma="diua" pos="NOMcom" sy="2A2b">diva,</word>
-<word lemma="ego" pos="PROper" sy="2c3A">mei?</word>
-<word lemma="similis" pos="ADJqua" sy="3b3c4A">similis</word>
-<word lemma="si2" pos="CONsub" sy="4T">si</word>
-<word lemma="cura" pos="NOMcom" sy="5A5b">cura</word>
-<word lemma="sum1" pos="VER" sy="5c6A6X">fuisset,</word>
-</line>
-<line meter="H" n="74" pattern="SSSSDS">
-<milestone n="118" source="urn:cts:latinLit:phi0690.phi003:12.540" unit="segment">segment ID 118</milestone>
-<word lemma="Aeneas" pos="NOMpro" sy="1A1T2A">Aenea</word>
-<milestone n="119" source="urn:cts:latinLit:phi0690.phi002:4.375" unit="segment">segment ID 119</milestone>
-<word lemma="natus1" pos="NOMcom" sy="2T3A">nati</word>
-<word lemma="fletus" pos="NOMcom" sy="3T4A">fletus</word>
-<word lemma="cognosco" pos="VER" sy="4T5A5b">cognovit</word>
-<word lemma="inanis" pos="ADJqua" sy="5c6A6X">inanes</word>
-</line>
-<line meter="H" n="75" pattern="DDDSDS">
-<milestone n="120" source="urn:cts:latinLit:phi0690.phi003:12.679" unit="segment">segment ID 120</milestone>
-<word lemma="mors" pos="NOMcom" sy="1A1b">morte</word>
-<word lemma="patior" pos="VER" sy="1c2A">pati,</word>
-<word lemma="neque" pos="CONcoo" sy="2b2c">neque</word>
-<word lemma="ego" mf="SY" pos="PROper" sy="">me</word>
-<word lemma="indecor" pos="ADJqua" sy="3A3b3c4A">indecorem,</word>
-<word lemma="germana" pos="NOMcom" sy="4T5A5b">germana,</word>
-<word lemma="uideo" pos="VER" sy="5c6A6X">videbis</word>
-</line>
-<line meter="H" n="76" pattern="DSSSDS">
-<milestone n="121" source="urn:cts:latinLit:phi0690.phi002:2.179" unit="segment">segment ID 121</milestone>
-<word lemma="difficilis" pos="ADJqua" sy="1A1b1c2A">difficiles</word>
-<word lemma="primum" pos="ADJadv.ord" sy="2T3A">primum</word>
-<word lemma="terra" pos="NOMcom" sy="3T4A">terrae</word>
-<word lemma="collis" pos="NOMcom" sy="4T5A5b">collesque</word>
-<word lemma="malignus" pos="ADJqua" sy="5c6A6X">maligni,</word>
-</line>
-<line meter="H" n="77" pattern="SDSSDS">
-<milestone n="122" source="urn:cts:latinLit:phi0690.phi002:2.402" unit="segment">segment ID 122</milestone>
-<word lemma="atque1" mf="SY" pos="CONcoo" sy="1A">atque</word>
-<word lemma="in" pos="PRE" sy="1T">in</word>
-<word lemma="sui1" pos="PROref" sy="2A">se</word>
-<word lemma="suus" pos="PROpos.ref" sy="2b2c">sua</word>
-<word lemma="per" pos="PRE" sy="3A">per</word>
-<milestone n="123" source="urn:cts:latinLit:phi0690.phi003:12.390" unit="segment">segment ID 123</milestone>
-<word lemma="sui" mf="SY" pos="PROref" sy="3T4A">seseque</word>
-<word lemma="in" pos="PRE" sy="4T">in</word>
-<word lemma="bellum" pos="NOMcom" sy="5A5b">bella</word>
-<word lemma="remitto" pos="VER" sy="5c6A6X">remittant.</word>
-</line>
-<line meter="H" n="78" pattern="SDSSDS">
-<milestone n="124" source="urn:cts:latinLit:phi0690.phi003:9.818" unit="segment">segment ID 124</milestone>
-<word lemma="et2" pos="CONcoo" sy="1A">et</word>
-<word lemma="laetus2" pos="ADJqua" sy="1T2A">laetum</word>
-<word lemma="socius1" pos="NOMcom" sy="2b2c3A">sociis</word>
-<word lemma="abluo" pos="VER" sy="3T4A4T">abluta</word>
-<word lemma="caedes" pos="NOMcom" sy="5A5b">caede</word>
-<word lemma="remitto" pos="VER" sy="5c6A6X">remisit.</word>
-</line>
-<line meter="H" n="79" pattern="DDSSDS">
-<milestone n="125" source="urn:cts:latinLit:phi0690.phi001:2.59" unit="segment">segment ID 125</milestone>
-<word lemma="perditus" pos="ADJqua" sy="1A1b1c">perditus</word>
-<word lemma="et2" pos="CONcoo" sy="2A">et</word>
-<word lemma="liquidus" pos="ADJqua" sy="2b2c3A">liquidis</word>
-<milestone n="126" source="urn:cts:latinLit:phi0690.phi002:3.110" unit="segment">segment ID 126</milestone>
-<word lemma="at2" pos="CONcoo" sy="3T">at</word>
-<word lemma="fuluus" pos="ADJqua" sy="4A4T">fulvae</word>
-<word lemma="nimbus" pos="NOMcom" sy="5A5b">nimbus</word>
-<word lemma="arena" pos="NOMcom" sy="5c6A6X">harenae</word>
-</line>
-<line meter="H" n="80" pattern="DSSSDS">
-<milestone n="127" source="urn:cts:latinLit:phi0690.phi002:1.268" unit="segment">segment ID 127</milestone>
-<word lemma="quippe2" mf="SY" pos="CONcoo" sy="1A">quippe</word>
-<word lemma="etiam" pos="ADV" sy="1b1c2A">etiam</word>
-<word lemma="festus" pos="ADJqua" sy="2T3A">festis</word>
-<word lemma="quidam" mf="SY" pos="PROind" sy="3T">quaedam</word>
-<milestone n="128" source="urn:cts:latinLit:phi0690.phi003:9.590" unit="segment">segment ID 128</milestone>
-<word lemma="intendo" pos="VER" sy="4A4T5A5b">intendisse</word>
-<word lemma="sagitta" pos="NOMcom" sy="5c6A6X">sagittam</word>
-</line>
-<line meter="H" n="81" pattern="DDSDDS">
-<milestone n="129" source="urn:cts:latinLit:phi0690.phi003:2.456" unit="segment">segment ID 129</milestone>
-<word lemma="saepe" pos="ADV" sy="1A1b1c">saepius</word>
-<word lemma="Andromacha" pos="NOMpro" sy="2A2b2c3A">Andromache</word>
-<word lemma="fero" mf="SY" pos="VER" sy="3T">ferre</word>
-<word lemma="incomitatus" pos="ADJqua" sy="4A4b4c5A5b">incomitata</word>
-<word lemma="soleo" pos="VER" sy="5c6A6X">solebat</word>
-</line>
-<line meter="H" n="82" pattern="DDDDDS">
-<milestone continued="true" n="130" source="urn:cts:latinLit:phi0690.phi003:2.457" unit="segment">segment ID 130</milestone>
-<word lemma="ad2" pos="PRE" sy="1A">ad</word>
-<word lemma="socer" pos="NOMcom" sy="1b1c2A">soceros</word>
-<word lemma="et2" pos="CONcoo" sy="2b">et</word>
-<word lemma="auus" pos="NOMcom" sy="2c3A">avo</word>
-<word lemma="puer" mf="SY" pos="NOMcom" sy="3b3c">puerum</word>
-<word lemma="Astyanax" pos="NOMpro" sy="4A4b4c5A5b">Astyanacta</word>
-<word lemma="traho" pos="VER" sy="5c6A6X">trahebat.</word>
-</line>
-<line meter="H" n="83" pattern="DDSSDS">
-<milestone n="131" source="urn:cts:latinLit:phi0690.phi003:11.730" unit="segment">segment ID 131</milestone>
-<word lemma="fero" pos="VER" sy="1A1b">fertur</word>
-<word lemma="equus" pos="NOMcom" sy="1c2A">equo</word>
-<word lemma="uarius" mf="SY" pos="ADJqua" sy="2b2c3A">variisque</word>
-<word lemma="instigo" pos="VER" sy="3T4A4T">instigat</word>
-<word lemma="uox" pos="NOMcom" sy="5A5b5c">vocibus</word>
-<word lemma="ala" pos="NOMcom" sy="6A6X">alas</word>
-</line>
-<line meter="H" n="84" pattern="DDSSDS">
-<milestone n="132" source="urn:cts:latinLit:phi0690.phi003:4.382" unit="segment">segment ID 132</milestone>
-<word lemma="spero" mf="SY" pos="VER" sy="1A">spero</word>
-<word lemma="equidem" pos="ADV" sy="1b1c2A">equidem</word>
-<word lemma="medius" pos="ADJqua" sy="2b2c3A">mediis,</word>
-<word lemma="si2" pos="CONsub" sy="3T">si</word>
-<word lemma="quis2" pos="PROind" sy="4A">quid</word>
-<milestone n="133" source="urn:cts:latinLit:phi0690.phi003:11.464" unit="segment">segment ID 133</milestone>
-<word lemma="Messapus" pos="NOMpro" sy="4T5A5b">Messapus</word>
-<word lemma="in" pos="PRE" sy="5c">in</word>
-<word lemma="arma" pos="NOMcom" sy="6A6X">armis,</word>
-</line>
-<line meter="H" n="85" pattern="SSSSDS">
-<milestone n="134" source="urn:cts:latinLit:phi0690.phi003:11.411" unit="segment">segment ID 134</milestone>
-<word lemma="si2" pos="CONsub" sy="1A">si</word>
-<word lemma="nullus" pos="PROind" sy="1T2A">nullam</word>
-<word lemma="noster" pos="PROpos" sy="2T3A">nostris</word>
-<milestone n="135" source="urn:cts:latinLit:phi0690.phi002:2.2" unit="segment">segment ID 135</milestone>
-<word lemma="nec2" pos="CONcoo" sy="3T">nec</word>
-<word lemma="non" pos="ADVneg" sy="4A">non</word>
-<word lemma="siluestris" pos="ADJqua" sy="4T5A5b5c">silvestria</word>
-<word lemma="tu" pos="PROper" sy="6A6X">tecum</word>
-</line>
-<line meter="H" n="86" pattern="SSDSDS">
-<milestone n="136" source="urn:cts:latinLit:phi0690.phi003:11.518" unit="segment">segment ID 136</milestone>
-<word lemma="tu" mf="SY" pos="PROper" sy="1A">tecum</word>
-<word lemma="acer2" pos="ADJqua" sy="1T2A">acer</word>
-<word lemma="Messapus" pos="NOMpro" sy="2T3A3b">Messapus</word>
-<word lemma="sum1" pos="VER" sy="3c4A">erit</word>
-<milestone n="137" source="urn:cts:latinLit:phi0690.phi003:3.163" unit="segment">segment ID 137</milestone>
-<word lemma="cognomen" pos="NOMcom" sy="4T5A5b5c">cognomine</word>
-<word lemma="dico2" pos="VER" sy="6A6X">dicunt,</word>
-</line>
-<line meter="H" n="87" pattern="SSSSDS">
-<milestone n="138" source="urn:cts:latinLit:phi0690.phi003:3.504" unit="segment">segment ID 138</milestone>
-<word lemma="atque1" mf="SY" pos="CONcoo" sy="1A">atque</word>
-<word lemma="idem" pos="PROdem" sy="1T2A">idem</word>
-<word lemma="casus" pos="NOMcom" sy="2T3A">casus),</word>
-<milestone n="139" source="urn:cts:latinLit:phi0690.phi003:5.463" unit="segment">segment ID 139</milestone>
-<word lemma="pugna" pos="NOMcom" sy="3T4A">pugnae</word>
-<word lemma="fessus" pos="ADJqua" sy="4T5A5b">fessumque</word>
-<word lemma="Dares" pos="NOMpro" sy="5c6A6X">Dareta</word>
-</line>
-<line meter="H" n="88" pattern="DDDDDS">
-<milestone n="140" source="urn:cts:latinLit:phi0690.phi002:2.15" unit="segment">segment ID 140</milestone>
-<word lemma="castanea" pos="NOMcom" sy="1A1b1c2A">castaneae,</word>
-<word lemma="nemus" pos="NOMcom" sy="2b2c3A3b">nemorumque</word>
-<milestone n="141" source="urn:cts:latinLit:phi0690.phi003:9.44" unit="segment">segment ID 141</milestone>
-<word lemma="manus1" pos="NOMcom" sy="3c4A">manum</word>
-<word lemma="pudor" pos="NOMcom" sy="4b4c">pudor</word>
-<word lemma="ira" pos="NOMcom" sy="5A5b5c">iraque</word>
-<word lemma="monstro" pos="VER" sy="6A6X">monstrat,</word>
-</line>
-<line meter="H" n="89" pattern="DSDDDS">
-<milestone n="142" source="urn:cts:latinLit:phi0690.phi003:6.205" unit="segment">segment ID 142</milestone>
-<word lemma="qualis1" pos="PROrel" sy="1A1b">quale</word>
-<word lemma="soleo" pos="VER" sy="1c2A">solet</word>
-<word lemma="silua" pos="NOMcom" sy="2T3A">silvis</word>
-<milestone n="143" source="urn:cts:latinLit:phi0690.phi003:9.485" unit="segment">segment ID 143</milestone>
-<word lemma="canis" pos="NOMcom" sy="3b3c4A">canibus</word>
-<word lemma="do" pos="VER" sy="4b4c">data</word>
-<word lemma="praeda" pos="NOMcom" sy="5A5b">praeda</word>
-<word lemma="Latinus" pos="ADJqua" sy="5c6A6X">Latinis</word>
-</line>
-<line meter="H" n="90" pattern="DSSSDS">
-<milestone n="144" source="urn:cts:latinLit:phi0690.phi003:9.316" unit="segment">segment ID 144</milestone>
-<word lemma="exitium" pos="NOMcom" sy="1A1b1c2A">exitio.</word>
-<word lemma="passim" pos="ADV" sy="2T3A">passim</word>
-<word lemma="somnus" pos="NOMcom" sy="3T4A">somno</word>
-<word lemma="uinum" pos="NOMcom" sy="4T5A5b">vinoque</word>
-<word lemma="per" pos="PRE" sy="5c">per</word>
-<word lemma="herba" pos="NOMcom" sy="6A6X">herbam</word>
-</line>
-<line meter="H" n="91" pattern="DDDSDS">
-<milestone n="145" source="urn:cts:latinLit:phi0690.phi002:3.292" unit="segment">segment ID 145</milestone>
-<word lemma="rapto" pos="VER" sy="1A1b">raptat</word>
-<word lemma="amor" pos="NOMcom" sy="1c2A">amor;</word>
-<word lemma="iuuo" pos="VER" sy="2b2c">juvat</word>
-<milestone n="146" source="urn:cts:latinLit:phi0690.phi003:1.653" unit="segment">segment ID 146</milestone>
-<word lemma="Ilione" pos="NOMpro" sy="3A3b3c4A">Ilione</word>
-<word lemma="qui1" pos="PROrel" sy="4T">quod</word>
-<word lemma="gero" pos="VER" sy="5A5b5c">gesserat</word>
-<word lemma="olim" pos="ADV" sy="6A6X">olim,</word>
-</line>
-<line meter="H" n="92" pattern="SDSDDS">
-<milestone n="147" source="urn:cts:latinLit:phi0690.phi002:4.255" unit="segment">segment ID 147</milestone>
-<word lemma="deformo2" pos="VER" sy="1A1T2A">deformat</word>
-<word lemma="macies" pos="NOMcom" sy="2b2c3A">macies,</word>
-<word lemma="tum" pos="ADV" sy="3T">tum</word>
-<word lemma="corpus" pos="NOMcom" sy="4A4b4c">corpora</word>
-<word lemma="lux" pos="NOMcom" sy="5A5b">luce</word>
-<word lemma="careo" pos="VER" sy="5c6A6X">carentum</word>
-</line>
-<line meter="H" n="93" pattern="SDSSDS">
-<milestone n="148" source="urn:cts:latinLit:phi0690.phi003:3.569" unit="segment">segment ID 148</milestone>
-<word lemma="ignarus" pos="ADJqua" sy="1A1T2A2b">ignarique</word>
-<word lemma="uia" pos="NOMcom" sy="2c3A">viae</word>
-<word lemma="Cyclops" mf="SY" pos="NOMpro" sy="3T4A">Cyclopum</word>
-<word lemma="allabor2" pos="VER" sy="4T5A5b5c">adlabimur</word>
-<word lemma="ora" pos="NOMcom" sy="6A6X">oris.</word>
-</line>
-<line meter="H" n="94" pattern="SDDDDS">
-<milestone n="149" source="urn:cts:latinLit:phi0690.phi003:11.111" unit="segment">segment ID 149</milestone>
-<word lemma="oro" pos="VER" sy="1A1T2A">oratis?</word>
-<word lemma="equidem" mf="SY" pos="ADV" sy="2b2c">equidem</word>
-<word lemma="et2" pos="CONcoo" sy="3A">et</word>
-<milestone n="150" source="urn:cts:latinLit:phi0690.phi003:10.308" unit="segment">segment ID 150</milestone>
-<word lemma="retineo" pos="VER" sy="3b3c4A">retinet</word>
-<word lemma="mora" pos="NOMcom" sy="4b4c">mora,</word>
-<word lemma="sed" pos="CONcoo" sy="5A">sed</word>
-<word lemma="rapio" pos="VER" sy="5b5c">rapit</word>
-<word lemma="acer2" pos="ADJqua" sy="6A6X">acer</word>
-</line>
-<line meter="H" n="95" pattern="SDDSDS">
-<milestone n="151" source="urn:cts:latinLit:phi0690.phi003:6.3" unit="segment">segment ID 151</milestone>
-<word lemma="obuerto" pos="VER" sy="1A1T2A">obvertunt</word>
-<word lemma="pelagus" pos="NOMcom" sy="2b2c3A">pelago</word>
-<milestone n="152" source="urn:cts:latinLit:phi0690.phi003:9.536" unit="segment">segment ID 152</milestone>
-<word lemma="latus1" pos="NOMcom" sy="3b3c4A">lateri,</word>
-<word lemma="qui1" pos="PROrel" sy="4T">quae</word>
-<word lemma="multus" pos="ADJqua" sy="5A5b5c">plurima</word>
-<word lemma="uentus" pos="NOMcom" sy="6A6X">vento</word>
-</line>
-<line meter="H" n="96" pattern="DSSSDS">
-<milestone n="153" source="urn:cts:latinLit:phi0690.phi002:3.319" unit="segment">segment ID 153</milestone>
-<word lemma="quo1" pos="ADVrel" sy="1A">quo</word>
-<word lemma="paruus2" pos="ADJqua" sy="1b1c">minor</word>
-<word lemma="sum1" pos="VER" sy="2A">est</word>
-<word lemma="ille" pos="PROdem" sy="2T3A">illis</word>
-<word lemma="cura" pos="NOMcom" sy="3T4A">curae</word>
-<word lemma="mortalis2" pos="ADJqua" sy="4T5A5b">mortalis</word>
-<word lemma="egestas" pos="NOMcom" sy="5c6A6X">egestas,</word>
-</line>
-<line meter="H" n="97" pattern="SDSSSS">
-<milestone n="154" source="urn:cts:latinLit:phi0690.phi003:7.640" unit="segment">segment ID 154</milestone>
-<word lemma="lorica" mf="SY" pos="NOMcom" sy="1A1T">loricam</word>
-<word lemma="induo" pos="VER" sy="2A2b2c3A">induitur</word>
-<milestone n="155" source="urn:cts:latinLit:phi0690.phi003:2.154" unit="segment">segment ID 155</milestone>
-<word lemma="uos" pos="PROper" sy="3T">‘vos,</word>
-<word lemma="aeternus" mf="SY" pos="ADJqua" sy="4A4T">aeterni</word>
-<word lemma="ignis" pos="NOMcom" sy="5A5T">ignes,</word>
-<word lemma="et2" pos="CONcoo" sy="6A">et</word>
-<word lemma="non" pos="ADVneg" sy="6X">non</word>
-</line>
-<line meter="H" n="98" pattern="DSDSDS">
-<milestone n="156" source="urn:cts:latinLit:phi0690.phi003:7.686" unit="segment">segment ID 156</milestone>
-<word lemma="nec2" pos="CONcoo" sy="1A">nec</word>
-<word lemma="clipeus" pos="NOMcom" sy="1b1c2A">clipei</word>
-<word lemma="currus" pos="NOMcom" sy="2T3A3b">currusve</word>
-<word lemma="sono1" pos="VER" sy="3c4A">sonant;</word>
-<word lemma="pars" pos="NOMcom" sy="4T">pars</word>
-<word lemma="magnus" pos="ADJqua" sy="5A5b5c">maxima</word>
-<word lemma="glans" pos="NOMcom" sy="6A6X">glandes</word>
-</line>
-<line meter="H" n="99" pattern="DDSSDS">
-<milestone continued="true" n="157" source="urn:cts:latinLit:phi0690.phi003:4.547" unit="segment">segment ID 157</milestone>
-<word lemma="quin1" pos="ADV" sy="1A">quin</word>
-<word lemma="morior" mf="SY" pos="VER" sy="1b1c">morere</word>
-<word lemma="ut1" pos="ADVrel" sy="2A">ut</word>
-<word lemma="meritum" pos="ADJqua" sy="2b2c3A">merita</word>
-<word lemma="sum1" mf="PE" pos="VER" sy="">es,</word>
-<word lemma="ferrum" mf="SY" pos="NOMcom" sy="3T4A">ferroque</word>
-<word lemma="auerto" pos="VER" sy="4T5A5b">averte</word>
-<word lemma="dolor" pos="NOMcom" sy="5c6A6X">dolorem.</word>
-</line>
-<line meter="H" n="100" pattern="DSDDDS">
-<milestone n="158" source="urn:cts:latinLit:phi0690.phi003:6.769" unit="segment">segment ID 158</milestone>
-<word lemma="Siluius" pos="NOMpro" sy="1A1b1c">Silvius</word>
-<word lemma="Aeneas" pos="NOMpro" sy="2A2T3A">Aeneas,</word>
-<word lemma="pariter" pos="ADV" sy="3b3c4A">pariter</word>
-<word lemma="pietas" pos="NOMcom" sy="4b4c5A5b">pietate</word>
-<word lemma="uel2" pos="CONcoo" sy="5c">vel</word>
-<word lemma="arma" pos="NOMcom" sy="6A6X">armis</word>
-</line>
-<line meter="H" n="101" pattern="SSSSDS">
-<milestone n="159" source="urn:cts:latinLit:phi0690.phi003:9.805" unit="segment">segment ID 159</milestone>
-<word lemma="ni2" pos="CONsub" sy="1A">ni</word>
-<word lemma="Turnus" pos="NOMpro" sy="1T2A">Turnus</word>
-<word lemma="cedo1" pos="VER" sy="2T3A">cedat</word>
-<word lemma="Teucri" pos="NOMpro" sy="3T4A4T">Teucrorum</word>
-<word lemma="moenia" pos="NOMcom" sy="5A5b5c">moenibus</word>
-<word lemma="altus" pos="ADJqua" sy="6A6X">altis.</word>
-</line>
-<line meter="H" n="102" pattern="DSDDDS">
-<milestone n="160" source="urn:cts:latinLit:phi0690.phi002:4.350" unit="segment">segment ID 160</milestone>
-<word lemma="luctus" pos="NOMcom" sy="1A1b">luctus</word>
-<word lemma="Aristaeus" pos="NOMpro" sy="1c2A2T3A">Aristaei,</word>
-<word lemma="uitreus" pos="ADJqua" sy="3b3c4A4b">vitreisque</word>
-<word lemma="sedile" pos="NOMcom" sy="4c5A5b5c">sedilibus</word>
-<word lemma="omnis" pos="PROind" sy="6A6X">omnes</word>
-</line>
-<line meter="H" n="103" pattern="DSDSDS">
-<milestone n="161" source="urn:cts:latinLit:phi0690.phi003:9.394" unit="segment">segment ID 161</milestone>
-<word lemma="audio" pos="VER" sy="1A1b">audit</word>
-<word lemma="equus" pos="NOMcom" sy="1c2A">equos,</word>
-<word lemma="audio" pos="VER" sy="2T3A">audit</word>
-<word lemma="strepitus" pos="NOMcom" sy="3b3c4A">strepitus</word>
-<word lemma="et2" pos="CONcoo" sy="4T">et</word>
-<milestone n="162" source="urn:cts:latinLit:phi0690.phi002:4.298" unit="segment">segment ID 162</milestone>
-<word lemma="lux" pos="NOMcom" sy="5A5b">luce</word>
-<word lemma="fenestra" pos="NOMcom" sy="5c6A6X">fenestras.</word>
-</line>
-<line meter="H" n="104" pattern="DSDDDS">
-<milestone n="163" source="urn:cts:latinLit:phi0690.phi001:4.20" unit="segment">segment ID 163</milestone>
-<word lemma="misceo" pos="VER" sy="1A1b1c">mixtaque</word>
-<word lemma="rideo" pos="VER" sy="2A2T3A">ridenti</word>
-<word lemma="colocasium" pos="NOMcom" sy="3b3c4A4b4c">colocasia</word>
-<word lemma="fundo2" pos="VER" sy="5A5b">fundet</word>
-<word lemma="acanthus" pos="NOMcom" sy="5c6A6X">acantho.</word>
-</line>
-<line meter="H" n="105" pattern="DSDSDS">
-<milestone continued="true" n="164" source="urn:cts:latinLit:phi0690.phi003:2.39" unit="segment">segment ID 164</milestone>
-<word lemma="scindo" pos="VER" sy="1A1b1c">scinditur</word>
-<word lemma="incertus" pos="ADJqua" sy="2A2T3A">incertum</word>
-<word lemma="studium" mf="SY" pos="NOMcom" sy="3b3c">studia</word>
-<word lemma="in" pos="PRE" sy="4A">in</word>
-<word lemma="contrarium" pos="ADJqua" sy="4T5A5b5c">contraria</word>
-<word lemma="uulgus" pos="NOMcom" sy="6A6X">vulgus.</word>
-</line>
-<line meter="H" n="106" pattern="DSDSDS">
-<milestone n="165" source="urn:cts:latinLit:phi0690.phi003:7.509" unit="segment">segment ID 165</milestone>
-<word lemma="quadrifidus" pos="NOMcom" sy="1A1b1c2A">quadrifidam</word>
-<word lemma="quercus" pos="NOMcom" sy="2T3A">quercum</word>
-<word lemma="cuneus" pos="NOMcom" sy="3b3c4A">cuneis</word>
-<milestone n="166" source="urn:cts:latinLit:phi0690.phi003:4.476" unit="segment">segment ID 166</milestone>
-<word lemma="aggredior" pos="VER" sy="4T5A5b">adgressa</word>
-<word lemma="soror" pos="NOMcom" sy="5c6A6X">sororem</word>
-</line>
-<line meter="H" n="107" pattern="DSDSDS">
-<milestone n="167" source="urn:cts:latinLit:phi0690.phi002:2.114" unit="segment">segment ID 167</milestone>
-<word lemma="aspicio" mf="SY" pos="VER" sy="1A1b">aspice</word>
-<word lemma="et2" pos="CONcoo" sy="1c">et</word>
-<word lemma="exter" pos="ADJqua" sy="2A2T3A">extremis</word>
-<milestone n="168" source="urn:cts:latinLit:phi0690.phi003:12.426" unit="segment">segment ID 168</milestone>
-<word lemma="animus" pos="NOMcom" sy="3b3c4A">animos</word>
-<word lemma="accendo" pos="VER" sy="4T5A5b">accendit</word>
-<word lemma="in" pos="PRE" sy="5c">in</word>
-<word lemma="hostis" pos="NOMcom" sy="6A6X">hostem.</word>
-</line>
-<line meter="H" n="108" pattern="DDSSDS">
-<milestone n="169" source="urn:cts:latinLit:phi0690.phi003:6.65" unit="segment">segment ID 169</milestone>
-<word lemma="gloria" pos="NOMcom" sy="1A1b1c">gloria</word>
-<word lemma="Dardanius" pos="NOMpro" sy="2A2b2c3A">Dardaniae.</word>
-<word lemma="tu" mf="SY" pos="PROper" sy="3T">tuque,</word>
-<word lemma="o" pos="INJ" sy="4A">o</word>
-<word lemma="sanctus" pos="ADJqua" sy="4T5A5b5c">sanctissima</word>
-<word lemma="uates" pos="NOMcom" sy="6A6X">vates,</word>
-</line>
-<line meter="H" n="109" pattern="SDDSDS">
-<milestone continued="true" n="170" source="urn:cts:latinLit:phi0690.phi003:7.691" unit="segment">segment ID 170</milestone>
-<word lemma="at2" pos="CONcoo" sy="1A">At</word>
-<word lemma="Messapus" pos="NOMpro" sy="1T2A2b">Messapus,</word>
-<word lemma="equus" pos="NOMcom" sy="2c3A">equum</word>
-<word lemma="domitor" pos="NOMcom" sy="3b3c4A">domitor,</word>
-<word lemma="Neptunius" pos="ADJqua" sy="4T5A5b5c">Neptunia</word>
-<word lemma="proles" pos="NOMcom" sy="6A6X">proles,</word>
-</line>
-<line meter="H" n="110" pattern="DSSSDS">
-<milestone n="171" source="urn:cts:latinLit:phi0690.phi003:4.422" unit="segment">segment ID 171</milestone>
-<word lemma="tu" pos="PROper" sy="1A">te</word>
-<word lemma="colo2" mf="SY" pos="VER" sy="1b1c">colere,</word>
-<word lemma="arcanus" pos="NOMcom" sy="2A2T3A">arcanos</word>
-<milestone n="172" source="urn:cts:latinLit:phi0690.phi003:3.434" unit="segment">segment ID 172</milestone>
-<word lemma="si2" pos="CONsub" sy="3T">si</word>
-<word lemma="uerus" pos="ADJqua" sy="4A4T">veris</word>
-<word lemma="impleo" pos="VER" sy="5A5b">implet</word>
-<word lemma="Apollo" pos="NOMpro" sy="5c6A6X">Apollo,</word>
-</line>
+    <line n="1" meter="H" pattern="DSSDDS">
+        <milestone unit="segment" n="1" source="urn:cts:latinLit:phi0690.phi003:4.201">segment ID 1</milestone>
+        <word sy="1A1b1c2A" pos="NOMcom" lemma="excubiae">excubias</word>
+        <word sy="2T" mf="SY" pos="NOMcom" lemma="diuus1">divum</word>
+        <word sy="3A3T4A" pos="ADJqua" lemma="aeternus">aeternas,</word>
+        <word sy="4b4c5A5b" pos="NOMcom" lemma="pecus">pecudumque</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="cruor">cruore</word>
+    </line>
+    <line n="2" meter="H" pattern="SDSSDS">
+        <milestone unit="segment" n="2" source="urn:cts:latinLit:phi0690.phi002:4.357">segment ID 2</milestone>
+        <word sy="1A" pos="PROdem" lemma="hic1">huic</word>
+        <word sy="1T2A2b" pos="VER" lemma="percutio">percussa</word>
+        <word sy="2c3A" pos="ADJqua" lemma="nouus">nova</word>
+        <word sy="3T4A" pos="NOMcom" lemma="mens">mentem</word>
+        <word sy="4T5A5b5c" pos="NOMcom" lemma="formido1">formidine</word>
+        <word sy="6A6X" pos="NOMcom" lemma="mater">mater,</word>
+    </line>
+    <line n="3" meter="H" pattern="DDDSDS">
+        <milestone unit="segment" n="3" source="urn:cts:latinLit:phi0690.phi003:4.128">segment ID 3</milestone>
+        <word sy="1A1b1c" pos="VER" lemma="annuo">adnuit</word>
+        <word sy="2A2b" pos="CONcoo" lemma="atque1">atque</word>
+        <word sy="2c3A" pos="NOMcom" lemma="dolus">dolis</word>
+        <milestone unit="segment" n="4" source="urn:cts:latinLit:phi0690.phi003:1.109">segment ID 4</milestone>
+        <word sy="3b3c4A" pos="ADJqua" lemma="medius">mediis</word>
+        <word sy="" mf="SY" pos="PROrel" lemma="qui1">quae</word>
+        <word sy="4T" pos="PRE" lemma="in">in</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="fluctus">fluctibus</word>
+        <word sy="6A6X" pos="NOMcom" lemma="ara">aras</word>
+    </line>
+    <line n="4" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="5" source="urn:cts:latinLit:phi0690.phi003:2.572">segment ID 5</milestone>
+        <word sy="1A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="1b1c2A" pos="NOMpro" lemma="Danai">Danaum</word>
+        <milestone unit="segment" n="6" source="urn:cts:latinLit:phi0690.phi003:8.418">segment ID 6</milestone>
+        <word sy="2b2c" pos="NOMcom" lemma="specus">specus</word>
+        <word sy="3A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="3T4A" mf="SY" pos="NOMpro" lemma="Cyclops">Cyclopum</word>
+        <word sy="4T5A5b" pos="VER" lemma="exedo2">exesa</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="caminus">caminis</word>
+    </line>
+    <line n="5" meter="H" pattern="SDDSDS">
+        <milestone unit="segment" n="7" source="urn:cts:latinLit:phi0690.phi003:8.419" continued="true">segment ID 7</milestone>
+        <word sy="1A" mf="SY" pos="NOMcom" lemma="antrum">antra</word>
+        <word sy="1T2A2b" pos="ADJqua" lemma="Aetnaeus">Aetnaea</word>
+        <word sy="2c3A" pos="VER" lemma="tono">tonant,</word>
+        <word sy="3b3c4A" mf="SY" pos="ADJqua" lemma="ualidus">validique</word>
+        <milestone unit="segment" n="8" source="urn:cts:latinLit:phi0690.phi003:10.574">segment ID 8</milestone>
+        <word sy="4T" pos="PRE" lemma="ad2">ad</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="litus">litora</word>
+        <word sy="6A6X" pos="NOMcom" lemma="currus">currus.</word>
+    </line>
+    <line n="6" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="9" source="urn:cts:latinLit:phi0690.phi003:10.575" continued="true">segment ID 9</milestone>
+        <word sy="1A1b1c2A" pos="ADV" lemma="interea">Interea</word>
+        <word sy="2b2c3A" pos="NOMcom" lemma="biiugi">bijugis</word>
+        <word sy="3T4A" pos="VER" lemma="infero">infert</word>
+        <word sy="4T" pos="PROref" lemma="sui1">se</word>
+        <word sy="5A5b5c" pos="NOMpro" lemma="Lucagus">Lucagus</word>
+        <word sy="6A6X" pos="ADJqua" lemma="albus">albis</word>
+    </line>
+    <line n="7" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="10" source="urn:cts:latinLit:phi0690.phi001:3.68">segment ID 10</milestone>
+        <word sy="1A1b" pos="VER" lemma="pario2">Parta</word>
+        <word sy="1c2A" pos="PROpos" lemma="meus">meae</word>
+        <word sy="2b2c3A" pos="NOMpro" lemma="Uenus">Veneri</word>
+        <milestone unit="segment" n="11" source="urn:cts:latinLit:phi0690.phi003:11.196">segment ID 11</milestone>
+        <word sy="3T" pos="CONcoo" lemma="et2">et</word>
+        <word sy="4A" pos="ADVneg" lemma="non">non</word>
+        <word sy="4T5A5b5c" pos="ADJqua" lemma="felix">felicia</word>
+        <word sy="6A6X" pos="NOMcom" lemma="telum">tela.</word>
+    </line>
+    <line n="8" meter="H" pattern="DDDDDS">
+        <milestone unit="segment" n="12" source="urn:cts:latinLit:phi0690.phi003:11.259">segment ID 12</milestone>
+        <word sy="1A" pos="CONcoo" lemma="uel2">vel</word>
+        <word sy="1b1c2A" pos="NOMpro" lemma="Priamus">Priamo</word>
+        <word sy="2b2c3A3b" pos="ADJqua" lemma="miserandus">miseranda</word>
+        <word sy="3c4A" pos="NOMcom" lemma="manus1">manus;</word>
+        <milestone unit="segment" n="13" source="urn:cts:latinLit:phi0690.phi003:5.803">segment ID 13</milestone>
+        <word sy="4b4c5A5b5c" pos="NOMpro" lemma="Simois">Simoentaque</word>
+        <word sy="6A6X" pos="VER" lemma="testor">testor,</word>
+    </line>
+    <line n="9" meter="H" pattern="SSSSDS">
+        <milestone unit="segment" n="14" source="urn:cts:latinLit:phi0690.phi003:11.822">segment ID 14</milestone>
+        <word sy="1A1T" pos="PROrel" lemma="qui">quicum</word>
+        <word sy="2A2T3A" pos="VER" lemma="partior">partiri</word>
+        <word sy="3T4A" pos="NOMcom" lemma="cura">curas,</word>
+        <word sy="4T" mf="SY" pos="CONcoo" lemma="atque1">atque</word>
+        <word sy="5A" pos="PROdem" lemma="hic1">haec</word>
+        <word sy="5b5c" pos="ADV" lemma="ita">ita</word>
+        <word sy="6A6X" pos="VER" lemma="for">fatur:</word>
+    </line>
+    <line n="10" meter="H" pattern="DDSDDS">
+        <milestone unit="segment" n="15" source="urn:cts:latinLit:phi0690.phi003:9.585">segment ID 15</milestone>
+        <word sy="1A1b1c" pos="NOMcom" lemma="flumen">flumina,</word>
+        <word sy="2A2b" pos="ADJqua" lemma="pinguis">pinguis</word>
+        <word sy="2c" mf="SY" pos="ADVrel" lemma="ubi1">ubi</word>
+        <word sy="3A" pos="CONcoo" lemma="et2">et</word>
+        <milestone unit="segment" n="16" source="urn:cts:latinLit:phi0690.phi003:7.557">segment ID 16</milestone>
+        <word sy="3T4A4b" pos="VER" lemma="erro2">errare</word>
+        <word sy="4c5A5b5c" pos="ADV" lemma="licenter">licentius</word>
+        <word sy="6A6X" pos="NOMcom" lemma="aura">auras</word>
+    </line>
+    <line n="11" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="17" source="urn:cts:latinLit:phi0690.phi003:7.558" continued="true">segment ID 17</milestone>
+        <word sy="1A" pos="ADVneg" lemma="haud">haud</word>
+        <word sy="1b1c" pos="NOMcom" lemma="pater">pater</word>
+        <word sy="2A2b" pos="PROdem" lemma="ille">ille</word>
+        <word sy="2c3A" pos="VER" lemma="uolo3">velit,</word>
+        <milestone unit="segment" n="18" source="urn:cts:latinLit:phi0690.phi002:1.185">segment ID 18</milestone>
+        <word sy="3T4A4T" pos="ADJqua" lemma="ingens">ingentem</word>
+        <word sy="5A5b" pos="NOMcom" lemma="far">farris</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="aceruus">acervum</word>
+    </line>
+    <line n="12" meter="H" pattern="DSSDDS">
+        <milestone unit="segment" n="19" source="urn:cts:latinLit:phi0690.phi003:9.147">segment ID 19</milestone>
+        <word sy="1A1b1c" pos="VER" lemma="apparo2">apparat</word>
+        <word sy="2A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="2T" mf="SY" pos="PROper" lemma="ego">mecum</word>
+        <word sy="3A3T4A" pos="VER" lemma="inuado2">invadit</word>
+        <milestone unit="segment" n="20" source="urn:cts:latinLit:phi0690.phi003:2.163">segment ID 20</milestone>
+        <word sy="4b4c" pos="VER" lemma="sto">stetit.</word>
+        <word sy="5A5b5c" pos="ADJqua" lemma="impius">impius</word>
+        <word sy="6A" pos="PRE" lemma="ex">ex</word>
+        <word sy="6X" pos="PROrel" lemma="qui1">quo</word>
+    </line>
+    <line n="13" meter="H" pattern="SDSDDS">
+        <milestone unit="segment" n="21" source="urn:cts:latinLit:phi0690.phi003:8.537">segment ID 21</milestone>
+        <word sy="1A" pos="INJ" lemma="heu">heu</word>
+        <word sy="1T2A" pos="PROint" lemma="quantus2">quantae</word>
+        <word sy="2b2c3A" pos="ADJqua" lemma="miser">miseris</word>
+        <milestone unit="segment" n="22" source="urn:cts:latinLit:phi0690.phi002:2.308">segment ID 22</milestone>
+        <word sy="3T4A" pos="NOMcom" lemma="flamma">flammis</word>
+        <word sy="4b4c" pos="NOMcom" lemma="nemus">nemus</word>
+        <word sy="5A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="5b5c" pos="VER" lemma="ruo">ruit</word>
+        <word sy="6A6X" pos="ADJqua" lemma="ater">atram</word>
+    </line>
+    <line n="14" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="23" source="urn:cts:latinLit:phi0690.phi003:5.333">segment ID 23</milestone>
+        <word sy="1A1b1c" pos="VER" lemma="concido1">concidit</word>
+        <word sy="2A2T3A3b" pos="ADJqua" lemma="immundus">immundoque</word>
+        <word sy="3c4A" pos="NOMcom" lemma="fimus">fimo</word>
+        <word sy="4T5A5b" pos="ADJqua" lemma="sacer">sacroque</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="cruor">cruore.</word>
+    </line>
+    <line n="15" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="24" source="urn:cts:latinLit:phi0690.phi003:5.334" continued="true">segment ID 24</milestone>
+        <word sy="1A" pos="ADVneg" lemma="non">non</word>
+        <word sy="1b1c" pos="ADV" lemma="tamen">tamen</word>
+        <word sy="2A2b2c3A" pos="NOMpro" lemma="Euryalus">Euryali,</word>
+        <word sy="3T" pos="ADVneg" lemma="non">non</word>
+        <word sy="4A" mf="SY" pos="PROdem" lemma="ille">ille</word>
+        <milestone unit="segment" n="25" source="urn:cts:latinLit:phi0690.phi003:5.404">segment ID 25</milestone>
+        <word sy="4T5A5b5c" pos="ADJqua" lemma="ingens">ingentia</word>
+        <word sy="6A6X" pos="ADJcar" lemma="septem">septem</word>
+    </line>
+    <line n="16" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="26" source="urn:cts:latinLit:phi0690.phi003:5.405" continued="true">segment ID 26</milestone>
+        <word sy="1A1b" pos="NOMcom" lemma="tergum">terga</word>
+        <word sy="1c2A" pos="NOMcom" lemma="bos">boum</word>
+        <word sy="2T" mf="SY" pos="NOMcom" lemma="plumbum">plumbo</word>
+        <word sy="3A3T4A" pos="VER" lemma="insuo">insuto</word>
+        <milestone unit="segment" n="27" source="urn:cts:latinLit:phi0690.phi002:3.363">segment ID 27</milestone>
+        <word sy="4T5A5b" pos="NOMcom" lemma="uestis">vestesque</word>
+        <word sy="5c6A6X" pos="VER" lemma="rigesco">rigescunt</word>
+    </line>
+    <line n="17" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="28" source="urn:cts:latinLit:phi0690.phi003:5.238">segment ID 28</milestone>
+        <word sy="1A1b1c" mf="SY" pos="VER" lemma="proicio">proiciam</word>
+        <word sy="2A" pos="PRE" lemma="in">in</word>
+        <word sy="2T3A" pos="NOMcom" lemma="fluctus">fluctus</word>
+        <milestone unit="segment" n="29" source="urn:cts:latinLit:phi0690.phi003:11.281">segment ID 29</milestone>
+        <word sy="3T" pos="PRE" lemma="ad2">ad</word>
+        <word sy="4A" pos="PROper" lemma="ego">me</word>
+        <word sy="4T5A5b" pos="VER" lemma="porto">portatis</word>
+        <word sy="5c" pos="PRE" lemma="ab">ab</word>
+        <word sy="6A6X" pos="NOMcom" lemma="ora">oris</word>
+    </line>
+    <line n="18" meter="H" pattern="DDSDDS">
+        <milestone unit="segment" n="30" source="urn:cts:latinLit:phi0690.phi003:12.428">segment ID 30</milestone>
+        <word sy="1A1b1c2A" pos="VER" lemma="prouenio">proveniunt,</word>
+        <word sy="2b2c" pos="CONcoo" lemma="neque">neque</word>
+        <word sy="" mf="SY" pos="PROper" lemma="tu">te,</word>
+        <word sy="3A3T4A" pos="NOMpro" lemma="Aeneas">Aenea,</word>
+        <milestone unit="segment" n="31" source="urn:cts:latinLit:phi0690.phi003:11.599">segment ID 31</milestone>
+        <word sy="4b4c" pos="VER" lemma="fremo">fremit</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="aequor">aequore</word>
+        <word sy="6A6X" pos="PROind" lemma="totus">toto</word>
+    </line>
+    <line n="19" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="32" source="urn:cts:latinLit:phi0690.phi001:8.63">segment ID 32</milestone>
+        <word sy="1A1b1c" pos="VER" lemma="duco">ducite,</word>
+        <word sy="2A2b2c3A" pos="NOMpro" lemma="Pierides">Pierides:</word>
+        <milestone unit="segment" n="33" source="urn:cts:latinLit:phi0690.phi003:11.66">segment ID 33</milestone>
+        <word sy="3T4A4T" pos="NOMcom" lemma="obtentus">obtentu</word>
+        <word sy="5A5b" pos="NOMcom" lemma="frons2">frondis</word>
+        <word sy="5c6A6X" pos="VER" lemma="inumbro">inumbrant.</word>
+    </line>
+    <line n="20" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="34" source="urn:cts:latinLit:phi0690.phi002:3.75">segment ID 34</milestone>
+        <word sy="1A1b1c2A" pos="ADV" lemma="continuo2">continuo</word>
+        <word sy="2b2c3A" pos="NOMcom" lemma="pecus1">pecoris</word>
+        <milestone unit="segment" n="35" source="urn:cts:latinLit:phi0690.phi002:1.436">segment ID 35</milestone>
+        <word sy="3T4A" pos="VER" lemma="soluo">solvent</word>
+        <word sy="4T" pos="PRE" lemma="in">in</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="litus">litore</word>
+        <word sy="6A6X" pos="NOMcom" lemma="nauta">nautae</word>
+    </line>
+    <line n="21" meter="H" pattern="SSDSDS">
+        <milestone unit="segment" n="36" source="urn:cts:latinLit:phi0690.phi003:8.364">segment ID 36</milestone>
+        <word sy="1A" mf="SY" pos="VER" lemma="audeo">aude,</word>
+        <word sy="1T2A" pos="NOMcom" lemma="hospes">hospes,</word>
+        <word sy="2T3A3b" mf="SY" pos="VER" lemma="contemno">contemnere</word>
+        <word sy="3c4A" pos="NOMcom" lemma="ops">opes</word>
+        <word sy="4T" pos="CONcoo" lemma="et2">et</word>
+        <milestone unit="segment" n="37" source="urn:cts:latinLit:phi0690.phi003:7.784">segment ID 37</milestone>
+        <word sy="5A5b5c" pos="NOMcom" lemma="uertex">vertice</word>
+        <word sy="6A" mf="SY" pos="ADV" lemma="supra1">supra</word>
+        <word sy="6X" pos="VER" lemma="sum1">est.</word>
+    </line>
+    <line n="22" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="38" source="urn:cts:latinLit:phi0690.phi002:2.407">segment ID 38</milestone>
+        <word sy="1A1b1c2A" pos="VER" lemma="persequor">persequitur</word>
+        <word sy="2T" mf="SY" pos="NOMcom" lemma="uitis">vitem</word>
+        <word sy="3A3T4A" pos="VER" lemma="attondeo">attondens</word>
+        <word sy="4T5A5b" pos="VER" lemma="fingo">fingitque</word>
+        <word sy="5c6A6X" pos="VER" lemma="puto">putando.</word>
+    </line>
+    <line n="23" meter="H" pattern="SSSDDS">
+        <milestone unit="segment" n="39" source="urn:cts:latinLit:phi0690.phi003:5.414">segment ID 39</milestone>
+        <word sy="1A" pos="PROdem" lemma="hic1">his</word>
+        <word sy="1T" mf="SY" pos="ADJqua" lemma="magnus">magnum</word>
+        <word sy="2A2T3A" pos="NOMpro" lemma="Alcides">Alciden</word>
+        <word sy="3T4A" pos="ADV" lemma="contra1">contra</word>
+        <milestone unit="segment" n="40" source="urn:cts:latinLit:phi0690.phi003:6.108">segment ID 40</milestone>
+        <word sy="4b4c5A5b" pos="NOMcom" lemma="genitor">genitoris</word>
+        <word sy="5c" pos="CONcoo" lemma="et2">et</word>
+        <word sy="6A6X" pos="NOMcom" lemma="os1">ora</word>
+    </line>
+    <line n="24" meter="H" pattern="SSSSDS">
+        <milestone unit="segment" n="41" source="urn:cts:latinLit:phi0690.phi003:1.286">segment ID 41</milestone>
+        <word sy="1A1X2A" pos="VER" lemma="nascor">Nascetur</word>
+        <milestone unit="segment" n="42" source="urn:cts:latinLit:phi0690.phi003:12.942">segment ID 42</milestone>
+        <word sy="2T3A" pos="ADJqua" lemma="notus2">notis</word>
+        <word sy="3T4A4T" pos="VER" lemma="fulgeo">fulserunt</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="cingulum">cingula</word>
+        <word sy="6A6X" pos="NOMcom" lemma="bulla">bullis</word>
+    </line>
+    <line n="25" meter="H" pattern="SDSSDS">
+        <milestone unit="segment" n="43" source="urn:cts:latinLit:phi0690.phi003:12.943" continued="true">segment ID 43</milestone>
+        <word sy="1A1T2A" pos="NOMpro" lemma="Pallas">Pallantis</word>
+        <word sy="2b2c3A" pos="NOMcom" lemma="puer">pueri,</word>
+        <word sy="3T4A" pos="NOMcom" lemma="uinco">victum</word>
+        <word sy="4T" pos="PROrel" lemma="qui1">quem</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="uulnus">vulnere</word>
+        <word sy="6A6X" pos="NOMpro" lemma="Turnus">Turnus</word>
+    </line>
+    <line n="26" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="44" source="urn:cts:latinLit:phi0690.phi003:2.89">segment ID 44</milestone>
+        <word sy="1A1b1c2A" pos="NOMcom" lemma="concilium">conciliis,</word>
+        <word sy="2T" pos="CONcoo" lemma="et2">et</word>
+        <word sy="3A" pos="PROper" lemma="nos">nos</word>
+        <word sy="3b3c4A" pos="PROind" lemma="aliquis">aliquod</word>
+        <word sy="4T5A5b" pos="NOMcom" lemma="nomen">nomenque</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="decus">decusque</word>
+    </line>
+    <line n="27" meter="H" pattern="SSSSDS">
+        <milestone unit="segment" n="45" source="urn:cts:latinLit:phi0690.phi003:5.216">segment ID 45</milestone>
+        <word sy="1A" pos="VER" lemma="do">dat</word>
+        <word sy="1T" mf="SY" pos="NOMcom" lemma="tectum">tecto</word>
+        <word sy="2A2T3A" pos="ADJqua" lemma="ingens">ingentem,</word>
+        <milestone unit="segment" n="46" source="urn:cts:latinLit:phi0690.phi003:1.690">segment ID 46</milestone>
+        <word sy="3T4A" pos="VER" lemma="gaudeo">gaudens</word>
+        <word sy="4T5A5b" pos="VER" lemma="incedo1">incedit</word>
+        <word sy="5c6A6X" pos="NOMpro" lemma="Iulus">Iuli.</word>
+    </line>
+    <line n="28" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="47" source="urn:cts:latinLit:phi0690.phi003:1.469">segment ID 47</milestone>
+        <word sy="1A" pos="CONcoo" lemma="nec2">Nec</word>
+        <word sy="1b1c" pos="ADV" lemma="procul">procul</word>
+        <word sy="2A" pos="ADV" lemma="hinc">hinc</word>
+        <word sy="2T3A" pos="NOMpro" lemma="Rhesus">Rhesi</word>
+        <word sy="3b3c4A" pos="ADJqua" lemma="niueus">niveis</word>
+        <milestone unit="segment" n="48" source="urn:cts:latinLit:phi0690.phi002:4.340">segment ID 48</milestone>
+        <word sy="4T5A5b" pos="VER" lemma="experior">experta</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="labor1">labores,</word>
+    </line>
+    <line n="29" meter="H" pattern="SDSSDS">
+        <milestone unit="segment" n="49" source="urn:cts:latinLit:phi0690.phi002:4.341" continued="true">segment ID 49</milestone>
+        <word sy="1A1T" mf="SY" pos="NOMpro" lemma="Clio">Clioque</word>
+        <word sy="2A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="2b2c3A" pos="NOMpro" lemma="Beroe">Beroe</word>
+        <milestone unit="segment" n="50" source="urn:cts:latinLit:phi0690.phi003:7.396">segment ID 50</milestone>
+        <word sy="3T4A4T" pos="VER" lemma="incingo">incinctae</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="pellis">pellibus</word>
+        <word sy="6A6X" pos="NOMcom" lemma="hasta">hastas.</word>
+    </line>
+    <line n="30" meter="H" pattern="SSSSDS">
+        <milestone unit="segment" n="51" source="urn:cts:latinLit:phi0690.phi003:12.899">segment ID 51</milestone>
+        <word sy="1A" pos="ADV" lemma="uix">vix</word>
+        <word sy="1T2A" pos="PROdem" lemma="ille">illum</word>
+        <word sy="2T3A" pos="VER" lemma="lectus1">lecti</word>
+        <word sy="3T" pos="ADJadv.mul" lemma="bis">bis</word>
+        <word sy="4A" pos="ADJcar" lemma="sex">sex</word>
+        <milestone unit="segment" n="52" source="urn:cts:latinLit:phi0690.phi003:4.523">segment ID 52</milestone>
+        <word sy="4T" pos="CONcoo" lemma="et2">et</word>
+        <word sy="5A5b" pos="ADJqua" lemma="saeuus">saeva</word>
+        <word sy="5c6A6X" pos="VER" lemma="quiesco">quierant</word>
+    </line>
+    <line n="31" meter="H" pattern="SDSDDS">
+        <milestone unit="segment" n="53" source="urn:cts:latinLit:phi0690.phi003:2.99">segment ID 53</milestone>
+        <word sy="1A" pos="PRE" lemma="in">in</word>
+        <word sy="1T" mf="SY" pos="NOMcom" lemma="uulgus">vulgum</word>
+        <word sy="2A2b2c3A" pos="ADJqua" lemma="ambiguus">ambiguas</word>
+        <milestone unit="segment" n="54" source="urn:cts:latinLit:phi0690.phi003:8.229">segment ID 54</milestone>
+        <word sy="3T" pos="ADV" lemma="huc">huc</word>
+        <word sy="4A4b" pos="NOMcom" lemma="os1">ora</word>
+        <word sy="4c5A5b" pos="VER" lemma="fero">ferebat</word>
+        <word sy="5c" pos="CONcoo" lemma="et2">et</word>
+        <word sy="6A6X" pos="ADV" lemma="illuc">illuc,</word>
+    </line>
+    <line n="32" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="55" source="urn:cts:latinLit:phi0690.phi003:8.230" continued="true">segment ID 55</milestone>
+        <word sy="1A1b1c" pos="NOMcom" lemma="dens">dentibus</word>
+        <word sy="2A2T3A" pos="VER" lemma="infrendeo">infrendens.</word>
+        <word sy="3T" pos="ADJadv.mul" lemma="ter">ter</word>
+        <word sy="4A4T" pos="PROind" lemma="totus">totum</word>
+        <word sy="5A5b5c" pos="ADJqua" lemma="feruidus">fervidus</word>
+        <word sy="6A6X" pos="NOMcom" lemma="ira">ira</word>
+    </line>
+    <line n="33" meter="H" pattern="SDDSDS">
+        <milestone unit="segment" n="56" source="urn:cts:latinLit:phi0690.phi003:12.793">segment ID 56</milestone>
+        <word sy="1A" pos="PROint" lemma="quis1">‘quae</word>
+        <word sy="1T" pos="ADV" lemma="iam">jam</word>
+        <word sy="2A2b" pos="NOMcom" lemma="finis">finis</word>
+        <word sy="2c3A" pos="VER" lemma="sum1">erit,</word>
+        <milestone unit="segment" n="57" source="urn:cts:latinLit:phi0690.phi002:2.149">segment ID 57</milestone>
+        <word sy="3b3c4A4T" pos="ADJqua" lemma="alienus2">alienis</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="mensis">mensibus</word>
+        <word sy="6A6X" pos="NOMcom" lemma="aestas">aestas:</word>
+    </line>
+    <line n="34" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="58" source="urn:cts:latinLit:phi0690.phi003:11.469">segment ID 58</milestone>
+        <word sy="1A1b1c" mf="SY" pos="NOMcom" lemma="concilium">concilium</word>
+        <word sy="2A2b" pos="PROdem" lemma="ipse">ipse</word>
+        <word sy="2c3A" pos="NOMcom" lemma="pater">pater</word>
+        <word sy="3T" pos="CONcoo" lemma="et2">et</word>
+        <word sy="4A" mf="SY" pos="ADJqua" lemma="magnus">magna</word>
+        <word sy="4T5A5b" pos="NOMcom" lemma="inceptum">incepta</word>
+        <word sy="5c6A6X" pos="NOMpro" lemma="Latinus">Latinus</word>
+    </line>
+    <line n="35" meter="H" pattern="DDSDDS">
+        <milestone unit="segment" n="59" source="urn:cts:latinLit:phi0690.phi001:1.60">segment ID 59</milestone>
+        <word sy="1A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="1b1c" pos="NOMcom" lemma="fretum">freta</word>
+        <word sy="2A2b2c3A" pos="VER" lemma="destituo">destituent</word>
+        <word sy="3T4A" pos="ADJqua" lemma="nudus">nudos</word>
+        <milestone unit="segment" n="60" source="urn:cts:latinLit:phi0690.phi003:2.741">segment ID 60</milestone>
+        <word sy="4b4c5A5b" pos="NOMcom" lemma="animus">animumve</word>
+        <word sy="5c6A6X" pos="VER" lemma="reflecto">reflexi</word>
+    </line>
+    <line n="36" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="61" source="urn:cts:latinLit:phi0690.phi003:2.742" continued="true">segment ID 61</milestone>
+        <word sy="1A" pos="ADVint" lemma="quis1">quam</word>
+        <word sy="1b1c" mf="SY" pos="NOMcom" lemma="tumulus">tumulum</word>
+        <word sy="2A2T3A" pos="ADJqua" lemma="antiquus">antiquae</word>
+        <word sy="3b3c4A" pos="NOMpro" lemma="Ceres">Cereris</word>
+        <word sy="4T5A5b" pos="NOMcom" lemma="sedes">sedemque</word>
+        <word sy="5c6A6X" pos="ADJqua" lemma="sacro">sacratam</word>
+    </line>
+    <line n="37" meter="H" pattern="DDDSDS">
+        <milestone unit="segment" n="62" source="urn:cts:latinLit:phi0690.phi003:9.564">segment ID 62</milestone>
+        <word sy="1A1b1c" pos="VER" lemma="tollo">sustulit</word>
+        <word sy="2A2b" pos="ADJqua" lemma="altus">alta</word>
+        <word sy="2c3A" pos="VER" lemma="peto">petens</word>
+        <word sy="3b3c4A" pos="NOMcom" lemma="pes">pedibus</word>
+        <milestone unit="segment" n="63" source="urn:cts:latinLit:phi0690.phi003:3.490">segment ID 63</milestone>
+        <word sy="4T" pos="ADV" lemma="sic">sic</word>
+        <word sy="5A5b" pos="NOMcom" lemma="os1">ora</word>
+        <word sy="5c6A6X" pos="VER" lemma="fero">ferebat;</word>
+    </line>
+    <line n="38" meter="H" pattern="SSDSDS">
+        <milestone unit="segment" n="64" source="urn:cts:latinLit:phi0690.phi003:6.317">segment ID 64</milestone>
+        <word sy="1A1T2A" pos="NOMpro" lemma="Aeneas">Aeneas</word>
+        <word sy="2T3A3b" pos="VER" lemma="miror">miratus</word>
+        <word sy="3c4A" pos="CONcoo" lemma="enim2">enim</word>
+        <word sy="4T5A5b" pos="NOMcom" lemma="moueo">motusque</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="tumultus">tumultu</word>
+    </line>
+    <line n="39" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="65" source="urn:cts:latinLit:phi0690.phi003:6.318" continued="true">segment ID 65</milestone>
+        <word sy="1A" pos="VER" lemma="dico2">‘dic,'</word>
+        <word sy="1b1c" pos="VER" lemma="aio">ait,</word>
+        <word sy="2A" pos="INJ" lemma="o">‘o</word>
+        <word sy="2T3A" pos="NOMcom" lemma="uirgo">virgo,</word>
+        <word sy="3T" pos="PROint" lemma="quis1">quid</word>
+        <word sy="4A" pos="VER" lemma="uolo3">vult</word>
+        <milestone unit="segment" n="66" source="urn:cts:latinLit:phi0690.phi003:5.431">segment ID 66</milestone>
+        <word sy="4X" pos="CONcoo" lemma="sed">sed</word>
+        <word sy="5A5b" pos="ADJqua" lemma="tardus">tarda</word>
+        <word sy="5c6A6X" pos="VER" lemma="tremo">trementi</word>
+    </line>
+    <line n="40" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="67" source="urn:cts:latinLit:phi0690.phi003:5.432" continued="true">segment ID 67</milestone>
+        <word sy="1A1b" pos="NOMcom" lemma="genu">genua</word>
+        <word sy="1c2A" pos="VER" lemma="labo">labant,</word>
+        <milestone unit="segment" n="68" source="urn:cts:latinLit:phi0690.phi003:12.762">segment ID 68</milestone>
+        <word sy="2T3A" pos="NOMcom" lemma="urbs">urbem</word>
+        <word sy="3b3c4A" pos="VER" lemma="minitor">minitans</word>
+        <word sy="4T" pos="CONcoo" lemma="et2">et</word>
+        <word sy="5A5b5c" pos="ADJqua" lemma="saucius">saucius</word>
+        <word sy="6A6X" pos="VER" lemma="insto">instat.</word>
+    </line>
+    <line n="41" meter="H" pattern="DDSDDS">
+        <milestone unit="segment" n="69" source="urn:cts:latinLit:phi0690.phi003:7.347">segment ID 69</milestone>
+        <word sy="1A1b1c" pos="VER" lemma="conicio">conicit,</word>
+        <word sy="2A2b" pos="PRE" lemma="in">inque</word>
+        <word sy="2c3A" pos="NOMcom" lemma="sinus">sinum</word>
+        <word sy="3T4A4b" mf="SY" pos="NOMcom" lemma="praecordia">praecordia</word>
+        <word sy="4c" pos="PRE" lemma="ad2">ad</word>
+        <word sy="5A5b5c" pos="ADJqua" lemma="interior2">intima</word>
+        <word sy="6A6X" pos="VER" lemma="subdo">subdit,</word>
+    </line>
+    <line n="42" meter="H" pattern="SDDSDS">
+        <milestone unit="segment" n="70" source="urn:cts:latinLit:phi0690.phi003:5.195">segment ID 70</milestone>
+        <word sy="1A" mf="SY" pos="ADVrel" lemma="quamquam1">(quamquam</word>
+        <word sy="1T" pos="INJ" lemma="o">o!</word>
+        <word sy="2A" pos="CONcoo" lemma="sed">sed</word>
+        <word sy="2b2c3A" pos="VER" lemma="supero">superent</word>
+        <word sy="3b3c" pos="PROint" lemma="qui1">quibus</word>
+        <word sy="4A" pos="PROdem" lemma="hic1">hoc,</word>
+        <milestone unit="segment" n="71" source="urn:cts:latinLit:phi0690.phi003:7.705">segment ID 71</milestone>
+        <word sy="4T" pos="PRE" lemma="ad2">ad</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="litus">litora</word>
+        <word sy="6A6X" pos="NOMcom" lemma="nubes">nubem.</word>
+    </line>
+    <line n="43" meter="H" pattern="DSSDDS">
+        <milestone unit="segment" n="72" source="urn:cts:latinLit:phi0690.phi003:7.706" continued="true">segment ID 72</milestone>
+        <word sy="1A1b" pos="INJ" lemma="ecce">Ecce</word>
+        <word sy="1c2A2T3A" pos="NOMpro" lemma="Sabini">Sabinorum</word>
+        <word sy="3T4A" pos="ADJqua" lemma="priscus">prisco</word>
+        <milestone unit="segment" n="73" source="urn:cts:latinLit:phi0690.phi003:1.666">segment ID 73</milestone>
+        <word sy="4b4c" pos="PROpos" lemma="tuus">tua</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="numen">numina</word>
+        <word sy="6A6X" pos="VER" lemma="posco">posco.</word>
+    </line>
+    <line n="44" meter="H" pattern="SDSSDS">
+        <milestone unit="segment" n="74" source="urn:cts:latinLit:phi0690.phi003:1.348">segment ID 74</milestone>
+        <word sy="1A" pos="PROrel" lemma="qui1">Quos</word>
+        <word sy="1T2A" pos="PRE" lemma="inter">inter</word>
+        <word sy="2b2c3A" pos="ADJqua" lemma="medius">medius</word>
+        <milestone unit="segment" n="75" source="urn:cts:latinLit:phi0690.phi003:8.658">segment ID 75</milestone>
+        <word sy="3T" pos="CONcoo" lemma="et2">et</word>
+        <word sy="4A4T" pos="NOMcom" lemma="donum">dono</word>
+        <word sy="5A5b" pos="NOMcom" lemma="nox">noctis</word>
+        <word sy="5c6A6X" pos="ADJqua" lemma="opacus">opacae.</word>
+    </line>
+    <line n="45" meter="H" pattern="DSSDDS">
+        <milestone unit="segment" n="76" source="urn:cts:latinLit:phi0690.phi003:11.311">segment ID 76</milestone>
+        <word sy="1A" mf="SY" pos="PRE" lemma="ante2">ante</word>
+        <word sy="1b1c2A" pos="NOMcom" lemma="oculus">oculos</word>
+        <milestone unit="segment" n="77" source="urn:cts:latinLit:phi0690.phi002:1.249">segment ID 77</milestone>
+        <word sy="2T3A" pos="PROper" lemma="nos">nobis</word>
+        <word sy="3T4A4b" pos="NOMpro" lemma="Aurora">Aurora</word>
+        <word sy="4c5A5b" pos="NOMcom" lemma="dies">diemque</word>
+        <word sy="5c6A6X" pos="VER" lemma="reduco">reducit,</word>
+    </line>
+    <line n="46" meter="H" pattern="SSSSDS">
+        <milestone unit="segment" n="78" source="urn:cts:latinLit:phi0690.phi002:3.297">segment ID 78</milestone>
+        <word sy="1A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="1T2A" pos="ADJqua" lemma="multus">multa</word>
+        <word sy="2T3A" pos="ADJqua" lemma="durus">duram</word>
+        <milestone unit="segment" n="79" source="urn:cts:latinLit:phi0690.phi001:1.39">segment ID 79</milestone>
+        <word sy="3T" mf="SY" pos="PROdem" lemma="ipse">ipsa</word>
+        <word sy="4A" pos="PROdem" lemma="hic1">haec</word>
+        <word sy="4T5A5b" pos="NOMcom" lemma="arbustum">arbusta</word>
+        <word sy="5c6A6X" pos="VER" lemma="uoco">vocabant.</word>
+    </line>
+    <line n="47" meter="H" pattern="SSSSDS">
+        <milestone unit="segment" n="80" source="urn:cts:latinLit:phi0690.phi003:5.282">segment ID 80</milestone>
+        <word sy="1A1T" mf="SY" pos="NOMpro" lemma="Sergestus">Sergestum</word>
+        <word sy="2A2T3A" pos="NOMpro" lemma="Aeneas">Aeneas</word>
+        <word sy="3T4A4T" pos="VER" lemma="promitto">promisso</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="munus">munere</word>
+        <word sy="6A6X" pos="VER" lemma="dono">donat</word>
+    </line>
+    <line n="48" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="81" source="urn:cts:latinLit:phi0690.phi003:10.861">segment ID 81</milestone>
+        <word sy="1A1b" pos="NOMpro" lemma="Rhaebus">‘Rhaebe,</word>
+        <word sy="1c2A" pos="ADV" lemma="diu">diu,</word>
+        <word sy="2T" pos="NOMcom" lemma="res">res</word>
+        <milestone unit="segment" n="82" source="urn:cts:latinLit:phi0690.phi003:1.418">segment ID 82</milestone>
+        <word sy="3A3b3c4A" pos="ADV" lemma="interea">interea,</word>
+        <word sy="4T" pos="ADVrel" lemma="qua1">qua</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="semita">semita</word>
+        <word sy="6A6X" pos="VER" lemma="monstro">monstrat.</word>
+    </line>
+    <line n="49" meter="H" pattern="SSSSDS">
+        <milestone unit="segment" n="83" source="urn:cts:latinLit:phi0690.phi003:1.419" continued="true">segment ID 83</milestone>
+        <word sy="1A" mf="SY" pos="ADV" lemma="iam">Jamque</word>
+        <word sy="1T2A2T3A" pos="VER" lemma="ascendo">ascendebant</word>
+        <word sy="3T4A" pos="NOMcom" lemma="collis">collem,</word>
+        <word sy="4T" pos="PROrel" lemma="qui1">qui</word>
+        <word sy="5A5b5c" pos="ADJqua" lemma="multus">plurimus</word>
+        <word sy="6A6X" pos="NOMcom" lemma="urbs">urbi</word>
+    </line>
+    <line n="50" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="84" source="urn:cts:latinLit:phi0690.phi003:5.565">segment ID 84</milestone>
+        <word sy="1A1b1c2A" pos="NOMcom" lemma="progenies">progenies,</word>
+        <word sy="2T3A" mf="SY" pos="VER" lemma="augeo">auctura</word>
+        <word sy="3b3c4A" pos="NOMpro" lemma="Itali">Italos;</word>
+        <word sy="4T" pos="PROrel" lemma="qui1">quem</word>
+        <word sy="5A5b5c" pos="ADJqua" lemma="Thracius">Thracius</word>
+        <word sy="6A6X" pos="ADJqua" lemma="albus">albis</word>
+    </line>
+    <line n="51" meter="H" pattern="SSDSDS">
+        <milestone unit="segment" n="85" source="urn:cts:latinLit:phi0690.phi003:6.468">segment ID 85</milestone>
+        <word sy="1A1T2A" pos="VER" lemma="lenio">lenibat</word>
+        <word sy="2T3A" pos="NOMcom" lemma="dictum">dictis</word>
+        <word sy="3b3c4A" pos="NOMcom" lemma="animus">animum</word>
+        <milestone unit="segment" n="86" source="urn:cts:latinLit:phi0690.phi002:3.109">segment ID 86</milestone>
+        <word sy="4T5A5b" mf="SY" pos="VER" lemma="assurgo">adsurgere</word>
+        <word sy="5c" pos="PRE" lemma="in">in</word>
+        <word sy="6A6X" pos="NOMcom" lemma="aura">auras.</word>
+    </line>
+    <line n="52" meter="H" pattern="SSDDDS">
+        <milestone unit="segment" n="87" source="urn:cts:latinLit:phi0690.phi001:7.62">segment ID 87</milestone>
+        <word sy="1A1T2A" pos="ADJqua" lemma="formosus">formosae</word>
+        <word sy="2T3A" pos="NOMcom" lemma="myrtus">myrtus</word>
+        <word sy="3b3c4A" pos="NOMpro" lemma="Uenus">Veneri,</word>
+        <word sy="4b4c" pos="PROpos.ref" lemma="suus">sua</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="laurea">laurea</word>
+        <word sy="6A6X" pos="NOMpro" lemma="Phoebus">Phoebo,</word>
+    </line>
+    <line n="53" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="88" source="urn:cts:latinLit:phi0690.phi003:5.316">segment ID 88</milestone>
+        <word sy="1A1b1c2A" pos="VER" lemma="corripio">corripiunt</word>
+        <word sy="2b2c" mf="SY" pos="NOMcom" lemma="spatium">spatia</word>
+        <word sy="3A3T4A" pos="VER" lemma="audio">audito</word>
+        <milestone unit="segment" n="89" source="urn:cts:latinLit:phi0690.phi003:6.196">segment ID 89</milestone>
+        <word sy="4T" pos="ADVneg" lemma="ne3">ne</word>
+        <word sy="5A5b5c" pos="VER" lemma="deficio">defice</word>
+        <word sy="6A6X" pos="NOMcom" lemma="res">rebus,</word>
+    </line>
+    <line n="54" meter="H" pattern="DSDDDS">
+        <milestone unit="segment" n="90" source="urn:cts:latinLit:phi0690.phi003:6.879">segment ID 90</milestone>
+        <word sy="1A1b1c" pos="NOMcom" lemma="dextera">dextera!</word>
+        <word sy="2A" pos="ADVneg" lemma="non">non</word>
+        <milestone unit="segment" n="91" source="urn:cts:latinLit:phi0690.phi001:7.20">segment ID 91</milestone>
+        <word sy="2T3A" pos="PROdem" lemma="ille">illos</word>
+        <word sy="3b3c4A4b" pos="VER" lemma="refero">referebat</word>
+        <word sy="4c" pos="PRE" lemma="in">in</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="ordo">ordine</word>
+        <word sy="6A6X" pos="NOMpro" lemma="Thyrsis">Thyrsis.</word>
+    </line>
+    <line n="55" meter="H" pattern="SSSDDS">
+        <milestone unit="segment" n="92" source="urn:cts:latinLit:phi0690.phi003:8.347">segment ID 92</milestone>
+        <word sy="1A" pos="ADV" lemma="hinc">hinc</word>
+        <word sy="1T" pos="PRE" lemma="ad2">ad</word>
+        <word sy="2A2T3A" pos="NOMpro" lemma="Tarpeia">Tarpejam</word>
+        <word sy="3T" mf="SY" pos="NOMcom" lemma="sedes">sedem</word>
+        <word sy="4A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="4b4c5A5b5c" pos="NOMpro" lemma="Capitolium">Capitolia</word>
+        <word sy="6A6X" pos="VER" lemma="duco">ducit</word>
+    </line>
+    <line n="56" meter="H" pattern="SDSSDS">
+        <milestone unit="segment" n="93" source="urn:cts:latinLit:phi0690.phi002:1.423">segment ID 93</milestone>
+        <word sy="1A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="1T2A" pos="ADJqua" lemma="laetus2">laetae</word>
+        <word sy="2b2c3A" pos="NOMcom" lemma="pecus2">pecudes</word>
+        <milestone unit="segment" n="94" source="urn:cts:latinLit:phi0690.phi003:10.27">segment ID 94</milestone>
+        <word sy="3T" pos="CONcoo" lemma="nec2">nec</word>
+        <word sy="4A" pos="ADVneg" lemma="non">non</word>
+        <word sy="4T5A5b5c" pos="NOMcom" lemma="exercitus1">exercitus</word>
+        <word sy="6A6X" pos="PROind" lemma="alter">alter,</word>
+    </line>
+    <line n="57" meter="H" pattern="SSDSDS">
+        <milestone unit="segment" n="95" source="urn:cts:latinLit:phi0690.phi003:2.356">segment ID 95</milestone>
+        <word sy="1A1T2A" pos="NOMcom" lemma="raptor">raptores</word>
+        <word sy="2T" mf="SY" pos="ADJqua" lemma="ater">atra</word>
+        <word sy="3A" pos="PRE" lemma="in">in</word>
+        <word sy="3b3c4A" pos="NOMcom" lemma="nebula">nebula,</word>
+        <word sy="4T" pos="PROrel" lemma="quis1">quos</word>
+        <word sy="5A5b5c" pos="ADJqua" lemma="improbus">improba</word>
+        <word sy="6A6X" pos="NOMcom" lemma="uenter">ventris</word>
+    </line>
+    <line n="58" meter="H" pattern="SSSDDS">
+        <milestone unit="segment" n="96" source="urn:cts:latinLit:phi0690.phi003:9.511">segment ID 96</milestone>
+        <word sy="1A1T2A" pos="ADJqua" lemma="assuetus">adsueti</word>
+        <milestone unit="segment" n="97" source="urn:cts:latinLit:phi0690.phi001:10.2">segment ID 97</milestone>
+        <word sy="2T3A" pos="NOMpro" lemma="Gallus">Gallo,</word>
+        <word sy="3T" pos="CONcoo" lemma="sed">sed</word>
+        <word sy="4A" pos="PROrel" lemma="qui1">quae</word>
+        <word sy="4b4c" pos="VER" lemma="lego2">legat</word>
+        <word sy="5A5b" pos="PROdem" lemma="ipse">ipsa</word>
+        <word sy="5c6A6X" pos="NOMpro" lemma="Lycoris">Lycoris,</word>
+    </line>
+    <line n="59" meter="H" pattern="SSDSDS">
+        <milestone unit="segment" n="98" source="urn:cts:latinLit:phi0690.phi003:4.188">segment ID 98</milestone>
+        <word sy="1A" pos="ADV" lemma="tam">tam</word>
+        <word sy="1T2A" pos="ADJqua" lemma="fictus">ficti</word>
+        <word sy="2T3A3b" pos="ADJqua" lemma="prauus">pravique</word>
+        <word sy="3c4A" pos="ADJqua" lemma="tenax">tenax</word>
+        <word sy="4T" pos="ADVrel" lemma="quam1">quam</word>
+        <word sy="5A5b5c" pos="ADJqua" lemma="nuntius2">nuntia</word>
+        <word sy="6A6X" pos="NOMcom" lemma="uerum1">veri.</word>
+    </line>
+    <line n="60" meter="H" pattern="SSDSDS">
+        <milestone unit="segment" n="99" source="urn:cts:latinLit:phi0690.phi003:4.189" continued="true">segment ID 99</milestone>
+        <word sy="1A" pos="PROdem" lemma="hic1">haec</word>
+        <word sy="1T" pos="ADV" lemma="tum">tum</word>
+        <milestone unit="segment" n="100" source="urn:cts:latinLit:phi0690.phi003:12.93">segment ID 100</milestone>
+        <word sy="2A2T3A" pos="VER" lemma="asto">astabat,</word>
+        <word sy="3b3c4A" pos="ADJqua" lemma="ualidus">validam</word>
+        <word sy="4T" pos="NOMcom" lemma="uis">vi</word>
+        <word sy="5A5b5c" pos="VER" lemma="corripio">corripit</word>
+        <word sy="6A6X" pos="NOMcom" lemma="hasta">hastam,</word>
+    </line>
+    <line n="61" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="101" source="urn:cts:latinLit:phi0690.phi003:6.304">segment ID 101</milestone>
+        <word sy="1A" pos="ADV" lemma="iam">jam</word>
+        <word sy="1b1c2A" pos="ADJqua" lemma="senex2">senior,</word>
+        <word sy="2T" pos="CONcoo" lemma="sed">sed</word>
+        <word sy="3A3b" pos="ADJqua" lemma="crudus">cruda</word>
+        <word sy="3c4A" pos="NOMcom" lemma="deus">deo</word>
+        <milestone unit="segment" n="102" source="urn:cts:latinLit:phi0690.phi003:11.618">segment ID 102</milestone>
+        <word sy="4T5A5b" pos="VER" lemma="uerto">versique</word>
+        <word sy="5c6A6X" pos="NOMpro" lemma="Latini">Latini</word>
+    </line>
+    <line n="62" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="103" source="urn:cts:latinLit:phi0690.phi003:11.619" continued="true">segment ID 103</milestone>
+        <word sy="1A1b1c2A" pos="VER" lemma="reicio">reiciunt</word>
+        <word sy="2T3A" pos="NOMcom" lemma="parma">parmas</word>
+        <word sy="3b" pos="CONcoo" lemma="et2">et</word>
+        <word sy="3c4A" pos="NOMcom" lemma="equus">equos</word>
+        <word sy="4T" pos="PRE" lemma="ad2">ad</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="moenia">moenia</word>
+        <word sy="6A6X" pos="VER" lemma="uerto">vertunt;</word>
+    </line>
+    <line n="63" meter="H" pattern="DSDDDS">
+        <milestone unit="segment" n="104" source="urn:cts:latinLit:phi0690.phi003:11.781">segment ID 104</milestone>
+        <word sy="1A1b" pos="ADJqua" lemma="caecus">caeca</word>
+        <word sy="1c2A2T3A" pos="VER" lemma="sequor">sequebatur</word>
+        <milestone unit="segment" n="105" source="urn:cts:latinLit:phi0690.phi003:9.738">segment ID 105</milestone>
+        <word sy="3b3c4A" pos="ADJqua" lemma="patrius">patriis</word>
+        <word sy="4b4c" mf="SY" pos="ADJqua" lemma="medius">media</word>
+        <word sy="5A5b5c" pos="NOMpro" lemma="Ardea">Ardea</word>
+        <word sy="6A6X" pos="NOMpro" lemma="Turnus">Turnum.</word>
+    </line>
+    <line n="64" meter="H" pattern="SSDDDS">
+        <milestone unit="segment" n="106" source="urn:cts:latinLit:phi0690.phi003:4.40">segment ID 106</milestone>
+        <word sy="1A" pos="ADV" lemma="hinc">hinc</word>
+        <word sy="1T2A" mf="SY" pos="ADJqua" lemma="Gaetulus">Gaetulae</word>
+        <word sy="2T3A" pos="NOMcom" lemma="urbs">urbes,</word>
+        <word sy="3b3c" pos="NOMcom" lemma="genus1">genus</word>
+        <milestone unit="segment" n="107" source="urn:cts:latinLit:phi0690.phi003:11.300">segment ID 107</milestone>
+        <word sy="4A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="4b4c" mf="SY" pos="ADJqua" lemma="trepidus">trepida</word>
+        <word sy="5A5b" pos="NOMcom" lemma="os1">ora</word>
+        <word sy="5c6A6X" pos="VER" lemma="queo">quierunt,</word>
+    </line>
+    <line n="65" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="108" source="urn:cts:latinLit:phi0690.phi003:4.371">segment ID 108</milestone>
+        <word sy="1A" pos="PROrel" lemma="qui1">quae</word>
+        <word sy="1b1c" pos="PROrel" lemma="qui1">quibus</word>
+        <word sy="2A2b2c3A" pos="VER" lemma="antefero">anteferam?</word>
+        <word sy="3T" pos="ADV" lemma="iam">jam</word>
+        <word sy="4A" pos="ADV" lemma="iam">jam</word>
+        <word sy="4T" pos="CONcoo" lemma="nec2">nec</word>
+        <milestone unit="segment" n="109" source="urn:cts:latinLit:phi0690.phi002:1.374">segment ID 109</milestone>
+        <word sy="5A5b5c" pos="NOMcom" lemma="uallis">vallibus</word>
+        <word sy="6A6X" pos="ADJqua" lemma="inferus">imis</word>
+    </line>
+    <line n="66" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="110" source="urn:cts:latinLit:phi0690.phi002:1.375" continued="true">segment ID 110</milestone>
+        <word sy="1A1b1c2A" pos="ADJqua" lemma="aerius">aeriae</word>
+        <word sy="2T3A3b" pos="VER" lemma="fugio">fugere</word>
+        <word sy="3c4A" pos="NOMcom" lemma="grus">grues,</word>
+        <word sy="4T" pos="CONcoo" lemma="aut">aut</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="bucula">bucula</word>
+        <word sy="6A6X" pos="NOMcom" lemma="caelum1">caelum</word>
+    </line>
+    <line n="67" meter="H" pattern="DDDSDS">
+        <milestone unit="segment" n="111" source="urn:cts:latinLit:phi0690.phi002:4.197">segment ID 111</milestone>
+        <word sy="1A" mf="SY" pos="PROdem" lemma="ille">Illum</word>
+        <word sy="1b1c2A" pos="ADV" lemma="adeo2">adeo</word>
+        <word sy="2b2c3A" mf="SY" pos="VER" lemma="placeo">placuisse</word>
+        <word sy="3b3c4A" pos="NOMcom" lemma="apis">apibus</word>
+        <milestone unit="segment" n="112" source="urn:cts:latinLit:phi0690.phi003:5.258">segment ID 112</milestone>
+        <word sy="4T5A5b" pos="NOMcom" lemma="uirtus">virtute</word>
+        <word sy="5c6A6X" pos="ADJqua" lemma="secundum2">secundum,</word>
+    </line>
+    <line n="68" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="113" source="urn:cts:latinLit:phi0690.phi002:4.348">segment ID 113</milestone>
+        <word sy="1A1b1c" pos="NOMcom" lemma="carmen1">carmine</word>
+        <word sy="2A" pos="PROrel" lemma="qui1">quo</word>
+        <word sy="2T3A" pos="VER" lemma="capio2">captae</word>
+        <milestone unit="segment" n="114" source="urn:cts:latinLit:phi0690.phi003:12.949">segment ID 114</milestone>
+        <word sy="3b3c4A" mf="SY" pos="ADJqua" lemma="sceleratus">scelerato</word>
+        <word sy="4T" pos="PRE" lemma="ex">ex</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="sanguis">sanguine</word>
+        <word sy="6A6X" pos="VER" lemma="sumo">sumit.'</word>
+    </line>
+    <line n="69" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="115" source="urn:cts:latinLit:phi0690.phi003:2.56">segment ID 115</milestone>
+        <word sy="1A1b1c" pos="NOMpro" lemma="Troia">Trojaque</word>
+        <word sy="2A" pos="ADV" lemma="nunc">nunc</word>
+        <word sy="2T3A" pos="VER" lemma="sto">staret,</word>
+        <word sy="3b3c4A" mf="SY" pos="NOMpro" lemma="Priamus">Priamique</word>
+        <milestone unit="segment" n="116" source="urn:cts:latinLit:phi0690.phi002:2.475">segment ID 116</milestone>
+        <word sy="4T" mf="SY" pos="PRE" lemma="ante2">ante</word>
+        <word sy="5A5b5c" pos="PROind" lemma="omnis">omnia</word>
+        <word sy="6A6X" pos="NOMpro" lemma="Musa">Musae,</word>
+    </line>
+    <line n="70" meter="H" pattern="DDDSDS">
+        <milestone unit="segment" n="117" source="urn:cts:latinLit:phi0690.phi003:5.483">segment ID 117</milestone>
+        <word sy="1A" pos="PROdem" lemma="hic1">‘hanc</word>
+        <word sy="1b" mf="SY" pos="PROper" lemma="tu">tibi,</word>
+        <word sy="1c2A" pos="NOMpro" lemma="Eryx">Eryx,</word>
+        <word sy="2b2c3A" mf="SY" pos="ADJqua" lemma="bonus">meliorem</word>
+        <word sy="3b3c4A" pos="NOMcom" lemma="anima">animam</word>
+        <milestone unit="segment" n="118" source="urn:cts:latinLit:phi0690.phi003:8.343">segment ID 118</milestone>
+        <word sy="4T" pos="PRE" lemma="sub">sub</word>
+        <word sy="5A5b" pos="NOMcom" lemma="rupes">rupe</word>
+        <word sy="5c6A6X" pos="NOMpro" lemma="Lupercal">Lupercal</word>
+    </line>
+    <line n="71" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="119" source="urn:cts:latinLit:phi0690.phi003:3.309">segment ID 119</milestone>
+        <word sy="1A1b1c" pos="VER" lemma="labor2">labitur,</word>
+        <word sy="2A" pos="CONcoo" lemma="et2">et</word>
+        <milestone unit="segment" n="120" source="urn:cts:latinLit:phi0690.phi003:3.288">segment ID 120</milestone>
+        <word sy="2X" pos="PROdem" lemma="hic1">haec</word>
+        <word sy="3A" pos="PRE" lemma="de">de</word>
+        <word sy="3b3c4A" pos="NOMpro" lemma="Danai">Danais</word>
+        <word sy="4X5A5b5c" pos="NOMcom" lemma="uictor">victoribus</word>
+        <word sy="6A6X" pos="NOMcom" lemma="arma">arma;</word>
+    </line>
+    <line n="72" meter="H" pattern="SDSSDS">
+        <milestone unit="segment" n="121" source="urn:cts:latinLit:phi0690.phi003:11.450">segment ID 121</milestone>
+        <word sy="1A1T2A2b" pos="ADJqua" lemma="Tyrrhenus">Tyrrhenamque</word>
+        <word sy="2c3A" pos="NOMcom" lemma="manus1">manum</word>
+        <word sy="3T4A" pos="PROind" lemma="totus">totis</word>
+        <word sy="4T5A5b5c" pos="VER" lemma="descendo">descendere</word>
+        <word sy="6A6X" pos="NOMcom" lemma="campus1">campis.</word>
+    </line>
+    <line n="73" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="122" source="urn:cts:latinLit:phi0690.phi003:2.160">segment ID 122</milestone>
+        <word sy="1A" pos="PROper" lemma="tu">tu</word>
+        <word sy="1b1c" pos="ADV" lemma="modo1">modo</word>
+        <word sy="2A2T3A" pos="NOMcom" lemma="promissum">promissis</word>
+        <milestone unit="segment" n="123" source="urn:cts:latinLit:phi0690.phi003:6.262">segment ID 123</milestone>
+        <word sy="3T4A" pos="NOMcom" lemma="antrum">antro</word>
+        <word sy="" mf="SY" pos="PROref" lemma="sui1">se</word>
+        <word sy="4T5A5b" pos="VER" lemma="immitto">immisit</word>
+        <word sy="5c6A6X" pos="ADJqua" lemma="apertus">aperto;</word>
+    </line>
+    <line n="74" meter="H" pattern="DDDSDS">
+        <milestone unit="segment" n="124" source="urn:cts:latinLit:phi0690.phi003:11.586">segment ID 124</milestone>
+        <word sy="1A1b" pos="ADJqua" lemma="carus">cara</word>
+        <word sy="1c2A" pos="PROper" lemma="ego">mihi</word>
+        <word sy="2b2c3A3b" pos="NOMcom" lemma="comes">comitumque</word>
+        <word sy="3c4A" pos="VER" lemma="sum1">foret</word>
+        <milestone unit="segment" n="125" source="urn:cts:latinLit:phi0690.phi003:1.574">segment ID 125</milestone>
+        <word sy="4T5A5b" mf="SY" pos="NOMcom" lemma="discrimen">discrimine</word>
+        <word sy="5c6A6X" pos="VER" lemma="ago">agetur.</word>
+    </line>
+    <line n="75" meter="H" pattern="DSDDDS">
+        <milestone unit="segment" n="126" source="urn:cts:latinLit:phi0690.phi003:3.136">segment ID 126</milestone>
+        <word sy="1A1b1c2A" pos="NOMcom" lemma="connubium">conubiis</word>
+        <word sy="2T3A3b" pos="NOMcom" lemma="aruum">arvisque</word>
+        <word sy="3c4A" pos="ADJqua" lemma="nouus">novis</word>
+        <word sy="4b4c5A5b" pos="VER" lemma="operor">operata</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="iuuentus">juventus,</word>
+    </line>
+    <line n="76" meter="H" pattern="DDDSDS">
+        <milestone unit="segment" n="127" source="urn:cts:latinLit:phi0690.phi003:3.137" continued="true">segment ID 127</milestone>
+        <word sy="1A1b" pos="NOMcom" lemma="ius1">jura</word>
+        <word sy="1c2A2b" pos="NOMcom" lemma="domus">domosque</word>
+        <word sy="2c3A" pos="VER" lemma="do">dabam,</word>
+        <word sy="3b3c4A" pos="ADV" lemma="subito">subito</word>
+        <word sy="4T" pos="PRE" lemma="cum2">cum</word>
+        <word sy="5A5b5c" pos="ADJqua" lemma="tabidus">tabida</word>
+        <word sy="6A6X" pos="NOMcom" lemma="membrum">membris</word>
+    </line>
+    <line n="77" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="128" source="urn:cts:latinLit:phi0690.phi002:2.230">segment ID 128</milestone>
+        <word sy="1A1b" pos="PRE" lemma="ante2">ante</word>
+        <word sy="1c2A" pos="NOMcom" lemma="locus">locum</word>
+        <word sy="2b2c3A" pos="VER" lemma="capio2">capies</word>
+        <milestone unit="segment" n="129" source="urn:cts:latinLit:phi0690.phi003:5.246">segment ID 129</milestone>
+        <word sy="3T4A4T" pos="VER" lemma="aduelo">advelat</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="tempus1">tempora</word>
+        <word sy="6A6X" pos="NOMcom" lemma="laurus">lauro,</word>
+    </line>
+    <line n="78" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="130" source="urn:cts:latinLit:phi0690.phi003:2.799">segment ID 130</milestone>
+        <word sy="1A1b1c" pos="ADV" lemma="undique">undique</word>
+        <word sy="2A2T3A" mf="SY" pos="VER" lemma="conuenio">convenere</word>
+        <milestone unit="segment" n="131" source="urn:cts:latinLit:phi0690.phi003:10.745">segment ID 131</milestone>
+        <word sy="3b3c4A" pos="NOMcom" lemma="oculus">oculos</word>
+        <word sy="4T" pos="CONcoo" lemma="et2">et</word>
+        <word sy="5A5b5c" pos="ADJqua" lemma="ferreus">ferreus</word>
+        <word sy="6A6X" pos="VER" lemma="urgeo">urget</word>
+    </line>
+    <line n="79" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="132" source="urn:cts:latinLit:phi0690.phi003:10.746" continued="true">segment ID 132</milestone>
+        <word sy="1A1b" pos="NOMcom" lemma="somnus">somnus,</word>
+        <word sy="1c" pos="PRE" lemma="in">in</word>
+        <word sy="2A2T3A" pos="ADJqua" lemma="aeternus">aeternam</word>
+        <word sy="3T4A4T" pos="VER" lemma="claudo1">clauduntur</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="lumen">lumina</word>
+        <word sy="6A6X" pos="NOMcom" lemma="nox">noctem.</word>
+    </line>
+    <line n="80" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="133" source="urn:cts:latinLit:phi0690.phi003:1.683">segment ID 133</milestone>
+        <word sy="1A" pos="PROper" lemma="tu">Tu</word>
+        <word sy="1b1c" mf="SY" pos="NOMcom" lemma="facies">faciem</word>
+        <word sy="2A2T3A" pos="PROdem" lemma="ille">illius</word>
+        <word sy="3T4A" pos="NOMcom" lemma="nox">noctem</word>
+        <word sy="4T" pos="ADVneg" lemma="non">non</word>
+        <word sy="5A5b5c" pos="ADV" lemma="ample">amplius</word>
+        <word sy="6A6X" pos="ADJcar" lemma="unus">unam</word>
+    </line>
+    <line n="81" meter="H" pattern="DDDDDS">
+        <milestone unit="segment" n="134" source="urn:cts:latinLit:phi0690.phi003:1.684" continued="true">segment ID 134</milestone>
+        <word sy="1A1b" pos="VER" lemma="fallo">falle</word>
+        <word sy="1c" mf="SY" pos="NOMcom" lemma="dolus">dolo,</word>
+        <word sy="2A" pos="CONcoo" lemma="et2">et</word>
+        <milestone unit="segment" n="135" source="urn:cts:latinLit:phi0690.phi001:9.23">segment ID 135</milestone>
+        <word sy="2b2c3A" pos="VER" lemma="redeo1">redeo</word>
+        <word sy="3b3c" pos="ADJqua" lemma="breuis">(brevis</word>
+        <word sy="4A" pos="VER" lemma="sum1">est</word>
+        <word sy="4b4c" pos="NOMcom" lemma="uia">via)</word>
+        <word sy="5A5b" pos="VER" lemma="pasco">pasce</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="capella">capellas;</word>
+    </line>
+    <line n="82" meter="H" pattern="SDSDDS">
+        <milestone unit="segment" n="136" source="urn:cts:latinLit:phi0690.phi003:10.510">segment ID 136</milestone>
+        <word sy="1A" pos="CONcoo" lemma="nec2">Nec</word>
+        <word sy="1T" pos="ADV" lemma="iam">jam</word>
+        <word sy="2A2b" pos="NOMcom" lemma="fama">fama</word>
+        <word sy="2c3A" pos="NOMcom" lemma="malum1">mali</word>
+        <word sy="3T4A" pos="PROdem" lemma="tantum1">tanti,</word>
+        <milestone unit="segment" n="137" source="urn:cts:latinLit:phi0690.phi003:12.926">segment ID 137</milestone>
+        <word sy="4b4c" pos="NOMcom" lemma="femur">femur.</word>
+        <word sy="5A5b5c" pos="VER" lemma="incido1">incidit</word>
+        <word sy="6A6X" pos="NOMcom" lemma="ictus">ictus</word>
+    </line>
+    <line n="83" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="138" source="urn:cts:latinLit:phi0690.phi003:1.697">segment ID 138</milestone>
+        <word sy="1A" pos="CONsub" lemma="cum3">Cum</word>
+        <word sy="1b1c" pos="VER" lemma="uenio">venit,</word>
+        <word sy="2A2T3A" pos="NOMcom" lemma="aulaeum">aulaeis</word>
+        <word sy="3T" pos="ADV" lemma="iam">jam</word>
+        <word sy="4A" pos="PROref" lemma="sui1">se</word>
+        <milestone unit="segment" n="139" source="urn:cts:latinLit:phi0690.phi003:11.392">segment ID 139</milestone>
+        <word sy="4T5A5b5c" pos="ADV" lemma="foede">foedissime,</word>
+        <word sy="6A6X" pos="VER" lemma="pello">pulsum</word>
+    </line>
+    <line n="84" meter="H" pattern="DSSDDS">
+        <milestone unit="segment" n="140" source="urn:cts:latinLit:phi0690.phi003:5.562">segment ID 140</milestone>
+        <word sy="1A1b1c" pos="NOMcom" lemma="agmen">agmine</word>
+        <word sy="2A2T3A" pos="VER" lemma="partio2">partito</word>
+        <word sy="3T4A" pos="VER" lemma="fulgeo">fulgent</word>
+        <word sy="4b4c5A5b" pos="ADJqua" lemma="par">paribusque</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="magister">magistris.</word>
+    </line>
+    <line n="85" meter="H" pattern="SSSSDS">
+        <milestone unit="segment" n="141" source="urn:cts:latinLit:phi0690.phi003:8.661">segment ID 141</milestone>
+        <word sy="1A" mf="SY" pos="NOMcom" lemma="aurum">auro</word>
+        <word sy="1T2A2T3A" pos="VER" lemma="innecto">innectuntur,</word>
+        <milestone unit="segment" n="142" source="urn:cts:latinLit:phi0690.phi003:10.302">segment ID 142</milestone>
+        <word sy="3T" pos="CONcoo" lemma="sed">sed</word>
+        <word sy="4A" pos="ADVneg" lemma="non">non</word>
+        <word sy="4T5A" pos="NOMcom" lemma="puppis">puppis</word>
+        <word sy="5b5c" pos="PROpos" lemma="tuus">tua,</word>
+        <word sy="6A6X" pos="NOMpro" lemma="Tarchon">Tarchon:</word>
+    </line>
+    <line n="86" meter="H" pattern="DDDSDS">
+        <milestone unit="segment" n="143" source="urn:cts:latinLit:phi0690.phi003:4.180">segment ID 143</milestone>
+        <word sy="1A1b1c2A" pos="VER" lemma="progigno">progenuit</word>
+        <word sy="2b2c3A" pos="NOMcom" lemma="pes">pedibus</word>
+        <word sy="3b3c" mf="SY" pos="ADJqua" lemma="celer">celerem</word>
+        <word sy="4A" pos="CONcoo" lemma="et2">et</word>
+        <milestone unit="segment" n="144" source="urn:cts:latinLit:phi0690.phi003:12.765">segment ID 144</milestone>
+        <word sy="4T" pos="CONcoo" lemma="et2">et</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="sanguis">sanguine</word>
+        <word sy="6A6X" pos="VER" lemma="certo1">certant.</word>
+    </line>
+    <line n="87" meter="H" pattern="DDDDDS">
+        <milestone unit="segment" n="145" source="urn:cts:latinLit:phi0690.phi003:12.483">segment ID 145</milestone>
+        <word sy="1A1b" pos="NOMcom" lemma="uox">voce</word>
+        <word sy="1c2A" pos="VER" lemma="uoco">vocat.</word>
+        <word sy="2b2c3A" pos="ADVrel" lemma="quotiens1">quotiens</word>
+        <word sy="3b3c4A" pos="NOMcom" lemma="oculus">oculos</word>
+        <milestone unit="segment" n="146" source="urn:cts:latinLit:phi0690.phi001:3.101">segment ID 146</milestone>
+        <word sy="4b4c5A5b" pos="NOMcom" lemma="pecus">pecorisque</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="magister">magistro.</word>
+    </line>
+    <line n="88" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="147" source="urn:cts:latinLit:phi0690.phi003:6.66">segment ID 147</milestone>
+        <word sy="1A1b1c" pos="ADJqua" lemma="praescius">praescia</word>
+        <word sy="2A2T3A" pos="VER" lemma="uenio">venturi,</word>
+        <milestone unit="segment" n="148" source="urn:cts:latinLit:phi0690.phi002:2.235">segment ID 148</milestone>
+        <word sy="3b3c4A4T" pos="VER" lemma="supero">superabit</word>
+        <word sy="5A5b" pos="NOMcom" lemma="terra">terra</word>
+        <word sy="5c6A6X" pos="VER" lemma="repleo">repletis,</word>
+    </line>
+    <line n="89" meter="H" pattern="SSSDDS">
+        <milestone unit="segment" n="149" source="urn:cts:latinLit:phi0690.phi002:1.389">segment ID 149</milestone>
+        <word sy="1A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="1T" mf="SY" pos="PROind" lemma="solus">sola</word>
+        <word sy="2A" pos="PRE" lemma="in">in</word>
+        <word sy="2T3A" pos="ADJqua" lemma="siccus">sicca</word>
+        <word sy="3T4A" pos="PROref" lemma="sui">secum</word>
+        <word sy="4b4c5A5b" pos="VER" lemma="spatior">spatiatur</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="arena">harena.</word>
+    </line>
+    <line n="90" meter="H" pattern="SDSDDS">
+        <milestone unit="segment" n="150" source="urn:cts:latinLit:phi0690.phi003:5.283">segment ID 150</milestone>
+        <word sy="1A1T" mf="SY" pos="VER" lemma="seruo">servatam</word>
+        <word sy="2A" pos="PRE" lemma="ob">ob</word>
+        <milestone unit="segment" n="151" source="urn:cts:latinLit:phi0690.phi001:2.56">segment ID 151</milestone>
+        <word sy="2b2c3A" pos="NOMpro" lemma="Corydon">Corydon;</word>
+        <word sy="3T" pos="CONcoo" lemma="nec2">nec</word>
+        <word sy="4A4b4c" pos="NOMcom" lemma="munus">munera</word>
+        <word sy="5A5b" pos="VER" lemma="curo">curat</word>
+        <word sy="5c6A6X" pos="NOMpro" lemma="Alexis">Alexis</word>
+    </line>
+    <line n="91" meter="H" pattern="DDSDDS">
+        <milestone unit="segment" n="152" source="urn:cts:latinLit:phi0690.phi003:9.155">segment ID 152</milestone>
+        <word sy="1A1b" pos="VER" lemma="sum1">esse</word>
+        <word sy="1c2A" pos="VER" lemma="fero">ferant,</word>
+        <word sy="2b2c3A" pos="ADJord" lemma="decimus">decimum</word>
+        <word sy="3T" pos="PROrel" lemma="qui1">quos</word>
+        <word sy="4A4b4c" pos="VER" lemma="differo">distulit</word>
+        <word sy="5A5b" pos="NOMpro" lemma="Hector">Hector</word>
+        <word sy="5c" pos="PRE" lemma="in">in</word>
+        <word sy="6A6X" pos="NOMcom" lemma="annus">annum.</word>
+    </line>
+    <line n="92" meter="H" pattern="SDDSDS">
+        <milestone unit="segment" n="153" source="urn:cts:latinLit:phi0690.phi003:4.195">segment ID 153</milestone>
+        <word sy="1A" pos="PROdem" lemma="hic1">haec</word>
+        <word sy="1T2A" pos="ADV" lemma="passim">passim</word>
+        <word sy="2b2c" pos="NOMcom" lemma="dea">dea</word>
+        <word sy="3A3b" pos="ADJqua" lemma="foedus2">foeda</word>
+        <word sy="3c4A" pos="NOMcom" lemma="uir">virum</word>
+        <word sy="4T5A5b" pos="VER" lemma="diffundo2">diffundit</word>
+        <word sy="5c" pos="PRE" lemma="in">in</word>
+        <word sy="6A6X" pos="NOMcom" lemma="os1">ora.</word>
+    </line>
+    <line n="93" meter="H" pattern="DDDDDS">
+        <milestone unit="segment" n="154" source="urn:cts:latinLit:phi0690.phi003:1.562">segment ID 154</milestone>
+        <word sy="1A1b1c" pos="VER" lemma="soluo">‘Solvite</word>
+        <word sy="2A2b" pos="NOMcom" lemma="cor">corde</word>
+        <word sy="2c3A" pos="NOMcom" lemma="metus">metum,</word>
+        <milestone unit="segment" n="155" source="urn:cts:latinLit:phi0690.phi003:7.306">segment ID 155</milestone>
+        <word sy="3b3c4A" pos="NOMcom" lemma="genitor">genitor</word>
+        <word sy="4b4c5A5b" pos="NOMpro" lemma="Calydon">Calydona</word>
+        <word sy="5c6A6X" pos="NOMpro" lemma="Diana">Dianae,</word>
+    </line>
+    <line n="94" meter="H" pattern="DSDDDS">
+        <milestone unit="segment" n="156" source="urn:cts:latinLit:phi0690.phi003:2.132">segment ID 156</milestone>
+        <word sy="1A1b" pos="ADV" lemma="iam">jamque</word>
+        <word sy="1c2A" pos="NOMcom" lemma="dies">dies</word>
+        <word sy="2T3A" mf="SY" pos="ADJqua" lemma="infandus">infanda</word>
+        <word sy="3b3c4A" pos="VER" lemma="assum1">aderat;</word>
+        <word sy="4b4c" pos="PROper" lemma="ego">mihi</word>
+        <word sy="5A5b" pos="NOMcom" lemma="sacrum">sacra</word>
+        <word sy="5c6A6X" pos="VER" lemma="paro2">parari</word>
+    </line>
+    <line n="95" meter="H" pattern="SSDSDS">
+        <milestone unit="segment" n="157" source="urn:cts:latinLit:phi0690.phi001:6.15">segment ID 157</milestone>
+        <word sy="1A1T" mf="SY" pos="VER" lemma="inflo">inflatum</word>
+        <word sy="2A2T3A" pos="ADJqua" lemma="hesternus">hesterno</word>
+        <milestone unit="segment" n="158" source="urn:cts:latinLit:phi0690.phi003:1.505">segment ID 158</milestone>
+        <word sy="3b3c4A" pos="ADJqua" lemma="medius">media</word>
+        <word sy="4T5A5b5c" pos="NOMcom" lemma="testudo">testudine</word>
+        <word sy="6A6X" pos="NOMcom" lemma="templum">templi,</word>
+    </line>
+    <line n="96" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="159" source="urn:cts:latinLit:phi0690.phi003:12.507">segment ID 159</milestone>
+        <word sy="1A1b1c" pos="VER" lemma="excipio">excipit</word>
+        <word sy="2A" pos="PRE" lemma="in">in</word>
+        <word sy="2b2c" pos="NOMcom" lemma="latus1">latus</word>
+        <word sy="3A" pos="CONcoo" lemma="et2">et,</word>
+        <word sy="3T" pos="ADVrel" lemma="qua1">qua</word>
+        <milestone unit="segment" n="160" source="urn:cts:latinLit:phi0690.phi001:6.59">segment ID 160</milestone>
+        <word sy="4A" pos="CONcoo" lemma="aut">aut</word>
+        <word sy="4T5A5b" pos="NOMcom" lemma="armentum">armenta</word>
+        <word sy="5c6A6X" pos="VER" lemma="sequor">secutum</word>
+    </line>
+    <line n="97" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="161" source="urn:cts:latinLit:phi0690.phi001:3.80">segment ID 161</milestone>
+        <word sy="1A1b" pos="ADJqua" lemma="tristis">Triste</word>
+        <word sy="1c2A" pos="NOMcom" lemma="lupus">lupus</word>
+        <word sy="2b2c3A" pos="NOMcom" lemma="stabulum">stabulis,</word>
+        <word sy="3T4A4T" pos="ADJqua" lemma="maturus">maturis</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="frux">frugibus</word>
+        <word sy="6A6X" pos="NOMcom" lemma="imber">imbres,</word>
+    </line>
+    <line n="98" meter="H" pattern="DSSDDS">
+        <milestone unit="segment" n="162" source="urn:cts:latinLit:phi0690.phi001:3.81" continued="true">segment ID 162</milestone>
+        <word sy="1A1b1c2A" pos="NOMcom" lemma="arbor">arboribus</word>
+        <word sy="2T3A" pos="NOMcom" lemma="uentus">venti,</word>
+        <word sy="3T4A" pos="PROper" lemma="nos">nobis</word>
+        <word sy="4b4c5A5b5c" pos="NOMpro" lemma="Amaryllis">Amaryllidos</word>
+        <word sy="6A6X" pos="NOMcom" lemma="ira">irae.</word>
+    </line>
+    <line n="99" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="163" source="urn:cts:latinLit:phi0690.phi003:12.571">segment ID 163</milestone>
+        <word sy="1A1b" pos="PROpos" lemma="noster">nostra</word>
+        <word sy="1c2A" pos="VER" lemma="patior">pati</word>
+        <word sy="2T3A3b" pos="ADV" lemma="rursus">rursusque</word>
+        <word sy="3c4A" pos="VER" lemma="uolo3">velit</word>
+        <word sy="4T5A5b5c" pos="VER" lemma="concurro">concurrere</word>
+        <word sy="6A6X" pos="NOMcom" lemma="uinco">victus?</word>
+    </line>
+    <line n="100" meter="H" pattern="SDSSDS">
+        <milestone unit="segment" n="164" source="urn:cts:latinLit:phi0690.phi001:9.1">segment ID 164</milestone>
+        <word sy="1A" pos="ADVint" lemma="quo3">Quo</word>
+        <word sy="1T" pos="PROper" lemma="tu">te,</word>
+        <word sy="2A2b" pos="NOMpro" lemma="Moeris">Moeri,</word>
+        <word sy="2c3A" pos="NOMcom" lemma="pes">pedes?</word>
+        <word sy="3T" pos="ADVint" lemma="an">An,</word>
+        <word sy="4A" pos="ADVrel" lemma="quis2">quo</word>
+        <milestone unit="segment" n="165" source="urn:cts:latinLit:phi0690.phi003:6.510">segment ID 165</milestone>
+        <word sy="4T" pos="CONcoo" lemma="et2">et</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="funus">funeris</word>
+        <word sy="6A6X" pos="NOMcom" lemma="umbra">umbris.</word>
+    </line>
+    <line n="101" meter="H" pattern="SDSDDS">
+        <milestone unit="segment" n="166" source="urn:cts:latinLit:phi0690.phi002:3.85">segment ID 166</milestone>
+        <word sy="1A1T2A2b" pos="VER" lemma="colligo">collectumque</word>
+        <word sy="2c3A" pos="VER" lemma="premo">premens</word>
+        <milestone unit="segment" n="167" source="urn:cts:latinLit:phi0690.phi003:11.610">segment ID 167</milestone>
+        <word sy="3T4A" pos="VER" lemma="fundo2">fundunt</word>
+        <word sy="4b4c" pos="ADV" lemma="simul1">simul</word>
+        <word sy="5A5b5c" pos="ADV" lemma="undique">undique</word>
+        <word sy="6A6X" pos="NOMcom" lemma="telum">tela</word>
+    </line>
+    <line n="102" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="168" source="urn:cts:latinLit:phi0690.phi003:4.36">segment ID 168</milestone>
+        <word sy="1A" pos="ADVneg" lemma="non">non</word>
+        <word sy="1b1c2A" pos="NOMpro" lemma="Libya">Libyae,</word>
+        <word sy="2T" pos="ADVneg" lemma="non">non</word>
+        <word sy="3A3b" pos="PRE" lemma="ante2">ante</word>
+        <word sy="3c4A" pos="NOMpro" lemma="Tyrus">Tyro;</word>
+        <milestone unit="segment" n="169" source="urn:cts:latinLit:phi0690.phi003:12.30">segment ID 169</milestone>
+        <word sy="4T" mf="SY" pos="NOMcom" lemma="uinculum">vincla</word>
+        <word sy="5A5b5c" pos="PROind" lemma="omnis">omnia</word>
+        <word sy="6A6X" pos="VER" lemma="rumpo">rupi;</word>
+    </line>
+    <line n="103" meter="H" pattern="SSSSDS">
+        <milestone unit="segment" n="170" source="urn:cts:latinLit:phi0690.phi003:10.887">segment ID 170</milestone>
+        <word sy="1A1T" mf="SY" pos="ADJqua" lemma="immanis">immanem</word>
+        <word sy="2A2T3A" pos="ADJqua" lemma="aeratus">aerato</word>
+        <milestone unit="segment" n="171" source="urn:cts:latinLit:phi0690.phi003:10.411">segment ID 171</milestone>
+        <word sy="3T" pos="CONcoo" lemma="sed">sed</word>
+        <word sy="4A4T" pos="NOMcom" lemma="bellum">bellis</word>
+        <word sy="5A5b" pos="ADJqua" lemma="acer2">acer</word>
+        <word sy="5c6A6X" pos="NOMpro" lemma="Halaesus">Halaesus</word>
+    </line>
+    <line n="104" meter="H" pattern="DSDSDS">
+        <milestone unit="segment" n="172" source="urn:cts:latinLit:phi0690.phi002:3.303">segment ID 172</milestone>
+        <word sy="1A" pos="PRE" lemma="ad2">ad</word>
+        <word sy="1b1c2A" pos="NOMcom" lemma="medius">medium</word>
+        <word sy="2T3A3b" pos="VER" lemma="conuerto">conversa</word>
+        <milestone unit="segment" n="173" source="urn:cts:latinLit:phi0690.phi003:5.54">segment ID 173</milestone>
+        <word sy="3c4A" pos="PROpos.ref" lemma="suus">suis</word>
+        <word sy="4T5A5b5c" pos="NOMcom" lemma="altar">altaria</word>
+        <word sy="6A6X" pos="NOMcom" lemma="donum">donis.</word>
+    </line>
+    <line n="105" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="174" source="urn:cts:latinLit:phi0690.phi002:2.332">segment ID 174</milestone>
+        <word sy="1A1b" pos="PRE" lemma="in">inque</word>
+        <word sy="1c2A" pos="ADJqua" lemma="nouus">novos</word>
+        <word sy="2T3A" pos="VER" lemma="sol">soles</word>
+        <milestone unit="segment" n="175" source="urn:cts:latinLit:phi0690.phi003:11.661">segment ID 175</milestone>
+        <word sy="3T" pos="CONcoo" lemma="seu1">seu</word>
+        <word sy="4A" pos="PRE" lemma="cum2">cum</word>
+        <word sy="4T" pos="PROref" lemma="sui1">se</word>
+        <word sy="5A5b5c" pos="ADJqua" lemma="Martius">Martia</word>
+        <word sy="6A6X" pos="NOMcom" lemma="currus">curru</word>
+    </line>
+    <line n="106" meter="H" pattern="SDSSDS">
+        <milestone unit="segment" n="176" source="urn:cts:latinLit:phi0690.phi003:4.53">segment ID 176</milestone>
+        <word sy="1A1T2A2b" pos="VER" lemma="quasso">quassataeque</word>
+        <word sy="2c3A" pos="NOMcom" lemma="ratis">rates,</word>
+        <word sy="3T" pos="CONsub" lemma="dum2">dum</word>
+        <word sy="4A" pos="ADVneg" lemma="non">non</word>
+        <word sy="4T5A5b5c" pos="ADJqua" lemma="tractabilis">tractabile</word>
+        <word sy="6A6X" pos="NOMcom" lemma="caelum1">caelum.'</word>
+    </line>
+    <line n="107" meter="H" pattern="SSDDDS">
+        <milestone unit="segment" n="177" source="urn:cts:latinLit:phi0690.phi003:10.903">segment ID 177</milestone>
+        <word sy="1A" mf="SY" pos="ADJcar" lemma="unus">unum</word>
+        <word sy="1X" pos="PROdem" lemma="hic1">hoc</word>
+        <word sy="2A" pos="PRE" lemma="per">per</word>
+        <word sy="2X" pos="CONsub" lemma="si2">si</word>
+        <word sy="" mf="SY" pos="PROind" lemma="quis2">qua</word>
+        <milestone unit="segment" n="178" source="urn:cts:latinLit:phi0690.phi003:11.568">segment ID 178</milestone>
+        <word sy="3A3b" pos="PROdem" lemma="ipse">ipse</word>
+        <word sy="3c4A" pos="NOMcom" lemma="manus1">manus</word>
+        <word sy="4b4c5A5b" pos="NOMcom" lemma="feritas">feritate</word>
+        <word sy="5c6A6X" pos="VER" lemma="do">dedisset),</word>
+    </line>
+    <line n="108" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="179" source="urn:cts:latinLit:phi0690.phi003:10.804">segment ID 179</milestone>
+        <word sy="1A1b1c2A" pos="VER" lemma="praecipito">praecipitant,</word>
+        <word sy="2X3A" pos="PROind" lemma="omnis">omnis</word>
+        <word sy="3X4A" pos="NOMcom" lemma="campus1">campis</word>
+        <word sy="4X5A5b" pos="VER" lemma="diffugio">diffugit</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="arator">arator</word>
+    </line>
+    <line n="109" meter="H" pattern="SDSDDS">
+        <milestone unit="segment" n="180" source="urn:cts:latinLit:phi0690.phi002:1.362">segment ID 180</milestone>
+        <word sy="1A1T2A2b" pos="NOMcom" lemma="clamor">clamoremque</word>
+        <word sy="2c3A" pos="VER" lemma="fero">ferunt</word>
+        <word sy="3T" pos="PRE" lemma="ad2">ad</word>
+        <word sy="4A4b4c" pos="NOMcom" lemma="litus">litora,</word>
+        <word sy="5A5b" pos="PRE" lemma="cum">cumque</word>
+        <word sy="5c6A6X" pos="ADJqua" lemma="marinus">marinae</word>
+    </line>
+    <line n="110" meter="H" pattern="DDDSDS">
+        <milestone unit="segment" n="181" source="urn:cts:latinLit:phi0690.phi003:1.554">segment ID 181</milestone>
+        <word sy="1A1b" mf="SY" pos="VER" lemma="tendo">tendere,</word>
+        <word sy="1c" pos="CONsub" lemma="ut4">ut</word>
+        <word sy="2A2b2c3A" pos="NOMpro" lemma="Italia">Italiam</word>
+        <milestone unit="segment" n="182" source="urn:cts:latinLit:phi0690.phi003:8.498">segment ID 182</milestone>
+        <word sy="3b3c4A" pos="VER" lemma="retineo">retinet</word>
+        <word sy="4T5A5b" pos="ADJqua" lemma="longaeuus">longaevus</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="haruspex">haruspex</word>
+    </line>
+    <line n="111" meter="H" pattern="SSDSDS">
+        <milestone unit="segment" n="183" source="urn:cts:latinLit:phi0690.phi003:8.279">segment ID 183</milestone>
+        <word sy="1A" pos="PRE" lemma="in">in</word>
+        <word sy="1T2A" pos="NOMcom" lemma="mensa">mensam</word>
+        <word sy="2T3A" pos="ADJqua" lemma="laetus2">laeti</word>
+        <milestone unit="segment" n="184" source="urn:cts:latinLit:phi0690.phi003:1.452">segment ID 184</milestone>
+        <word sy="3b3c4A" pos="ADV" lemma="bene">melius</word>
+        <word sy="4T5A5b5c" pos="VER" lemma="confido">confidere</word>
+        <word sy="6A6X" pos="NOMcom" lemma="res">rebus.</word>
+    </line>
+    <line n="112" meter="H" pattern="DSSDDS">
+        <milestone unit="segment" n="185" source="urn:cts:latinLit:phi0690.phi003:11.559">segment ID 185</milestone>
+        <word sy="1A1b" pos="NOMcom" lemma="telum">tela</word>
+        <word sy="1c2A" pos="VER" lemma="teneo">tenens</word>
+        <word sy="2T3A" pos="ADJqua" lemma="supplex2">supplex</word>
+        <word sy="3T4A" pos="NOMcom" lemma="hostis">hostem</word>
+        <word sy="4b4c" pos="VER" lemma="fugio">fugit.</word>
+        <word sy="5A5b5c" pos="VER" lemma="accipio">accipe,</word>
+        <word sy="6A6X" pos="VER" lemma="testor">testor,</word>
+    </line>
+    <line n="113" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="186" source="urn:cts:latinLit:phi0690.phi003:9.106">segment ID 186</milestone>
+        <word sy="1A1b1c" pos="VER" lemma="annuo">adnuit,</word>
+        <word sy="2A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="2T3A" pos="PROind" lemma="totus">totum</word>
+        <milestone unit="segment" n="187" source="urn:cts:latinLit:phi0690.phi003:7.608">segment ID 187</milestone>
+        <word sy="3T4A" pos="ADJqua" lemma="saeuus">saevi</word>
+        <word sy="4T5A5b5c" pos="NOMcom" lemma="formido1">formidine</word>
+        <word sy="6A6X" pos="NOMpro" lemma="Mars">Martis;</word>
+    </line>
+    <line n="114" meter="H" pattern="SSDSDS">
+        <milestone unit="segment" n="188" source="urn:cts:latinLit:phi0690.phi003:7.609" continued="true">segment ID 188</milestone>
+        <word sy="1A" mf="SY" pos="ADJcar" lemma="centum">centum</word>
+        <word sy="1T2A" pos="ADJqua" lemma="aereus2">aerei</word>
+        <word sy="2T3A" pos="VER" lemma="claudo1">claudunt</word>
+        <milestone unit="segment" n="189" source="urn:cts:latinLit:phi0690.phi003:1.713">segment ID 189</milestone>
+        <word sy="3b3c" pos="VER" lemma="nequeo">nequit</word>
+        <word sy="4A4T5A5b" pos="VER" lemma="ardesco">ardescitque</word>
+        <word sy="5c6A6X" pos="VER" lemma="tueor">tuendo</word>
+    </line>
+    <line n="115" meter="H" pattern="SDSDDS">
+        <milestone unit="segment" n="190" source="urn:cts:latinLit:phi0690.phi002:4.374">segment ID 190</milestone>
+        <word sy="1A" mf="SY" pos="CONsub" lemma="postquam">Postquam</word>
+        <word sy="1T" pos="VER" lemma="sum1">est</word>
+        <word sy="2A" pos="PRE" lemma="in">in</word>
+        <word sy="2b2c3A" pos="NOMcom" lemma="thalamus">thalami</word>
+        <word sy="3T4A4b4c" pos="VER" lemma="pendeo">pendentia</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="pumex">pumice</word>
+        <word sy="6A6X" pos="NOMcom" lemma="tectum">tecta</word>
+    </line>
+    <line n="116" meter="H" pattern="DDSDDS">
+        <milestone unit="segment" n="191" source="urn:cts:latinLit:phi0690.phi001:10.46">segment ID 191</milestone>
+        <word sy="1A" pos="PROper" lemma="tu">Tu</word>
+        <word sy="1b1c" pos="ADV" lemma="procul">procul</word>
+        <word sy="2A" pos="PRE" lemma="ab">a</word>
+        <word sy="2b2c3A" pos="NOMcom" lemma="patria">patria</word>
+        <milestone unit="segment" n="192" source="urn:cts:latinLit:phi0690.phi003:9.286">segment ID 192</milestone>
+        <word sy="3T" pos="ADVneg" lemma="non">non</word>
+        <word sy="4A4b4c" pos="NOMcom" lemma="moenia">moenia</word>
+        <word sy="5A5b" pos="NOMcom" lemma="rex">regis</word>
+        <word sy="5c6A6X" pos="NOMpro" lemma="Acestes">Acestae.</word>
+    </line>
+    <line n="117" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="193" source="urn:cts:latinLit:phi0690.phi003:9.287" continued="true">segment ID 193</milestone>
+        <word sy="1A" pos="PROdem" lemma="hic1">hanc</word>
+        <word sy="1b1c" pos="PROper" lemma="ego">ego</word>
+        <word sy="2A" pos="ADV" lemma="nunc">nunc</word>
+        <word sy="2T3A" mf="SY" pos="ADJqua" lemma="ignarus">ignaram</word>
+        <word sy="3T4A" pos="PROdem" lemma="hic1">hujus</word>
+        <word sy="4T5A5b" pos="PROrel" lemma="quicumque1">quodcumque</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="periculum">pericli</word>
+    </line>
+    <line n="118" meter="H" pattern="SSSDDS">
+        <milestone unit="segment" n="194" source="urn:cts:latinLit:phi0690.phi003:1.210">segment ID 194</milestone>
+        <word sy="1A1T" pos="PROdem" lemma="ille">Illi</word>
+        <word sy="2A" pos="PROref" lemma="sui1">se</word>
+        <word sy="2T" mf="SY" pos="NOMcom" lemma="praeda">praedae</word>
+        <word sy="3A3T4A" pos="VER" lemma="accingo">accingunt,</word>
+        <word sy="4b4c5A5b" pos="NOMcom" lemma="daps">dapibusque</word>
+        <word sy="5c6A6X" pos="ADJqua" lemma="futurus">futuris;</word>
+    </line>
+    <line n="119" meter="H" pattern="DSSDDS">
+        <milestone unit="segment" n="195" source="urn:cts:latinLit:phi0690.phi003:5.295">segment ID 195</milestone>
+        <word sy="1A1b1c2A" pos="NOMpro" lemma="Euryalus">Euryalus</word>
+        <word sy="2X" mf="SY" pos="NOMcom" lemma="forma">forma</word>
+        <word sy="3A3X4A" pos="ADJqua" lemma="insignis">insignis</word>
+        <word sy="4b4c5A5b" pos="ADJqua" lemma="uiridis">viridique</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="iuuenta">juventa,</word>
+    </line>
+    <line n="120" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="196" source="urn:cts:latinLit:phi0690.phi003:8.648">segment ID 196</milestone>
+        <word sy="1A1b1c" mf="SY" pos="NOMpro" lemma="Aeneadae">Aeneadae</word>
+        <word sy="2A" pos="PRE" lemma="in">in</word>
+        <word sy="2T3A" pos="NOMcom" lemma="ferrum">ferrum</word>
+        <word sy="3T" pos="PRE" lemma="pro1">pro</word>
+        <word sy="4A4T5A5b" pos="NOMcom" lemma="libertas">libertate</word>
+        <word sy="5c6A6X" pos="VER" lemma="ruo">ruebant.</word>
+    </line>
+    <line n="121" meter="H" pattern="DDDSDS">
+        <milestone unit="segment" n="197" source="urn:cts:latinLit:phi0690.phi003:5.321">segment ID 197</milestone>
+        <word sy="1A1b1c2A" pos="VER" lemma="insequor">insequitur</word>
+        <word sy="2b2c3A" pos="NOMpro" lemma="Salius">Salius;</word>
+        <word sy="3b3c4A" pos="NOMcom" lemma="spatium">spatio</word>
+        <word sy="4T" pos="ADV" lemma="post1">post</word>
+        <milestone unit="segment" n="198" source="urn:cts:latinLit:phi0690.phi002:1.201">segment ID 198</milestone>
+        <word sy="5A5b5c" pos="NOMcom" lemma="flumen">flumine</word>
+        <word sy="6A6X" pos="NOMcom" lemma="lembus">lembum</word>
+    </line>
+    <line n="122" meter="H" pattern="DDDSDS">
+        <milestone unit="segment" n="199" source="urn:cts:latinLit:phi0690.phi003:12.952">segment ID 199</milestone>
+        <word sy="1A1b1c" pos="NOMcom" lemma="uita">vitaque</word>
+        <word sy="2A" pos="PRE" lemma="cum2">cum</word>
+        <word sy="2b2c3A" pos="NOMcom" lemma="gemitus">gemitu</word>
+        <word sy="3b3c" pos="VER" lemma="fugio">fugit</word>
+        <word sy="4A4T5A5b" pos="VER" lemma="indignor">indignata</word>
+        <word sy="5c" pos="PRE" lemma="sub">sub</word>
+        <word sy="6A6X" pos="NOMcom" lemma="umbra">umbras.</word>
+    </line>
+    <line n="123" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="200" source="urn:cts:latinLit:phi0690.phi003:2.1" continued="true">segment ID 200</milestone>
+        <word sy="1A1b1c2A" mf="SY" pos="VER" lemma="conticesco">Conticuere</word>
+        <word sy="2T3A" pos="PROind" lemma="omnis">omnes</word>
+        <milestone unit="segment" n="201" source="urn:cts:latinLit:phi0690.phi003:3.190">segment ID 201</milestone>
+        <word sy="3T4A" pos="NOMcom" lemma="sedes">sedem</word>
+        <word sy="4T5A5b" pos="NOMcom" lemma="paucus">paucisque</word>
+        <word sy="5c6A6X" pos="VER" lemma="relinquo">relictis</word>
+    </line>
+    <line n="124" meter="H" pattern="DDDSDS">
+        <milestone unit="segment" n="202" source="urn:cts:latinLit:phi0690.phi003:10.26">segment ID 202</milestone>
+        <word sy="1A1b1c2A2b" pos="NOMcom" lemma="obsidio">obsidione</word>
+        <word sy="2c3A" pos="VER" lemma="sino">sines?</word>
+        <milestone unit="segment" n="203" source="urn:cts:latinLit:phi0690.phi003:4.569">segment ID 203</milestone>
+        <word sy="3b3c" mf="SY" pos="ADJqua" lemma="uarius">varium</word>
+        <word sy="4A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="4T5A5b5c" pos="ADJqua" lemma="mutabilis">mutabile</word>
+        <word sy="6A6X" pos="ADV" lemma="semper">semper</word>
+    </line>
+    <line n="125" meter="H" pattern="DSSSDS">
+        <milestone unit="segment" n="204" source="urn:cts:latinLit:phi0690.phi003:4.570" continued="true">segment ID 204</milestone>
+        <word sy="1A1b1c" pos="NOMcom" lemma="femina">femina.'</word>
+        <word sy="2A" pos="ADV" lemma="sic">sic</word>
+        <word sy="2T3A" pos="VER" lemma="for">fatus</word>
+        <word sy="3T4A" pos="NOMcom" lemma="nox">nocti</word>
+        <word sy="" mf="SY" pos="PROref" lemma="sui1">se</word>
+        <word sy="4T5A5b5c" pos="VER" lemma="immisceo">immiscuit</word>
+        <word sy="6A6X" pos="ADJqua" lemma="ater">atrae.</word>
+    </line>
+    <line n="126" meter="H" pattern="SDSDDS">
+        <milestone unit="segment" n="205" source="urn:cts:latinLit:phi0690.phi002:1.391">segment ID 205</milestone>
+        <word sy="1A1T2A" mf="SY" pos="VER" lemma="nescio">nescivere</word>
+        <word sy="2b2c3A" pos="NOMcom" lemma="hiems">hiemem,</word>
+        <word sy="3T4A" pos="NOMcom" lemma="testa">testa</word>
+        <word sy="" mf="SY" pos="PRE" lemma="cum2">cum</word>
+        <milestone unit="segment" n="206" source="urn:cts:latinLit:phi0690.phi003:9.150">segment ID 206</milestone>
+        <word sy="4b" pos="CONcoo" lemma="et2">et</word>
+        <word sy="4c5A5b5c" pos="NOMcom" lemma="iners">inertia</word>
+        <word sy="6A6X" pos="NOMcom" lemma="furtum">furta</word>
+    </line>
+    <line n="127" meter="H" pattern="DSSDDS">
+        <milestone unit="segment" n="207" source="urn:cts:latinLit:phi0690.phi003:9.288">segment ID 207</milestone>
+        <word sy="1A1b" pos="PRE" lemma="in">inque</word>
+        <word sy="1c2A2T3A" pos="VER" lemma="saluto">salutatam</word>
+        <milestone unit="segment" n="208" source="urn:cts:latinLit:phi0690.phi003:3.142">segment ID 208</milestone>
+        <word sy="3T4A" pos="NOMcom" lemma="uictus">victum</word>
+        <word sy="4b4c" pos="NOMcom" lemma="seges">seges</word>
+        <word sy="5A5b" pos="ADJqua" lemma="aeger2">aegra</word>
+        <word sy="5c6A6X" pos="VER" lemma="nego">negabat.</word>
+    </line>
+    <line n="128" meter="H" pattern="SSSDDS">
+        <milestone unit="segment" n="209" source="urn:cts:latinLit:phi0690.phi002:1.115">segment ID 209</milestone>
+        <word sy="1A1T" mf="SY" pos="ADV" lemma="praesertim">praesertim</word>
+        <word sy="2A2T3A" pos="ADJqua" lemma="incertus">incertis</word>
+        <word sy="3T" pos="CONsub" lemma="si2">si</word>
+        <word sy="4A4b4c" pos="NOMcom" lemma="mensis">mensibus</word>
+        <word sy="5A5b" pos="NOMcom" lemma="amnis">amnis</word>
+        <word sy="5c6A6X" pos="ADJqua" lemma="abundans2">abundans</word>
+    </line>
+    <line n="129" meter="H" pattern="DSSDDS">
+        <milestone unit="segment" n="210" source="urn:cts:latinLit:phi0690.phi002:1.116" continued="true">segment ID 210</milestone>
+        <word sy="1A1b" pos="VER" lemma="exeo1">exit</word>
+        <word sy="1c" pos="CONcoo" lemma="et2">et</word>
+        <word sy="2A2T3A" pos="VER" lemma="obduco">obducto</word>
+        <milestone unit="segment" n="211" source="urn:cts:latinLit:phi0690.phi002:3.489">segment ID 211</milestone>
+        <word sy="3T4A4b4c" pos="VER" lemma="macto">mactaverat</word>
+        <word sy="5A5b" pos="PRE" lemma="ante2">ante</word>
+        <word sy="5c6A6X" pos="NOMcom" lemma="sacerdos">sacerdos,</word>
+    </line>
+    <line n="130" meter="H" pattern="DDSSDS">
+        <milestone unit="segment" n="212" source="urn:cts:latinLit:phi0690.phi002:3.490" continued="true">segment ID 212</milestone>
+        <word sy="1A1b" pos="ADV" lemma="inde">inde</word>
+        <word sy="1c" mf="SY" pos="CONcoo" lemma="neque">neque</word>
+        <word sy="2A2b2c3A" pos="VER" lemma="impono">impositis</word>
+        <word sy="3T4A" pos="VER" lemma="ardeo">ardent</word>
+        <word sy="4T5A5b5c" pos="NOMcom" lemma="altar">altaria</word>
+        <word sy="6A6X" pos="NOMcom" lemma="fibra">fibris,</word>
+    </line>
+    <line n="131" meter="H" pattern="DSDDDS">
+        <milestone unit="segment" n="213" source="urn:cts:latinLit:phi0690.phi002:4.456">segment ID 213</milestone>
+        <word sy="1A1b1c" pos="VER" lemma="suscito1">suscitat</word>
+        <word sy="2A" pos="CONcoo" lemma="et2">et</word>
+        <word sy="2T3A" pos="VER" lemma="rapio">rapta</word>
+        <milestone unit="segment" n="214" source="urn:cts:latinLit:phi0690.phi002:3.470">segment ID 214</milestone>
+        <word sy="3b3c4A" pos="NOMcom" lemma="hiems">hiemem</word>
+        <word sy="4b4c" pos="VER" lemma="ruo">ruit</word>
+        <word sy="5A5b5c" pos="NOMcom" lemma="aequor">aequore</word>
+        <word sy="6A6X" pos="NOMcom" lemma="turbo1">turbo</word>
+    </line>
 </text>
