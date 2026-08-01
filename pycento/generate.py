@@ -50,6 +50,45 @@ def entry_to_words(entry: dict) -> List[Word]:
     ]
 
 
+_VOWELS = set("aeiouAEIOU")
+
+
+def _last_syllable(words: List[Word]):
+    for w in reversed(words):
+        if w.syllables:
+            return w.syllables[-1]
+    return None
+
+
+def _first_letter(words: List[Word]):
+    for w in words:
+        if w.text:
+            return w.text[0]
+    return None
+
+
+def elision_ok(words_a: List[Word], words_b: List[Word]) -> bool:
+    """Cheap, deterministic pre-check for gluing words_a's tail to words_b's
+    head: if words_a's last syllable was originally marked "elided" in the
+    gold data, that elision only holds because the ORIGINAL next word (in
+    the real Virgil line) started with a vowel. Once we glue in a
+    different words_b, the elision is only still valid if words_b's first
+    word also starts with a vowel (a/e/i/o/u) -- otherwise the final
+    syllable would no longer elide, silently changing the scansion, so the
+    joint must be rejected.
+
+    Unlike rescan_joint, this needs no compiled scansion grammar, so it
+    should always run regardless of --allow-unchecked-merges.
+    """
+    last = _last_syllable(words_a)
+    if last is None or last.length != "elided":
+        return True
+    first_letter = _first_letter(words_b)
+    if first_letter is None:
+        return True
+    return first_letter in _VOWELS
+
+
 @dataclass
 class RescanResult:
     valid: bool
@@ -102,6 +141,8 @@ class MergeStats:
     versus how often a pre-validated adjacent pair could be used instead."""
     pair_used: int = 0
     independent_resolved: int = 0
+    elision_checks: int = 0
+    elision_rejected: int = 0
     rescan_attempts: int = 0
     rescan_rejected: int = 0
     slots_given_up: int = 0
@@ -111,6 +152,13 @@ class MergeStats:
         lines = [
             f"  {self.pair_used} slot(s) used a pre-validated adjacent-verse pair (no rescan needed)",
         ]
+        if self.elision_checks:
+            lines.append(
+                f"  {self.elision_checks} elision check(s): "
+                f"{self.elision_rejected} rejected (elided final syllable would no longer "
+                f"elide against the glued-in next word) "
+                f"({100 * self.elision_rejected // self.elision_checks}% thrown out)"
+            )
         if self.rescan_attempts:
             lines.append(
                 f"  {self.rescan_attempts} independent rescan attempt(s): "
@@ -132,7 +180,7 @@ def resolve_merge_slot(
     b_candidates: List[dict],
     used_refs: set,
     allow_unchecked: bool,
-    max_attempts: int = 8,
+    max_attempts: int = 30,
     stats: Optional[MergeStats] = None,
 ) -> Optional[Tuple[List[Word], List[Word], List[str]]]:
     """Resolve a two-segment slot (a cross-line continuation, or any other
@@ -144,7 +192,12 @@ def resolve_merge_slot(
        exactly as it was in the real Virgil corpus. No re-scan needed.
     2. Otherwise, independently draw one candidate from each side and either
        accept it unchecked (if `allow_unchecked`) or re-scan the joint,
-       retrying with a fresh random draw up to `max_attempts` times.
+       retrying with a fresh random draw up to `max_attempts` times. A pair
+       that fails elision or rescan is removed from its side's pool for the
+       remaining attempts (falling back to the full pool once every
+       candidate on a side has been tried and failed), so retries actually
+       explore new combinations instead of risking a repeat draw of the
+       same bad candidate.
 
     Returns None if there are no candidates at all, or every attempt fails
     re-scan -- the caller should skip the whole poem in that case. Pass
@@ -166,10 +219,27 @@ def resolve_merge_slot(
             stats.slots_given_up += 1
         return None
 
+    # Only the scarcer side's failed draw gets excluded from its pool on a
+    # rejection -- the other side keeps its full pool available (re-drawing
+    # the same ref there across attempts is fine, reuse isn't forbidden).
+    # Constraining both sides on every rejection burns through the smaller
+    # pool's already-limited diversity for no benefit, and can exhaust it
+    # into pure-fallback (i.e. random, unexcluded) draws well before
+    # max_attempts is reached.
+    shrink_a = len(a_candidates) <= len(b_candidates)
+    failed_a: set = set()
+    failed_b: set = set()
     for _ in range(max_attempts):
-        entry_a = pick_candidate(a_candidates, used_refs)
-        entry_b = pick_candidate(b_candidates, used_refs)
+        entry_a = pick_candidate(a_candidates, used_refs | failed_a)
+        entry_b = pick_candidate(b_candidates, used_refs | failed_b)
         words_a, words_b = entry_to_words(entry_a), entry_to_words(entry_b)
+        if stats is not None:
+            stats.elision_checks += 1
+        if not elision_ok(words_a, words_b):
+            if stats is not None:
+                stats.elision_rejected += 1
+            (failed_a if shrink_a else failed_b).add((entry_a if shrink_a else entry_b)["id"])
+            continue
         if allow_unchecked:
             if stats is not None:
                 stats.independent_resolved += 1
@@ -183,6 +253,7 @@ def resolve_merge_slot(
             return words_a, words_b, [entry_a["id"], entry_b["id"]]
         if stats is not None:
             stats.rescan_rejected += 1
+        (failed_a if shrink_a else failed_b).add((entry_a if shrink_a else entry_b)["id"])
     if stats is not None:
         stats.slots_given_up += 1
     return None
@@ -194,7 +265,7 @@ def resolve_pinned_slot(
     free_candidates: List[dict],
     used_refs: set,
     allow_unchecked: bool,
-    max_attempts: int = 8,
+    max_attempts: int = 30,
     stats: Optional[MergeStats] = None,
 ) -> Optional[Tuple[List[Word], str]]:
     """Resolve the one FREE side of a two-segment slot whose other side is
@@ -206,18 +277,28 @@ def resolve_pinned_slot(
 
     Draws a candidate for the free side and re-scans the joint against the
     pinned words (unless `allow_unchecked`), retrying up to `max_attempts`
-    times. Returns (free_words, free_id), or None if no candidates exist or
-    every attempt fails re-scan.
+    times. A candidate that fails elision or rescan is removed from the pool
+    for the remaining attempts (falling back to the full pool once every
+    candidate has been tried and failed). Returns (free_words, free_id), or
+    None if no candidates exist or every attempt fails re-scan.
     """
     if not free_candidates:
         if stats is not None:
             stats.slots_given_up += 1
         return None
 
+    failed: set = set()
     for _ in range(max_attempts):
-        entry_free = pick_candidate(free_candidates, used_refs)
+        entry_free = pick_candidate(free_candidates, used_refs | failed)
         words_free = entry_to_words(entry_free)
         words_a, words_b = (pinned_words, words_free) if pinned_is_start else (words_free, pinned_words)
+        if stats is not None:
+            stats.elision_checks += 1
+        if not elision_ok(words_a, words_b):
+            if stats is not None:
+                stats.elision_rejected += 1
+            failed.add(entry_free["id"])
+            continue
         if allow_unchecked:
             if stats is not None:
                 stats.independent_resolved += 1
@@ -229,6 +310,7 @@ def resolve_pinned_slot(
             if stats is not None:
                 stats.independent_resolved += 1
             return words_free, entry_free["id"]
+        failed.add(entry_free["id"])
         if stats is not None:
             stats.rescan_rejected += 1
     if stats is not None:

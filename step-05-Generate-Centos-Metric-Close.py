@@ -43,8 +43,10 @@ from pycento.generate import (
     MergeStats,
     ResolvedSegment,
     assemble_lines,
+    elision_ok,
     entry_to_words,
     pick_candidate,
+    rescan_joint,
     resolve_merge_slot,
     resolve_pinned_slot,
     work_of,
@@ -146,8 +148,27 @@ def resolve_line(
         # Both boundary segments were pinned by a continuation on EACH side
         # (rare: this line is sandwiched between two `type="sq"` slots).
         # They weren't drawn to be compatible with each other, so the joint
-        # still needs validating.
+        # still needs validating -- and since both sides are already pinned,
+        # there's nothing left to redraw if it fails.
         (id_a, words_a, cont_a), (id_b, words_b, cont_b) = slots
+        if stats is not None:
+            stats.elision_checks += 1
+        if not elision_ok(words_a, words_b):
+            if stats is not None:
+                stats.elision_rejected += 1
+                stats.slots_given_up += 1
+            raise LineSkipped(f"pinned joint for split {key} would un-elide "
+                               f"(final syllable of {id_a} is elided, but {id_b} "
+                               f"doesn't start with a vowel)")
+        if not allow_unchecked:
+            if stats is not None:
+                stats.rescan_attempts += 1
+            result = rescan_joint(words_a, words_b)
+            if not result.valid:
+                if stats is not None:
+                    stats.rescan_rejected += 1
+                    stats.slots_given_up += 1
+                raise LineSkipped(f"pinned joint for split {key} failed rescan: {result.reason}")
         return [
             ResolvedSegment(source=id_a, words=words_a, continued=cont_a),
             ResolvedSegment(source=id_b, words=words_b, continued=cont_b),

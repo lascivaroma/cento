@@ -21,7 +21,18 @@ import json
 import os.path as op
 import random
 
-from pycento.generate import MergeStats, ResolvedSegment, assemble_lines, entry_to_words, resolve_merge_slot, work_of, write_poem
+from pycento.generate import (
+    MergeStats,
+    ResolvedSegment,
+    assemble_lines,
+    elision_ok,
+    entry_to_words,
+    pick_candidate,
+    rescan_joint,
+    resolve_merge_slot,
+    work_of,
+    write_poem,
+)
 from pycento.scansion import ScansionUnavailable
 from pycento.scheme import RowShape, iter_scheme_rows, render_row_key
 
@@ -40,6 +51,58 @@ def _filter_by_work(candidates: list, works) -> list:
 
 class PoemFailed(Exception):
     pass
+
+
+def _pick_line_segment(candidates: list, used_refs: set, prev_words, allow_unchecked: bool,
+                        stats: MergeStats, max_attempts: int = 30):
+    """Draw a candidate for an ordinary single-segment row, validating the
+    joint against the immediately preceding segment already placed in this
+    cento line (if any).
+
+    An ordinary same-line split (e.g. H1+H2 at the caesura) is two separate
+    single-segment rows in sequence, not a 2-segment continuation row -- so
+    nothing else ever validates the boundary between them, even though
+    they're independently drawn from unrelated Virgil verses. Without this,
+    a segment ending in a syllable marked "elided" in the gold data (elided
+    against whatever originally followed it) can get glued to a new next
+    segment that doesn't start with a vowel, silently un-eliding it.
+
+    A candidate that fails elision or rescan is removed from the pool for
+    the remaining attempts (falling back to the full pool once every
+    candidate has been tried and failed), so retries explore new candidates
+    instead of risking a repeat draw of the same bad one.
+
+    Returns (entry, words), or (None, None) if no compatible candidate was
+    found within `max_attempts` (or at all).
+    """
+    if prev_words is None:
+        entry = pick_candidate(candidates, used_refs)
+        return entry, entry_to_words(entry)
+
+    failed: set = set()
+    for _ in range(max_attempts):
+        entry = pick_candidate(candidates, used_refs | failed)
+        words = entry_to_words(entry)
+        if stats is not None:
+            stats.elision_checks += 1
+        if not elision_ok(prev_words, words):
+            if stats is not None:
+                stats.elision_rejected += 1
+            failed.add(entry["id"])
+            continue
+        if allow_unchecked:
+            return entry, words
+        result = rescan_joint(prev_words, words)
+        if stats is not None:
+            stats.rescan_attempts += 1
+        if result.valid:
+            return entry, words
+        if stats is not None:
+            stats.rescan_rejected += 1
+        failed.add(entry["id"])
+    if stats is not None:
+        stats.slots_given_up += 1
+    return None, None
 
 
 def generate_poem(rows: list, table: dict, works, allow_unchecked: bool, stats: MergeStats):
@@ -61,10 +124,12 @@ def generate_poem(rows: list, table: dict, works, allow_unchecked: bool, stats: 
                 raise PoemFailed(f"no candidates for {_key(pattern, is_start)}")
             if is_start:
                 close_line()
-            pool = [e for e in candidates if e["id"] not in used_refs] or candidates
-            entry = random.choice(pool)
+            prev_words = current_line[-1].words if current_line else None
+            entry, words = _pick_line_segment(candidates, used_refs, prev_words, allow_unchecked, stats)
+            if entry is None:
+                raise PoemFailed(f"could not resolve a same-line-compatible segment for {_key(pattern, is_start)}")
             used_refs.add(entry["id"])
-            current_line.append(ResolvedSegment(source=entry["id"], words=entry_to_words(entry), continued=False))
+            current_line.append(ResolvedSegment(source=entry["id"], words=words, continued=False))
         else:
             (pattern_a, is_start_a), (pattern_b, is_start_b) = segs
             row_key = render_row_key(segs)
