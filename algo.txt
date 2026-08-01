@@ -1,0 +1,161 @@
+# Cento generation algorithms
+
+Both generators build a synthetic cento by walking the gold cento's
+structural template and, for each slot, drawing a real Virgil verse (or
+verse fragment) whose metrical shape matches that slot, then validating
+the joint wherever two independently-chosen fragments get glued together.
+They differ in how strict the metrical match has to be, and in how much of
+the gold structure they preserve.
+
+## step-04-Generate-Centos-Sequence.py — "exact" strategy
+
+Matches the gold cento's **exact morae sequence**, segment by segment, not
+just its total. Entry point: `generate_poem()`.
+
+1. **Template**: `scheme.json`'s `"table"` (built by
+   `step-01-Build-Stats.py`) is parsed by `pycento.scheme.iter_scheme_rows()`
+   into a flat list of rows, each row either one segment `(pattern,
+   is_start)` or two `[(pattern_a, is_start_a), (pattern_b, is_start_b)]`.
+   A 2-segment row is *always* a genuine `type="sq"` cross-line
+   continuation (the tail of cento line N glued to the head of line N+1) —
+   an ordinary same-line split is two separate 1-segment rows in sequence,
+   not a 2-segment row (see `pycento/scheme.py`'s `iter_scheme_rows()`
+   docstring).
+
+2. **Candidate lookup**: `data/segment_table.json` (built by
+   `step-02-Build-Segment-Table.py`) is keyed by the exact morae pattern
+   (`_key()` in step-04). Filtered by `--works` via `_filter_by_work()`.
+
+3. **Walk the rows** (`generate_poem()`):
+   - **1-segment row** (ordinary case — either a whole-line AB segment, or
+     one half of an ordinary same-line H1+H2 split): drawn via
+     `_pick_line_segment()`. If this segment starts a new line
+     (`is_start`), the current line is closed first
+     (`close_line()`). Otherwise it's being appended after a segment
+     already in the current line — `_pick_line_segment()` validates the
+     new joint against that previous segment's words (see "Joint
+     validation" below) before accepting it.
+   - **2-segment row** (continuation): resolved as a unit by
+     `pycento.generate.resolve_merge_slot()`, which prefers a
+     pre-validated pair (see below) over an independent draw. The first
+     segment closes/continues the current line as usual; the second
+     *always* starts the next line (`close_line()` then append, with
+     `continued=True`).
+
+4. **Output**: `pycento.generate.assemble_lines()` turns the accumulated
+   per-line segment lists into `pycento.data.Line` objects;
+   `pycento.generate.write_poem()` renders them through
+   `pycento.serialize.lines_to_compact_tree()` to
+   `data/generated-compact/exact/cento_{n:04d}.xml`.
+
+### Pre-validated pairs (continuations only)
+
+For a 2-segment continuation row, `data/segment_table.json` also stores,
+under `pycento.scheme.render_row_key()`'s key, a list of **pre-validated
+pairs**: two Virgil verses confirmed genuinely adjacent in the source
+corpus (built by `step-02`'s `find_consecutive_pairs()`). If any exist,
+`resolve_merge_slot()` picks one uniformly at random and returns it
+directly — no re-validation needed, since the joint is real, unmodified
+Virgil text. In the current `scheme.json`, all 26 distinct continuation
+row-patterns have such pairs (17 to 2505 each), so step-04 in practice
+*never* needs an independent draw for continuations.
+
+### Joint validation (independent draws only)
+
+Whenever two segments are drawn independently and glued (same-line
+1-segment-row appends, via `_pick_line_segment()`; or continuation rows
+with no pre-validated pair, via `resolve_merge_slot()`), the joint is
+checked twice before being accepted, in this order:
+
+1. **`pycento.generate.elision_ok(words_a, words_b)`**: if `words_a`'s
+   last syllable was marked `elided` in the gold data, that only holds if
+   the word that *originally* followed it started with a vowel. A newly
+   glued-in `words_b` that doesn't start with a/e/i/o/u would silently
+   un-elide it, so the pair is rejected. Cheap and always runs (no
+   dependency on the scansion engine), even under
+   `--allow-unchecked-merges`.
+2. **`pycento.generate.rescan_joint(words_a, words_b)`** (skipped if
+   `--allow-unchecked-merges`): reconstructs macron-marked text via
+   `pycento.scansion.macronize_words()` and asks
+   `pycento.scansion.is_valid_hexameter()` (the CUNY-CL
+   `latin_scansion`/pynini FST engine) whether the glued text still scans.
+
+On rejection, both `_pick_line_segment()` and `resolve_merge_slot()` retry
+with a fresh draw, up to `max_attempts` (30) times, excluding
+already-rejected candidates from the pool as they go (falling back to the
+full pool only once every candidate has been tried and failed). In
+`resolve_merge_slot()`'s two-sided case, only the **scarcer** side's
+rejected candidate gets excluded (`shrink_a` in the code) — reusing a ref
+on the larger side across retries is fine, and constraining both sides
+equally wastes the smaller pool's limited diversity for no benefit.
+`pycento.generate.MergeStats` accumulates `elision_checks`/
+`elision_rejected` and `rescan_attempts`/`rescan_rejected` across the
+whole run, printed via `stats.summary()`.
+
+If every attempt is exhausted, the row/slot has no valid resolution and
+`generate_poem()` raises `PoemFailed`, discarding the **whole poem**
+(step-04 has no notion of a partial/skippable line — a cento line's
+segments must all resolve or the poem doesn't get written).
+
+## step-05-Generate-Centos-Metric-Close.py — "loose" strategy
+
+Matches only the **total morae** of each split (not the exact per-segment
+sequence), against `data/segment_table_by_total.json` (built by
+`step-03-Build-Segment-Table-Canon-Caesura.py`, one of 8 curated
+start/end split totals, all summing to 24). This trades exact
+dactyl/spondee fidelity for vocabulary variety, and — unlike step-04 —
+tolerates skipping individual lines it can't resolve rather than failing
+the whole poem.
+
+1. **Template**: `pycento.scheme.build_line_specs()` reduces
+   `iter_scheme_rows()`'s row stream into one `LineSpec` per real cento
+   line (`segs`, `continues_previous`), independent of how many
+   `scheme.json` rows contributed to it. `pycento.scheme.line_segment_totals()`
+   turns each line's segment patterns into their morae totals.
+
+2. **Resolve continuation boundaries first**
+   (`resolve_continuation_boundaries()`): every line whose first segment
+   is a genuine `type="sq"` continuation of the previous line's last
+   segment gets that boundary filled *before* anything else, from
+   `segment_table_by_total.json`'s `"sequential"` bucket — pre-validated
+   adjacent-Virgil-verse pairs, matched by total morae (`"{a_total}/{b_total}"`)
+   instead of exact sequence. This preserves the gold cento's "quote two
+   verses in a row" construction even in loose mode. Unresolved boundaries
+   are simply left `None` and surface as a skipped line downstream.
+
+3. **Resolve each line's remaining segment(s)** (`resolve_line()`),
+   dispatching on how many segments the line has and which (if either)
+   boundary was already pinned in step 2:
+   - **1 segment** (whole verse): drawn from the `"whole"` bucket via
+     `pycento.generate.pick_candidate()`. No joint to validate.
+   - **2 segments, neither pinned** (an ordinary same-line split — unlike
+     step-04, step-05 does *not* require these to come from adjacent
+     Virgil verses): resolved as a unit by
+     `pycento.generate.resolve_merge_slot()`, same independent-draw +
+     elision + rescan logic as step-04's continuation rows.
+   - **2 segments, one pinned** (the free end of a continuation boundary):
+     resolved by `pycento.generate.resolve_pinned_slot()`, which draws
+     only the free side and validates it (elision + rescan) against the
+     already-fixed pinned side.
+   - **2 segments, both pinned** (rare: a line sandwiched between two
+     `type="sq"` boundaries, both sides fixed by two independent
+     `resolve_continuation_boundaries()` draws that were never checked
+     against each other): validated directly with `elision_ok()` and
+     `rescan_joint()` in `resolve_line()` — if it fails, there's nothing
+     left to redraw, so the line is skipped outright.
+   - Any of these raising `LineSkipped` (no candidates, no valid split
+     coverage, or validation exhausted) just drops that **one line**;
+     `generate_poem()` (step-05's own, distinct from step-04's) counts
+     `skipped_lines` and keeps going — the poem is still written with
+     whatever lines did resolve.
+
+4. **Output**: same `assemble_lines()`/`write_poem()` path as step-04, to
+   `data/generated-compact/loose/cento_{n:04d}.xml`.
+
+Joint validation, retry/exclusion behavior, and `MergeStats` accounting
+are identical to step-04's, since both call the same
+`pycento.generate.resolve_merge_slot()` / `resolve_pinned_slot()` /
+`elision_ok()` / `rescan_joint()` functions — step-05 just has more call
+sites for them (ordinary same-line splits go through `resolve_merge_slot()`
+directly, not a step-04-style independent single-segment path) and fails
+softer (per-line, not per-poem) when they're exhausted.

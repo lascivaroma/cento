@@ -233,7 +233,9 @@ def main():
     parser.add_argument("--works", nargs="*", default=None, choices=["Aeneid", "Eclogues", "Georgics"])
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--allow-unchecked-merges", action="store_true",
-                         help="Skip re-scanning merged joints (rescan_joint is not implemented yet).")
+                         help="Skip rescan_joint's full-hexameter re-validation of merged "
+                              "joints (e.g. if the compiled scansion grammar isn't available). "
+                              "The elision check always runs regardless.")
     args = parser.parse_args()
 
     if args.seed is not None:
