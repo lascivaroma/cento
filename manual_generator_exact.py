@@ -2,11 +2,14 @@ import random
 
 import lxml.etree as et
 from dataclasses import dataclass
-from typing import List
+from typing import List, Counter
 from functools import lru_cache
+from pycento.cltk.scanner import Scansion
+import re
 
 xml_gold = et.parse("data/generated-compact/cento-compact.xml")
 _check = True
+_VOWELS = set("aeiouAEIOU")
 
 @dataclass
 class Segment:
@@ -19,8 +22,13 @@ class Segment:
         # ToDo for loose
         return "int"
 
-from functools import lru_cache
 
+def strip_punct(word_tag):
+    return re.sub("\W", "", word_tag.text)
+
+
+class NotFoundCandidate(ValueError):
+    pass
 
 @lru_cache(maxsize=None)
 def _tail_scan_matching(line, scan):
@@ -45,6 +53,10 @@ def _tail_scan_matching(line, scan):
 @lru_cache(maxsize=None)
 def _line_scan(line):
     return "/" + "".join(w.attrib.get("sy", "") for w in line.xpath("./word"))
+
+@lru_cache(maxsize=None)
+def _w_to_xml(word):
+    return et.fromstring(word)
 
 @lru_cache(maxsize=None)
 def _line_to_string(line) -> List[str]:
@@ -227,6 +239,11 @@ for scan in uniques:
 
 from tabulate import tabulate
 
+uniques = {
+    scan: list(map(tuple, values))
+    for scan, values in uniques.items()
+}
+
 rows = []
 for scan, pool in uniques.items():
     nocc = len([row for row in template if row.scan == scan])
@@ -234,13 +251,63 @@ for scan, pool in uniques.items():
 rows.sort(key=lambda r: r[1], reverse=True)
 print(tabulate(rows, headers=["Scan", "Candidates", "Occurrences in Cento"], tablefmt="github"))
 
-def make_cento():
+def make_cento(seed: int = 42, max_candidates: int = 100):
     xml = []
+    attempts = Counter()
     for segment in template:
         candidates = uniques[segment.scan]
-        if segment.start_a_line is False:
-            xml.append("<custom_join />")
-        xml.extend(random.choice(candidates))
-    xml = et.fromstring(f"<poem>{'\n'.join(xml)}</poem>")
+        if not segment.start_a_line: # We only need to check new merge
+            last_word = _w_to_xml(xml[-1])
+            nb_candidates = max_candidates
+            validated_candidate = None
+            former_candidates = set()
+            situation = ""
+            while nb_candidates > 0:
+                candidate = random.choice(list(set(candidates) | former_candidates))
+                # If it's not starting, the first word is the second element (first is milestone)
+                candidate_first_word = _w_to_xml(candidate[1])
 
+                # First case: last word is ending with a SY, we check if next one starts with VOWEL
+                if last_word.attrib.get("mf", "") == "SY":
+                    situation = "Elision removed"
+                    attempts[situation] += 1
+                    if strip_punct(candidate_first_word)[0] in _VOWELS:
+                        validated_candidate = candidate
+                        break
+                # We check that if last word ends with a short, it does not turn into a long
+                elif last_word.attrib["sy"].endswith("c"):
+                    situation = "Short lengthened"
+                    attempts[situation] += 1
+                    # Two not in a VOWEL means two consonnants, which means turned into long
+                    if strip_punct(last_word)[-1] not in _VOWELS and strip_punct(candidate_first_word)[0] not in _VOWELS:
+                        continue
+                    else:
+                        validated_candidate = candidate
+                        break
+                else:
+                    # We need to rescan if not fitting those situation
+                    # Situations we can have:
+                    # - long by position
+                    # - natural long (valid in anycase but how do you know this ?)
+                    # To rescan, we suffer
+                    two_words = Scansion().scan_text(strip_punct(last_word) + " " + strip_punct(candidate_first_word))
+                    print(last_word.text.strip() + " " + candidate_first_word.text.strip(), two_words)
+                    # Right now, we are not checking
+                    validated_candidate = candidate
+                    break
+
+                nb_candidates -= 1
+                former_candidates.add(candidate)
+            if validated_candidate:
+                xml.append("<custom_join />")
+                xml.extend(validated_candidate)
+            else:
+                for candidate in former_candidates:
+                    print("\t"+" ".join(candidate))
+                raise NotFoundCandidate(f"({situation}) Not a single candidate found in 30 attempts")
+        else:
+            candidate = random.choice(candidates)
+            xml.extend(candidate)
+    xml = et.fromstring(f"<poem>{'\n'.join(xml)}</poem>")
+    print(attempts)
 make_cento()
