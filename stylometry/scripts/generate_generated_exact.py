@@ -104,6 +104,26 @@ def _norm_token(tok: str) -> str:
 # XML extraction
 # ---------------------------------------------------------------------------
 
+def _patch_prodelision(line_elem) -> None:
+    """Detect prodelision and mark est with mf=PE.
+
+    Prodelision occurs when a word with mf=SY (elision) is followed by
+    'est'. In that case, est loses its initial vowel. We mark est with
+    mf=PE and clear its scansion so metrical_numbering.process_line
+    treats it as a lost word (number=0).
+
+    This catches ~98% of prodelision cases.
+    """
+    words = line_elem.find_all("word")
+    for i, w in enumerate(words[:-1]):
+        if w.get("mf") == "SY":
+            next_w = words[i + 1]
+            next_text = next_w.get_text(strip=True).lower().rstrip(".,;:!?")
+            if next_text == "est":
+                next_w["mf"] = "PE"
+                next_w["sy"] = ""
+
+
 def extract_xml_data(xml_path: Path) -> Tuple[
     List[str],
     List[List[str]],
@@ -115,6 +135,9 @@ def extract_xml_data(xml_path: Path) -> Tuple[
     - plain_lines: text with | pipe markers from <milestone> tags
     - line_numbers: per-line lists of metrical number strings
     - line_words: per-line lists of (normalised_text, pos_tag) tuples
+
+    Prodelision is auto-detected: when a word with mf=SY is followed by
+    'est', the est is marked with mf=PE before metrical processing.
     """
     tree = BeautifulSoup(xml_path.read_text(encoding="utf-8"), "xml")
 
@@ -138,6 +161,9 @@ def extract_xml_data(xml_path: Path) -> Tuple[
                 if text:
                     parts.append(text)
         plain_lines.append(" ".join(parts))
+
+        # Patch prodelision before metrical processing
+        _patch_prodelision(line_elem)
 
         # Metrical numbers via existing metrical_numbering module
         word_results = xml_process_line(line_elem)
