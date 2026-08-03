@@ -230,7 +230,6 @@ class Scansion:
         """
 
         tokenized_sentences = text.split('.')
-
         tokenized_text = []
         for sentence in tokenized_sentences:
             sentence_dict = {} # type: ignore
@@ -238,7 +237,6 @@ class Scansion:
             sentence_dict["structured_sentence"] = self._tokenize_words(
                 sentence) # type: ignore
             tokenized_text.append(sentence_dict)
-
         return tokenized_text
 
     def scan_text(self, text: str) -> List[str]:
@@ -252,24 +250,102 @@ class Scansion:
         ['u--uuu---ux', 'u---u--u---ux']
         """
         tokens = self.tokenize(text)
-        clausulae = []
+        # clausulae = []
+
         for sentence in tokens:
-            sentence_clausula = [] # type: List[str]
-            syllables = [word['syllables']
-                         for word in sentence['structured_sentence']]
-            flat_syllables = [
-                syllable for word in syllables for syllable in word]
-            if self.elide:
-                flat_syllables = [
-                    syll for syll in flat_syllables if not syll['elide'][0]][:-1][::-1]
-            for syllable in flat_syllables:
-                if len(sentence_clausula) < self.clausula_length - 1:
-                    if syllable['long_by_nature'] or syllable['long_by_position'][0]:
-                        sentence_clausula.append('-')
+            # sentence_clausula = [] # type: List[str]
+            syllables = [
+                word['syllables']
+                for word in sentence['structured_sentence']
+            ]
+            # Here we change the way things works: we are only interested in the first word, and the last syllable
+            first_word = syllables[0]
+            if len(first_word) == 1 and first_word[0]["elide"][0]: # It's elided, we don't care if strong or not
+                return "elided"
+            else:
+                # return the last not elided
+                for syllable in syllables[::-1]:
+                    print(syllable)
+                    if syllable["elide"][0]:
+                        continue
                     else:
-                        sentence_clausula.append('u')
-            sentence_clausula = sentence_clausula[::-1]
-            sentence_clausula.append('x')
-            clausulae.append(''.join(sentence_clausula))
-        clausulae = clausulae[:-1]
-        return clausulae
+                        if syllable["long_by_nature"] or syllable["long_by_position"][0]:
+                            return "long"
+                        else:
+                            return "short"
+            # flat_syllables = [
+            #     syllable for word in syllables for syllable in word]
+            # if self.elide:
+            #     flat_syllables = [
+            #         syll for syll in flat_syllables if not syll['elide'][0]][:-1][::-1]
+            # for syllable in flat_syllables:
+            #     if len(sentence_clausula) < self.clausula_length - 1:
+            #         if syllable['long_by_nature'] or syllable['long_by_position'][0]:
+            #             sentence_clausula.append('-')
+            #         else:
+            #             sentence_clausula.append('u')
+            # sentence_clausula = sentence_clausula[::-1]
+            # sentence_clausula.append('x')
+            # clausulae.append(''.join(sentence_clausula))
+        # The following line fails because I expect it to expect a dot at the end of each sentence
+        # clausulae = clausulae[:-1]
+        # return clausulae
+
+    def first_word_end(self, text: str) -> str:
+        """
+        Return a flat list of rhythms.
+        Desired clausula length is passed as a parameter. Clausula shorter than the specified
+        length can be exluded.
+        :return:
+
+        >>> Scansion().scan_text('dedērunt te miror antōnī quorum. sī quid est in mē ingenī jūdicēs quod sentiō.')
+        'long'
+        """
+        tokens = self.tokenize(text)
+        # clausulae = []
+
+        for sentence in tokens:
+            syllables = [
+                word['syllables']
+                for word in sentence['structured_sentence']
+            ]
+            # Here we change the way things works: we are only interested in the first word, and the last syllable
+            first_word = syllables[0]
+            if len(first_word) == 1 and first_word[0]["elide"][0]: # It's elided, we don't care if strong or not
+                return "elided"
+            else:
+                # return the last not elided
+                for syllable in first_word[::-1]:
+                    if syllable["elide"][0]:
+                        continue
+                    else:
+                        if syllable["long_by_nature"] or syllable["long_by_position"][0]:
+                            return "long"
+                        else:
+                            return "short"
+
+    def first_word_elided(self, text: str) -> bool:
+        """
+        Return a flat list of rhythms.
+        Desired clausula length is passed as a parameter. Clausula shorter than the specified
+        length can be exluded.
+        :return:
+
+        >>> Scansion().scan_text('dedērunt te miror antōnī quorum. sī quid est in mē ingenī jūdicēs quod sentiō.')
+        'long'
+        """
+        tokens = self.tokenize(text)
+        # clausulae = []
+
+        for sentence in tokens:
+            syllables = [
+                word['syllables']
+                for word in sentence['structured_sentence']
+            ]
+            # Here we change the way things works: we are only interested in the first word, and the last syllable
+            first_word = syllables[0]
+            for syllable in first_word[::-1]:
+                if syllable["elide"][0]:
+                    return True
+                else:
+                    return False

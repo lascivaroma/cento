@@ -6,6 +6,7 @@ from typing import List, Counter
 from functools import lru_cache
 from pycento.cltk.scanner import Scansion
 import re
+import random
 
 xml_gold = et.parse("data/generated-compact/cento-compact.xml")
 _check = True
@@ -26,6 +27,19 @@ class Segment:
 def strip_punct(word_tag):
     return re.sub("\W", "", word_tag.text)
 
+@lru_cache(maxsize=None)
+def letters_to_ux(word1, word2):
+    return re.sub(
+        r"[a-z]", "u",
+        re.sub(
+            r"[A-Z]", "-",
+            re.sub(r"\d+", "", word1.attrib["sy"]+word1.attrib["sy"])
+        )
+    )
+
+@lru_cache(maxsize=None)
+def _first_word_elided(sequence: str):
+    return Scansion().first_word_elided(sequence)
 
 class NotFoundCandidate(ValueError):
     pass
@@ -251,19 +265,21 @@ for scan, pool in uniques.items():
 rows.sort(key=lambda r: r[1], reverse=True)
 print(tabulate(rows, headers=["Scan", "Candidates", "Occurrences in Cento"], tablefmt="github"))
 
-def make_cento(seed: int = 42, max_candidates: int = 100):
+
+def make_cento(file: int, seed: int = 42, max_candidates: int = 100):
+    random.seed(seed)
     xml = []
     attempts = Counter()
     for segment in template:
         candidates = uniques[segment.scan]
-        if not segment.start_a_line: # We only need to check new merge
+        if not segment.start_a_line and "6A" not in xml[-1]: # We only need to check new merge
             last_word = _w_to_xml(xml[-1])
             nb_candidates = max_candidates
             validated_candidate = None
             former_candidates = set()
             situation = ""
             while nb_candidates > 0:
-                candidate = random.choice(list(set(candidates) | former_candidates))
+                candidate = random.choice(sorted(list(set(candidates) | former_candidates)))
                 # If it's not starting, the first word is the second element (first is milestone)
                 candidate_first_word = _w_to_xml(candidate[1])
 
@@ -285,29 +301,55 @@ def make_cento(seed: int = 42, max_candidates: int = 100):
                         validated_candidate = candidate
                         break
                 else:
-                    # We need to rescan if not fitting those situation
-                    # Situations we can have:
-                    # - long by position
-                    # - natural long (valid in anycase but how do you know this ?)
-                    # To rescan, we suffer
-                    two_words = Scansion().scan_text(strip_punct(last_word) + " " + strip_punct(candidate_first_word))
-                    print(last_word.text.strip() + " " + candidate_first_word.text.strip(), two_words)
-                    # Right now, we are not checking
-                    validated_candidate = candidate
-                    break
-
+                    # We only check is something becomes elided
+                    # A new elision should not happen on a single char word
+                    if len(strip_punct(last_word)) == 1:
+                        validated_candidate = candidate
+                        break
+                    sequence = strip_punct(last_word) + " " + strip_punct(candidate_first_word)
+                    if not _first_word_elided(sequence.lower()):
+                        validated_candidate = candidate
+                        break
+                    else:
+                        situation = "Elision added"
+                        attempts["Elision added"] += 1
                 nb_candidates -= 1
                 former_candidates.add(candidate)
             if validated_candidate:
                 xml.append("<custom_join />")
                 xml.extend(validated_candidate)
-            else:
+            elif _check:
+                print("Previous", xml[-1])
                 for candidate in former_candidates:
                     print("\t"+" ".join(candidate))
-                raise NotFoundCandidate(f"({situation}) Not a single candidate found in 30 attempts")
+                error = NotFoundCandidate(f"({situation}) Not a single candidate found in 30 attempts")
+                error.situation = situation
+                raise error
         else:
             candidate = random.choice(candidates)
             xml.extend(candidate)
     xml = et.fromstring(f"<poem>{'\n'.join(xml)}</poem>")
-    print(attempts)
-make_cento()
+
+    with open(f"data/generated-compact/exact/cento_{file:04d}.xml", "w") as f:
+        f.write(et.tostring(xml, pretty_print=True, encoding=str))
+
+    return attempts
+
+file = 0
+seed = 0
+errors = []
+
+import tqdm
+
+pbar = tqdm.tqdm(desc="")
+while file < 1000:
+    try:
+        make_cento(file, seed=42 + seed)
+        file += 1
+    except NotFoundCandidate as E:
+        errors.append(E.situation)
+    seed += 1
+    pbar.set_postfix(successes=file, attempts=seed)
+    pbar.update(1)
+
+pbar.close()
