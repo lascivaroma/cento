@@ -32,7 +32,10 @@ for division in xml.xpath("//division"):
     division.tag = "div"
     work.append(division)
     for line in division.xpath("line"):
-        line.attrib["n"] = f"urn:cts:latinLit:phi0690.phi001:{division.attrib['title']}.{line.attrib['name']}"
+        if line.attrib["name"] == "":
+            division.remove(line)
+        else:
+            line.attrib["n"] = f"urn:cts:latinLit:phi0690.phi001:{division.attrib['title']}.{line.attrib['name']}"
 out.append(work)
 
 
@@ -49,7 +52,10 @@ for division in xml.xpath("//division"):
     division.tag = "div"
     work.append(division)
     for line in division.xpath("line"):
-        line.attrib["n"] = f"urn:cts:latinLit:phi0690.phi002:{division.attrib['title']}.{line.attrib['name']}"
+        if line.attrib["name"] == "":
+            division.remove(line)
+        else:
+            line.attrib["n"] = f"urn:cts:latinLit:phi0690.phi002:{division.attrib['title']}.{line.attrib['name']}"
 out.append(work)
 
 with open(op.join(op.dirname(__file__), "virgil-compact.xml"), "w") as f:

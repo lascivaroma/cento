@@ -267,6 +267,8 @@ for scan in uniques:
                             ])
 
                 lid += 1
+        else:
+            print(f"Missing for {scan}")
         # Two missing approaches:
         #   - end of line + beginning of line
         #   - end of line + full line
