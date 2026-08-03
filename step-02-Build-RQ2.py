@@ -26,7 +26,7 @@ class Segment:
 
 
 def strip_punct(word_tag):
-    return re.sub("\W", "", word_tag.text)
+    return re.sub(r"\W", "", word_tag.text)
 
 @lru_cache(maxsize=None)
 def letters_to_ux(word1, word2):
@@ -156,11 +156,18 @@ for scan in uniques:
                 if line_scan.startswith(scan):
                     temp_scan = "/"
                     words = []
-                    for elem in line.xpath("./word"):
+                    line_words = line.xpath("./word")
+                    wid = 0
+                    while wid < len(line_words):
+                        elem = line_words[wid]
                         temp_scan += elem.attrib["sy"]
                         words.append(elem)
                         if temp_scan.startswith(scan): # We stop when one contains the other
+                            # EXCEPT if the next word is prodelided ! Then we go a little further
+                            if wid < len(line_words)-1 and line_words[wid+1].attrib.get("sy") == "PE":
+                                words.append(line_words[wid+1])
                             break
+                        wid += 1
                     if temp_scan == scan: # We check that it's a strict equality
                         uniques[scan].append([
                             "<line>",
@@ -176,7 +183,7 @@ for scan in uniques:
                         *[et.tostring(word, encoding=str).strip() for word in words],
                         "</line>"
                     ])
-        # We got the full line followeg by a bit
+        # We got the full line followed by a bit
         elif scan.startswith("/") and scan.count("/") == 2: # Single line start
             lines = poem.xpath("./line")
             lid = 0
@@ -190,11 +197,19 @@ for scan in uniques:
                     if (line_scan+next_line_scan).startswith(scan):
                         temp_scan = line_scan+"/" # We start with the second one already
                         words = []
-                        for elem in lines[lid+1].xpath("./word"):
+                        wid = 0
+                        line_words = lines[lid+1].xpath("./word")
+                        while wid < len(line_words):
+                            elem = line_words[wid]
                             temp_scan += elem.attrib["sy"]
                             words.append(elem)
                             if temp_scan.startswith(scan): # We stop when one contains the other
+                                # EXCEPT if the next word is prodelided ! Then we go a little further
+                                if wid < len(line_words)-1 and line_words[wid+1].attrib.get("sy") == "PE":
+                                    words.append(line_words[wid+1])
+                                    print("PRODELISION INCLUDED !")
                                 break
+                            wid += 1
                         if temp_scan == scan: # We check that it's a strict equality
                             uniques[scan].append([
                                 "<line>",
@@ -229,11 +244,18 @@ for scan in uniques:
                     elif next_line_scan.startswith(second_segment):
                         temp_scan = "/"
                         words_seg_2 = []
-                        for elem in lines[lid+1].xpath("./word"):
+                        second_line_words = lines[lid+1].xpath("./word")
+                        wid = 0
+                        while wid < len(second_line_words):
+                            elem = second_line_words[wid]
                             temp_scan += elem.attrib["sy"]
                             words_seg_2.append(elem)
                             if temp_scan.startswith(next_line_scan):  # We stop when one contains the other
+                                if wid < len(second_line_words)-1 and second_line_words[wid+1].attrib.get("sy") == "PE":
+                                    words.append(second_line_words[wid+1])
+                                    print("PRODELISION INCLUDED !")
                                 break
+                            wid += 1
                         if temp_scan == next_line_scan:  # We check that it's a strict equality
                             uniques[scan].append([
                                 f"""<milestone source="{line.attrib["n"]}" />""",
@@ -285,8 +307,13 @@ def make_cento(file: int, seed: int = 42, max_candidates: int = 100):
                 # If it's not starting, the first word is the second element (first is milestone)
                 candidate_first_word = _w_to_xml(candidate[1])
                 candidate_first_word_strip = strip_punct(candidate_first_word)
-                # First case: last word is ending with a SY, we check if next one starts with VOWEL
-                if last_word.attrib.get("mf", "") == "SY":
+                # First situation: we had a prodelision, it should not affect the metric
+                if last_word.attrib.get("mf", "") == "PE":
+                    print("PRODELISION VALIDATION")
+                    validated_candidate = candidate
+                    break
+                # Second case: last word is ending with a SY, we check if next one starts with VOWEL
+                elif last_word.attrib.get("mf", "") == "SY":
                     situation = "Elision removed"
                     attempts[situation] += 1
                     if _elision(last_word_strip, candidate_first_word_strip).word1_elided:
