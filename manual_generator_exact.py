@@ -1,12 +1,13 @@
 import random
-
+import re
+import tqdm
 import lxml.etree as et
+
 from dataclasses import dataclass
 from typing import List, Counter
 from functools import lru_cache
-from pycento.cltk.scanner import Scansion
-import re
-import random
+from pycento.elision import check_elision, ElisionResult
+from tabulate import tabulate
 
 xml_gold = et.parse("data/generated-compact/cento-compact.xml")
 _check = True
@@ -38,7 +39,8 @@ def letters_to_ux(word1, word2):
     )
 
 @lru_cache(maxsize=None)
-def _first_word_elided(sequence: str):
+def _elision(w1: str, w2: str) -> ElisionResult:
+    return check_elision(w1, w2)
     return Scansion().first_word_elided(sequence)
 
 class NotFoundCandidate(ValueError):
@@ -251,7 +253,6 @@ for scan in uniques:
 #     nocc = len([row for row in template if row.scan == scan])
 #     print(f"{scan}: {len(pool)} candidates for {nocc} occurrences in the cento")
 
-from tabulate import tabulate
 
 uniques = {
     scan: list(map(tuple, values))
@@ -274,6 +275,7 @@ def make_cento(file: int, seed: int = 42, max_candidates: int = 100):
         candidates = uniques[segment.scan]
         if not segment.start_a_line and "6A" not in xml[-1]: # We only need to check new merge
             last_word = _w_to_xml(xml[-1])
+            last_word_strip = strip_punct(last_word)
             nb_candidates = max_candidates
             validated_candidate = None
             former_candidates = set()
@@ -282,12 +284,12 @@ def make_cento(file: int, seed: int = 42, max_candidates: int = 100):
                 candidate = random.choice(sorted(list(set(candidates) | former_candidates)))
                 # If it's not starting, the first word is the second element (first is milestone)
                 candidate_first_word = _w_to_xml(candidate[1])
-
+                candidate_first_word_strip = strip_punct(candidate_first_word)
                 # First case: last word is ending with a SY, we check if next one starts with VOWEL
                 if last_word.attrib.get("mf", "") == "SY":
                     situation = "Elision removed"
                     attempts[situation] += 1
-                    if strip_punct(candidate_first_word)[0] in _VOWELS:
+                    if _elision(last_word_strip, candidate_first_word_strip).word1_elided:
                         validated_candidate = candidate
                         break
                 # We check that if last word ends with a short, it does not turn into a long
@@ -306,8 +308,7 @@ def make_cento(file: int, seed: int = 42, max_candidates: int = 100):
                     if len(strip_punct(last_word)) == 1:
                         validated_candidate = candidate
                         break
-                    sequence = strip_punct(last_word) + " " + strip_punct(candidate_first_word)
-                    if not _first_word_elided(sequence.lower()):
+                    if not bool(_elision(last_word_strip, candidate_first_word_strip)):
                         validated_candidate = candidate
                         break
                     else:
@@ -338,8 +339,6 @@ def make_cento(file: int, seed: int = 42, max_candidates: int = 100):
 file = 0
 seed = 0
 errors = []
-
-import tqdm
 
 pbar = tqdm.tqdm(desc="")
 while file < 1000:
