@@ -9,9 +9,11 @@ def simplify_scan(scan):
     >>> simplify_scan("3T4A4b4c5A5b5c6A6X")
     'sDDS'
     >>> simplify_scan("4b4c5A5b5c6A6X")
-    'dDS'
+    'ddDS'
     >>> simplify_scan("1A1b1c2A2T3A3b3c4A")
     'DSDX'
+    >>> simplify_scan("5A5b5c6A6X")
+    'DS'
     """
     scan = re.sub(r"\dA\d[TX]", "S", scan)
     scan = re.sub(r"\dA\db\dc", "D", scan)
