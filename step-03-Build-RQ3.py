@@ -59,6 +59,8 @@ def _scan_to_loose_scan(scan) -> str:
 
     >>> _scan_to_loose_scan("/5A5b5c6A6X")
     '/44'
+    >>> _scan_to_loose_scan("/1A1b1c2A2T3A3b3c4A")
+    '/4442'
     """
     scan = simplify_scan("/".join(
         [
@@ -108,36 +110,36 @@ def _line_to_string(line) -> List[str]:
         et.tostring(word, encoding=str).strip() for word in line.xpath("./word")
     ]
 
-run = True
 
-if run:
-    template: List[Segment] = []
+template: List[Segment] = []
 
-    for row in xml_gold.xpath("//line"):
-        segments = row.xpath("./milestone")
-        nb_segment = len(segments)
-        first_segment = True
-        for elem in row.iterchildren():
-            if elem.tag == "milestone":
-                # We check first if we are continuing
-                if elem.attrib.get("continued", "false").lower() == "true":
-                    segment = template[-1]
-                    segment.scan += "/"
-                    segment.more_than_a_line = True
-                else:
-                    segment = Segment(start_a_line=first_segment, scan="/" if first_segment else "")
-                    template.append(segment)
-                if first_segment:
-                    first_segment = False
-            elif elem.tag == "word":
-                segment.scan += elem.attrib["sy"]
+for row in xml_gold.xpath("//line"):
+    segments = row.xpath("./milestone")
+    nb_segment = len(segments)
+    first_segment = True
+    for elem in row.iterchildren():
+        if elem.tag == "milestone":
+            # We check first if we are continuing
+            if elem.attrib.get("continued", "false").lower() == "true":
+                segment = template[-1]
+                segment.scan += "/"
+                segment.more_than_a_line = True
+            else:
+                segment = Segment(start_a_line=first_segment, scan="/" if first_segment else "")
+                template.append(segment)
+            if first_segment:
+                first_segment = False
+        elif elem.tag == "word":
+            segment.scan += elem.attrib["sy"]
 
-    if _check:
-        lines = 0
-        for row in template:
-            print(row, row.loose_scan)
-            lines += row.scan.count("/")
+if _check:
+    lines = 0
+    for row in template:
+        lines += row.scan.count("/")
+        print(lines+1, row, row.loose_scan)
 
+run_template = True
+if run_template:
     uniques = {element.loose_scan: [] for element in template}
     print(uniques)
     print(len(uniques))
@@ -258,10 +260,9 @@ if run:
                     if line.attrib.get("pattern") == "not scanned" or lines[lid+1].attrib.get("pattern") == "not scanned":
                         lid += 1
                         continue
-                    first_segment, second_segment = scan.split("/")
+                    first_segment, second_segment = [x for x in scan.split("/") if x]
                     second_segment = "/"+second_segment
                     if words := _tail_scan_matching(line, first_segment): # We match the first element
-                        next_line_scan = _line_scan(lines[lid+1])
                         if second_segment == "/444444": # We got a full line for the second part
                             uniques[scan].append([
                                 f"""<milestone source="{line.attrib["n"]}" />""",
@@ -281,13 +282,13 @@ if run:
                                 elem = second_line_words[wid]
                                 temp_scan += elem.attrib["sy"]
                                 words_seg_2.append(elem)
-                                if _scan_to_loose_scan(temp_scan) == next_line_scan:  # We stop when one contains the other
+                                if _scan_to_loose_scan(temp_scan) == second_segment:  # We stop when one contains the other
                                     if wid < len(second_line_words)-1 and second_line_words[wid+1].attrib.get("sy") == "PE":
                                         words.append(second_line_words[wid+1])
                                         print("PRODELISION INCLUDED !")
                                     break
                                 wid += 1
-                            if temp_scan == next_line_scan:  # We check that it's a strict equality
+                            if _scan_to_loose_scan(temp_scan) == second_segment:  # We check that it's a strict equality
                                 uniques[scan].append([
                                     f"""<milestone source="{line.attrib["n"]}" />""",
                                     *[et.tostring(word, encoding=str).strip() for word in words],
@@ -320,14 +321,18 @@ if run:
     rows.sort(key=lambda r: r[1], reverse=True)
     print(tabulate(rows, headers=["Scan", "Candidates", "Occurrences in Cento"], tablefmt="github"))
 
-
+run_cento = True
+if run_cento:
     def make_cento(file: int, seed: int = 42, max_candidates: int = 100):
         random.seed(seed)
         xml = []
         attempts = Counter()
         for segment in template:
-            candidates = uniques[segment.scan]
-            if not segment.start_a_line and "6A" not in xml[-1]: # We only need to check new merge
+            candidates = uniques[segment.loose_scan]
+            if not segment.start_a_line and "6" not in segment.scan: # We only need to check new merge
+                # if "".join(xml).count("<line") == 43:
+                #     print("".join(xml).count("<line"), segment)
+                #     print(xml)
                 last_word = _w_to_xml(xml[-1])
                 last_word_strip = strip_punct(last_word)
                 nb_candidates = max_candidates
@@ -388,26 +393,31 @@ if run:
             else:
                 candidate = random.choice(candidates)
                 xml.extend(candidate)
+                # if "".join(xml).count("<line") == 43:
+                #     print(segment, segment.loose_scan, candidate)
+                #     raise Exception
+                #     break
         xml = et.fromstring(f"<poem>{'\n'.join(xml)}</poem>")
-
+        for lid, line in enumerate(xml.xpath("//line")):
+            line.attrib["n"] = str(lid+1)
         with open(f"data/generated-compact/loose/cento_{file:04d}.xml", "w") as f:
             f.write(et.tostring(xml, pretty_print=True, encoding=str))
 
         return attempts
-    #
-    # file = 0
-    # seed = 0
-    # errors = []
-    #
-    # pbar = tqdm.tqdm(desc="")
-    # while file < 1000:
-    #     try:
-    #         make_cento(file, seed=42 + seed)
-    #         file += 1
-    #     except NotFoundCandidate as E:
-    #         errors.append(E.situation)
-    #     seed += 1
-    #     pbar.set_postfix(successes=file, attempts=seed)
-    #     pbar.update(1)
-    #
-    # pbar.close()
+
+    file = 0
+    seed = 0
+    errors = []
+
+    pbar = tqdm.tqdm(desc="")
+    while file < 1000:
+        try:
+            make_cento(file, seed=42 + seed)
+            file += 1
+        except NotFoundCandidate as E:
+            errors.append(E.situation)
+        seed += 1
+        pbar.set_postfix(successes=file, attempts=seed)
+        pbar.update(1)
+
+    pbar.close()

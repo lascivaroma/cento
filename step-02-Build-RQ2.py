@@ -250,13 +250,13 @@ for scan in uniques:
                             elem = second_line_words[wid]
                             temp_scan += elem.attrib["sy"]
                             words_seg_2.append(elem)
-                            if temp_scan.startswith(next_line_scan):  # We stop when one contains the other
+                            if temp_scan.startswith(second_segment):  # We stop when one contains the other
                                 if wid < len(second_line_words)-1 and second_line_words[wid+1].attrib.get("sy") == "PE":
                                     words.append(second_line_words[wid+1])
                                     print("PRODELISION INCLUDED !")
                                 break
                             wid += 1
-                        if temp_scan == next_line_scan:  # We check that it's a strict equality
+                        if temp_scan == second_segment:  # We check that it's a strict equality
                             uniques[scan].append([
                                 f"""<milestone source="{line.attrib["n"]}" />""",
                                 *[et.tostring(word, encoding=str).strip() for word in words],
@@ -359,6 +359,9 @@ def make_cento(file: int, seed: int = 42, max_candidates: int = 100):
             candidate = random.choice(candidates)
             xml.extend(candidate)
     xml = et.fromstring(f"<poem>{'\n'.join(xml)}</poem>")
+
+    for lid, line in enumerate(xml.xpath("//line")):
+        line.attrib["n"] = str(lid + 1)
 
     with open(f"data/generated-compact/exact/cento_{file:04d}.xml", "w") as f:
         f.write(et.tostring(xml, pretty_print=True, encoding=str))
