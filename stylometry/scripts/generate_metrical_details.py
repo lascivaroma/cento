@@ -44,29 +44,49 @@ def _patch_prodelision(line_elem) -> None:
                 next_w["sy"] = ""
 
 
-def process_xml(xml_path: Path) -> list[list[WordResult]]:
+def process_xml(xml_path: Path) -> list[list[WordResult | str]]:
     """Process an XML file and return per-line word data.
+
+    Milestone markers are inserted as the string ``"*"`` at the position
+    where a segment join occurs within a line.
 
     Args:
         xml_path: Path to a Pedecerto XML file.
 
     Returns:
-        List of word result lists, one per hexameter line.
+        List of word result lists, one per hexameter line. Each list may
+        contain ``"*"`` entries marking segment boundaries.
     """
     from bs4 import BeautifulSoup
 
     tree = BeautifulSoup(xml_path.read_text(encoding="utf-8"), "xml")
-    lines = []
+    lines: list[list[WordResult | str]] = []
     for line_elem in tree.find_all("line"):
-        if line_elem.get("meter") != "H":
+        if line_elem.get("meter") not in ("H", None):
             continue
         _patch_prodelision(line_elem)
+
+        # Track milestone positions relative to the word sequence
+        milestone_after: set[int] = set()
+        word_count = 0
+        for child in line_elem.children:
+            if child.name == "milestone":
+                if word_count > 0:
+                    milestone_after.add(word_count)
+            elif child.name == "word":
+                word_count += 1
+
         word_results = xml_process_line(line_elem)
-        lines.append(word_results)
+        row: list[WordResult | str] = []
+        for idx, w in enumerate(word_results, start=1):
+            row.append(w)
+            if idx in milestone_after:
+                row.append("*")
+        lines.append(row)
     return lines
 
 
-def process_json(json_path: Path) -> list[list[WordResult]]:
+def process_json(json_path: Path) -> list[list[WordResult | str]]:
     """Process a JSON file and return per-line word data.
 
     Args:
@@ -87,11 +107,15 @@ def process_json(json_path: Path) -> list[list[WordResult]]:
     return lines
 
 
-def format_details(lines: list[list[WordResult]], title: str) -> str:
+def format_details(lines: list[list[WordResult | str]], title: str) -> str:
     """Format word data into a human-readable table.
 
+    Segment boundaries within a line are shown as a row with ``*`` in the
+    word column and empty columns for the scansion data.
+
     Args:
-        lines: List of word result lists, one per hexameter line.
+        lines: List of word result lists, one per hexameter line. Entries
+            may be ``"*"`` strings marking segment boundaries.
         title: Title to display at the top of the table.
 
     Returns:
@@ -115,7 +139,12 @@ def format_details(lines: list[list[WordResult]], title: str) -> str:
         out.append(header)
         out.append(f"  {'─'*25} {'─'*20} {'─'*14} {'─'*16} {'─'*16} {'─'*8}")
 
-        for w in word_results:
+        for entry in word_results:
+            if entry == "*":
+                out.append(f"  {'*':<25} {'':20} {'':14} {'':16} {'':16} {'':>8}")
+                continue
+
+            w: WordResult = entry  # type: ignore[assignment]
             text = str(w["text"])
             sy_raw = str(w.get("sy_raw", ""))
             base = ",".join(w["syllables"]) if w["syllables"] else "—"

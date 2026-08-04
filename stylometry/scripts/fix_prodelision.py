@@ -71,7 +71,7 @@ def fix_file(xml_path: Path, dry_run: bool = False) -> tuple[int, int]:
     """
     content = xml_path.read_text(encoding="utf-8")
     tree = BeautifulSoup(content, "xml")
-    lines = [ln for ln in tree.find_all("line") if ln.get("meter") == "H"]
+    lines = [ln for ln in tree.find_all("line") if ln.get("meter") in ("H", None)]
 
     fixed = 0
     cross_segment = 0

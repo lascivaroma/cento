@@ -154,7 +154,7 @@ def extract_xml_data(xml_path: Path) -> Tuple[
     line_words: List[List[Tuple[str, str]]] = []
 
     for line_elem in tree.find_all("line"):
-        if line_elem.get("meter") != "H":
+        if line_elem.get("meter") not in ("H", None):
             continue
 
         # Plain text with pipe markers from milestones

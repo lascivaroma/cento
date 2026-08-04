@@ -29,13 +29,12 @@ SOURCE_DIRS = [
 ]
 
 # Valid foot patterns: foot_num -> set of valid type sequences
-# X allowed as second element (long by position) but not in dactyl position
 VALID_FEET = {
-    1: {("A", "T"), ("A", "X"), ("A", "b", "c")},
-    2: {("A", "T"), ("A", "X"), ("A", "b", "c")},
-    3: {("A", "T"), ("A", "X"), ("A", "b", "c")},
-    4: {("A", "T"), ("A", "X"), ("A", "b", "c")},
-    5: {("A", "T"), ("A", "X"), ("A", "b", "c")},
+    1: {("A", "T"), ("A", "b", "c")},
+    2: {("A", "T"), ("A", "b", "c")},
+    3: {("A", "T"), ("A", "b", "c")},
+    4: {("A", "T"), ("A", "b", "c")},
+    5: {("A", "T"), ("A", "b", "c")},
     6: {("A", "X"),},
 }
 
@@ -106,7 +105,7 @@ def verify_file(xml_path: Path) -> list[tuple[int, str, list[str]]]:
     issues = []
 
     for line_idx, line in enumerate(tree.find_all("line"), 1):
-        if line.get("meter") != "H":
+        if line.get("meter") not in ("H", None):
             continue
 
         # Build complete line scansion from all words
