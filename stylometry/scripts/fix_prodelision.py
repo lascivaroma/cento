@@ -22,7 +22,6 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import re
 import sys
 from pathlib import Path
 
@@ -36,7 +35,18 @@ SOURCE_DIRS = [
 
 
 def same_segment(line: Tag, w1: Tag, w2: Tag) -> bool:
-    """Check if two adjacent words are from the same segment (no milestone between them)."""
+    """Check if two adjacent words are from the same segment.
+
+    Returns False if there is a milestone element between w1 and w2.
+
+    Args:
+        line: Parent <line> element.
+        w1: First <word> element.
+        w2: Second <word> element.
+
+    Returns:
+        True if both words are in the same segment.
+    """
     between = False
     for child in line.children:
         if child is w1:
@@ -52,11 +62,16 @@ def same_segment(line: Tag, w1: Tag, w2: Tag) -> bool:
 def fix_file(xml_path: Path, dry_run: bool = False) -> tuple[int, int]:
     """Fix prodelision in a single generated cento XML file.
 
-    Returns (fixed_count, cross_segment_count).
+    Args:
+        xml_path: Path to the generated cento XML file.
+        dry_run: If True, report changes without writing the file.
+
+    Returns:
+        Tuple of (fixed_count, cross_segment_count).
     """
     content = xml_path.read_text(encoding="utf-8")
     tree = BeautifulSoup(content, "xml")
-    lines = [l for l in tree.find_all("line") if l.get("meter") == "H"]
+    lines = [ln for ln in tree.find_all("line") if ln.get("meter") == "H"]
 
     fixed = 0
     cross_segment = 0
@@ -132,7 +147,7 @@ def main() -> int:
         if fixed > 0:
             files_changed += 1
 
-    print(f"\nDone.")
+    print("\nDone.")
     print(f"  Files changed: {files_changed}")
     print(f"  Fixes applied: {total_fixed}")
     print(f"  Cross-segment (skipped): {total_cross}")

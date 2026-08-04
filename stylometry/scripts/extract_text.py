@@ -23,15 +23,9 @@ Usage:
 from __future__ import annotations
 
 import json
-import sys
 from pathlib import Path
 
 from bs4 import BeautifulSoup
-
-# Add scripts dir to path for corpus_utils
-SCRIPTS_DIR = Path(__file__).resolve().parent
-if str(SCRIPTS_DIR) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS_DIR))
 
 from corpus_utils import line_text
 
@@ -66,6 +60,12 @@ def extract_text_from_xml(input_path: Path) -> list[str]:
     """Extract text lines from a Pedecerto XML file.
 
     Each <line> element becomes one text line, with words joined by spaces.
+
+    Args:
+        input_path: Path to the Pedecerto XML file.
+
+    Returns:
+        List of text lines, one per hexameter line.
     """
     with open(input_path, "r", encoding="utf-8") as f:
         content = f.read()
@@ -94,6 +94,12 @@ def extract_text_from_json(input_path: Path) -> list[str]:
     """Extract text lines from a hypotactic JSON file.
 
     Each line object becomes one text line, using corpus_utils.line_text().
+
+    Args:
+        input_path: Path to the hypotactic JSON file.
+
+    Returns:
+        List of text lines.
     """
     with open(input_path, "r", encoding="utf-8") as f:
         data = json.load(f)

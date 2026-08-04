@@ -16,16 +16,11 @@ from __future__ import annotations
 
 import json
 import re
-import sys
 import unicodedata
 from collections import defaultdict
 from pathlib import Path
 
 from bs4 import BeautifulSoup
-
-SCRIPTS_DIR = Path(__file__).resolve().parent
-if str(SCRIPTS_DIR) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS_DIR))
 
 from metrical_numbering import _norm, process_line as xml_process_line
 from hypotactic_numbering import process_line as json_process_line
@@ -76,7 +71,14 @@ def _norm_token(tok: str) -> str:
 # ---------------------------------------------------------------------------
 
 def load_xml_lines(xml_path: Path) -> list:
-    """Load hexameter lines from a Pedecerto XML file."""
+    """Load hexameter lines from a Pedecerto XML file.
+
+    Args:
+        xml_path: Path to the Pedecerto XML file.
+
+    Returns:
+        List of hexameter <line> BeautifulSoup elements.
+    """
     with open(xml_path, "r", encoding="utf-8") as f:
         content = f.read()
     content = clean_xml(content)
@@ -85,7 +87,14 @@ def load_xml_lines(xml_path: Path) -> list:
 
 
 def xml_to_flat(xml_lines: list) -> tuple[list[str], list[int]]:
-    """Build flat (normalised_text, number) lists from XML lines."""
+    """Build flat (normalised_text, number) lists from XML lines.
+
+    Args:
+        xml_lines: List of hexameter <line> elements.
+
+    Returns:
+        Tuple of (normalised_texts, metrical_numbers) as parallel lists.
+    """
     texts: list[str] = []
     numbers: list[int] = []
     for line_tag in xml_lines:
@@ -96,14 +105,28 @@ def xml_to_flat(xml_lines: list) -> tuple[list[str], list[int]]:
 
 
 def load_json_lines(json_path: Path) -> list[dict]:
-    """Load hexameter lines from a hypotactic JSON file."""
+    """Load hexameter lines from a hypotactic JSON file.
+
+    Args:
+        json_path: Path to the hypotactic JSON file.
+
+    Returns:
+        List of line dicts from the JSON.
+    """
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     return data.get("lines", [])
 
 
 def json_to_flat(json_lines: list[dict]) -> tuple[list[str], list[int]]:
-    """Build flat (normalised_text, number) lists from JSON lines."""
+    """Build flat (normalised_text, number) lists from JSON lines.
+
+    Args:
+        json_lines: List of line dicts from hypotactic JSON.
+
+    Returns:
+        Tuple of (normalised_texts, metrical_numbers) as parallel lists.
+    """
     texts: list[str] = []
     numbers: list[int] = []
     for line_dict in json_lines:
@@ -128,7 +151,13 @@ def build_numbered_sentences(
     as sentences_raw. Each word is replaced by its metrical number, <EOL>
     and <EOS> tokens are preserved in place.
 
-    Returns (numbered_sentences, mismatch_count).
+    Args:
+        source_texts: Flat list of normalised source word forms.
+        source_numbers: Parallel list of metrical numbers.
+        sentences_raw: Raw sentence strings with <EOL>/<EOS> markers.
+
+    Returns:
+        Tuple of (numbered_sentences, mismatch_count).
     """
     # Build lookup: normalised source word → list of metrical numbers (FIFO)
     src_lookup: dict[str, list[int]] = defaultdict(list)

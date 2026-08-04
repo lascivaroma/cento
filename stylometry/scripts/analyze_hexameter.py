@@ -14,10 +14,11 @@ Usage:
     python analyze_hexameter.py
 """
 
-from bs4 import BeautifulSoup
-from pathlib import Path
+import re
 from collections import Counter
-import sys
+from pathlib import Path
+
+from bs4 import BeautifulSoup
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -30,11 +31,16 @@ HEXAMETER_METER = "H"
 
 
 def clean_xml(content: str) -> str:
-    """
-    Fix common XML issues in Pedecerto files.
+    """Fix common XML issues in Pedecerto files.
 
     Some files contain unescaped < and > characters in attribute values
     (e.g., division title attributes with <emph> tags).
+
+    Args:
+        content: Raw XML content string.
+
+    Returns:
+        Cleaned XML content with problematic characters escaped.
     """
     # Fix title attributes that contain <emph> tags
     content = re.sub(
@@ -46,16 +52,14 @@ def clean_xml(content: str) -> str:
 
 
 def analyze_file(input_path: Path) -> dict:
-    """
-    Analyze a single XML file for hexameter content.
+    """Analyze a single XML file for hexameter content.
 
-    Returns a dict with:
-    - filename: str
-    - total_lines: int
-    - meter_counts: Counter
-    - hex_stretches: list of (start_line_num, length) tuples
-    - longest_hex_stretch: int
-    - hex_line_numbers: set of line numbers that are hexameter
+    Args:
+        input_path: Path to the Pedecerto XML file.
+
+    Returns:
+        Dict with keys: filename, total_lines, meter_counts, hex_stretches,
+        longest_hex_stretch, hex_line_numbers.
     """
     with open(input_path, "r", encoding="utf-8") as f:
         content = f.read()
@@ -107,15 +111,14 @@ def analyze_file(input_path: Path) -> dict:
 
 
 def classify_file(analysis: dict) -> str:
-    """
-    Classify a file based on its hexameter content.
+    """Classify a file based on its hexameter content.
 
-    Returns one of:
-    - "pure_hexameter": all lines are hexameter
-    - "predominant_hexameter": >50% hexameter, with long continuous stretches
-    - "mixed_hexameter": has hexameter but also significant non-hexameter
-    - "no_hexameter": no hexameter lines at all
-    - "elegiac_couplets": appears to be elegiac (hexameter + non-hex alternating)
+    Args:
+        analysis: Dict from analyze_file with meter counts and stretch data.
+
+    Returns:
+        One of: "pure_hexameter", "predominant_hexameter", "mixed_hexameter",
+        "minimal_hexameter", "no_hexameter", "elegiac_couplets".
     """
     total = analysis["total_lines"]
     hex_count = analysis["meter_counts"].get(HEXAMETER_METER, 0)
@@ -149,9 +152,8 @@ def classify_file(analysis: dict) -> str:
     return "minimal_hexameter"
 
 
-def main():
-    import re  # needed for clean_xml
-
+def main() -> None:
+    """Analyze all XML files and print a summary report to stdout."""
     print(f"Input directory: {INPUT_DIR}")
 
     xml_files = sorted(INPUT_DIR.glob("*.xml"))
@@ -201,5 +203,4 @@ def main():
 
 
 if __name__ == "__main__":
-    import re  # needed for clean_xml at module level
     main()

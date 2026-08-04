@@ -16,15 +16,10 @@ from __future__ import annotations
 
 import json
 import re
-import sys
 import unicodedata
 from pathlib import Path
 
 from bs4 import BeautifulSoup
-
-SCRIPTS_DIR = Path(__file__).resolve().parent
-if str(SCRIPTS_DIR) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS_DIR))
 
 from metrical_numbering import _norm, process_line as xml_process_line
 from hypotactic_numbering import process_line as json_process_line
@@ -68,7 +63,14 @@ def _norm_token(tok: str) -> str:
 # ---------------------------------------------------------------------------
 
 def load_xml_lines(xml_path: Path) -> list:
-    """Load hexameter lines from a Pedecerto XML file."""
+    """Load hexameter lines from a Pedecerto XML file.
+
+    Args:
+        xml_path: Path to the Pedecerto XML file.
+
+    Returns:
+        List of hexameter <line> BeautifulSoup elements.
+    """
     with open(xml_path, "r", encoding="utf-8") as f:
         content = f.read()
     content = clean_xml(content)
@@ -77,7 +79,14 @@ def load_xml_lines(xml_path: Path) -> list:
 
 
 def xml_line_to_numbers(line_tag) -> list[str]:
-    """Encode one XML line as a list of metrical number strings."""
+    """Encode one XML line as a list of metrical number strings.
+
+    Args:
+        line_tag: A BeautifulSoup <line> element.
+
+    Returns:
+        List of metrical number strings for the line.
+    """
     tokens: list[str] = []
     for w in xml_process_line(line_tag):
         tokens.append(str(int(w["number"])))
@@ -85,14 +94,28 @@ def xml_line_to_numbers(line_tag) -> list[str]:
 
 
 def load_json_lines(json_path: Path) -> list[dict]:
-    """Load hexameter lines from a hypotactic JSON file."""
+    """Load hexameter lines from a hypotactic JSON file.
+
+    Args:
+        json_path: Path to the hypotactic JSON file.
+
+    Returns:
+        List of line dicts from the JSON.
+    """
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     return data.get("lines", [])
 
 
 def json_line_to_numbers(line_dict: dict) -> list[str]:
-    """Encode one JSON line as a list of metrical number strings."""
+    """Encode one JSON line as a list of metrical number strings.
+
+    Args:
+        line_dict: A line dict from hypotactic JSON.
+
+    Returns:
+        List of metrical number strings for the line.
+    """
     tokens: list[str] = []
     for w in json_process_line(line_dict):
         tokens.append(str(int(w["number"])))
@@ -109,7 +132,12 @@ def process_lines_to_file(
 ) -> int:
     """Write one sentence per hexameter line, each ending with <EOL>.
 
-    Returns the number of sentences written.
+    Args:
+        line_numbers: Per-line lists of metrical number strings.
+        output_path: Path to write the output file.
+
+    Returns:
+        Number of sentences written.
     """
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
@@ -133,7 +161,16 @@ def process_xml_corpus(
     skip: set[str] | None = None,
     out_prefix: str = "",
 ) -> None:
-    """Process XML sources and write mapped-lines files."""
+    """Process XML sources and write mapped-lines files.
+
+    Args:
+        source_dir: Directory containing source XML files.
+        source_glob: Glob pattern for source files.
+        output_dir: Directory to write output files.
+        label: Human-readable label for progress messages.
+        skip: Set of file stems to skip.
+        out_prefix: Prefix for output filenames.
+    """
     if skip is None:
         skip = set()
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -167,7 +204,14 @@ def process_json_corpus(
     output_dir: Path,
     label: str,
 ) -> None:
-    """Process JSON sources and write mapped-lines files."""
+    """Process JSON sources and write mapped-lines files.
+
+    Args:
+        source_dir: Directory containing source JSON files.
+        source_glob: Glob pattern for source files.
+        output_dir: Directory to write output files.
+        label: Human-readable label for progress messages.
+    """
     output_dir.mkdir(parents=True, exist_ok=True)
 
     source_files = sorted(source_dir.glob(source_glob))

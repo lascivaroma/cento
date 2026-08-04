@@ -22,11 +22,7 @@ import json
 import sys
 from pathlib import Path
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-if str(SCRIPTS_DIR) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS_DIR))
-
-from metrical_numbering import process_line as xml_process_line
+from metrical_numbering import WordResult, process_line as xml_process_line
 from hypotactic_numbering import process_line as json_process_line
 
 
@@ -48,8 +44,15 @@ def _patch_prodelision(line_elem) -> None:
                 next_w["sy"] = ""
 
 
-def process_xml(xml_path: Path) -> list[dict]:
-    """Process an XML file and return per-line word data."""
+def process_xml(xml_path: Path) -> list[list[WordResult]]:
+    """Process an XML file and return per-line word data.
+
+    Args:
+        xml_path: Path to a Pedecerto XML file.
+
+    Returns:
+        List of word result lists, one per hexameter line.
+    """
     from bs4 import BeautifulSoup
 
     tree = BeautifulSoup(xml_path.read_text(encoding="utf-8"), "xml")
@@ -63,8 +66,15 @@ def process_xml(xml_path: Path) -> list[dict]:
     return lines
 
 
-def process_json(json_path: Path) -> list[dict]:
-    """Process a JSON file and return per-line word data."""
+def process_json(json_path: Path) -> list[list[WordResult]]:
+    """Process a JSON file and return per-line word data.
+
+    Args:
+        json_path: Path to a hypotactic JSON file.
+
+    Returns:
+        List of word result lists, one per hexameter line.
+    """
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -77,8 +87,16 @@ def process_json(json_path: Path) -> list[dict]:
     return lines
 
 
-def format_details(lines: list[list[dict]], title: str) -> str:
-    """Format word data into a human-readable table."""
+def format_details(lines: list[list[WordResult]], title: str) -> str:
+    """Format word data into a human-readable table.
+
+    Args:
+        lines: List of word result lists, one per hexameter line.
+        title: Title to display at the top of the table.
+
+    Returns:
+        Formatted text string with the scansion table.
+    """
     out = []
     out.append("=" * 100)
     out.append(title)

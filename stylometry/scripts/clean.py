@@ -55,7 +55,11 @@ PRESERVE = {
 def clean_directory(path: Path) -> int:
     """Remove all files and subdirectories inside path, keeping path itself.
 
-    Returns the number of items removed.
+    Args:
+        path: Directory to clean.
+
+    Returns:
+        Number of items removed.
     """
     if not path.exists():
         return 0

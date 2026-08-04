@@ -29,7 +29,7 @@ import unicodedata
 from pathlib import Path
 from typing import Any
 
-from metrical_numbering import PRIME, word_to_number
+from metrical_numbering import PRIME, WordResult, word_to_number
 
 
 # ---------------------------------------------------------------------------
@@ -67,7 +67,7 @@ def _word_syllables(word: dict[str, Any]) -> list[dict[str, str]]:
 # Line processing
 # ---------------------------------------------------------------------------
 
-def process_line(line_dict: dict[str, Any]) -> list[dict[str, Any]]:
+def process_line(line_dict: dict[str, Any]) -> list[WordResult]:
     """Process a single line dict and return word data.
 
     Same output format as metrical_numbering.process_line.
@@ -84,7 +84,7 @@ def process_line(line_dict: dict[str, Any]) -> list[dict[str, Any]]:
         for w in (seg.get("words") or []):
             all_words.append(w)
 
-    results: list[dict[str, Any]] = []
+    results: list[WordResult] = []
 
     for i, w in enumerate(all_words):
         text = _word_text(w)
@@ -93,7 +93,6 @@ def process_line(line_dict: dict[str, Any]) -> list[dict[str, Any]]:
         # Convert syllables to L/S, detect special cases
         base: list[str] = []
         last_syl_text = ""
-        last_syl_length = ""
         has_elided = False
 
         for s in syls:
@@ -103,7 +102,6 @@ def process_line(line_dict: dict[str, Any]) -> list[dict[str, Any]]:
             if length == "elided":
                 has_elided = True
                 last_syl_text = st
-                last_syl_length = "elided"
                 continue  # don't add to base yet
 
             if length == "long":
@@ -113,12 +111,12 @@ def process_line(line_dict: dict[str, Any]) -> list[dict[str, Any]]:
             # skip empty/unknown
 
             last_syl_text = st
-            last_syl_length = length
 
         # Special case: est with elided syllable → PE target
         if text.lower() == "est" and has_elided:
             results.append({
                 "text": text,
+                "sy_raw": "",
                 "syllables": [],
                 "added": ["lost"],
                 "final_syllables": [],
@@ -139,6 +137,7 @@ def process_line(line_dict: dict[str, Any]) -> list[dict[str, Any]]:
                 added.append("push_e")
                 results.append({
                     "text": text,
+                    "sy_raw": "",
                     "syllables": base,
                     "added": ["push_e"],
                     "final_syllables": [],
@@ -165,6 +164,7 @@ def process_line(line_dict: dict[str, Any]) -> list[dict[str, Any]]:
 
         results.append({
             "text": text,
+            "sy_raw": "",
             "syllables": base,
             "added": added,
             "final_syllables": final,

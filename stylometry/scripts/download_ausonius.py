@@ -80,17 +80,27 @@ ALL_WORKS = {
 
 
 def fetch_author_page(url: str) -> str:
-    """Fetch the HTML of the author page."""
+    """Fetch the HTML of the author page.
+
+    Args:
+        url: URL of the Pedecerto author page.
+
+    Returns:
+        HTML content as a string.
+    """
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req) as resp:
         return resp.read().decode("utf-8")
 
 
 def parse_download_ids(html: str) -> dict[int, str]:
-    """
-    Parse the author page HTML to extract download IDs and their titles.
+    """Parse the author page HTML to extract download IDs and their titles.
 
-    Returns a mapping of download_id -> title.
+    Args:
+        html: HTML content of the author page.
+
+    Returns:
+        Mapping of download_id to title.
     """
     pattern = r"javascript:download\((\d+)\)[^>]*>([^<]*)"
     matches = re.findall(pattern, html)
@@ -104,10 +114,14 @@ def parse_download_ids(html: str) -> dict[int, str]:
 
 
 def download_xml(download_id: int, output_path: Path) -> bool:
-    """
-    Download a single XML file from Pedecerto.
+    """Download a single XML file from Pedecerto.
 
-    Returns True on success, False on failure.
+    Args:
+        download_id: Pedecerto work download ID.
+        output_path: Path to write the downloaded XML file.
+
+    Returns:
+        True on success, False on failure.
     """
     url = f"{DOWNLOAD_BASE}/{download_id}"
     try:

@@ -11,13 +11,7 @@ Usage:
 from __future__ import annotations
 
 import json
-import sys
 from pathlib import Path
-
-# Add scripts dir to path for corpus_utils and naming
-SCRIPTS_DIR = Path(__file__).resolve().parent
-if str(SCRIPTS_DIR) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS_DIR))
 
 from corpus_utils import find_poems_in_doc, line_meter
 
@@ -44,7 +38,16 @@ def _safe_name(s: str) -> str:
 
 
 def extract_poem(ctx: dict, lines: list[dict], out_dir: Path) -> Path:
-    """Write a single poem as a small JSON file."""
+    """Write a single poem as a small JSON file.
+
+    Args:
+        ctx: Context dict with author, work, book, poem_num keys.
+        lines: List of line dicts from the source JSON.
+        out_dir: Directory to write the output JSON file.
+
+    Returns:
+        Path to the written JSON file.
+    """
     author = _safe_name(ctx.get("author", "unknown"))
     work = _safe_name(ctx.get("work", "unknown"))
     book = ctx.get("book", "")
@@ -85,6 +88,9 @@ def main() -> int:
 
     Expects author-level JSON files in raw/hypotactic_source/ (one-time copy).
     After extraction, the source directory can be deleted to save space.
+
+    Returns:
+        0 on success, 1 if the source directory is missing.
     """
     source_dir = Path(__file__).resolve().parent.parent / "raw" / "hypotactic_source"
     if not source_dir.exists():
@@ -111,7 +117,7 @@ def main() -> int:
                     continue
                 path = extract_poem(ctx, lines, out_dir)
                 print(f"  {path.name} ({ctx.get('work')} {ctx.get('book')}): "
-                      f"{sum(1 for l in lines if line_meter(l) == 'hexameter')} hex lines")
+                      f"{sum(1 for ln in lines if line_meter(ln) == 'hexameter')} hex lines")
 
     return 0
 

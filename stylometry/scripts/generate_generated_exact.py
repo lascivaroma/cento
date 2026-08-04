@@ -29,10 +29,6 @@ from typing import Dict, List, Tuple
 
 from bs4 import BeautifulSoup
 
-SCRIPTS_DIR = Path(__file__).resolve().parent
-if str(SCRIPTS_DIR) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS_DIR))
-
 from metrical_numbering import _norm, process_line as xml_process_line
 
 # ---------------------------------------------------------------------------
@@ -58,7 +54,11 @@ OUT_LEXICAL = BASE_DIR / "lexical_model" / "generated_exact"
 def load_pos_mapping(path: Path) -> Dict[str, Tuple[str, bool]]:
     """Load the Pedecerto to UD POS mapping file.
 
-    Returns dict: pedecerto_pos -> (ud_pos, should_mask).
+    Args:
+        path: Path to the TSV mapping file.
+
+    Returns:
+        Dict mapping pedecerto_pos to (ud_pos, should_mask).
     """
     mapping: Dict[str, Tuple[str, bool]] = {}
     with open(path, "r", encoding="utf-8") as f:
@@ -74,7 +74,11 @@ def load_pos_mapping(path: Path) -> Dict[str, Tuple[str, bool]]:
 def load_common_adverbs(path: Path) -> set[str]:
     """Load common adverbs that should NOT be masked.
 
-    Format: one adverb per line, tab-separated (word, count).
+    Args:
+        path: Path to the adverbs file (tab-separated word + count).
+
+    Returns:
+        Set of normalised adverb forms.
     """
     adverbs: set[str] = set()
     with open(path, "r", encoding="utf-8") as f:
@@ -131,13 +135,17 @@ def extract_xml_data(xml_path: Path) -> Tuple[
 ]:
     """Extract plain text, metrical numbers, and POS data from XML.
 
-    Returns three parallel lists indexed by hexameter line number:
-    - plain_lines: text with | pipe markers from <milestone> tags
-    - line_numbers: per-line lists of metrical number strings
-    - line_words: per-line lists of (normalised_text, pos_tag) tuples
-
     Prodelision is auto-detected: when a word with mf=SY is followed by
     'est', the est is marked with mf=PE before metrical processing.
+
+    Args:
+        xml_path: Path to the generated cento XML file.
+
+    Returns:
+        Tuple of (plain_lines, line_numbers, line_words) where:
+        - plain_lines: text with | pipe markers from <milestone> tags
+        - line_numbers: per-line lists of metrical number strings
+        - line_words: per-line lists of (normalised_text, pos_tag) tuples
     """
     tree = BeautifulSoup(xml_path.read_text(encoding="utf-8"), "xml")
 
@@ -184,7 +192,14 @@ def extract_xml_data(xml_path: Path) -> Tuple[
 
 
 def strip_parens(text: str) -> str:
-    """Remove all parentheses and brackets from text."""
+    """Remove all parentheses and brackets from text.
+
+    Args:
+        text: Input text.
+
+    Returns:
+        Text with all parentheses and brackets removed.
+    """
     return re.sub(r"[()[\]{}]", "", text)
 
 
@@ -193,7 +208,14 @@ def strip_parens(text: str) -> str:
 # ---------------------------------------------------------------------------
 
 def sentence_split(text: str) -> List[str]:
-    """Split text into sentences using latin_masking."""
+    """Split text into sentences using latin_masking.
+
+    Args:
+        text: Plain text to split.
+
+    Returns:
+        List of sentence strings with <EOL>/<EOS> markers.
+    """
     from latin_masking.sentences import split_sentences
     return split_sentences(text, preserve_eol=True)
 
@@ -203,6 +225,13 @@ def que_split_sentences(sentences: List[str], common_adverbs: set[str]) -> List[
 
     Respects both the default blacklist and common_adverbs to protect
     known adverbs from being split.
+
+    Args:
+        sentences: List of sentence strings to process.
+        common_adverbs: Set of adverbs to protect from splitting.
+
+    Returns:
+        List of sentences with -que clitics split.
     """
     from latin_masking.clitics import split_que_blacklist
     result: List[str] = []
@@ -217,7 +246,15 @@ def que_split_sentences(sentences: List[str], common_adverbs: set[str]) -> List[
 # ---------------------------------------------------------------------------
 
 def build_fifo_lookup(norms: List[str], values: list) -> Dict[str, list]:
-    """Build a FIFO lookup from normalised words to their values."""
+    """Build a FIFO lookup from normalised words to their values.
+
+    Args:
+        norms: List of normalised word forms.
+        values: Parallel list of values to look up.
+
+    Returns:
+        Dict mapping normalised words to FIFO queues of values.
+    """
     lookup: Dict[str, list] = defaultdict(list)
     for norm, val in zip(norms, values):
         lookup[norm].append(val)
@@ -240,6 +277,16 @@ def mask_sentences_fifo(
     """Apply POS masking using FIFO alignment to XML POS tags.
 
     ADV words in common_adverbs are kept as lowercased words (not masked).
+
+    Args:
+        quesplit_sentences: Que-split sentence strings.
+        all_xml_norms: Flat list of normalised XML word forms.
+        all_xml_pos: Parallel list of Pedecerto POS tags.
+        pos_mapping: Mapping from Pedecerto POS to (ud_pos, should_mask).
+        common_adverbs: Set of adverbs to keep as words.
+
+    Returns:
+        List of POS-masked sentence strings.
     """
     pos_lookup = build_fifo_lookup(all_xml_norms, all_xml_pos)
 
@@ -301,7 +348,16 @@ def metrical_sentences_fifo(
     all_xml_norms: List[str],
     all_xml_numbers: List[str],
 ) -> Tuple[List[str], int]:
-    """Build sentence-based metrical output using FIFO alignment."""
+    """Build sentence-based metrical output using FIFO alignment.
+
+    Args:
+        quesplit_sentences: Que-split sentence strings.
+        all_xml_norms: Flat list of normalised XML word forms.
+        all_xml_numbers: Parallel list of metrical number strings.
+
+    Returns:
+        Tuple of (numbered_sentences, mismatch_count).
+    """
     num_lookup = build_fifo_lookup(all_xml_norms, all_xml_numbers)
 
     result: List[str] = []
@@ -347,7 +403,12 @@ def metrical_sentences_fifo(
 # ---------------------------------------------------------------------------
 
 def write_lines(path: Path, lines: List[str]) -> None:
-    """Write lines to a file, one per line."""
+    """Write lines to a file, one per line.
+
+    Args:
+        path: Output file path.
+        lines: List of strings to write.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         for line in lines:
@@ -355,7 +416,12 @@ def write_lines(path: Path, lines: List[str]) -> None:
 
 
 def write_metrical_lines(path: Path, line_numbers: List[List[str]]) -> None:
-    """Write one metrical sentence per hexameter line, ending with <EOL>."""
+    """Write one metrical sentence per hexameter line, ending with <EOL>.
+
+    Args:
+        path: Output file path.
+        line_numbers: Per-line lists of metrical number strings.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         for nums in line_numbers:
@@ -373,7 +439,17 @@ def process_one_file(
     common_adverbs: set[str],
     verbose: bool = True,
 ) -> None:
-    """Process a single generated cento XML file."""
+    """Process a single generated cento XML file.
+
+    Produces plain text, sentence-split, que-split, POS-masked,
+    and metrical output files.
+
+    Args:
+        xml_path: Path to the generated cento XML file.
+        pos_mapping: Pedecerto POS to (ud_pos, should_mask) mapping.
+        common_adverbs: Set of adverbs to keep as words.
+        verbose: If True, print progress messages.
+    """
     stem = xml_path.stem
 
     if verbose:

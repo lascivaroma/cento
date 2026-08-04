@@ -41,12 +41,26 @@ VALID_FEET = {
 
 
 def parse_sy(sy: str) -> list[tuple[int, str]]:
-    """Parse a sy string into (foot_num, type) pairs."""
+    """Parse a sy string into (foot_num, type) pairs.
+
+    Args:
+        sy: Pedecerto sy attribute string (e.g. "1A1b1c2A").
+
+    Returns:
+        List of (foot_number, syllable_type) tuples.
+    """
     return [(int(m.group(1)), m.group(2)) for m in re.finditer(r'(\d)([A-Za-z])', sy)]
 
 
 def validate_line(sy: str) -> list[str]:
-    """Validate a complete line's scansion. Returns list of error messages."""
+    """Validate a complete line's scansion.
+
+    Args:
+        sy: Concatenated sy attributes from all words in the line.
+
+    Returns:
+        List of error messages (empty if valid).
+    """
     if not sy:
         return ["empty scansion"]
 
@@ -79,8 +93,15 @@ def validate_line(sy: str) -> list[str]:
     return errors
 
 
-def verify_file(xml_path: Path) -> list[tuple[int, str, str, list[str]]]:
-    """Verify all hexameter lines in a file. Returns list of (line_num, word_text, sy, errors)."""
+def verify_file(xml_path: Path) -> list[tuple[int, str, list[str]]]:
+    """Verify all hexameter lines in a file.
+
+    Args:
+        xml_path: Path to the generated cento XML file.
+
+    Returns:
+        List of (line_num, full_sy, errors) tuples for lines with issues.
+    """
     tree = BeautifulSoup(xml_path.read_text(), "xml")
     issues = []
 

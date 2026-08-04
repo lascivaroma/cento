@@ -144,7 +144,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
-    """Entry point.
+    """Run the latin_masking pipeline stages.
 
     Returns:
         Exit code (0 on success, 2 if no stages requested).

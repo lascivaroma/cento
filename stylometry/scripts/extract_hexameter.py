@@ -13,7 +13,6 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import sys
 from pathlib import Path
 
 from bs4 import BeautifulSoup
@@ -33,7 +32,17 @@ HEXAMETER_METER = "H"
 
 
 def is_valid_hexameter(line_tag) -> bool:
-    """Check if a line is valid hexameter: meter=H, not unscanned, has sy attributes."""
+    """Check if a line is valid hexameter.
+
+    A line is valid if meter="H", pattern is not "not scanned", and at
+    least one word has a sy attribute (is scanned).
+
+    Args:
+        line_tag: A BeautifulSoup <line> element.
+
+    Returns:
+        True if the line is a valid hexameter line.
+    """
     if line_tag.get("meter") != "H":
         return False
 
@@ -50,12 +59,17 @@ def is_valid_hexameter(line_tag) -> bool:
 
 
 def is_verse_line(line) -> bool:
-    """Check if an element is an actual verse line (has a name attribute).
+    """Check if an element is an actual verse line.
 
     Some Pedecerto XML files contain <line> elements that are structural
     markers (prose section headers, scene changes) rather than actual verse
-    lines. These have no 'name' attribute and should be skipped when
-    detecting continuous hexameter stretches.
+    lines. These have no 'name' attribute and should be skipped.
+
+    Args:
+        line: A BeautifulSoup <line> element.
+
+    Returns:
+        True if the element has a 'name' attribute (is an actual verse).
     """
     return bool(line.get("name"))
 
@@ -63,12 +77,17 @@ def is_verse_line(line) -> bool:
 def find_hexameter_stretches(lines: list, min_stretch: int = 10) -> list[list]:
     """Find continuous stretches of valid hexameter lines.
 
-    A stretch is a run of consecutive hexameter lines (meter="H").  Lacunose
+    A stretch is a run of consecutive hexameter lines (meter="H"). Lacunose
     lines (meter="H" but pattern="not scanned" or missing sy=) are allowed
-    *within* a stretch — they keep the run alive — but are stripped from the
-    final output.  Only stretches with ≥ min_stretch *valid* lines are kept.
+    within a stretch but are stripped from the final output. Only stretches
+    with >= min_stretch valid lines are kept.
 
-    Non-verse elements (no 'name' attribute) are skipped entirely.
+    Args:
+        lines: List of BeautifulSoup <line> elements.
+        min_stretch: Minimum number of valid hexameter lines to keep a stretch.
+
+    Returns:
+        List of stretches, each a list of valid <line> elements.
     """
     stretches: list[list] = []
     current_raw: list = []
@@ -83,13 +102,13 @@ def find_hexameter_stretches(lines: list, min_stretch: int = 10) -> list[list]:
             current_raw.append(line)
         else:
             # Non-hexameter verse line — break the stretch
-            valid = [l for l in current_raw if is_valid_hexameter(l)]
+            valid = [ln for ln in current_raw if is_valid_hexameter(ln)]
             if len(valid) >= min_stretch:
                 stretches.append(valid)
             current_raw = []
 
     # Finalise last stretch
-    valid = [l for l in current_raw if is_valid_hexameter(l)]
+    valid = [ln for ln in current_raw if is_valid_hexameter(ln)]
     if len(valid) >= min_stretch:
         stretches.append(valid)
 
@@ -97,7 +116,15 @@ def find_hexameter_stretches(lines: list, min_stretch: int = 10) -> list[list]:
 
 
 def process_file(input_path: Path, min_stretch: int) -> tuple[int, int, int]:
-    """Process a single XML file, returning (total_lines, hex_lines, eligible_lines)."""
+    """Process a single XML file and count hexameter lines.
+
+    Args:
+        input_path: Path to the Pedecerto XML file.
+        min_stretch: Minimum stretch length to count as eligible.
+
+    Returns:
+        Tuple of (total_lines, hex_lines, eligible_lines).
+    """
     with open(input_path, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -106,7 +133,7 @@ def process_file(input_path: Path, min_stretch: int) -> tuple[int, int, int]:
     lines = soup.find_all("line")
 
     # Find all valid hexameter lines
-    all_hex = [l for l in lines if is_valid_hexameter(l)]
+    all_hex = [ln for ln in lines if is_valid_hexameter(ln)]
 
     # Find stretches of continuous hexameter
     stretches = find_hexameter_stretches(lines, min_stretch)
@@ -120,7 +147,16 @@ def process_file(input_path: Path, min_stretch: int) -> tuple[int, int, int]:
 
 
 def extract_file(input_path: Path, output_path: Path, min_stretch: int) -> int:
-    """Extract hexameter stretches from a single file. Returns number of lines written."""
+    """Extract hexameter stretches from a single file.
+
+    Args:
+        input_path: Path to the source Pedecerto XML file.
+        output_path: Path to write the extracted hexameter XML.
+        min_stretch: Minimum continuous hexameter lines to keep.
+
+    Returns:
+        Number of hexameter lines written.
+    """
     with open(input_path, "r", encoding="utf-8") as f:
         content = f.read()
 

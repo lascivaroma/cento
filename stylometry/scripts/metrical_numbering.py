@@ -30,8 +30,20 @@ from __future__ import annotations
 
 import re
 from math import prod
+from typing import TypedDict
 
 from bs4 import Tag
+
+
+class WordResult(TypedDict):
+    """Result dict from process_line for a single word."""
+
+    text: str
+    sy_raw: str
+    syllables: list[str]
+    added: list[str]
+    final_syllables: list[str]
+    number: int
 
 
 # ---------------------------------------------------------------------------
@@ -131,7 +143,7 @@ def is_vowel_start(text: str) -> bool:
 # Line processing
 # ---------------------------------------------------------------------------
 
-def process_line(line_tag: Tag) -> list[dict[str, object]]:
+def process_line(line_tag: Tag) -> list[WordResult]:
     """Process a single <line> element and return word data.
 
     Only processes words that have actual scansion (non-empty sy attribute).
@@ -154,7 +166,7 @@ def process_line(line_tag: Tag) -> list[dict[str, object]]:
         final_syllables, number (int).
     """
     words = line_tag.find_all("word")
-    results = []
+    results: list[WordResult] = []
 
     for i, w in enumerate(words):
         text = word_text(w)

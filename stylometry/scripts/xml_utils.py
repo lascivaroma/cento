@@ -3,15 +3,16 @@
 
 
 def clean_xml(content: str) -> str:
-    """
-    Fix common XML issues in Pedecerto files.
+    """Fix common XML issues in Pedecerto files.
 
-    Some files contain unescaped < and > characters in attribute values
-    (e.g., division title attributes with <emph> tags).
+    Removes <division> opening and closing tags while keeping everything
+    else (including <line> elements).
 
-    This function walks the file line by line, removing <division> opening
-    and closing tags while keeping everything else (including <line> elements).
-    Division opening tags are always on single lines (ending with ">).
+    Args:
+        content: Raw XML content string.
+
+    Returns:
+        Cleaned XML content with division tags removed.
     """
     output_lines = []
 
