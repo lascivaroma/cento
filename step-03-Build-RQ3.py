@@ -31,6 +31,12 @@ class Segment:
         return "int"
 
 
+@lru_cache(maxsize=None)
+def _is_hypermetric(line):
+    scan = _line_scan(line)
+    return "7" in scan or scan.count("6") > 2
+
+
 def strip_punct(word_tag):
     return re.sub(r"\W", "", word_tag.text)
 
@@ -148,7 +154,9 @@ if run_template:
         for poem in xml_virgil.xpath("./div/div"):
             # For full line, it's simple, we get the line scan and check a match with our current one
             if scan == "/444444":
-                for line in poem.xpath("./line"):
+                for line in poem.xpath("./line[@pattern!='not scanned']"):
+                    if _is_hypermetric(line):
+                        continue
                     uniques[scan].append([
                         "<line>",
                         f"""<milestone source="{line.attrib["n"]}" />""",
@@ -162,6 +170,15 @@ if run_template:
                 lid = 0
                 while lid < len(lines) - 1:
                     line = lines[lid]
+                    if (
+                            line.attrib.get("pattern") == "not scanned"
+                            or lines[lid+1].attrib.get("pattern") == "not scanned"
+                    ):
+                        lid += 1
+                        continue
+                    if _is_hypermetric(line) or _is_hypermetric(lines[lid+1]):
+                        lid += 1
+                        continue
                     uniques[scan].append([
                         "<line>",
                         f"""<milestone source="{line.attrib["n"]}" />""",
@@ -202,6 +219,8 @@ if run_template:
             # Reverse of the first one
             elif not scan.startswith("/") and scan.count("/") == 0: # Single line end
                 for line in poem.xpath("./line[@pattern!='not scanned']"):
+                    if _is_hypermetric(line):
+                        continue
                     if words := _tail_scan_matching(line, scan):
                         uniques[scan].append([
                             f"""<milestone source="{line.attrib["n"]}" />""",
@@ -213,9 +232,12 @@ if run_template:
                 scan_bit = "/"+scan.split("/")[-1]
                 lid = 0
                 lines = poem.xpath("./line")
-                while lid < len(lines):
+                while lid < len(lines) - 1:
                     line = lines[lid]
                     if line.attrib.get("pattern") == "not scanned":
+                        lid += 1
+                        continue
+                    if _is_hypermetric(lines[lid-1]):
                         lid += 1
                         continue
                     # Unlike RQ2, we do not need to prescan the line
@@ -260,17 +282,23 @@ if run_template:
                     if line.attrib.get("pattern") == "not scanned" or lines[lid+1].attrib.get("pattern") == "not scanned":
                         lid += 1
                         continue
+                    if _is_hypermetric(line):
+                        lid += 1
+                        continue
                     first_segment, second_segment = [x for x in scan.split("/") if x]
                     second_segment = "/"+second_segment
                     if words := _tail_scan_matching(line, first_segment): # We match the first element
                         if second_segment == "/444444": # We got a full line for the second part
+                            if _is_hypermetric(lines[lid+1]):
+                                lid += 1
+                                continue
                             uniques[scan].append([
                                 f"""<milestone source="{line.attrib["n"]}" />""",
                                 *[et.tostring(word, encoding=str).strip() for word in words],
                                 "</line>",
                                 "<line>",
                                 f"""<milestone source="{lines[lid + 1].attrib["n"]}" />""",
-                                *_line_to_string(line),
+                                *_line_to_string(lines[lid + 1]),
                                 "</line>"
                             ])
                         else:
@@ -362,6 +390,8 @@ if run_cento:
                         attempts[situation] += 1
                         # Two not in a VOWEL means two consonnants, which means turned into long
                         if strip_punct(last_word)[-1] not in _VOWELS and strip_punct(candidate_first_word)[0] not in _VOWELS:
+                            continue
+                        elif bool(_elision(last_word_strip, candidate_first_word_strip)):
                             continue
                         else:
                             validated_candidate = candidate

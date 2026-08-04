@@ -4,7 +4,7 @@ latin_elision.py
 Detects elision and prodelision between two consecutive words in
 Latin verse (dactylic hexameter, elegiac couplets, etc.).
 """
-
+import os.path
 import re
 import unicodedata
 from typing import NamedTuple
@@ -12,6 +12,8 @@ from typing import NamedTuple
 VOWELS = set("aeiouy")  # y appears in Greek loanwords, e.g. "lyra"
 PRODELISION_WORDS = {"es", "est"}  # short forms of *sum* that elide themselves
 
+with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "..", "stylometry", "vergil_vj_vocab.txt")) as f:
+    VJ_WORDS = set([l.strip() for l in f.read().splitlines()])
 
 def _clean(word: str) -> str:
     """Lowercase a word and strip punctuation, whitespace, and
@@ -25,10 +27,15 @@ def _starts_with_vowel_sound(w: str) -> bool:
     """Does cleaned word `w` expose a vowel sound at its start?"""
     if not w:
         return False
+    if w in VJ_WORDS:
+        return False
     # Word-initial i/u before another vowel is usually consonantal
     # (semivowel): "iam" ~ "yam", "video"/"uideo" ~ "wideo".
     if w[0] in ("i", "u") and len(w) > 1 and w[1] in VOWELS:
-        return False
+        if len(w) > 2 and w[2] in VOWELS: # uuam starts with vowel
+            return True
+        else:
+            return False
     if w[0] == "h":  # h is phonetically silent
         return len(w) > 1 and w[1] in VOWELS
     return w[0] in VOWELS
@@ -117,6 +124,7 @@ if __name__ == "__main__":
         ("atque", "iam", ElisionResult(False, False), "illustrative: 'iam' is consonant-initial"),
         ("puella", "hic", ElisionResult(True, False), "illustrative: silent h before vowel"),
         ("Aeneas", "", ElisionResult(False, False), "empty word2 is handled gracefully"),
+        ("manum", "uuam", ElisionResult(True, False), "Triple should go through"),
     ]
 
     w1_width = max(len(c[0]) for c in cases)

@@ -297,7 +297,7 @@ def make_cento(file: int, seed: int = 42, max_candidates: int = 100):
     attempts = Counter()
     for segment in template:
         candidates = uniques[segment.scan]
-        if not segment.start_a_line and "6A" not in xml[-1]: # We only need to check new merge
+        if not segment.start_a_line and "6" not in xml[-1] and "7" not in xml[-1]: # We only need to check new merge
             last_word = _w_to_xml(xml[-1])
             last_word_strip = strip_punct(last_word)
             nb_candidates = max_candidates
@@ -318,6 +318,8 @@ def make_cento(file: int, seed: int = 42, max_candidates: int = 100):
                 elif last_word.attrib.get("mf", "") == "SY":
                     situation = "Elision removed"
                     attempts[situation] += 1
+                    # We check that the elision is kept
+                    #   If it is, it's a validate candidate
                     if _elision(last_word_strip, candidate_first_word_strip).word1_elided:
                         validated_candidate = candidate
                         break
@@ -326,7 +328,9 @@ def make_cento(file: int, seed: int = 42, max_candidates: int = 100):
                     situation = "Short lengthened"
                     attempts[situation] += 1
                     # Two not in a VOWEL means two consonnants, which means turned into long
-                    if strip_punct(last_word)[-1] not in _VOWELS and strip_punct(candidate_first_word)[0] not in _VOWELS:
+                    if last_word_strip[-1] not in _VOWELS and candidate_first_word_strip[0] not in _VOWELS:
+                        continue
+                    elif bool(_elision(last_word_strip, candidate_first_word_strip)):
                         continue
                     else:
                         validated_candidate = candidate
@@ -334,7 +338,7 @@ def make_cento(file: int, seed: int = 42, max_candidates: int = 100):
                 else:
                     # We only check is something becomes elided
                     # A new elision should not happen on a single char word
-                    if len(strip_punct(last_word)) == 1:
+                    if len(last_word_strip) == 1:
                         validated_candidate = candidate
                         break
                     if not bool(_elision(last_word_strip, candidate_first_word_strip)):
