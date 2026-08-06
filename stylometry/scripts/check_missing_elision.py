@@ -78,17 +78,28 @@ def is_consonantal_v(word: str, vj_vocab: set[str]) -> bool:
 
     The vocab file has v-words with all non-initial v normalized to u.
     So just change the first 'u' to 'v' and look up.
+    Also handles -que clitics: if the full form isn't found, try stripping
+    -que and checking the base form (e.g. 'uestrique' -> 'vestri').
 
     Args:
         word: Cleaned lowercase word.
         vj_vocab: Set of normalized v/j words from Vergil's hypotactic data.
 
     Returns:
-        True if 'v' + word[1:] matches the vocabulary.
+        True if the word matches a consonantal-v word in the vocabulary.
     """
     if not word or word[0] != "u":
         return False
-    return ("v" + word[1:]) in vj_vocab
+    v_form = "v" + word[1:]
+    if v_form in vj_vocab:
+        return True
+    # Try stripping -que clitic
+    if word.endswith("que") and len(word) > 3:
+        base = word[:-3]
+        if base:
+            v_base = "v" + base[1:]
+            return v_base in vj_vocab
+    return False
 
 
 def is_consonantal_j(word: str, vj_vocab: set[str]) -> bool:
@@ -96,17 +107,28 @@ def is_consonantal_j(word: str, vj_vocab: set[str]) -> bool:
 
     The vocab file has j-words with all non-initial j normalized to i.
     So just change the first 'i' to 'j' and look up.
+    Also handles -que clitics: if the full form isn't found, try stripping
+    -que and checking the base form (e.g. 'iungentque' -> 'jungent').
 
     Args:
         word: Cleaned lowercase word.
         vj_vocab: Set of normalized v/j words from Vergil's hypotactic data.
 
     Returns:
-        True if 'j' + word[1:] matches the vocabulary.
+        True if the word matches a consonantal-j word in the vocabulary.
     """
     if not word or word[0] != "i":
         return False
-    return ("j" + word[1:]) in vj_vocab
+    j_form = "j" + word[1:]
+    if j_form in vj_vocab:
+        return True
+    # Try stripping -que clitic
+    if word.endswith("que") and len(word) > 3:
+        base = word[:-3]
+        if base:
+            j_base = "j" + base[1:]
+            return j_base in vj_vocab
+    return False
 
 
 def is_vowel_ending(word: str) -> bool:
