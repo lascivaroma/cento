@@ -13,6 +13,9 @@ This script reports only — it does not modify any files.
 
 Usage:
     python scripts/check_missing_elision.py [--limit N]
+    python scripts/check_missing_elision.py --file cento_0001.xml
+    python scripts/check_missing_elision.py --file ../data/generated-compact/loose/cento_*.xml
+    python scripts/check_missing_elision.py --file ../data/generated-compact/loose/*.xml -o report.txt
 """
 
 from __future__ import annotations
@@ -191,8 +194,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--limit", type=int, default=0,
                         help="Process only the first N files (0 = all)")
-    parser.add_argument("--file", type=str, default=None,
-                        help="Process a single specific file instead of scanning directories")
+    parser.add_argument("--file", nargs="+", default=None,
+                        help="Process specific file(s) instead of scanning directories. "
+                             "Accepts multiple paths or glob patterns (shell-expanded).")
     parser.add_argument("--output", "-o", type=str, default=None,
                         help="Write report to this file instead of stdout")
     args = parser.parse_args()
@@ -202,7 +206,7 @@ def main() -> int:
 
     source_files: list[Path] = []
     if args.file:
-        source_files = [Path(args.file)]
+        source_files = [Path(f) for f in args.file]
     else:
         for source_dir in SOURCE_DIRS:
             source_files.extend(sorted(source_dir.glob("cento_*.xml")))
@@ -220,6 +224,7 @@ def main() -> int:
     total_missing = 0
     total_consonantal_v = 0
     total_consonantal_j = 0
+    total_single_vowel = 0
     files_with_issues = 0
 
     for xml_path in source_files:
@@ -239,6 +244,11 @@ def main() -> int:
                 if not is_vowel_ending(prev_text):
                     continue
                 if not is_vowel_start(next_text):
+                    continue
+
+                # Single-vowel words (a, e, i, o, u) are always hiatus
+                if len(prev_text) == 1:
+                    total_single_vowel += 1
                     continue
 
                 # Filter consonantal v/u
@@ -272,6 +282,7 @@ def main() -> int:
     print(f"Total missing elision: {total_missing}", file=out)
     print(f"Filtered as consonantal u/v: {total_consonantal_v}", file=out)
     print(f"Filtered as consonantal i/j: {total_consonantal_j}", file=out)
+    print(f"Filtered as single vowel: {total_single_vowel}", file=out)
 
     if args.output:
         out.close()
