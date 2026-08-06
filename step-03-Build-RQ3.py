@@ -355,9 +355,9 @@ if run_cento:
         random.seed(seed)
         xml = []
         attempts = Counter()
-        for segment in template:
+        for template_idx, segment in enumerate(template):
             candidates = uniques[segment.loose_scan]
-            if not segment.start_a_line and "6" not in segment.scan: # We only need to check new merge
+            if xml and xml[-1] != "</line>" and "6" not in xml[-1] and "7" not in xml[-1]: # We only need to check new merge
                 # if "".join(xml).count("<line") == 43:
                 #     print("".join(xml).count("<line"), segment)
                 #     print(xml)
