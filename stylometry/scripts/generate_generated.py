@@ -44,29 +44,29 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 POS_MAPPING_PATH = BASE_DIR / "pos_mapping.tsv"
 ADVERBS_PATH = BASE_DIR / "scripts" / "common_adverbs.txt"
+UNMASKED_VOCAB_PATH = BASE_DIR / "scripts" / "unmasked_vocab.txt"
 
 
 # ---------------------------------------------------------------------------
 # POS mapping
 # ---------------------------------------------------------------------------
 
-def load_pos_mapping(path: Path) -> Dict[str, Tuple[str, bool]]:
+def load_pos_mapping(path: Path) -> Dict[str, str]:
     """Load the Pedecerto to UD POS mapping file.
 
     Args:
         path: Path to the TSV mapping file.
 
     Returns:
-        Dict mapping pedecerto_pos to (ud_pos, should_mask).
+        Dict mapping pedecerto_pos to ud_pos.
     """
-    mapping: Dict[str, Tuple[str, bool]] = {}
+    mapping: Dict[str, str] = {}
     with open(path, "r", encoding="utf-8") as f:
         reader = csv.reader(f, delimiter="\t")
         for row in reader:
             if not row or row[0].startswith("#"):
                 continue
-            ped_pos, ud_pos, mask_flag = row[0], row[1], row[2].strip().lower()
-            mapping[ped_pos] = (ud_pos, mask_flag == "y")
+            mapping[row[0]] = row[1]
     return mapping
 
 
@@ -89,6 +89,28 @@ def load_common_adverbs(path: Path) -> set[str]:
             if word:
                 adverbs.add(_norm(word))
     return adverbs
+
+
+def load_unmasked_vocab(path: Path) -> set[str]:
+    """Load the reference unmasked vocabulary from disk.
+
+    This file is pre-extracted from Vergil, Ausonius, and background
+    masked files.  Words in this set stay as lowercased words in the
+    generated centos; everything else gets a POS tag.
+
+    Args:
+        path: Path to unmasked_vocab.txt (one word per line).
+
+    Returns:
+        Set of lowercased word forms.
+    """
+    words: set[str] = set()
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            w = line.strip()
+            if w:
+                words.add(w)
+    return words
 
 
 # ---------------------------------------------------------------------------
@@ -285,19 +307,22 @@ def mask_sentences_fifo(
     quesplit_sentences: List[str],
     all_xml_norms: List[str],
     all_xml_pos: List[str],
-    pos_mapping: Dict[str, Tuple[str, bool]],
+    pos_mapping: Dict[str, str],
     common_adverbs: set[str],
+    vergil_unmasked: set[str],
 ) -> List[str]:
     """Apply POS masking using FIFO alignment to XML POS tags.
 
-    ADV words in common_adverbs are kept as lowercased words (not masked).
+    Words in the reference unmasked vocabulary stay as lowercased words.
+    Everything else gets its UDPipe POS tag from pos_mapping.
 
     Args:
         quesplit_sentences: Que-split sentence strings.
         all_xml_norms: Flat list of normalised XML word forms.
         all_xml_pos: Parallel list of Pedecerto POS tags.
-        pos_mapping: Mapping from Pedecerto POS to (ud_pos, should_mask).
-        common_adverbs: Set of adverbs to keep as words.
+        pos_mapping: Mapping from Pedecerto POS to UDPipe POS tag.
+        common_adverbs: (unused, kept for backwards compat)
+        vergil_unmasked: Set of normalised words to keep unmasked.
 
     Returns:
         List of POS-masked sentence strings.
@@ -335,14 +360,13 @@ def mask_sentences_fifo(
             if ped_pos is not None:
                 # Strip CON clitic tag (e.g. "ADJqua CON" → "ADJqua")
                 ped_pos = ped_pos.split()[0] if " " in ped_pos else ped_pos
-                ud_pos, should_mask = pos_mapping.get(ped_pos, (ped_pos, False))
-                # ADV: keep common adverbs as words, mask rare ones
-                if ped_pos in ("ADV", "ADVneg") and norm in common_adverbs:
+                # Words in the reference unmasked vocab stay as words;
+                # everything else gets its UDPipe POS tag.
+                if norm in vergil_unmasked:
                     masked.append(norm)
-                elif should_mask:
-                    masked.append(ud_pos)
                 else:
-                    masked.append(norm)
+                    ud_pos = pos_mapping.get(ped_pos, ped_pos)
+                    masked.append(ud_pos)
             else:
                 mismatches += 1
                 masked.append(norm)
@@ -463,8 +487,9 @@ def write_metrical_lines(path: Path, line_numbers: List[List[str]]) -> None:
 
 def process_one_file(
     xml_path: Path,
-    pos_mapping: Dict[str, Tuple[str, bool]],
+    pos_mapping: Dict[str, str],
     common_adverbs: set[str],
+    unmasked_vocab: set[str],
     out_processed: Path,
     out_metrical_lines: Path,
     out_metrical_sent: Path,
@@ -479,7 +504,8 @@ def process_one_file(
     Args:
         xml_path: Path to the generated cento XML file.
         pos_mapping: Pedecerto POS to (ud_pos, should_mask) mapping.
-        common_adverbs: Set of adverbs to keep as words.
+        common_adverbs: Set of adverbs for que-splitting protection.
+        unmasked_vocab: Reference unmasked words (stay as words).
         out_processed: Directory for processed output files.
         out_metrical_lines: Directory for line-based metrical output.
         out_metrical_sent: Directory for sentence-based metrical output.
@@ -520,7 +546,7 @@ def process_one_file(
             all_xml_numbers.append(num)
 
     # 7. POS masking (add <EOS> to match existing pipeline format)
-    masked = mask_sentences_fifo(quesplit, all_xml_norms, all_xml_pos, pos_mapping, common_adverbs)
+    masked = mask_sentences_fifo(quesplit, all_xml_norms, all_xml_pos, pos_mapping, common_adverbs, unmasked_vocab)
     write_lines(out_processed / f"{stem}_sentences.quesplit.masked.txt", append_eos(masked))
     write_lines(out_lexical / f"{stem}_sentences.quesplit.masked.txt", append_eos(masked))
 
@@ -584,6 +610,14 @@ def main() -> int:
     common_adverbs = load_common_adverbs(ADVERBS_PATH)
     print(f"Loaded {len(common_adverbs)} common adverbs from {ADVERBS_PATH.name}")
 
+    # Load reference unmasked vocabulary (words that stay as words)
+    if not UNMASKED_VOCAB_PATH.exists():
+        print(f"Unmasked vocab file not found: {UNMASKED_VOCAB_PATH}", file=sys.stderr)
+        print("Run scripts/extract_unmasked_vocab.py first.", file=sys.stderr)
+        return 1
+    unmasked_vocab = load_unmasked_vocab(UNMASKED_VOCAB_PATH)
+    print(f"Loaded {len(unmasked_vocab)} reference unmasked words from {UNMASKED_VOCAB_PATH.name}")
+
     # Find source files
     source_files = sorted(source_dir.glob("cento_*.xml"))
     if args.limit > 0:
@@ -602,7 +636,7 @@ def main() -> int:
 
     for xml_path in source_files:
         process_one_file(
-            xml_path, pos_mapping, common_adverbs,
+            xml_path, pos_mapping, common_adverbs, unmasked_vocab,
             out_processed, out_metrical_lines, out_metrical_sent, out_lexical,
         )
 

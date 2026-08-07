@@ -32,6 +32,7 @@ CORPORA: Dict[str, Path] = {
     "generated_loose": BASE_DIR / "lexical_model" / "generated_loose",
     "vergil":          BASE_DIR / "lexical_model" / "vergil",
     "ausonius":        BASE_DIR / "lexical_model" / "ausonius",
+    "background":      BASE_DIR / "lexical_model" / "background",
 }
 
 MASKED_GLOB = "*masked*"
@@ -40,8 +41,8 @@ MASKED_GLOB = "*masked*"
 # masking pipeline).  Anything that is ALL-CAPS or Title-case single word is
 # a POS tag and should be excluded.
 _POS_TAGS = {
-    "ADJ", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM", "PRON",
-    "PROPN", "SCONJ", "VERB", "X",
+    "ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM",
+    "PRON", "PROPN", "SCONJ", "VERB", "X",
 }
 
 
