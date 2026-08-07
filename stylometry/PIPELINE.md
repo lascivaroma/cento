@@ -152,29 +152,33 @@ LambdaG models are built and evaluated in the Jupyter notebooks:
 
 ## Step 8 — Generated cento conversion
 
-Convert automatically generated centos from `data/generated-compact/exact/` to
-all stylometry formats.  Uses `la_senter` for sentence splitting and
-`latin_masking.clitics` for que-splitting (no UDPipe).  POS masking uses
-Pedecerto POS tags with a manually editable mapping file.
+Convert automatically generated centos to all stylometry formats.  Uses
+`la_senter` for sentence splitting and `latin_masking.clitics` for que-splitting
+(no UDPipe).  POS masking uses Pedecerto POS tags with a manually editable
+mapping file.
 
 ```bash
-# Process a single cento for testing
-PYTHONPATH=scripts python scripts/generate_generated_exact.py --limit 1
+# Process a single cento for testing (exact)
+PYTHONPATH=scripts python scripts/generate_generated.py --source-dir ../data/generated-compact/exact --limit 1
 
-# Process all 1000 centos
-PYTHONPATH=scripts python scripts/generate_generated_exact.py
+# Process all 1000 exact centos
+PYTHONPATH=scripts python scripts/generate_generated.py --source-dir ../data/generated-compact/exact
+
+# Process loose centos
+PYTHONPATH=scripts python scripts/generate_generated.py --source-dir ../data/generated-compact/loose
 ```
 
-- **Input**: `../data/generated-compact/exact/cento_*.xml`
+- **Input**: Source directory containing `cento_*.xml` files
 - **Mapping**: `pos_mapping.tsv` (Pedecerto POS → UD POS, editable)
+- **Output tag**: Derived from the source directory name (e.g. `exact` → `generated_exact`, `loose` → `generated_loose`)
 - **Output**:
-  - `processed/generated_exact/*.txt` — plain text with pipe markers
-  - `processed/generated_exact/*_sentences.txt` — sentence-split
-  - `processed/generated_exact/*_sentences.quesplit.txt` — que-split
-  - `processed/generated_exact/*_sentences.quesplit.masked.txt` — POS-masked
-  - `lexical_model/generated_exact/*_sentences.quesplit.masked.txt` — copy
-  - `metrical_model/generated_exact/*_sentences.metrical.txt` — sentence-based metrical
-  - `metrical_model_lines/generated_exact/*.mapped_lines.txt` — line-based metrical
+  - `processed/generated_{tag}/*.txt` — plain text with pipe markers
+  - `processed/generated_{tag}/*_sentences.txt` — sentence-split
+  - `processed/generated_{tag}/*_sentences.quesplit.txt` — que-split
+  - `processed/generated_{tag}/*_sentences.quesplit.masked.txt` — POS-masked
+  - `lexical_model/generated_{tag}/*_sentences.quesplit.masked.txt` — copy
+  - `metrical_model/generated_{tag}/*_sentences.metrical.txt` — sentence-based metrical
+  - `metrical_model_lines/generated_{tag}/*.mapped_lines.txt` — line-based metrical
 
 ---
 

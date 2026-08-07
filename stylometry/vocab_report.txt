@@ -1,0 +1,413 @@
+========================================================================
+UNMASKED-WORD VOCABULARY COMPARISON
+========================================================================
+
+  Corpus                Files     Tokens    Vocab
+  -------------------- ------ ---------- --------
+  generated_exact       1,000    239,988      622
+  generated_loose       1,000    239,490      623
+  vergil                    4      3,993      396
+  ausonius                 17      3,571      424
+
+  Union vocabulary: 695
+
+  Pairwise overlap (shared unmasked words):
+    generated_exact ∩ generated_loose: 622
+    generated_exact ∩ vergil: 374
+    generated_exact ∩ ausonius: 365
+    generated_loose ∩ vergil: 374
+    generated_loose ∩ ausonius: 365
+    vergil ∩ ausonius: 293
+    All four: 284
+
+------------------------------------------------------------------------
+TOP 30 UNMASKED WORDS BY FREQUENCY
+------------------------------------------------------------------------
+
+  generated_exact  (622 types, 239,988 tokens)
+  Rank  Word                   Count    Pct  Histogram
+  ----  ----                   -----    ---  ---------
+     1  et                    29,499  12.3%  ████░░░░░░░░░░░░░░░░░░░░░░░░░░
+     2  in                    11,027   4.6%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     3  nec                    4,964   2.1%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     4  ad                     4,647   1.9%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     5  atque                  4,427   1.8%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     6  per                    4,358   1.8%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     7  non                    4,224   1.8%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     8  aut                    3,934   1.6%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     9  cum                    3,542   1.5%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    10  quae                   3,384   1.4%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    11  tum                    3,370   1.4%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    12  si                     3,225   1.3%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    13  te                     2,930   1.2%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    14  iam                    2,842   1.2%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    15  haec                   2,738   1.1%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    16  hic                    2,566   1.1%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    17  nunc                   2,410   1.0%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    18  sub                    2,363   1.0%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    19  se                     2,262   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    20  ut                     2,145   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    21  qui                    2,106   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    22  me                     1,980   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    23  ille                   1,957   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    24  tibi                   1,952   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    25  sed                    1,946   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    26  at                     1,943   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    27  sic                    1,928   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    28  mihi                   1,908   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    29  omnis                  1,882   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    30  ipse                   1,803   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+  generated_loose  (623 types, 239,490 tokens)
+  Rank  Word                   Count    Pct  Histogram
+  ----  ----                   -----    ---  ---------
+     1  et                    29,506  12.3%  ████░░░░░░░░░░░░░░░░░░░░░░░░░░
+     2  in                    10,807   4.5%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     3  nec                    5,234   2.2%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     4  ad                     4,485   1.9%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     5  non                    4,414   1.8%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     6  per                    4,405   1.8%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     7  atque                  4,238   1.8%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     8  aut                    3,769   1.6%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     9  quae                   3,504   1.5%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    10  cum                    3,433   1.4%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    11  tum                    3,209   1.3%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    12  si                     3,116   1.3%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    13  iam                    2,958   1.2%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    14  te                     2,934   1.2%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    15  nunc                   2,764   1.2%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    16  haec                   2,729   1.1%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    17  hic                    2,489   1.0%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    18  se                     2,436   1.0%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    19  sub                    2,253   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    20  qui                    2,182   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    21  me                     2,149   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    22  ut                     2,101   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    23  ille                   2,074   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    24  mihi                   2,071   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    25  sed                    2,061   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    26  ipse                   2,051   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    27  tibi                   1,936   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    28  at                     1,910   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    29  sic                    1,909   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    30  ab                     1,796   0.7%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+  vergil  (396 types, 3,993 tokens)
+  Rank  Word                   Count    Pct  Histogram
+  ----  ----                   -----    ---  ---------
+     1  et                       567  14.2%  ████░░░░░░░░░░░░░░░░░░░░░░░░░░
+     2  in                       196   4.9%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     3  aut                      114   2.9%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     4  atque                     98   2.5%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     5  nec                       98   2.5%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     6  non                       97   2.4%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     7  cum                       84   2.1%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     8  ad                        74   1.9%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     9  per                       68   1.7%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    10  iam                       57   1.4%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    11  tum                       54   1.4%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    12  sub                       48   1.2%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    13  quae                      46   1.2%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    14  si                        46   1.2%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    15  se                        44   1.1%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    16  at                        43   1.1%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    17  ubi                       43   1.1%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    18  te                        37   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    19  saepe                     35   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    20  sed                       34   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    21  neque                     33   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    22  ut                        32   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    23  hinc                      31   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    24  tibi                      31   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    25  etiam                     31   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    26  hic                       27   0.7%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    27  ipsa                      27   0.7%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    28  ante                      27   0.7%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    29  quo                       26   0.7%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    30  quid                      25   0.6%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+  ausonius  (424 types, 3,571 tokens)
+  Rank  Word                   Count    Pct  Histogram
+  ----  ----                   -----    ---  ---------
+     1  et                       387  10.8%  ███░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     2  in                       148   4.1%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     3  non                      113   3.2%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     4  per                       97   2.7%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     5  nec                       81   2.3%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     6  ut                        71   2.0%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     7  quae                      63   1.8%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     8  cum                       62   1.7%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     9  quod                      62   1.7%  █░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    10  si                        59   1.7%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    11  te                        56   1.6%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    12  qui                       56   1.6%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    13  iam                       54   1.5%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    14  sed                       50   1.4%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    15  ad                        40   1.1%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    16  haec                      39   1.1%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    17  aut                       37   1.0%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    18  tibi                      36   1.0%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    19  tu                        36   1.0%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    20  sub                       35   1.0%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    21  sic                       35   1.0%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    22  quam                      32   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    23  quis                      31   0.9%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    24  mihi                      30   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    25  quem                      28   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    26  de                        28   0.8%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    27  inter                     26   0.7%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    28  ter                       25   0.7%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    29  ab                        25   0.7%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    30  quid                      25   0.7%  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+------------------------------------------------------------------------
+WORDS UNIQUE TO ONE CORPUS
+------------------------------------------------------------------------
+
+  generated_exact only (0 words):
+
+  generated_loose only (1 words):
+
+  vergil only (13 words):
+
+  ausonius only (50 words):
+
+------------------------------------------------------------------------
+SIGNIFICANT WORDS (freq >= 5) PRESENT IN SOME CORPORA BUT NOT OTHERS
+------------------------------------------------------------------------
+
+  Shows words that reach significance in at least one corpus but are
+  entirely absent from another.  Useful for spotting vocabulary gaps
+  that could bias stylometry.
+
+  Words in GENERATED (exact+loose) but not in REFERENCE (vergil+ausonius)
+  (168 words with freq >= 5):
+  Word                  Gen count
+  -------------------- ----------
+  mecum                     1,000
+  secum                       606
+  talibus                     595
+  age                         567
+  uobis                       503
+  olli                        450
+  tecum                       291
+  pariterque                  262
+  aliud                       255
+  quidue                      220
+  tenus                       207
+  tuorum                      199
+  uicissim                    188
+  mene                        160
+  quale                       133
+  immo                        129
+  quoi                        109
+  ubique                      105
+  quisquis                    104
+  agite                       103
+  meos                        103
+  quemquam                    101
+  uestras                     100
+  hodie                        99
+  ipsam                        95
+  uestrum                      89
+  tantas                       88
+  nonne                        85
+  quales                       84
+  anne                         79
+  tantorum                     77
+  soli                         76
+  harum                        76
+  aliquid                      74
+  utinam                       74
+  utramque                     73
+  aliquam                      71
+  tune                         71
+  quantos                      68
+  ullast                       68
+  porro                        66
+  noster                       64
+  sicubi                       64
+  propere                      63
+  ei                           62
+  mi                           62
+  quaeue                       62
+  heus                         61
+  eandem                       60
+  uestri                       59
+  quiue                        57
+  set                          56
+  eo                           55
+  quoue                        55
+  ecquis                       53
+  tantam                       52
+  tuarum                       52
+  tantane                      52
+  tanton                       52
+  quandoquidem                 49
+  utrasque                     49
+  aliquis                      49
+  tantarum                     47
+  uester                       47
+  cuium                        46
+  memet                        46
+  nostram                      45
+  heia                         44
+  parum                        43
+  extra                        41
+  proinde                      40
+  ullas                        40
+  mearum                       39
+  quianam                      39
+  aliquos                      38
+  ollis                        38
+  nostrasne                    37
+  profecto                     37
+  etsi                         37
+  citius                       36
+  posthac                      35
+  tete                         35
+  quisue                       35
+  eque                         34
+  quonam                       33
+  suarum                       33
+  aduersum                     33
+  eundem                       32
+  meam                         32
+  illorum                      31
+  tuane                        30
+  quantis                      30
+  quosne                       30
+  fortasse                     29
+  nobiscum                     29
+  quicum                       29
+  fors                         27
+  nostrorum                    27
+  io                           26
+  tun                          26
+  idemque                      26
+  quibusue                     25
+  suist                        24
+  sicut                        24
+  aliquae                      24
+  ullos                        23
+  nullae                       23
+  tuast                        23
+  cras                         22
+  quiane                       22
+  quemuis                      22
+  uosmet                       22
+  tantaene                     21
+  nullane                      21
+  quemue                       21
+  uae                          21
+  supter                       21
+  quosue                       21
+  quocirca                     21
+  quantae                      21
+  actutum                      21
+  quisnam                      20
+  clam                         20
+  ipsorum                      20
+  temere                       20
+  quasue                       19
+  uestrae                      19
+  tamquam                      19
+  nouies                       19
+  aliqua                       19
+  tantost                      19
+  tantaest                     19
+  tute                         18
+  aligerum                     18
+  aput                         18
+  aliquot                      18
+  uestram                      18
+  quaue                        18
+  aque                         18
+  insuper                      18
+  talin                        18
+  ullam                        18
+  atqui                        18
+  ullius                       17
+  quantusque                   17
+  ecqua                        17
+  nouiens                      16
+  utcumque                     15
+  istum                        15
+  quom                         15
+  illuuie                      15
+  cedo                         14
+  nimis                        14
+  antes                        14
+  tene                         14
+  minime                       13
+  maxime                       13
+  sane                         13
+  istius                       13
+  aliquas                      13
+  nosne                        12
+  quosque                      11
+  alterum                      11
+  illude                       10
+  adusque                      10
+  foras                         8
+  omnium                        7
+  penes                         7
+
+  Words in REFERENCE (vergil+ausonius) but not in GENERATED (exact+loose)
+  (9 words with freq >= 5):
+  Word                  Ref count  Sources
+  -------------------- ----------  -------
+  multa                        22  vergil, ausonius
+  cuncta                       12  vergil, ausonius
+  unum                          7  vergil, ausonius
+  cunctis                       7  ausonius
+  cetera                        7  vergil, ausonius
+  uno                           7  vergil, ausonius
+  unus                          7  vergil, ausonius
+  multos                        6  vergil, ausonius
+  plurima                       5  vergil
+
+------------------------------------------------------------------------
+POTENTIAL NEAR-MISS SPELLING PAIRS (edit distance 1)
+------------------------------------------------------------------------
+
+  mea                [generated_exact   ]   886  ~  me                 [vergil            ]    13
+  ea                 [generated_loose   ]   510  ~  et                 [ausonius          ]   387
+  mea                [generated_exact   ]   886  ~  ea                 [vergil            ]     3
+  mea                [generated_exact   ]   886  ~  meae               [vergil            ]     1
+  ea                 [generated_exact   ]   495  ~  et                 [ausonius          ]   387
+  mea                [generated_loose   ]   732  ~  me                 [vergil            ]    13
+  mea                [generated_loose   ]   732  ~  ea                 [vergil            ]     3
+  mea                [generated_loose   ]   732  ~  meae               [vergil            ]     1
+  ei                 [generated_loose   ]    34  ~  et                 [vergil            ]   567
+  eo                 [generated_loose   ]    33  ~  et                 [vergil            ]   567
+  set                [generated_loose   ]    31  ~  et                 [vergil            ]   567
+  ei                 [generated_exact   ]    28  ~  et                 [vergil            ]   567
+  set                [generated_exact   ]    25  ~  et                 [vergil            ]   567
+  eo                 [generated_exact   ]    22  ~  et                 [vergil            ]   567
+  mecum              [generated_exact   ]   550  ~  meum               [ausonius          ]     1
+  ea                 [generated_loose   ]   510  ~  ex                 [ausonius          ]    13
+  ea                 [generated_loose   ]   510  ~  a                  [ausonius          ]    10
+  ea                 [generated_loose   ]   510  ~  mea                [ausonius          ]     6
+  ea                 [generated_loose   ]   510  ~  e                  [ausonius          ]     5
+  ea                 [generated_loose   ]   510  ~  en                 [ausonius          ]     2
+  ea                 [generated_exact   ]   495  ~  ex                 [ausonius          ]    13
+  ea                 [generated_exact   ]   495  ~  a                  [ausonius          ]    10
+  ea                 [generated_exact   ]   495  ~  mea                [ausonius          ]     6
+  ea                 [generated_exact   ]   495  ~  e                  [ausonius          ]     5
+  ea                 [generated_exact   ]   495  ~  en                 [ausonius          ]     2
+  mecum              [generated_loose   ]   450  ~  meum               [ausonius          ]     1
+  ei                 [generated_loose   ]    34  ~  et                 [ausonius          ]   387
+  eo                 [generated_loose   ]    33  ~  et                 [ausonius          ]   387
+  set                [generated_loose   ]    31  ~  et                 [ausonius          ]   387
+  ei                 [generated_exact   ]    28  ~  et                 [ausonius          ]   387
+  set                [generated_exact   ]    25  ~  et                 [ausonius          ]   387
+  eo                 [generated_exact   ]    22  ~  et                 [ausonius          ]   387
+  is                 [generated_exact   ]   251  ~  in                 [ausonius          ]   148
+  ea                 [vergil            ]     3  ~  et                 [ausonius          ]   387
+  ast                [generated_exact   ]   229  ~  aut                [vergil            ]   114
+  is                 [generated_loose   ]   195  ~  in                 [ausonius          ]   148
+  secum              [generated_exact   ]   308  ~  secus              [ausonius          ]     2
+  secum              [generated_exact   ]   308  ~  secus              [vergil            ]     1
+  secum              [generated_loose   ]   298  ~  secus              [ausonius          ]     2
+  secum              [generated_loose   ]   298  ~  secus              [vergil            ]     1

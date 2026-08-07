@@ -190,7 +190,7 @@ def main() -> int:
             print(f"Unknown format: {src_path} (expected .xml or .json)", file=sys.stderr)
             continue
 
-        title = f"{src_path.stem} — all hexameter lines"
+        title = f"{src_path} — all hexameter lines"
         text = format_details(lines, title)
 
         if args.output and len(args.sources) == 1:
