@@ -1,3 +1,21 @@
+*This repository needs some heavy clean up, but we promise you it's the right repository for https://inria.hal.science/hal-05881529*
+
+```bib
+@inproceedings{nagy:hal-05881529,
+  TITLE = {{The (almost) invisible poet: How Vergilian is Ausonius' Cento Nuptialis?}},
+  AUTHOR = {Nagy, Benjamin and Cl{\'e}rice, Thibault},
+  URL = {https://inria.hal.science/hal-05881529},
+  BOOKTITLE = {{CHR 2027 - 7th Computational Humanities Research}},
+  ADDRESS = {Manchester (UK), United Kingdom},
+  YEAR = {2027},
+  MONTH = Jan,
+  KEYWORDS = {Vergil ; Ausonius ; authorship verification ; Latin poetry ; cento ; computational poetics ; stylometry},
+  PDF = {https://inria.hal.science/hal-05881529v1/file/CHR___Cento_Nuptialis.pdf},
+  HAL_ID = {hal-05881529},
+  HAL_VERSION = {v1},
+}
+```
+
 
 ## Setup: Latin scansion (rescan_joint)
 
